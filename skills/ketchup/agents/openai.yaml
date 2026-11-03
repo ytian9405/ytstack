@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ketchup"
+  short_description: "Catch me up, or write a note for a later session"
+  default_prompt: "Use $ketchup to catch me up on what changed since my last message."

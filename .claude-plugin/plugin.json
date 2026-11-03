@@ -1,7 +1,7 @@
 {
   "name": "ytstack",
-  "version": "0.4.0",
-  "description": "Personal portable work skills: runnable behavior tests, plain explanations, and clear technical writing.",
+  "version": "0.5.0",
+  "description": "Personal portable work skills: runnable behavior tests, plain explanations, and clear technical writing. Also catch-up reports, handoff notes, and teaching how something works (回来汇报、交接、讲解).",
   "author": {
     "name": "ytian9405"
   },

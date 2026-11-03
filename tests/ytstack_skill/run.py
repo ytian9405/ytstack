@@ -24,6 +24,9 @@ CASES = {
     'YT08': 'test_default_links_survive_bundle_move_for_both_hosts',
     'YT09': 'test_voice_block_keeps_user_content_and_repeat_is_harmless',
     'YT10': 'test_voice_dry_run_and_stale_block_update',
+    'YT11': 'test_ketchup_installs_only_ketchup',
+    'YT12': 'test_teach_install_includes_unslop',
+    'YT13': 'test_undeclared_skill_link_fails_validation',
 }
 
 
@@ -45,7 +48,8 @@ def doctor(root):
     required = ['tools/install.py', 'tools/validate.py', 'ytstack.json', 'provenance.json',
                 'LICENSE', '.claude-plugin/plugin.json']
     required.extend(f'skills/{name}/SKILL.md' for name in
-                    ['create-test-skill', 'bro', 'technical-bro', 'unslop'])
+                    ['create-test-skill', 'bro', 'technical-bro', 'unslop',
+                     'in-your-own-words', 'ketchup', 'teach'])
     missing = [name for name in required if not (root / name).is_file()]
     if sys.version_info < (3, 9):
         return {'status': 'BLOCKED', 'reason': 'Python 3.9+ is required'}

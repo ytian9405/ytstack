@@ -1,5 +1,5 @@
 {
-  "checked_on": "2026-11-02",
+  "checked_on": "2026-11-03",
   "records": [
     {
       "repository": "cursor/plugins",
@@ -95,6 +95,110 @@
       "path": ".claude-plugin/marketplace.json",
       "url": "https://raw.githubusercontent.com/michael-denyer/pstack-claude/8ecae6893912d2bbb3b841c09a8d76e61a4d708b/.claude-plugin/marketplace.json",
       "sha256": "beba54bfd5977fa1debc70e59df9969f7d6d1d7a801652ae4af2c6965e9db054"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/in-your-own-words/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/in-your-own-words/SKILL.md",
+      "sha256": "fa8ba74e27d7be371dc270ec78bbf816411477d0dfab185356c861ac8dd413ad",
+      "adoption": {
+        "local_path": "skills/in-your-own-words/SKILL.md",
+        "mode": "extended",
+        "changes": [
+          "Keep upstream explicit-only metadata. The description names only $in-your-own-words and /in-your-own-words.",
+          "Add Chinese rules: a fallible reading, guessed causes marked as guesses, one decision when two readings change the outcome, stop for confirmation.",
+          "The confirmed goal is the full restatement after the user's corrections. Acceptance-criteria openings use one sentence. Worker briefs and handoff purpose use the full version."
+        ],
+        "upstream_body_sha256": "ae8e8f04b4c245919f15d8cec1a1acc31f60dcbfc9af50a836b4dc635ac3054a",
+        "local_body_sha256": "e0f9064d0f61231f8548e6a4d8756513c31b808b7caa9266ee5facc6b4eabe9f"
+      }
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/ketchup/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/ketchup/SKILL.md",
+      "sha256": "f2923ffd14f6fc778f75a47aaed1f317fb5fd00b5701ca769d6446c74106dead",
+      "adoption": {
+        "local_path": "skills/ketchup/SKILL.md",
+        "mode": "translated-and-adapted",
+        "changes": [
+          "Translate into Chinese and drop pictures, /visualize, and video. Voice rules are inlined. No bro dependency.",
+          "Catch-up is read-only and stays within about 300 Chinese characters. Decision items stay, about 60 characters each. The handoff file is not under that cap.",
+          "A handoff note is for a later session or another computer. Giving the work to another agent now is orca-cli, and the note can still be written.",
+          "Pickup reads the note, checks claimed completions, reports, then continues only listed next steps."
+        ],
+        "upstream_body_sha256": "bb5db97b0caf7dd8938e7591e5169acbc7ce8abfbc5ffd1082e5fa9cad47c999",
+        "local_body_sha256": "7e7649ce22c38b764f37340d8f1de238dfa19d7d279389a9ae73f5f56a4a5af9"
+      }
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/teach/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/teach/SKILL.md",
+      "sha256": "bd286e5a6290673be2cd28aef7af2ec7f1fb138e6bce156ea657368c7e7fc8a4",
+      "adoption": {
+        "local_path": "skills/teach/SKILL.md",
+        "mode": "translated-and-merged",
+        "changes": [
+          "Fold how and why into single-agent steps. Do not spawn subagents.",
+          "Read-only: files, git log, git blame, git show, and commands that do not change state.",
+          "Give two or three sentences, walk one real operation, then stop. Draw a return edge only when the code has one.",
+          "Reduce confidence tiers to cited source, inference, and not found. Read bundled unslop."
+        ],
+        "upstream_body_sha256": "a5ec79390430a3bb7dd9f3820216dbbc5f543a921fb73138429370b6c68410f9",
+        "local_body_sha256": "32ee709bc492fb3c7879138cf854dac97d08c3883604343179a2cf23ea7a4d68"
+      }
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/how/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/how/SKILL.md",
+      "sha256": "08a00079bb15b4258874ac3ff62d4ca7e94350ffedb521d0fd296dc9dd21904e",
+      "folded_into": "skills/teach/SKILL.md"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/how/references/explainer-prompt.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/how/references/explainer-prompt.md",
+      "sha256": "ddb89cebefc24e2b54517a331aedfe045b6971e101f45c71b8cef4cccff45bff",
+      "folded_into": "skills/teach/SKILL.md"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/why/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/why/SKILL.md",
+      "sha256": "144d42e7712723d763e607bc0a969e5f1cdf83ec7228519d87677cc534571bed",
+      "folded_into": "skills/teach/SKILL.md"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/why/references/epistemics.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/why/references/epistemics.md",
+      "sha256": "d54a2361b2d5973bc3fe2edf62f446d87935974d4b40d47f23b9529f956ca758",
+      "folded_into": "skills/teach/SKILL.md"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/poteto-mode/playbooks/pause-safely.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/poteto-mode/playbooks/pause-safely.md",
+      "sha256": "77968cfe5f4a71a8cd33e0ae8ffcdbd88dd693a212c240457773e6c40c96c21d",
+      "folded_into": "skills/ketchup/SKILL.md"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/poteto-mode/playbooks/session-pickup.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/poteto-mode/playbooks/session-pickup.md",
+      "sha256": "d194f2a7ef392c1598ef3f0e3b561370ca25c2c7a78308007af4aa46ada8ee12",
+      "folded_into": "skills/ketchup/SKILL.md"
     }
   ],
   "design_reference_note": "pstack-claude informs shared source layout and host-independent instructions; no port-specific implementation copied."

@@ -1,14 +1,17 @@
 # ytstack
 
-四个个人工作技能、一个必要依赖和一份常驻说话规则。主要为 Codex 的 Sol 和 Astra 调试，同一份源码也可用于 Claude Code。
+七个个人工作技能、一个随包依赖和一份常驻说话规则。主要为 Codex 的 Sol 和 Astra 调试，同一份源码也可用于 Claude Code。
 
 | 技能 | 用途 |
 | --- | --- |
+| `in-your-own-words` | 用户点名后，用 3 到 5 句复述目标和要解决的问题，然后停下来等确认。确认过的原文留给验收标准开头、worker 任务卡开头和交接说明的“目的”。 |
 | `acceptance-criteria` | 动手前定验收标准：一份连贯的短标准，每条写清靠什么证据算通过，最后列出你可以改的决定。 |
 | `create-test-skill` | 为项目生成 `test-<app>` 技能、可运行的行为测试和用例索引，实际运行并证明测试能抓住错误。 |
-| `bro` | 把上一条回答说得自然、简明、容易理解。 |
+| `bro` | 把上一条回答说得自然、简明、容易理解。上一条没看懂、我没太明白、我不太理解，用它。问的是某个机制怎么工作，用 `teach`。 |
 | `technical-bro` | 按 technical-writing 的四层规范编写或修改技术文档、PR 和提交说明。 |
-| `unslop` | technical-bro 的随包依赖，清理空话和套路表达。 |
+| `ketchup` | 回来时只汇报、不写文件；要交接说明时写给以后的会话或另一台电脑；接手时先核对写成已完成的，再决定是否继续。 |
+| `teach` | 把一个机制讲明白：自己读代码和 git 记录，先给两三句，再用眼前的例子走一遍。 |
+| `unslop` | `technical-bro` 和 `teach` 的随包依赖，清理空话和套路表达。 |
 
 `create-test-skill` 用于创建可复用的项目测试能力。普通的一次性测试补充直接使用项目既有 runner。生成测试不会自动授权修改产品代码或共享环境。
 
@@ -20,9 +23,9 @@
 python3 ytstack/tools/install.py --project /path/to/project --harness codex
 ```
 
-这会创建项目 `.agents/skills/` 下的五个入口。重新开始会话以刷新技能发现。使用 `$create-test-skill`、`$bro` 或 `$technical-bro`，也可用自然语言提出对应请求。当前会话的技能清单可能不会即时更新。
+这会创建项目 `.agents/skills/` 下的八个入口。重新开始会话以刷新技能发现。使用 `$in-your-own-words`、`$create-test-skill`、`$bro`、`$technical-bro`、`$ketchup` 或 `$teach`，也可用自然语言提出对应请求。`in-your-own-words` 只在用户点名时使用。当前会话的技能清单可能不会即时更新。
 
-只安装一个主技能时，可以指定名称；依赖会一起安装。
+只安装一个主技能时，可以指定名称；依赖会一起安装。`ketchup` 单独安装，不带其他技能。`teach` 和 `technical-bro` 会带上 `unslop`。
 
 ```sh
 python3 ytstack/tools/install.py --project /path/to/project --harness codex --skill technical-bro
@@ -34,7 +37,7 @@ Claude Code 可以直接加载包：
 claude --plugin-dir ./ytstack
 ```
 
-插件调用名为 `/ytstack:bro`、`/ytstack:technical-bro` 和 `/ytstack:create-test-skill`。也可以用安装工具暴露为项目技能：
+插件调用名为 `/ytstack:in-your-own-words`、`/ytstack:bro`、`/ytstack:technical-bro`、`/ytstack:create-test-skill`、`/ytstack:ketchup` 和 `/ytstack:teach`。也可以用安装工具暴露为项目技能：
 
 ```sh
 python3 ytstack/tools/install.py --project /path/to/project --harness claude
@@ -54,10 +57,13 @@ python3 ytstack/tools/install.py --project /path/to/project --harness codex --vo
 
 ## 请求示例
 
+- “用你的话说说我要干嘛，先别动手。”
 - “给 expense 工具加撤销功能，开发前先把验收标准定下来。”
 - “用 create-test-skill 给这个 CLI 生成可重复运行的测试技能，验证实际输出和持久化。先证明测试能抓住一次错误，再给我证据。”
 - “bro，把上一条解释说成人话，保留数字和必要条件。”
 - “technical-bro，把这份文档整理成操作指南，保留真实命令、前置条件和预期结果。”
+- “我回来了，现在什么情况？”
+- “把我当小白，讲讲这段是怎么工作的。”
 
 `technical-bro` 保留上游英文正文，`unslop` 和 `bro` 在上游内容后增加了中文规则。用户指定的语言、结构和术语优先。
 

@@ -20,15 +20,19 @@ def validate(root=PACKAGE):
     names = manifest['primary_skills'] + manifest['support_skills']
     assert len(names) == len(set(names))
     assert set(names) == {p.parent.name for p in (root / 'skills').glob('*/SKILL.md')}
+    bodies = {}
     for name in names:
         file = root / 'skills' / name / 'SKILL.md'
         text = file.read_text()
         header, body = text.split('---', 2)[1:]
+        bodies[name] = body
         # These package files use simple, single-line name/description scalars.
         assert re.search(rf'^name: {re.escape(name)}$', header, re.M), name
         description = re.search(r'^description: (.+)$', header, re.M)
         assert description and description.group(1).strip(), name
-        assert 'disable-model-invocation' not in header, name
+        invocation = re.search(r'^disable-model-invocation: (.+)$', header, re.M)
+        if invocation:
+            assert invocation.group(1).strip() == 'true', name
         assert 'TODO' not in body, name
         assert (file.parent / 'agents/openai.yaml').is_file(), name
         skill_license = (file.parent / 'LICENSE').read_text()
@@ -40,12 +44,25 @@ def validate(root=PACKAGE):
             target = (file.parent / link.split('#', 1)[0]).resolve()
             assert target.is_relative_to(root), f'Link escapes package: {link}'
             assert target.exists(), f'Broken local link: {file}: {link}'
+    known = set(names)
     for owner, dependencies in manifest['dependencies'].items():
-        assert owner in names
+        assert owner in known, owner
         for dependency in dependencies:
-            assert dependency in names
+            assert dependency in known, dependency
+    for name, body in bodies.items():
+        linked = set()
+        for link in re.findall(r'\]\(([^)]+)\)', body):
+            if '://' in link or link.startswith('#'):
+                continue
+            parts = link.split('#', 1)[0].split('/')
+            if len(parts) >= 2 and parts[0] == '..' and parts[1] in known:
+                linked.add(parts[1])
+        declared = set(manifest['dependencies'].get(name, []))
+        undeclared = sorted(linked - declared)
+        assert not undeclared, f'{name} links to undeclared skills: {", ".join(undeclared)}'
+        missing = sorted(declared - linked)
+        assert not missing, f'{name} does not link declared dependencies: {", ".join(missing)}'
     assert (root / 'voice/plain-talk.md').read_text().strip(), 'voice rules are empty'
-    assert '../unslop/SKILL.md' in (root / 'skills/technical-bro/SKILL.md').read_text()
     provenance = json.loads((root / 'provenance.json').read_text())
     checked_bodies = []
     for record in provenance['records']:

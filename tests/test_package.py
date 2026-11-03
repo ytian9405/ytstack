@@ -80,7 +80,7 @@ class PackageTests(unittest.TestCase):
         with self.temporary_directory() as temp:
             result = self.run_installer(temp, '--dry-run')
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(len(json.loads(result.stdout)['planned']), 5)
+            self.assertEqual(len(json.loads(result.stdout)['planned']), 8)
             self.assertFalse((Path(temp) / '.agents').exists())
 
     def test_copied_claude_skills_are_standalone(self):
@@ -97,7 +97,7 @@ class PackageTests(unittest.TestCase):
             result = self.run_command(command)
             self.assertEqual(result.returncode, 0, result.stderr)
             installed = project / '.claude/skills'
-            self.assertEqual(len(list(installed.iterdir())), 5)
+            self.assertEqual(len(list(installed.iterdir())), 8)
             self.assertFalse((installed / 'technical-bro').is_symlink())
             self.assertTrue((installed / 'technical-bro/../unslop/SKILL.md').is_file())
             for name in ['technical-bro', 'unslop']:
@@ -160,7 +160,8 @@ class PackageTests(unittest.TestCase):
             self.assertEqual(list(shared.iterdir()), [])
 
     def test_default_links_survive_bundle_move_for_both_hosts(self):
-        expected_names = {'acceptance-criteria', 'create-test-skill', 'bro', 'technical-bro', 'unslop'}
+        expected_names = {'acceptance-criteria', 'create-test-skill', 'bro', 'technical-bro', 'unslop',
+                          'in-your-own-words', 'ketchup', 'teach'}
         for harness, discovery in [('codex', '.agents'), ('claude', '.claude')]:
             with self.subTest(harness=harness), self.temporary_directory() as temp:
                 bundle = Path(temp) / 'bundle'
@@ -172,7 +173,7 @@ class PackageTests(unittest.TestCase):
                 result = self.run_command([sys.executable, str(package / 'tools/install.py'),
                                            '--project', str(project), '--harness', harness])
                 self.assertEqual(result.returncode, 0, result.stderr)
-                self.assertEqual(len(json.loads(result.stdout)['installed']), 5)
+                self.assertEqual(len(json.loads(result.stdout)['installed']), 8)
                 moved = Path(temp) / 'moved bundle'
                 bundle.rename(moved)
                 installed = moved / 'project' / discovery / 'skills'
@@ -185,6 +186,34 @@ class PackageTests(unittest.TestCase):
                     self.assertIn(f'name: {name}', (entry / 'SKILL.md').read_text())
                 self.assertIn('name: unslop',
                               (installed / 'technical-bro/../unslop/SKILL.md').read_text())
+
+    def test_ketchup_installs_only_ketchup(self):
+        with self.temporary_directory() as temp:
+            result = self.run_installer(temp, '--skill', 'ketchup')
+            self.assertEqual(result.returncode, 0, result.stderr)
+            installed = Path(temp) / '.agents/skills'
+            self.assertEqual({p.name for p in installed.iterdir()}, {'ketchup'})
+            self.assertFalse((installed / 'bro').exists())
+
+    def test_teach_install_includes_unslop(self):
+        with self.temporary_directory() as temp:
+            result = self.run_installer(temp, '--skill', 'teach')
+            self.assertEqual(result.returncode, 0, result.stderr)
+            installed = Path(temp) / '.agents/skills'
+            self.assertEqual({p.name for p in installed.iterdir()}, {'teach', 'unslop'})
+            self.assertTrue((installed / 'teach/../unslop/SKILL.md').is_file())
+
+    def test_undeclared_skill_link_fails_validation(self):
+        with self.temporary_directory() as temp:
+            package = Path(temp) / 'package'
+            package.mkdir()
+            copy_package(package)
+            skill = package / 'skills/acceptance-criteria/SKILL.md'
+            skill.write_text(skill.read_text() + '\nSee [bro](../bro/SKILL.md).\n')
+            result = self.run_command([sys.executable, str(package / 'tools/validate.py')])
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('links to undeclared skills', result.stderr)
+            self.assertIn('bro', result.stderr)
 
 
 if __name__ == '__main__':
