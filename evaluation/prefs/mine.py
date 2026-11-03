@@ -6,6 +6,10 @@ analyst can see what the user was reacting to. Subagent threads, scheduled
 automations, and evaluation sandboxes are dropped. Output goes outside the
 repository by default because it contains private conversation text.
 
+Logs written before Codex recorded turn_attribution have no trigger
+information, so a turn counts as human typing when its session was started by
+a desktop or CLI UI (source vscode/cli) instead of a subagent or exec run.
+
     python3 evaluation/prefs/mine.py --codex-home ~/.codex --out ~/.ytstack-prefs
 """
 import argparse
@@ -17,6 +21,7 @@ import tempfile
 from pathlib import Path
 
 HUMAN_TRIGGERS = {'composer', 'user', 'edit_user_message', 'remote_android'}
+UI_SOURCES = {'vscode', 'cli'}  # sessions started from a human UI; exec/subagent are not
 INJECTED = re.compile(r'^\s*<|<environment_context>|AGENTS\.md instructions|<codex_delegation>|<user_instructions>|^# Context from my IDE')
 SANDBOX_CWD = re.compile(r'/tmp/|ytjudge|ytgrade|ytdiag|ytprobe|ytev|ytmut')
 NODE_UNZSTD = "const z=require('zlib'),f=require('fs');f.writeFileSync(process.argv[2],z.zstdDecompressSync(f.readFileSync(process.argv[1])))"
@@ -39,10 +44,11 @@ def rollouts(codex_home, scratch):
                 plain = scratch / path.name[:-4]
                 decompress(path, plain)
                 yield plain
+                plain.unlink()  # decompressed logs can be ~4x larger; don't keep them all
 
 
 def human_turns(path):
-    cwd, subagent, human, reply, turns = None, False, False, '', []
+    cwd, subagent, ui_source, human, reply, turns = None, False, False, False, '', []
     for line in path.open(errors='ignore'):
         try:
             event = json.loads(line)
@@ -52,11 +58,16 @@ def human_turns(path):
         kind = event.get('type')
         if kind == 'session_meta':
             cwd = payload.get('cwd')
-            subagent = isinstance(payload.get('source'), dict) and 'subagent' in payload['source']
+            source = payload.get('source')
+            subagent = isinstance(source, dict) and 'subagent' in source
+            ui_source = not subagent and isinstance(source, str) and source in UI_SOURCES
         elif kind == 'turn_context':
             cwd = cwd or payload.get('cwd')
         elif kind == 'event_msg' and payload.get('type') == 'task_started':
-            human = (payload.get('turn_attribution') or {}).get('turn_trigger') in HUMAN_TRIGGERS
+            attribution = payload.get('turn_attribution')
+            # Old logs carry no turn_attribution: trust the turn as human when
+            # the session came from a UI, otherwise fall back to not human.
+            human = (attribution or {}).get('turn_trigger') in HUMAN_TRIGGERS if attribution is not None else ui_source
         elif kind == 'response_item' and payload.get('type') == 'message':
             text = ''.join(c.get('text', '') for c in payload.get('content', []) if isinstance(c, dict))
             if payload.get('role') == 'assistant' and text.strip():
