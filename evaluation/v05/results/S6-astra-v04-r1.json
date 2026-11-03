@@ -1,0 +1,32 @@
+{
+ "id": "S6-astra-v04-r1",
+ "prompt": "queue_cli 任务多了不好找，我想加个搜索，按标题里的词找。先别改代码，讲讲你打算怎么改、分几步、每步怎么算做完。",
+ "model": "gpt-6-astra",
+ "package": "v04",
+ "agents_md": "/Users/ytian9405/projects/ytstack/evaluation/snapshots/v04/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 124.1,
+ "usage": {
+  "input_tokens": 86681,
+  "cached_input_tokens": 75264,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 902,
+  "reasoning_output_tokens": 187
+ },
+ "final": "建议给 `queue_cli.py` 加 `search \"关键词\"`，只按标题查找。现在 `list` 会列出全部任务，包括已完成任务；现有测试没有覆盖任务搜索。\n\n分三步，下面是完成标准，尚未实际运行：\n\n1. **加搜索入口。** 用 `python3 queue_cli.py --state tasks.json search \"报告\"`，应返回标题含“报告”的任务，保留原字段、添加顺序和 JSON 输出。实际运行命令，逐项核对结果才算完成。\n2. **补齐边界。** 中文能搜，英文默认不分大小写；没有匹配、没有任务或数据文件不存在时，成功返回 `[]`，不创建文件。漏填关键词、输入空串或全空格时，报错并以非零状态退出。逐项运行并核对输出才算完成。\n3. **确认不会影响任务。** 搜索前后，数据文件内容完全一致；另起进程执行 `list`，任务仍完整。新增任务、完成任务和原有列表行为照常；补搜索用例和使用说明，实际检查通过才算完成。\n\n已按推荐写进上述条件，你可以改：\n\n- **最要紧：怎么匹配。** 推荐按连续文字找，“报告”能找到“周报告”；输入“周 报告”则查这段含空格的文字。若要拆成多个词分别找，需要改这条规则。\n- **英文大小写。** 推荐 `Report` 和 `report` 都能找到；区分大小写会减少结果。\n- **已完成任务。** 推荐一起搜索，方便找历史任务；只搜未完成任务会隐藏历史结果。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我先用 acceptance-criteria 技能看看 `queue_cli` 现在怎么列任务，再把搜索的改法、步骤和每步完成标准说清楚；先不改代码。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g '*queue*' -g 'AGENTS.md' -g '*test*' -g 'README*'\"",
+  "/bin/zsh -lc 'cat queue_cli.py'",
+  "/bin/zsh -lc 'cat README.md; cat AGENTS.md'",
+  "/bin/zsh -lc 'cat tests/test_smoke.py; cat tests/test_package.py'",
+  "/bin/zsh -lc \"rg -n 'queue_cli|search|任务队列' --glob '*.py' --glob '*.md' --glob '\"'!skills/**'\"' --glob '\"'!.agents/**'\"' --glob '\"'!.claude/**'\"'\""
+ ]
+}

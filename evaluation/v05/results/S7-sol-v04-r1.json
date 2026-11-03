@@ -1,0 +1,29 @@
+{
+ "id": "S7-sol-v04-r1",
+ "prompt": "我一直以为 queue_cli 和 expense_cli 出错时就是打一行提示、照常退出，退出码还是 0，脚本里看输出就行。我理解得对吗？不对就纠正，漏的也补上。",
+ "model": "gpt-6.1-sol",
+ "package": "v04",
+ "agents_md": "/Users/ytian9405/projects/ytstack/evaluation/snapshots/v04/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 71.5,
+ "usage": {
+  "input_tokens": 116498,
+  "cached_input_tokens": 102144,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2219,
+  "reasoning_output_tokens": 350
+ },
+ "final": "不对。**最要紧的是：脚本应先看退出码；这些错误不会照常以 `0` 退出。** 我实际运行了 14 个案例，结果与代码一致：\n- **两者的参数错误**：缺必填参数、命令写错、整数传成文字，退出码都是 **`2`**；用法说明和错误写到错误输出（`stderr`），通常不止一行。\n- **`queue_cli` 的内容错误**：标题全空白、完成不存在的任务，也退出 **`2`**，输出用法说明和错误。见 [queue_cli.py](/private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-0urcbvh2/project/queue_cli.py:24)。\n- **`expense_cli` 的内容错误**：标题或类别全空白、金额不大于零、作废不存在的记录，向 `stderr` 打一行提示，退出 **`1`**。`main()` 返回的 `1` 会通过 `sys.exit(main())` 变成退出码。见 [expense_cli.py](/private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-0urcbvh2/project/expense_cli.py:33)。\n- **其他异常**：损坏的 JSON、把目录当状态文件等没有统一处理；实测会向 `stderr` 输出多行 Python 错误详情，退出 **`1`**。读写权限等异常也没有专门处理。\n- **不是错误的情况**：状态文件不存在会按空数据处理；正常完成的命令向正常输出（`stdout`）写 JSON，退出 `0`。`--help` 也退出 `0`，但输出的是帮助文字。\n- **脚本里的做法**：先判断退出码；非零就走失败处理并保留 `stderr`，成功时再解析 `stdout`。只读取 `stdout` 会漏掉上述错误信息。\n- **数据方面别混为一谈**：上述内容校验失败发生在保存前，不改已有数据；但保存途中失败没有恢复旧文件的处理，不能认为“非零退出就一定没改数据”。这一点来自代码检查，未实测写入故障。",
+ "commentary": [
+  "我先检查 `queue_cli` 和 `expense_cli` 的错误处理，确认它们会输出什么、退出码是多少，再补上容易漏掉的情况。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g '*expense*' -g '*test*' -g 'pyproject.toml' -g 'package.json' -g 'README*'\"",
+  "/bin/zsh -lc 'cat AGENTS.md && cat queue_cli.py'",
+  "/bin/zsh -lc 'cat expense_cli.py && cat tests/test_smoke.py && cat tests/test_package.py && cat README.md'",
+  "/bin/zsh -lc 'nl -ba queue_cli.py && nl -ba expense_cli.py && nl -ba README.md'",
+  "/bin/zsh -lc \"python3 -B -c 'import subprocess, sys, json\nfrom pathlib import Path\nmissing = Path.cwd() / \\\"__cli_error_check_nonexistent__.json\\\"\nassert not missing.exists()\ncases = [\n (\\\"queue: missing arguments\\\", \\\"q"
+ ]
+}

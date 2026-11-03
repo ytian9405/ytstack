@@ -1,0 +1,28 @@
+{
+ "id": "S7-sol-v05-r2",
+ "prompt": "我一直以为 queue_cli 和 expense_cli 出错时就是打一行提示、照常退出，退出码还是 0，脚本里看输出就行。我理解得对吗？不对就纠正，漏的也补上。",
+ "model": "gpt-6.1-sol",
+ "package": "v05",
+ "agents_md": "/Users/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 119.5,
+ "usage": {
+  "input_tokens": 105663,
+  "cached_input_tokens": 84224,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1399,
+  "reasoning_output_tokens": 249
+ },
+ "final": "不对。已核对代码并实测，**出错会返回非 0，提示也不一定只有一行**。\n\n- [queue_cli.py](/private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-cy181_1n/project/queue_cli.py:24)：标题全空白、任务 ID 不存在，退出码是 **2**，会打印用法和错误提示。\n- [expense_cli.py](/private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-cy181_1n/project/expense_cli.py:33)：标题或分类全空白、金额不大于零、记录 ID 不存在，退出码是 **1**。\n- 两者缺参数、整数参数格式错误，退出码都是 **2**。\n- 两者遇到非法 JSON，会打印多行异常详情，退出码是 **1**。\n- 错误写到错误输出（`stderr`）；成功结果以 JSON 写到标准输出（`stdout`）。只收集 `stdout` 会漏掉报错。\n- 状态文件不存在会当作空数据，不算错误。\n\n脚本应先看退出码：**0 表示成功，非 0 表示失败**；失败时再看 `stderr`。",
+ "commentary": [
+  "我先看 `queue_cli` 和 `expense_cli` 的错误处理、退出码，再核对你的理解。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*queue*' -g '*expense*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc 'cat AGENTS.md queue_cli.py expense_cli.py'",
+  "/bin/zsh -lc 'nl -ba queue_cli.py; nl -ba expense_cli.py'",
+  "/bin/zsh -lc \"python3 -B -c 'import subprocess, sys; cases = [(\\\"queue_cli.py\\\", [\\\"--state\\\", \\\"/nonexistent/cli-check-state.json\\\", \\\"add\\\", \\\"  \\\"]), (\\\"queue_cli.py\\\", [\\\"--state\\\", \\\"/nonexistent/cli-check-state.jso"
+ ]
+}

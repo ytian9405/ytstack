@@ -1,0 +1,31 @@
+{
+ "id": "S6-astra-v05-r1",
+ "prompt": "queue_cli 任务多了不好找，我想加个搜索，按标题里的词找。先别改代码，讲讲你打算怎么改、分几步、每步怎么算做完。",
+ "model": "gpt-6-astra",
+ "package": "v05",
+ "agents_md": "/Users/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 74.9,
+ "usage": {
+  "input_tokens": 87663,
+  "cached_input_tokens": 69376,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1316,
+  "reasoning_output_tokens": 257
+ },
+ "final": "建议给现有 `list` 加搜索参数：`list --search \"关键词\"`，只显示标题包含关键词的任务，不改变保存的数据。分 **3 步**做。\n\n目前 `queue_cli.py` 只有新增、列出、完成任务；`list` 会包含已完成任务。现有 README 讲的是记账程序，现有测试也没覆盖任务搜索，需要补上专门的说明和检查。\n\n1. **先定搜索规则和对照样本。**  \n   推荐按连续文字匹配，英文不区分大小写，不做错别字纠正。例如：\n   ```sh\n   python3 queue_cli.py --state tasks.json list --search \"报告\"\n   ```\n   标题“写报告”“报告复查”都能找到，“写周报”找不到。输入 `\"周报 修改\"` 时，按这段完整文字查找，不拆成两个词。搜索词去掉首尾空格；结果保留原来的顺序、任务编号和完成状态。  \n   **做完标准：**固定一份包含中文、英文、重复标题、已完成任务的样本，逐项写清应该返回哪些任务，后面照着核对。\n\n2. **实现筛选，并处理空结果和错误输入。**  \n   只根据标题筛选，继续输出现有的 JSON 列表格式。  \n   **做完标准：**实际运行命令，结果符合以下条件：\n\n   | 情况 | 应该看到什么 |\n   |---|---|\n   | 搜索 `report` | 能找到标题含 `Report` 的任务 |\n   | 多条任务标题相同 | 全部返回，不合并 |\n   | 没有匹配、任务列表为空、状态文件不存在 | 成功返回 `[]`；不创建文件 |\n   | `--search` 后没给值，或只给空格 | 明确提示参数错误，命令返回失败 |\n   | 状态文件损坏，或传入目录当文件 | 提示具体路径和原因，不只显示程序报错栈 |\n\n   搜索成功或失败后，原文件内容都必须不变；结束程序再运行普通 `list`，仍能看到全部原任务。\n\n3. **补用法说明，检查旧功能。**  \n   增加 `queue_cli` 的搜索示例及对应检查，保存实际命令、输出和成功或失败结果作为证据。  \n   **做完标准：**搜索样本全部符合预期；下面这些原有行为也通过检查：不带搜索参数仍列出全部任务；新增任务编号继续递增；完成任务后重新打开仍是已完成；空白标题和不存在的任务编号仍会报错。以上检查目前尚未运行。\n\n已按推荐写进上面的条件，你可以改：\n\n- **匹配方式：**推荐“包含即可、忽略英文大小写”；改成完整单词匹配会少返回一些结果，中文还需另定规则。\n- **多个词：**推荐整段连续匹配；改成“每个词都出现即可”，能找到词序不同、位置分开的标题。\n- **完成状态：**推荐包含已完成任务，与当前 `list` 一致；只搜未完成任务会隐藏历史任务。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我会先看 `queue_cli` 怎么列出任务，再用 `acceptance-criteria` 技能整理修改步骤和每步的完成标准。先不改代码。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc 'cat README.md && cat queue_cli.py'",
+  "/bin/zsh -lc 'cat AGENTS.md && cat tests/test_smoke.py && cat tests/test_package.py'",
+  "/bin/zsh -lc \"rg -n 'queue_cli|task queue|标题.*搜索|search' --glob '\"'!provenance.json'\"' --glob '\"'!LICENSE'\"' --glob '\"'!SKILL.md'\"' .\""
+ ]
+}

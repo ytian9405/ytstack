@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "重新启动独立进程执行 `list`，只看到剩余未完成任务"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "执行 `archive` 后，主文件只含 1、3，归档依次含 5、2、4，返回 `{\"archived\":2}`。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "执行 `archive` 后，主文件只含 1、3，归档依次含 5、2、4，返回 `{\"archived\":2}`。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "归档后新增任务不会复用旧 ID。"
+  },
+  {
+   "i": 4,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": "**触发方式**：完成后立即归档，旧数据用 `archive` 清理；改为全手动，则两次归档之间主文件仍会积累已完成任务。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**触发方式**：完成后立即归档，旧数据用 `archive` 清理；改为全手动，则两次归档之间主文件仍会积累已完成任务。"
+  },
+  {
+   "i": 1,
+   "state": "ASKED",
+   "quote": "**查看历史**：本次直接查看归档文件；若要在 CLI 查看，再增加 `list --archived`。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**文件位置**：在主文件路径后追加 `.archive.json`；改为可指定路径，需要增加参数及路径校验。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "归档后新增任务不会复用旧 ID。"
+  }
+ ]
+}

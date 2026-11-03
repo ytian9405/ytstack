@@ -1,0 +1,30 @@
+{
+ "id": "AC10-sol-v05-r2",
+ "prompt": "queue_cli 里完成的任务越来越多，list 看着乱。我想加个归档：已完成的任务挪到单独的文件，主文件只留没完成的。动手之前，先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v05",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 130.6,
+ "usage": {
+  "input_tokens": 79102,
+  "cached_input_tokens": 69632,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1699,
+  "reasoning_output_tokens": 516
+ },
+ "final": "本次目标：把已完成任务移到独立归档文件，归档后主文件只留未完成任务。\n\n已读 `queue_cli.py`：当前只有 `add/list/complete`，数据是 JSON 数组；ID 根据主文件最大值生成。README 和现有测试针对其他功能，没有 queue 的验收依据。以下是待确认的标准，尚未运行验证；本次不改代码。\n\n1. **归档入口与结果**\n   按推荐新增手动命令：\n   `python3 queue_cli.py --state /tmp/q.json archive`。\n   准备 ID 为 1、2、3 的任务，其中 1、3 已完成。执行后退出码为 0，输出 JSON，明确报告归档数量为 2 和归档文件路径；随后 `list` 只返回任务 2。完成任务后、执行归档前，仍保留当前行为。\n\n2. **归档内容完整**\n   归档路径默认为主文件路径后追加 `.archive.json`，例为 `/tmp/q.json.archive.json`，内容沿用任务 JSON 数组。\n   比较操作前后的文件：任务的 ID、标题、完成状态不变；主文件保留任务的顺序，归档按迁出顺序追加，已有归档内容保留。中文、首尾空格不变，每条任务只存在于一个文件。\n\n3. **空数据与重复执行**\n   分别用不存在的主文件、空数组、全部未完成、全部完成的数据执行归档。归档数量分别为 0、0、0、全部；全部完成后主文件为 `[]`。没有可归档任务时不新建文件、不改已有文件。连续执行两次，第二次归档数量为 0，归档内容不重复。\n\n4. **重新打开与 ID**\n   关闭命令进程后，另开进程执行 `list`、读取归档，结果仍符合上述要求。\n   将最高 ID 或全部任务归档后再 `add`，新 ID 必须大于主文件和归档中所有已有 ID，不能复用。对已归档 ID 再次执行 `complete`，返回原记录成功，两文件不变，也不移回主文件。\n\n5. **错误不能损坏数据**\n   分别验证：错误参数、损坏 JSON、不合格的任务行、同名目录占用文件路径、不可写路径，以及两文件出现相同 ID。\n   均须非零退出，stderr 说明原因，并定位参数、文件或问题记录，无 Python 报错栈；原有文件内容和目录不变。模拟任一步保存失败，也不能出现任务丢失、重复或只更新一个文件后报成功。并发写入、进程被强制终止和断电恢复不纳入本次范围。\n\n6. **人工确认与不能弄坏**\n   验收时展示同一批任务归档前后的 `list` 和两个文件，由你确认清理效果及默认路径是否符合习惯；自动检查不能替代这项确认。\n   同时复查现有行为：`add` 保留标题原文并拒绝全空白标题；`list` 保持顺序；重复 `complete` 无额外副作用；不存在的 ID 报错；首次写入创建父目录；成功命令输出 JSON。复查归档后这些行为是否出现新问题。\n\n已按推荐写进上面的条件，你可以改：\n\n- **手动归档**：改成完成即自动归档，则每次 `complete` 后主文件立即清净。\n- **固定归档路径**：改成允许指定路径，则命令需增加路径选项，并规定后续命令如何找到它。\n- **重复完成已归档任务仍成功**：改成报错，则重复 `complete` 的结果会因是否归档而不同。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我会先用 acceptance-criteria 技能，查看 queue_cli 的现有行为，再定下归档范围和可检验的完成标准。先不改代码。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g 'README*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc 'cat queue_cli.py'",
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*test*' -g '*.json*' -g '*.toml' -g '*.txt'; cat README.md\"",
+  "/bin/zsh -lc \"cat tests/test_smoke.py tests/test_package.py; rg --files -g '\"'!'\"\\\\.git/**'; ls -a\""
+ ]
+}

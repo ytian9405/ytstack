@@ -1,0 +1,30 @@
+{
+ "id": "AC10-sol-v04-r1",
+ "prompt": "queue_cli 里完成的任务越来越多，list 看着乱。我想加个归档：已完成的任务挪到单独的文件，主文件只留没完成的。动手之前，先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v04",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 97.7,
+ "usage": {
+  "input_tokens": 59387,
+  "cached_input_tokens": 49664,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1941,
+  "reasoning_output_tokens": 727
+ },
+ "final": "这次要做到：已完成任务保存到归档文件，主文件只保留未完成任务，归档后新增任务不会复用旧 ID。\n\n看过代码：目前 `complete` 只改 `done`，`list` 返回主文件全部任务；现有测试没有覆盖 queue_cli。下面是**待确认的验收标准，尚未运行验证**，本次未改代码。\n\n1. **归档入口与旧数据**  \n   推荐 `complete ID` 成功后立即归档该任务；新增 `archive` 命令，搬走旧主文件中已有的全部已完成任务。以 `--state /tmp/q.json` 为例，归档文件为 `/tmp/q.json.archive.json`，内容也是 JSON 数组。`archive` 成功返回 `{\"archived\":本次搬移数量}`，退出码为 0。\n\n2. **搬移准确，不丢不重**  \n   准备主文件包含未完成的 1、3 和已完成的 2、4，归档已有 5。执行 `archive` 后，主文件只含 1、3，归档依次含 5、2、4，返回 `{\"archived\":2}`。逐条比对两个文件：任务总数不变，原有 ID、标题、`done` 和其他字段完整保留，各自顺序不变。\n\n3. **完成、查看与持久化**  \n   对未完成的任务 1 执行 `complete 1`，仍返回完整任务，`done` 为 `true`；主文件移除 1，归档追加 1。重新启动独立进程执行 `list`，只看到剩余未完成任务；重新读取归档文件仍能找到 1。重复 `complete 1` 返回同一任务，两文件不变。\n\n4. **边界与失败输入**\n\n   | 场景 | 通过条件 |\n   |---|---|\n   | 主文件全部已完成 | 归档后主文件为 `[]`，任务全部保留在归档 |\n   | 没有已完成任务、重复归档 | 返回 `{\"archived\":0}`，已有文件内容不变 |\n   | 主文件不存在 | `list` 返回 `[]`；`archive` 返回零，不创建文件 |\n   | 归档中最大 ID 为 9，主文件为空 | 下一次 `add` 使用 ID 10 |\n   | 空白标题、不存在或非整数的完成 ID | 非零退出，stderr 有错误，两文件不变 |\n   | 归档文件不是有效 JSON | 涉及归档的写入命令报错，两文件不变 |\n\n5. **用户检查**  \n   用一份真实任务副本完成一次任务、执行一次旧数据归档，再查看 `list` 和归档文件，由你确认日常查看是否清楚。自动检查不能代替你判断这个操作流程是否顺手。\n\n6. **不能弄坏**  \n   `--state` 继续隔离不同队列；新增任务保留 Unicode 和标题首尾空格，初始 `done=false`；首次写入创建父目录；成功命令输出一个 JSON 值，退出码为 0。证据须来自实际 CLI 命令、退出码及保存的文件内容。本次不加恢复归档功能；并发和进程中断恢复另定范围。\n\n已按推荐写进上面的条件，你可以改：\n\n- **触发方式**：完成后立即归档，旧数据用 `archive` 清理；改为全手动，则两次归档之间主文件仍会积累已完成任务。\n- **文件位置**：在主文件路径后追加 `.archive.json`；改为可指定路径，需要增加参数及路径校验。\n- **查看历史**：本次直接查看归档文件；若要在 CLI 查看，再增加 `list --archived`。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我先用 acceptance-criteria 技能，查看 queue_cli 的存储方式和任务状态，再把归档的范围与验收标准列清楚；这一步不改代码。\n"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g 'README*' -g 'SKILL.md' -g '*test*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc 'cat /private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-aqrg7x77/project/.agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc 'cat README.md; cat queue_cli.py'",
+  "/bin/zsh -lc 'cat tests/test_smoke.py; cat tests/test_package.py'",
+  "/bin/zsh -lc \"ls -la; rg --files -g 'AGENTS.md' -g '*.py' -g '*.toml' -g '*.json' -g '*.md'\""
+ ]
+}

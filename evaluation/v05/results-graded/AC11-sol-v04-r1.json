@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "拆分至少两项，每项金额为正整数分，合计必须等于 `--cents`；不自动补差或舍入。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "总金额和笔数不重复计算。"
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "结束进程后重新运行 `list`，拆分金额、类别、总额和 ID 全部保留。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "成功后退出码为 0，输出一笔 JSON 记录，能读到总额及每项类别、金额；只分配一个 ID。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**推荐本次仅支持新增拆分记录**；若要补拆旧账，需要增加修改入口及对应验收。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "成功后退出码为 0，输出一笔 JSON 记录，能读到总额及每项类别、金额；只分配一个 ID。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**推荐手填各项金额，并校验总额**；改成比例拆分，需要另定余数分配规则。"
+  },
+  {
+   "i": 3,
+   "state": "ABSENT",
+   "quote": ""
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "主文件和 `list` 均只包含 2；归档文件包含 1、3。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "保留旧记录，新归档记录追加在末尾"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "只移动完成任务，内容不变"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "再执行 `add`，新 ID 必须大于主文件和归档文件中所有旧 ID。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "原任务仍完整留在主文件，已有归档内容不被覆盖。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**触发方式：**手动 `archive`；改为完成后自动归档，则主文件随时只含未完成任务。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "这次要做到：归档后，已完成任务保存在独立文件，主文件和 `list` 只保留未完成任务。\n本次不增加恢复归档或归档查询命令。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**文件位置：**固定放在主文件旁；改为用户指定路径，则每次需要明确归档去向。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "再执行 `add`，新 ID 必须大于主文件和归档文件中所有旧 ID。两份文件都为空时，首个 ID 仍为 1。"
+  }
+ ]
+}

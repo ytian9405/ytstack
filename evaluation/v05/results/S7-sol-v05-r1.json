@@ -1,0 +1,28 @@
+{
+ "id": "S7-sol-v05-r1",
+ "prompt": "我一直以为 queue_cli 和 expense_cli 出错时就是打一行提示、照常退出，退出码还是 0，脚本里看输出就行。我理解得对吗？不对就纠正，漏的也补上。",
+ "model": "gpt-6.1-sol",
+ "package": "v05",
+ "agents_md": "/Users/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 119.3,
+ "usage": {
+  "input_tokens": 126617,
+  "cached_input_tokens": 108032,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1432,
+  "reasoning_output_tokens": 168
+ },
+ "final": "不对。**出错时退出码不是 0，脚本应先判断退出码，再读取输出。** 已核对代码并运行验证：\n\n- `queue_cli`：空标题、任务不存在，打印用法和错误提示，退出码 **2**。见 [queue_cli.py:25](/private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-1vt4g8u6/project/queue_cli.py:25)。\n- `expense_cli`：标题或分类为空、金额非正数、记录不存在，打一行提示，退出码 **1**。见 [expense_cli.py:32](/private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T/ytev-1vt4g8u6/project/expense_cli.py:32)。\n- 两者缺参数或参数格式错误，退出码都是 **2**；文件内容损坏、读写失败等未处理错误，会打印多行报错，通常退出码 **1**。\n- 错误写到 `stderr`（错误输出），正常 JSON 写到 `stdout`（标准输出）。只捕获标准输出会漏掉报错；正常完成才返回 **0**。",
+ "commentary": [
+  "我先查看 `queue_cli` 和 `expense_cli` 的出错处理，确认提示会打到哪里、退出码是多少。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*cli*' -g '*expense*cli*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc \"cat AGENTS.md && rg -n 'exit|SystemExit|except|print\\\\(|stderr|def main|ArgumentParser|raise|return' queue_cli.py expense_cli.py\"",
+  "/bin/zsh -lc 'nl -ba queue_cli.py && nl -ba expense_cli.py && rg --files'",
+  "/bin/zsh -lc \"python3 -B -c 'import subprocess, uuid\nstate = \\\"/tmp/cli-check-\\\" + uuid.uuid4().hex + \\\".json\\\"\ncases = [\n(\\\"queue 空标题\\\", [\\\"queue_cli.py\\\", \\\"--state\\\", state, \\\"add\\\", \\\" \\\"]),\n(\\\"queue 找不到任务\\\", [\\\"queu"
+ ]
+}

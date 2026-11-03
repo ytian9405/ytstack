@@ -1,0 +1,37 @@
+{
+ "id": "AC10-sol-v04-r2",
+ "prompt": "queue_cli 里完成的任务越来越多，list 看着乱。我想加个归档：已完成的任务挪到单独的文件，主文件只留没完成的。动手之前，先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v04",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 130.2,
+ "usage": {
+  "input_tokens": 132202,
+  "cached_input_tokens": 117760,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2033,
+  "reasoning_output_tokens": 578
+ },
+ "final": "这次要做到：执行归档后，已完成任务保存在单独文件，主文件只留未完成任务。以下按推荐方案拟定，尚未运行验证。\n\n目前 `queue_cli.py` 的 `complete` 只标记完成，`list` 显示全部任务；现有测试没有覆盖它。README 描述的是记账工具，不能作为队列的行为依据。\n\n验收时，每组使用独立目录，保留实际命令、退出码、输出及两个文件的内容作为证据。\n\n1. **手动归档。** 新增 `python3 queue_cli.py --state tasks.json archive`，只移动 `done: true` 的任务。`complete` 仍只标记完成，`list` 不触发归档。归档成功退出码为 0，输出一个 JSON 对象，如 `{\"archived\": 2}`，数字等于本次移动数量。\n\n2. **任务完整保留。** 准备两条已完成、一条未完成任务后执行归档。主文件和 `list` 只剩未完成任务，`tasks.json.archive.json` 保存两条已完成任务。ID、标题、完成标记均不变，两边各自保留原来的相对顺序。中文、首尾空格和同名任务不能丢失或合并。\n\n3. **追加且不重复。** 已有归档时，新归档任务追加到末尾，原有内容不丢失。连续执行两次 `archive`，第二次返回 `{\"archived\": 0}`，两个文件内容不变。任务全部完成时，归档后主文件为 `[]`；没有已完成任务或主文件不存在时，返回数量 0，不创建新文件。\n\n4. **重新打开后仍正确。** 分别启动新进程读取主文件和归档文件，内容与归档结果一致。可用 `python3 queue_cli.py --state tasks.json.archive.json list` 查看历史。归档后继续 `add`，新 ID 必须大于主文件和归档中的所有 ID；即使主文件已空，也不能复用旧 ID。只在归档里的 ID，再对主文件执行 `complete ID` 时按不存在处理，文件不变。\n\n5. **失败不能丢任务。** 分别用损坏的归档 JSON、无法写入的归档路径、无法更新的主文件触发失败。命令必须非零退出，stderr 给出错误，两个文件恢复或保持执行前的内容。证据须包含失败前后的文件对比。本次不覆盖并发写入、断电或强制结束进程，也不增加恢复、删除历史功能。\n\n6. **你亲自确认使用方式。** 用一组实际任务走完“完成、归档、查看当前任务、查看历史”，确认命令和文件位置符合你的使用习惯。这项确认不能由自动检查代替。\n\n7. **不能弄坏。** `add` 仍拒绝全空白标题，保留标题原文，新任务为 `done: false`；`complete` 仍返回完整任务，重复完成无额外变化；不存在的 ID 报错。缺失主文件时，`list` 返回 `[]` 且不创建文件。用原命令逐项运行并核对输出、退出码和保存内容。\n\n已按推荐写进上面的条件，你可以改：\n\n- 归档时机推荐手动执行；改成完成后自动归档，`complete` 后任务就立即离开主文件。\n- 归档位置推荐主文件路径追加 `.archive.json`；改成指定路径，需要新增路径参数。\n- 历史查看推荐复用 `--state 归档文件 list`；改成专用历史命令，日常使用更短，但会增加入口。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我会先用 acceptance-criteria 技能，看看 queue_cli 的现有行为和数据格式，把归档涉及的边界与验收标准定清楚，先不改代码。\n",
+  "目前 `list` 会显示全部任务，`complete` 只标记完成；新 ID 只根据主文件计算，所以归档后要防止复用旧 ID。README 和现有测试都没有覆盖 queue_cli。我会按单独执行归档的推荐方案写标准，并用 technical-bro 和 unslop 技能整理表述，把需要你拍板的选择放在末尾。\n"
+ ],
+ "skills_read": [
+  "acceptance-criteria",
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g 'README*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc 'cat README.md'",
+  "/bin/zsh -lc 'cat queue_cli.py'",
+  "/bin/zsh -lc \"rg --files -g '\"'! .git'\"' && rg --files --hidden -g AGENTS.md -g '\"'! .git'\"'\"",
+  "/bin/zsh -lc 'cat tests/test_smoke.py tests/test_package.py'",
+  "/bin/zsh -lc 'for dir in \"$PWD\" \"$(dirname \"$PWD\")\" /private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T /private/var /private /; do if [ -f \"$dir/AGENTS.md\" ]; then cat \"$dir/AGENTS.md\"; fi; done'",
+  "/bin/zsh -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'"
+ ]
+}

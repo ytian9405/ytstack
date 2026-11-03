@@ -1,0 +1,30 @@
+{
+ "id": "AC10-sol-v05-r1",
+ "prompt": "queue_cli 里完成的任务越来越多，list 看着乱。我想加个归档：已完成的任务挪到单独的文件，主文件只留没完成的。动手之前，先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v05",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 88.4,
+ "usage": {
+  "input_tokens": 85587,
+  "cached_input_tokens": 72704,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1630,
+  "reasoning_output_tokens": 305
+ },
+ "final": "这次要做到：执行归档后，已完成任务移入单独文件，主文件只留未完成任务，`list` 随之清爽。\n\n目前 `queue_cli.py` 只有 `add/list/complete`；完成任务仍留在主文件，ID 按主文件最大值加一。README 和现有测试没有覆盖这个工具。下面是待确认的验收标准，尚未实现或运行验证。\n\n以下以 `Q` 表示独立测试用的主文件路径，`A` 表示归档文件路径。\n\n1. **归档入口与结果**  \n   推荐新增 `python3 queue_cli.py --state Q archive`，手动归档全部已完成任务。成功时退出码为 0，输出一个 JSON 值，包含本次归档数量和归档路径。`complete` 仍只标记完成；执行归档后，主文件才只含未完成任务。\n\n2. **移动完整，不丢任务**  \n   准备主文件含未完成任务 1、3，已完成任务 2、4，归档已有任务 5。执行归档后，主文件仅含 1、3，归档依次含 5、2、4。逐条核对 ID、原始标题、完成状态及其他已有字段，均不得改变；两个文件合起来的任务不多不少。\n\n3. **列表与持久化**  \n   归档后另起进程执行 `python3 queue_cli.py --state Q list`，只返回 1、3，顺序不变。关闭后重新运行，并直接读取两个文件，结果仍一致。推荐归档保存在主文件旁：`tasks.json` 对应 `tasks.archive.json`；可直接读取该 JSON 查看历史，本次不新增历史查询或恢复命令。\n\n4. **空集和重复执行**  \n   按下表分别运行归档，并核对输出、文件内容及是否新建文件：\n\n   | 场景 | 通过条件 |\n   |---|---|\n   | 主文件不存在 | 归档数为 0，不创建文件 |\n   | 没有已完成任务 | 归档数为 0，已有文件内容不变 |\n   | 全部已完成 | 主文件为 `[]`，所有任务进入归档 |\n   | 连续归档两次 | 第二次数量为 0，历史任务不重复 |\n\n5. **ID 不复用**  \n   将当前最大 ID 归档，包括把主文件全部归档，再另起进程执行 `add`。新 ID 必须大于主文件和归档中的全部已有 ID。重复 `complete` 已归档的 ID，推荐返回原任务、成功退出，两个文件内容不变。\n\n6. **失败不损坏数据**  \n   分别验证损坏 JSON、任务记录缺少必要字段、归档路径被目录占用、文件不可写、写入过程中失败。命令须非零退出，stderr 指明相关路径和原因；记录错误还须指出第几条。不得覆盖无关文件或删除原任务。失败后重新运行，应能得到一致结果，每个任务恰好一份；如需恢复，必须明确提示并提供可执行的恢复办法，不能只留下报错栈。\n\n7. **不能弄坏已有行为**  \n   复查 `add` 保留中文和标题首尾空格、新任务为未完成；空白标题和不存在的完成 ID 仍报错且不改数据；`complete` 保留原任务其他内容；成功命令仍输出 JSON、退出码为 0。执行归档前，`list` 仍按原顺序返回主文件全部任务。使用独立路径实际运行这些命令，保存退出码、输出和操作前后文件作为证据，并检查是否引出新问题。\n\n已按推荐写进上面的条件，你可以改：\n\n- **触发时机：手动归档。** 改为完成即自动归档，`complete` 后任务会立即从列表消失，还需约定旧任务何时迁移。\n- **保存位置：主文件旁固定命名。** 改为指定路径，使用时需额外传参并保持路径一致。\n- **历史操作：直接查看文件，重复完成成功。** 可改为新增历史查询命令，或对已归档 ID 报错。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我会先用 acceptance-criteria 技能，查看 queue_cli 的任务状态和存储方式，再定出可验证的验收标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g 'README*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc 'cat README.md; cat queue_cli.py'",
+  "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git/**'\"'; rg --files /private/var/folders/74/ws5jw71j68lfltft9x4729f80000gn/T -g 'AGENTS.md'\"",
+  "/bin/zsh -lc \"cat tests/test_smoke.py tests/test_package.py; rg -n 'queue|archive|complete' . -g '\"'!LICENSE'\"' -g '\"'!SKILL.md'\"'\""
+ ]
+}

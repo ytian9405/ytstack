@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "主文件和 `list` 只剩未完成任务，`tasks.json.archive.json` 保存两条已完成任务。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "已有归档时，新归档任务追加到末尾，原有内容不丢失。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "只移动 `done: true` 的任务。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "归档后继续 `add`，新 ID 必须大于主文件和归档中的所有 ID；即使主文件已空，也不能复用旧 ID。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "命令必须非零退出，stderr 给出错误，两个文件恢复或保持执行前的内容。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "归档时机推荐手动执行；改成完成后自动归档，`complete` 后任务就立即离开主文件。"
+  },
+  {
+   "i": 1,
+   "state": "ASKED",
+   "quote": "历史查看推荐复用 `--state 归档文件 list`；改成专用历史命令，日常使用更短，但会增加入口。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "归档位置推荐主文件路径追加 `.archive.json`；改成指定路径，需要新增路径参数。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "归档后继续 `add`，新 ID 必须大于主文件和归档中的所有 ID；即使主文件已空，也不能复用旧 ID。"
+  }
+ ]
+}

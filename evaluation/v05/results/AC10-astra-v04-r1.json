@@ -1,0 +1,28 @@
+{
+ "id": "AC10-astra-v04-r1",
+ "prompt": "queue_cli 里完成的任务越来越多，list 看着乱。我想加个归档：已完成的任务挪到单独的文件，主文件只留没完成的。动手之前，先把验收标准定下来。",
+ "model": "gpt-6-astra",
+ "package": "v04",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 172.6,
+ "usage": {
+  "input_tokens": 58808,
+  "cached_input_tokens": 44032,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1335,
+  "reasoning_output_tokens": 191
+ },
+ "final": "这次要做到：归档后，已完成任务保存在独立文件，主文件和 `list` 只保留未完成任务。\n\n目前 `queue_cli.py` 只有 `add`、`list`、`complete`，新增 ID 取主文件最大 ID 加一，归档后必须防止复用旧 ID。README 和现有测试主要覆盖其他功能，不能作为归档验收依据。以下是待确认的标准，尚未实现或运行验证。\n\n1. **归档入口与结果**  \n   推荐新增手动命令 `python3 queue_cli.py --state tasks.json archive`，归档文件为同目录的 `tasks.json.archive.json`。成功退出码为 0，输出一个 JSON 对象，例如 `{\"archived\":2}`，数字表示本次移走的任务数。`complete` 仍只标记完成，执行归档后才移走。\n\n2. **只移动完成任务，内容不变**  \n   建立 ID 为 1、2、3 的任务，完成 1 和 3 后执行归档：主文件和 `list` 均只包含 2；归档文件包含 1、3。任务的 ID、标题、完成状态保持原样，两边各自保留原顺序。以实际命令输出及两个文件的内容为证。\n\n3. **累积归档，不覆盖、不重复**  \n   接着完成并归档任务 2，归档文件顺序为 1、3、2。再次执行归档返回 `{\"archived\":0}`，两个文件内容均不变。所有任务在两份文件合计恰好出现一次。\n\n4. **边界情况有明确结果**\n\n   | 场景 | 应看到的结果 |\n   |---|---|\n   | 主文件不存在 | 返回归档数 0，不创建文件 |\n   | 主文件为空或没有完成任务 | 返回归档数 0，不改已有文件，不新建归档文件 |\n   | 全部任务已完成 | 主文件保留空数组，任务全部进入归档 |\n   | 归档文件已有内容 | 保留旧记录，新归档记录追加在末尾 |\n\n5. **重开后仍有效，ID 不复用**  \n   每条命令用独立进程执行。归档全部任务后重新运行 `list`，仍返回 `[]`；再执行 `add`，新 ID 必须大于主文件和归档文件中所有旧 ID。两份文件都为空时，首个 ID 仍为 1。\n\n6. **失败不能丢任务**  \n   用损坏的归档 JSON、不可写的归档路径分别实际执行归档：非零退出，stderr 给出错误，不输出成功结果，原任务仍完整留在主文件，已有归档内容不被覆盖。保留失败输出及前后文件内容作为证据。本次不包含并发操作、断电或进程被强杀的恢复。\n\n7. **不能弄坏现有行为**  \n   用实际命令确认：标题的中文及首尾空格保留；空白标题、不存在的任务 ID 仍报错且不改数据；未归档任务重复 `complete` 无额外影响；`list` 保持添加顺序。推荐对已归档 ID 执行 `complete` 也按“不存在”报错，两份文件不变。本次不增加恢复归档或归档查询命令。\n\n已按推荐写进上面的条件，你可以改：\n\n- **触发方式：**手动 `archive`；改为完成后自动归档，则主文件随时只含未完成任务。\n- **文件位置：**固定放在主文件旁；改为用户指定路径，则每次需要明确归档去向。\n- **归档后操作：**`complete` 已归档 ID 报错；也可改成返回已归档记录，保持重复完成成功的体验。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我先用 acceptance-criteria 技能，查看 queue_cli 的存储格式和任务状态，再把归档的范围与验收标准定下来。\n"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g 'package.json' -g 'Cargo.toml'; cat .agents/skills/acceptance-criteria/SKILL.md\"",
+  "/bin/zsh -lc 'cat README.md; cat queue_cli.py'",
+  "/bin/zsh -lc \"cat tests/test_smoke.py; cat tests/test_package.py; rg --files -g 'AGENTS.md' -g '*.py' -g '*.json' -g '*.toml' -g '*.yaml' -g '*.yml'\""
+ ]
+}

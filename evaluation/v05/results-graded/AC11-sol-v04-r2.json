@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "拆分金额使用正整数分，合计必须恰好等于总金额，不自动补差或四舍五入。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "记录数和总支出不重复计算。"
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "标题、总额、拆分明细及统计均与添加时一致"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "用独立进程添加拆分记录，退出后再分别运行 `list` 和 `summary`：标题、总额、拆分明细及统计均与添加时一致；后续添加仍按原规则递增 ID。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "成功后只有一个 ID，返回结果和 `list` 均可查到完整拆分明细。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "已按推荐写进上面的条件，你可以改：\n\n- **范围**：先支持新增时拆分；若要拆已有记录，需增加修改入口及对应验收。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "成功后只有一个 ID，返回结果和 `list` 均可查到完整拆分明细。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "- **分摊**：手填整数分且合计严格相等；若选比例分摊，需另定余数归属规则。"
+  },
+  {
+   "i": 3,
+   "state": "ABSENT",
+   "quote": ""
+  }
+ ]
+}

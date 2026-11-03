@@ -1,0 +1,72 @@
+{
+ "recorded_at": "2026-11-03T06:53:34.563962+00:00",
+ "rater": "user",
+ "records": [
+  {
+   "question": 1,
+   "source": "S5",
+   "preferred_alias": "B",
+   "preferred_arm": "v04",
+   "A": "v05",
+   "B": "v04",
+   "chars_A": 162,
+   "chars_B": 153,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 2,
+   "source": "S6",
+   "preferred_alias": "A",
+   "preferred_arm": "v05",
+   "A": "v05",
+   "B": "v04",
+   "chars_A": 1332,
+   "chars_B": 661,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 3,
+   "source": "S7",
+   "preferred_alias": "B",
+   "preferred_arm": "v04",
+   "A": "v05",
+   "B": "v04",
+   "chars_A": 523,
+   "chars_B": 919,
+   "reason_verbatim": "但如果能更精炼一点会更好"
+  },
+  {
+   "question": 4,
+   "source": "S8",
+   "preferred_alias": "A",
+   "preferred_arm": "v04",
+   "A": "v04",
+   "B": "v05",
+   "chars_A": 416,
+   "chars_B": 282,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 5,
+   "source": "AC10",
+   "preferred_alias": "B",
+   "preferred_arm": "v05",
+   "A": "v04",
+   "B": "v05",
+   "chars_A": 1493,
+   "chars_B": 1589,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 6,
+   "source": "AC11",
+   "preferred_alias": "tie",
+   "preferred_arm": "tie",
+   "A": "v05",
+   "B": "v04",
+   "chars_A": 1439,
+   "chars_B": 1509,
+   "reason_verbatim": "基本平局"
+  }
+ ]
+}

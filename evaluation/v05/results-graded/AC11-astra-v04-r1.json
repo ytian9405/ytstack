@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "明细合计少于或多于总额 | 拒绝"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "笔数和总支出不重复计算。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "ID 不复用"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "标题和类别的 Unicode、首尾空格仍原样保留，类别按原字符串归并。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "添加后退出进程，再由新进程分别执行 `list`、`summary`。明细、总额、ID 和汇总必须保持一致；证据包括命令输出和保存的状态内容。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "只有一个 ID，总额 10000 分，并完整返回两项拆分。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "先支持新增时拆分；若要拆已有记录，需增加编辑入口及验收。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "只有一个 ID，总额 10000 分，并完整返回两项拆分。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "手填各部分分金额且严格对齐总额；若支持比例或自动补余款，需另定尾差规则。"
+  },
+  {
+   "i": 3,
+   "state": "ABSENT",
+   "quote": ""
+  }
+ ]
+}

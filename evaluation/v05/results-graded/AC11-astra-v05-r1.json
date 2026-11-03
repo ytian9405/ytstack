@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "| 拆分合计与总额相差 1 分 | 拒绝 |"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "**分类金额准确，总额只算一次。**"
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "返回结果及 `list` 都能看到标题、总额、各类别金额和作废状态。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "用独立进程重新运行 `list`、`summary`，拆分仍在且统计一致。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "成功后退出码为 0，输出一个 JSON 值；只产生一个 ID。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "已按推荐写进上面的条件，你可以改：\n\n- **范围：**仅新增时拆分；若要拆已有记录，需要增加修改入口和对应验收。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "成功后退出码为 0，输出一个 JSON 值；只产生一个 ID。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "- **金额：**手填分金额且必须凑齐总额；若改用比例或自动补差，需要另定舍入和余额归属。"
+  },
+  {
+   "i": 3,
+   "state": "ABSENT",
+   "quote": ""
+  }
+ ]
+}

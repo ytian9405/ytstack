@@ -1,0 +1,28 @@
+{
+ "id": "S5-astra-v04-r1",
+ "prompt": "queue_cli 里我想用中文和 emoji 写标题，存进去再 list 出来会不会乱码？你跑一下看看，把结果告诉我。",
+ "model": "gpt-6-astra",
+ "package": "v04",
+ "agents_md": "/Users/ytian9405/projects/ytstack/evaluation/snapshots/v04/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 137.0,
+ "usage": {
+  "input_tokens": 99256,
+  "cached_input_tokens": 91520,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1337,
+  "reasoning_output_tokens": 225
+ },
+ "final": "**模拟测试没有乱码，但实际文件保存还没验证成功。**\n\n- 运行了 `queue_cli.py` 的 `add` → `list`，用内存代替文件保存。\n- 测试标题：`中文标题：买牛奶`、`周末计划 🥳🚀`、`修复问题 👩🏽‍💻 ✅`，列出后都与输入完全一致。\n- 实际文件测试被当前环境的只读限制拦住，报错 `operation not permitted`；需要在允许写文件的环境补跑，才能确认完整结果。",
+ "commentary": [
+  "我先找到 `queue_cli` 的用法，再实际试一次保存和列出带中文、emoji 的标题。",
+  "当前环境禁止创建文件，实际保存测试被拦住了。我会继续运行 `queue_cli` 的添加和列出流程，用内存代替文件，检查中文和 emoji 是否原样返回；这不能算实际文件保存验证。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"pwd; rg --files -g '*queue*' -g 'AGENTS.md' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/zsh -lc \"cat AGENTS.md; sed -n '1,260p' queue_cli.py; rg --files\"",
+  "/bin/zsh -lc \"python3 -B -c 'import contextlib, io, json, locale, runpy, sys\nfrom pathlib import Path\nfrom unittest.mock import patch\nsource = Path(\\\"queue_cli.py\\\").read_text()\nprogram = compile(source, \\\"queue_cli.py\\\""
+ ]
+}

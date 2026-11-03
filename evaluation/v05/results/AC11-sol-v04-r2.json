@@ -1,0 +1,31 @@
+{
+ "id": "AC11-sol-v04-r2",
+ "prompt": "expense 一笔记录只能填一个类别，像请客这种一半算餐费、一半算人情的，就记不准。我想加拆分，让 summary 的 by_category 分开算。动手之前，先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v04",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 120.4,
+ "usage": {
+  "input_tokens": 82731,
+  "cached_input_tokens": 72576,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1943,
+  "reasoning_output_tokens": 674
+ },
+ "final": "这次要做到：一笔 expense 可分到多个类别，`summary.by_category` 按各部分统计，记录数和总支出不重复计算。\n\n根据现有 README、代码和测试，建议采用以下标准；目前未改文件，也未运行这些验收。验收时须保留实际命令、退出码、JSON 输出及状态文件作为证据。\n\n1. **新增拆分记录**\n   一次 `add` 能提交标题、总金额及至少两个“类别＋金额”。例如“请客”共 10000 分，餐费 5000、人情 5000。成功后只有一个 ID，返回结果和 `list` 均可查到完整拆分明细。原有单类别添加方式继续可用。\n\n2. **分类统计准确**\n   在含一笔旧餐费 1250 分的账本中，添加上述请客记录后，`summary` 必须返回：\n   ```json\n   {\n     \"count\": 2,\n     \"total_cents\": 11250,\n     \"by_category\": {\"餐费\": 6250, \"人情\": 5000}\n   }\n   ```\n   旧记录无需补填拆分信息；各类别金额之和必须等于 `total_cents`。\n\n3. **金额和失败边界明确**\n   拆分金额使用正整数分，合计必须恰好等于总金额，不自动补差或四舍五入。\n\n   | 输入 | 应看到的结果 |\n   |---|---|\n   | 总额 2，拆为 1＋1 | 成功 |\n   | 总额 101，拆为 50＋51 | 成功 |\n   | 合计比总额少或多 1 分 | 拒绝 |\n   | 金额为零、负数或非整数 | 拒绝 |\n   | 空白类别、重复类别、仅一项拆分 | 拒绝 |\n   | 同时提交单类别和拆分 | 拒绝 |\n\n   拒绝时非零退出，stderr 有错误说明；已有状态文件内容不变，不留下半笔记录、不消耗 ID。状态文件不存在时，失败也不创建它。\n\n4. **重新打开仍一致**\n   用独立进程添加拆分记录，退出后再分别运行 `list` 和 `summary`：标题、总额、拆分明细及统计均与添加时一致；后续添加仍按原规则递增 ID。\n\n5. **整笔作废**\n   对请客记录执行 `void ID` 后，`list` 保留原记录及明细并标记作废；`summary` 恢复为一笔餐费：`count=1`、`total_cents=1250`、`by_category={\"餐费\":1250}`。重复作废结果不变，不支持只作废其中一部分。\n\n6. **本人试用**\n   由你实际录入一次请客拆分，确认输入方式和返回明细足以核对每部分。金额计算可自动检查；操作是否顺手须由你确认。\n\n7. **不能弄坏**\n   原单类别命令及 JSON 字段保持兼容；标题和类别保留 Unicode、首尾空格；`list` 保持添加顺序并包含作废记录；空账本输出不变，读取不创建文件，首次写入可创建父目录。现有非法输入拒绝规则继续有效。\n\n已按推荐写进上面的条件，你可以改：\n\n- **范围**：先支持新增时拆分；若要拆已有记录，需增加修改入口及对应验收。\n- **分摊**：手填整数分且合计严格相等；若选比例分摊，需另定余数归属规则。\n- **记录方式**：单类别与拆分二选一；若允许并用，需明确单类别是否承担剩余金额。重复类别默认拒绝。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我先用 acceptance-criteria 技能梳理现有 expense 和 summary 行为，把拆分的范围、待定规则和可验收结果写清楚，暂不改代码。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*expense*' -g '*summary*' -g 'README*' -g 'package.json' -g 'pyproject.toml' -g 'go.mod' -g 'Cargo.toml' -g '*test*' -g '*spec*'\"",
+  "/bin/zsh -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/zsh -lc 'cat README.md && cat expense_cli.py'",
+  "/bin/zsh -lc 'cat tests/test_smoke.py && cat tests/test_package.py'",
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '\"'!node_modules'\"' -g '\"'!.git'\"' && ls -la\"",
+  "/bin/zsh -lc \"rg --files --hidden -g 'AGENTS.md' -g '\"'!.git'\"' -g '\"'!node_modules'\"'; ls -la\""
+ ]
+}

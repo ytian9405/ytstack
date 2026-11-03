@@ -1,0 +1,28 @@
+{
+ "id": "S7-sol-v04-r2",
+ "prompt": "我一直以为 queue_cli 和 expense_cli 出错时就是打一行提示、照常退出，退出码还是 0，脚本里看输出就行。我理解得对吗？不对就纠正，漏的也补上。",
+ "model": "gpt-6.1-sol",
+ "package": "v04",
+ "agents_md": "/Users/ytian9405/projects/ytstack/evaluation/snapshots/v04/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 136.0,
+ "usage": {
+  "input_tokens": 112841,
+  "cached_input_tokens": 89344,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1695,
+  "reasoning_output_tokens": 277
+ },
+ "final": "不对。**最要紧的是：脚本应先看退出码；只看输出文字会漏判失败。** 我检查了代码，也实际验证了主要情况。\n\n- **两者参数写错**：缺必填参数、命令不存在、整数传成文字，退出码都是 **2**，用法和错误说明写到错误输出（`stderr`）。\n- **`queue_cli` 内容不合要求**：标题全为空白，或 `complete` 的任务不存在，退出码 **2**，输出用法和错误说明。[代码依据](queue_cli.py:24)\n- **`expense_cli` 内容不合要求**：标题或类别为空白、金额不大于零，或 `void` 的记录不存在，退出码 **1**，向 `stderr` 打一行提示。[代码依据](expense_cli.py:33)\n- **文件出问题**：两者都没有统一处理读取、解析和保存异常；通常会打印多行 Python 错误堆栈，退出码 **1**。已实测损坏 JSON 的情况。\n- **成功执行**：退出码 **0**，结果以 JSON 写到正常输出（`stdout`）。状态文件不存在时按空列表处理；已有文件为空或 JSON 损坏则会报错。`--help` 也返回 **0**，但输出的是帮助文字。\n\n所以脚本应当：**退出码非 0 就按失败处理并保留 `stderr`；执行正常业务命令且退出码为 0，再解析 `stdout` 的 JSON。** 目前失败输出不是统一的 JSON，也不保证只有一行。",
+ "commentary": [
+  "我先检查 `queue_cli` 和 `expense_cli` 的错误处理和退出方式，再说明脚本该怎么判断成败。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*queue*' -g '*expense*' -g 'pyproject.toml' -g 'package.json' -g '*test*'\"",
+  "/bin/zsh -lc 'cat AGENTS.md queue_cli.py expense_cli.py tests/test_smoke.py tests/test_package.py'",
+  "/bin/zsh -lc 'nl -ba queue_cli.py\nnl -ba expense_cli.py'",
+  "/bin/zsh -lc \"python3 -B -c 'from pathlib import Path\nimport subprocess, sys\nmissing = \\\"/__cli_readonly_probe_missing_state__.json\\\"\ncases = [\n(\\\"queue: empty list\\\", \\\"queue_cli.py\\\", [\\\"--state\\\", missing, \\\"list\\\"]),"
+ ]
+}

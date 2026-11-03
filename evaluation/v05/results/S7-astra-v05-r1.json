@@ -1,0 +1,27 @@
+{
+ "id": "S7-astra-v05-r1",
+ "prompt": "我一直以为 queue_cli 和 expense_cli 出错时就是打一行提示、照常退出，退出码还是 0，脚本里看输出就行。我理解得对吗？不对就纠正，漏的也补上。",
+ "model": "gpt-6-astra",
+ "package": "v05",
+ "agents_md": "/Users/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 183.8,
+ "usage": {
+  "input_tokens": 101643,
+  "cached_input_tokens": 92928,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1131,
+  "reasoning_output_tokens": 79
+ },
+ "final": "不对。看过代码并实际验证后，**脚本应先看退出码判断成败，再看输出了解原因**。\n\n- `queue_cli`：标题为空、任务不存在时，退出码是 **2**，会打印用法和错误提示。\n- `expense_cli`：标题或分类为空、金额不大于零、账目不存在时，退出码是 **1**，打印一行错误提示。\n- 两者缺少必填参数或参数格式错误时，退出码都是 **2**。\n- 数据文件损坏等未处理的错误，会打印多行报错调用记录，退出码通常是 **1**；已验证损坏 JSON 的情况。\n- 错误信息写到专门的错误输出（`stderr`）；只读取正常输出（`stdout`）会漏掉。成功操作才向 `stdout` 输出 JSON，退出码为 **0**。",
+ "commentary": [
+  "我先看 `queue_cli` 和 `expense_cli` 的出错处理，确认提示写到哪里、退出码是什么。\n"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"rg --files -g '*queue*' -g '*expense*' -g 'AGENTS.md'\"",
+  "/bin/zsh -lc 'cat AGENTS.md queue_cli.py expense_cli.py'",
+  "/bin/zsh -lc \"python3 -B -c 'from pathlib import Path\nimport subprocess, sys\nstate = Path(\\\"__cli_error_check_missing__.json\\\")\nassert not state.exists()\ncases = [(\\\"queue 空标题\\\", \\\"queue_cli.py\\\", [\\\"--state\\\", str(state"
+ ]
+}
