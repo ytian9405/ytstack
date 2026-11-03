@@ -1,0 +1,17 @@
+{"_note":"Frozen 2026-11-03 after the user's v02 blind review and before any v0.3 rule edit. None of these were used for tuning.",
+"speech":{
+"N1":"queue_cli 的 complete 重复执行会怎样？要不要拦着？",
+"N2":"README 里写的“读取空账本不创建状态文件”，现在真的做到了吗？",
+"N3":"tools/install.py 的 --dry-run 靠得住吗？",
+"N4":"expense 的数据从 JSON 换成 SQLite，值不值得？",
+"N5":"这个项目的代码，最该先修的是什么？",
+"N6":"queue_cli 和 expense_cli 能合并成一个工具吗？"},
+"acceptance":{
+"AC6":{"prompt":"queue_cli 想加任务截止时间，过期了要能看出来。先定一下验收标准。",
+ "decisions":["截止时间用什么格式输入、按哪个时区算","“过期”怎么显示（list 里加字段、单独命令、还是排序）","已完成的任务过了截止时间算不算过期","能否修改或清除截止时间"],
+ "wrong":["已完成的任务过了截止时间也显示为过期","重新运行程序后截止时间丢失","不带截止时间的旧任务读取时报错","截止时间恰好等于当前时刻时，有时算过期有时不算","输入无法解析的日期时，任务仍被创建"],
+ "ok":"过期以 list 输出里每条任务新增的 overdue 字段表示，其余行为符合要求"},
+"AC7":{"prompt":"给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "decisions":["用户自己同名、但不是 ytstack 装的目录算不算“已安装”","内容被改过的复制版本怎么显示","失效的软链接怎么显示","输出给人看还是给程序读（文本还是 JSON）"],
+ "wrong":["运行 --list 时创建了 .agents 目录或任何文件","把用户自己的同名目录报成 ytstack 已安装且没有任何区分","失效的软链接让命令崩溃并显示 Python 报错栈","项目里一个技能都没装时报错退出","只列出 Codex 目录，忽略了用 --harness claude 指定的目录"],
+ "ok":"输出为 JSON，失效链接列为 broken，其余行为符合要求"}}}

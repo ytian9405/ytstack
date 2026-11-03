@@ -1,0 +1,31 @@
+{
+ "id": "H6-astra-v02-r1",
+ "prompt": "帮我评估一下这个仓库的测试够不够。",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 1919.0,
+ "usage": {
+  "input_tokens": 109228,
+  "cached_input_tokens": 90112,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1658,
+  "reasoning_output_tokens": 352
+ },
+ "final": "**不够。按 README 承诺的记账功能，目前测试只能证明“空账本的汇总结果正确”，还不能证明记账、保存和作废可靠。**\n\n- **11 个测试里，只有 1 个测记账。** [test_smoke.py](/tmp/ytev-8xs4l6mb/project/tests/test_smoke.py:10) 只检查空账本的 `summary`；即使新增记录保存失败、作废后仍被计入总额，这个测试也发现不了。\n- **另外 10 个测的是技能安装工具，而且与当前仓库不匹配。** [test_package.py](/tmp/ytev-8xs4l6mb/project/tests/test_package.py:13) 依赖仓库里没有的 `skills/` 等文件，还测试了安装工具不支持的 `--voice` 参数。这部分需要先确定是否仍属于项目，再修复或移出默认测试。\n- **`queue_cli.py` 没有测试。** 如果它仍要交付给用户，也需要覆盖新增、完成和重新打开后读取；如果只是旧文件，应明确退出维护范围。\n\n建议按这个顺序补齐：\n\n| 优先级 | 要验证什么 | 能发现什么问题 |\n|---|---|---|\n| 最高 | 新增多笔记录，每次用独立进程操作，再读取和汇总 | 保存后记录丢失、覆盖旧记录、金额或分类合计算错 |\n| 最高 | 作废、重复作废、全部作废，再新增 | 作废记录仍计入总额、误改其他字段、重复使用 ID |\n| 最高 | 非整数、零和负数金额，空白标题或类别，不存在的 ID | 错误输入被接受，或拒绝操作时仍改动原有数据；同时检查非零退出和错误输出 |\n| 随后 | 中文和首尾空格、记录顺序、自动创建父目录、读取空账本不创建文件 | README 承诺的细节被后续修改破坏 |\n\n本次验证的边界：\n\n- 已执行默认测试入口：包完整性检查因缺少 `.claude-plugin/plugin.json` 失败；其余测试被当前只读环境挡在创建临时目录这一步，不能据此判定功能失败。\n- 单独运行了无需写文件的空账本 `list` 和 `summary`，结果正确，也没有创建状态文件。\n- README 已明确排除损坏 JSON、并发写入和权限异常，**这轮不需要把它们列为补测门槛**。先让默认测试正常运行，再覆盖上表中的承诺，才算有基本保障。",
+ "commentary": [
+  "我先看仓库有哪些功能、现有测试覆盖了什么，再判断哪些漏测会影响使用。\n"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'package.json' -g 'pyproject.toml' -g 'Cargo.toml' -g 'go.mod' -g '*test*' -g '*spec*' -g 'README*' -g '*lock*' -g '*config*' -g '\"'!node_modules'\"' -g '\"'!vendor'\"'\"",
+  "/bin/bash -lc \"ls -la && rg --files -g '\"'!node_modules'\"' -g '\"'!.git'\"'\"",
+  "/bin/bash -lc 'cat AGENTS.md README.md tests/test_package.py tests/test_smoke.py'",
+  "/bin/bash -lc 'nl -ba expense_cli.py && nl -ba queue_cli.py && nl -ba tests/test_smoke.py && cat ytstack.json'",
+  "/bin/bash -lc \"nl -ba tools/install.py && nl -ba tools/validate.py && git status --short && rg --files --hidden -g '\"'!.git'\"' -g '\"'!**/__pycache__/**'\"'\"",
+  "/bin/bash -lc 'PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v'",
+  "/bin/bash -lc \"python3 -B - <<'PY'\nimport json\nimport pathlib\nimport subprocess\nimport sys\nimport ast\nroot = pathlib.Path.cwd()\nstate = root / '__review_absent_state__' / 'ledger.json'\nassert not state.parent.exists()\nca"
+ ]
+}

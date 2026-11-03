@@ -1,0 +1,32 @@
+{
+ "id": "H6-astra-v01-r1",
+ "prompt": "帮我评估一下这个仓库的测试够不够。",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 1473.0,
+ "usage": {
+  "input_tokens": 137865,
+  "cached_input_tokens": 114432,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2009,
+  "reasoning_output_tokens": 156
+ },
+ "final": "**不够。按 README 的记账功能要求，现有测试还不足以防止核心功能回归。** 我检查了全部源码和测试，并做了运行验证，没有修改文件。\n\n主要问题有三个：\n\n1. **核心业务只有一个空账本测试。**  \n   [test_smoke.py:10](/tmp/ytev-vdh_e30o/project/tests/test_smoke.py:10) 只验证空账本的 `summary`。新增、列表、作废、持久化、非空汇总和非法输入都没有测试。\n\n   我在内存中分别注入了四种故障：不保存数据、ID 永远为 1、汇总包含已作废记录、总金额永远为 0。**四种故障均能通过现有冒烟测试的断言。** 这说明该测试无法保护主要业务。\n\n2. **其余 10 个测试与当前仓库不匹配。**  \n   [test_package.py](/tmp/ytev-vdh_e30o/project/tests/test_package.py) 测的是技能安装包。其中存在明确不一致：\n   - 包校验依赖的 `.claude-plugin/plugin.json` 缺失，实际运行失败。\n   - 测试使用 `--voice`，安装器实际返回“不支持该参数”。\n   - 测试预期安装 5 个技能，[ytstack.json](/tmp/ytev-vdh_e30o/project/ytstack.json) 只声明了 4 个。\n\n   需要先确认这部分是否属于交付范围，再修复或移出默认测试入口。\n\n3. **队列 CLI 没有测试。**  \n   如果 [queue_cli.py](/tmp/ytev-vdh_e30o/project/queue_cli.py) 也需要维护，其新增、完成和持久化行为同样没有保障。\n\n建议优先补齐这些行为测试：\n\n| 优先级 | 场景 | 必须验证的结果 |\n|---|---|---|\n| 高 | 独立进程依次新增、列表、作废、再读取 | 数据持久化、顺序和字段正确，作废记录保留 |\n| 高 | 多条、同类别及不同类别记录的汇总 | 数量、总额、分类金额正确，排除作废记录 |\n| 高 | 非法金额、空白标题/类别、不存在的 ID | 非零退出、stderr 有错误、原文件内容不变 |\n| 中 | 重复作废、作废后继续新增 | 重复操作不改变业务结果，ID 不复用 |\n| 中 | Unicode、首尾空格、缺失父目录、空账本读取 | 原文保留、首次写入建目录、读取不创建文件 |\n\n完整测试命令发现 **11 个测试，报告 1 个失败、11 个错误（含子测试）**。其中错误来自当前只读环境无法创建临时目录，不能算作产品缺陷；包校验失败则是已确认的仓库问题。另用不写文件的方式验证了空账本汇总，结果正确。\n\n建议先让默认测试集与交付内容一致，再补齐上表中的核心流程。README 已明确排除损坏 JSON、并发写入和权限异常，当前无需优先为这些场景补测试。",
+ "commentary": [
+  "我会先看仓库结构、现有测试和运行方式，再对照主要功能判断覆盖缺口，以及这些测试能否发现实际故障。",
+  "目前发现，11 个测试中只有 1 个针对 README 描述的记账功能，而且只检查空账本汇总；其余 10 个测试针对技能安装包，并与当前文件、参数存在不一致。完整测试运行还受到只读环境限制，我会把环境导致的报错和仓库本身的问题分开说明。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*test*' -g '*spec*' -g '*config*' -g 'package.json' -g 'README*' -g 'pyproject.toml' -g 'Cargo.toml' -g 'go.mod' -g 'Makefile' -g '\"'!package-lock.json'\"' -g '\"'!pnpm-l",
+  "/bin/bash -lc 'ls -la && rg --files && for f in AGENTS.md README.md tests/test_package.py tests/test_smoke.py; do if [ -f \"$f\" ]; then printf '\"'\\\\n%s\\\\n' \\\"\"'$f\"; sed -n '\"'1,240p' \\\"\"'$f\"; fi; done'",
+  "/bin/bash -lc \"git status --short && rg --files --hidden -g '\"'!'\"\\\\.git/**' -g 'AGENTS.md' -g '*.yml' -g '*.yaml' -g '*coverage*' -g 'pytest.ini' -g 'tox.ini' -g 'setup.cfg' -g 'requirements*' && git ls-files\"",
+  "/bin/bash -lc \"for f in expense_cli.py queue_cli.py tools/install.py tools/validate.py ytstack.json; do printf '\\\\n%s\\\\n' \\\"\"'$f\"; nl -ba \"$f\"; done'",
+  "/bin/bash -lc \"nl -ba tests/test_smoke.py && nl -ba README.md && nl -ba tests/test_package.py | sed -n '85,185p'\"",
+  "/bin/bash -lc 'PYTHONDONTWRITEBYTECODE=1 python3 tools/validate.py && true'",
+  "/bin/bash -lc 'PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v'",
+  "/bin/bash -lc \"PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nroot = Path.cwd()\nstate = root / '__readonly_audit_missing_state__.json'\nassert not state.exist"
+ ]
+}

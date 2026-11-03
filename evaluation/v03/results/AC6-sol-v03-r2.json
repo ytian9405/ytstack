@@ -1,0 +1,31 @@
+{
+ "id": "AC6-sol-v03-r2",
+ "prompt": "queue_cli 想加任务截止时间，过期了要能看出来。先定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v03",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 102.0,
+ "usage": {
+  "input_tokens": 75313,
+  "cached_input_tokens": 58368,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1806,
+  "reasoning_output_tokens": 465
+ },
+ "final": "建议先做到：**添加任务时可选填截止时间；查看时明确显示是否过期。** 我读了 [queue_cli.py](/tmp/ytev-g_iwvp5k/project/queue_cli.py)，目前只有添加、列出、完成任务，还没有截止时间。\n\n**待你决定**（下面按推荐选项拟定）\n\n| 编号 | 要决定的事 | 推荐 | 另一种选择的影响 |\n|---|---|---|---|\n| D1（最要紧） | 已完成任务还算过期吗？ | 只有未完成且超过截止时间才算过期 | 已完成也标记，会混入“还没处理”的任务中 |\n| D2 | 截止时间怎么填？ | 完整日期、时分秒及与 UTC 的时差，如 `2026-11-04T10:00:00+08:00` | 只填日期，需要再决定当天几点截止；不写时差，换电脑可能理解不同 |\n| D3 | 什么时候设置？ | 本次仅在添加时选填 | 支持事后修改、清除，需要增加操作入口 |\n\n其余按推荐处理：允许添加已经过期的任务；恰好到截止时间时还不算过期。\n\n**这次不做**\n\n- 到期通知、后台提醒、自动完成或删除任务。\n- 按截止时间排序、只看过期任务，以及记录任务是否曾经逾期完成。\n\n**验收条件**\n\n以下命令均在 `/tmp/ytev-g_iwvp5k/project` 运行，前缀为 `python3 queue_cli.py --state /tmp/queue-acceptance.json`；每个独立场景使用新状态文件。\n\n- C1 [D2,D3]：执行 `add \"交报告\" --due \"2026-11-04T10:00:00+08:00\"`，退出后重新执行 `list` → 两次 JSON 输出都包含截止时间 `due`，表示同一时刻。防：只在添加成功时显示，重新打开就丢失。\n- C2 [D3]：执行 `add \"买牛奶\"`，再读取改动前保存的任务文件 → 未设截止时间的任务均显示 `due: null`、`overdue: false`。防：旧任务无法读取，或被误判过期。\n- C3 [D1,D2]：未完成任务截止于上述时间，分别在当天 `09:59:59`、`10:00:00`、`10:00:01`（均为 `+08:00`）执行 `list` → `overdue` 依次为 `false`、`false`、`true`，无须先保存任务。防：等于截止时间就判过期，或必须写入后才更新。\n- C4 [D1]：对过期任务执行 `complete 1`，再执行 `list` → 两次都显示 `done: true`、`overdue: false`，截止时间保留。防：完成后仍被当作待处理的过期任务。\n- C5 [D2]：分别用 `--due \"明天\"`、`--due \"2026-02-30T10:00:00+08:00\"`、`--due \"2026-11-04T10:00:00\"` 添加 → 非零退出，stderr 说明日期格式要求；已有文件内容不变。防：无效时间被接受，或失败仍留下任务。\n- C6 [D1,D2]：当前时间为 `2026-11-04T10:00:01+08:00`，添加截止于 `2026-11-04T02:00:00Z` 的任务 → 添加结果立即显示 `overdue: true`。防：拒绝过去时间，或忽略不同时差实际表示同一时刻。\n\n**不能弄坏**\n\n- `add`、`list`、`complete ID` 继续输出 JSON；任务编号递增，列表保持添加顺序，重复完成不会新增任务。\n- 空白标题、不存在的任务编号仍报错，已有数据不变。\n- 读取不存在的状态文件仍返回 `[]`，不创建文件。\n\n确认后可以交给 `create-test-skill` 变成可运行的测试。",
+ "commentary": [
+  "我会用 `acceptance-criteria` 这套技能，先看 `queue_cli` 现在怎么添加和查看任务，再整理截止时间的验收标准，把需要你决定的地方列出来。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g 'SKILL.md' -g 'README*' -g 'pyproject.toml' -g 'package.json' -g 'Cargo.toml' -g 'go.mod'\"",
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc 'cat AGENTS.md && cat README.md'",
+  "/bin/bash -lc \"cat queue_cli.py && rg --files -g '*test*' -g '\"'!vendor'\"' -g '\"'!node_modules'\"' -g '\"'!'\"\\\\.git'\"",
+  "/bin/bash -lc \"cat tests/test_package.py && cat tests/test_smoke.py && rg -n 'queue_cli|deadline|overdue|截止|过期' . --glob '\"'!AGENTS.md'\"' --glob '\"'!SKILL.md'\"'\""
+ ]
+}

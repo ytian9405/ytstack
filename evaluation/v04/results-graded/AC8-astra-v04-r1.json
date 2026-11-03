@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "导出前后重新运行 `list`、`summary`，结果一致；"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "中文不乱码，含逗号、双引号、换行和首尾空格的标题、类别不被拆错或丢字；"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "作废状态显示“是／否”。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "列为“编号、标题、金额（元）、类别、是否作废”。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**导出哪些记录。** 推荐全部并标注作废，方便核对历史；只导出未作废记录，则文件只包含有效支出。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "拟用 `python3 expense_cli.py --state 账本.json export --output 账单.csv`。\n推荐目标文件已存在就拒绝覆盖。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**最要紧：用什么软件打开。** 推荐 Excel；若用 WPS 或 LibreOffice，第 4 条改在你实际使用的软件和系统上验收。\n**金额怎么显示。** 推荐元，方便阅读和计算；若保留分，1250 就显示为 `1250`，列名也改为“金额（分）”。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "空账本导出只有列名，不创建原账本文件。"
+  }
+ ]
+}

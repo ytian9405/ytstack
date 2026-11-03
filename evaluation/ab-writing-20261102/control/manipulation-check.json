@@ -1,0 +1,71 @@
+{
+  "method": "Original agents post-generation self-report; full tool trace unavailable",
+  "runs": [
+    {
+      "label": "sample-66",
+      "reported_skill_resources_read": [],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-35",
+      "reported_skill_resources_read": [
+        ".agents/skills/bro/SKILL.md"
+      ],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-74",
+      "reported_skill_resources_read": [],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-48",
+      "reported_skill_resources_read": [
+        ".agents/skills/bro/SKILL.md"
+      ],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-53",
+      "reported_skill_resources_read": [],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-89",
+      "reported_skill_resources_read": [
+        ".agents/skills/technical-bro/SKILL.md",
+        ".agents/skills/unslop/SKILL.md"
+      ],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-27",
+      "reported_skill_resources_read": [],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    },
+    {
+      "label": "sample-12",
+      "reported_skill_resources_read": [
+        ".agents/skills/technical-bro/SKILL.md",
+        ".agents/skills/unslop/SKILL.md"
+      ],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_dependency_install_or_source_command_execution": false,
+      "exceptions": "assigned prompt.txt; bro setup also control/seed-message.txt"
+    }
+  ]
+}

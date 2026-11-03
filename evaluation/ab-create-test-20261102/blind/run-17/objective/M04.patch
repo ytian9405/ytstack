@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -30,7 +30,7 @@
+     args = parser.parse_args()
+     entries = load(args.state)
+     if args.command == 'add':
+-        if not args.title.strip() or not args.category.strip() or args.cents <= 0:
++        if not args.title.strip() or not args.category.strip() or args.cents == 0:
+             print('title and category must be nonblank; cents must be positive', file=sys.stderr)
+             return 1
+         entry = {'id': max((item['id'] for item in entries), default=0) + 1,

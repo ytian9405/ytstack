@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-11-02T12:52:00.358020+00:00",
+  "checks": [
+    "pre-run rubric, task and mutations unchanged",
+    "blind scores unchanged after unblinding",
+    "all report links resolve",
+    "summary arithmetic agrees with locked scores",
+    "original and anonymous delivery artifacts unchanged",
+    "review scratch cleanup verified"
+  ],
+  "scope": "Final artifact integrity, separate from recorded product test results"
+}

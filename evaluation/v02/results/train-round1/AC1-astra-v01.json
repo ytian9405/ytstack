@@ -1,0 +1,13 @@
+{
+ "id": "AC1-astra-v01",
+ "prompt": "我要给 queue_cli 加一个“任务超时后自动重试”的功能，开发前先帮我把验收标准定下来。",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "exit": "timeout",
+ "seconds": 420.1,
+ "usage": null,
+ "final": "",
+ "commentary": [],
+ "skills_read": [],
+ "commands": []
+}

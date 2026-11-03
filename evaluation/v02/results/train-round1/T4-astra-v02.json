@@ -1,0 +1,14 @@
+{
+ "id": "T4-astra-v02",
+ "prompt": "如果两个人同时用这个 expense 工具会怎么样？",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "exit": "timeout",
+ "seconds": 420.1,
+ "usage": null,
+ "final": "",
+ "commentary": [],
+ "skills_read": [],
+ "commands": []
+}

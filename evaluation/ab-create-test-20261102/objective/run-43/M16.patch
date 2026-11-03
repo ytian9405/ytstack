@@ -1,0 +1,12 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -53,7 +53,8 @@
+         active = [item for item in entries if not item['voided']]
+         by_category = {}
+         for item in active:
+-            by_category[item['category']] = by_category.get(item['category'], 0) + item['cents']
++            category = active[0]['category']
++            by_category[category] = by_category.get(category, 0) + item['cents']
+         result = {'count': len(active), 'total_cents': sum(item['cents'] for item in active),
+                   'by_category': by_category}
+     print(json.dumps(result, ensure_ascii=False))

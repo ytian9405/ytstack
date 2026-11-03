@@ -1,0 +1,33 @@
+{
+ "id": "AC3-sol-v01-r1",
+ "prompt": "tools/install.py 现在只能装不能卸，我想加卸载。动手前帮我定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 56.9,
+ "usage": {
+  "input_tokens": 82606,
+  "cached_input_tokens": 66816,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1463,
+  "reasoning_output_tokens": 324
+ },
+ "final": "建议第一版按“只删除能确认属于 ytstack 的条目”验收。当前脚本没有安装记录，可以先用链接目标和副本内容判断归属；无法确认的条目保留并报错。以下是建议标准，尚未修改代码。\n\n卸载入口建议为：\n\n```sh\npython3 tools/install.py --uninstall --project PATH --harness codex\n```\n\n| 场景 | 验收结果 |\n|---|---|\n| 兼容现有安装 | 不带 `--uninstall` 时，现有参数、默认行为和输出保持兼容。 |\n| 指定卸载范围 | 支持 `codex`、`claude` 和重复传入 `--skill`。只操作指定宿主的目录；不传 `--skill` 时，处理清单中的全部技能。 |\n| 卸载链接 | 链接指向本包对应技能时，只删除链接，源目录及其内容不变。指向其他位置的同名链接保留并报错。 |\n| 卸载副本 | 与本包对应技能内容一致的副本可以删除。文件被修改、增加或删除时，保留整个副本并报错。无需用户指定当初的安装方式。 |\n| 保护依赖 | 卸载 `technical-bro` 时保留 `unslop`；单独卸载 `unslop`、但仍保留依赖它的 `technical-bro` 时，拒绝执行。两者一起选择或全量卸载时允许删除。 |\n| 重复卸载 | 目标不存在时成功退出，列入 `missing`。连续执行两次，第二次不产生文件变更。 |\n| 预览卸载 | `--dry-run` 输出待删除路径和缺失项，所有文件、链接及目录保持原样。预览执行相同的归属和依赖检查。 |\n| 保护其他内容 | 不删除其他技能、`.agents`、`.claude` 或 `skills` 父目录。发现目录解析到项目之外时拒绝执行，外部文件保持原样。 |\n| 错误处理 | 无效项目、未知技能、归属冲突或依赖冲突均非零退出，错误写入 stderr。删除前检查全部目标，发现这些问题时不删除任何条目。 |\n| 可核对的输出 | 成功时退出码为 `0`，stdout 输出 JSON，包含 `project`、`harness`、`removed` 和 `missing`；预览用 `planned` 替代 `removed`。运行中删除失败时，说明失败路径并非零退出，不承诺恢复已删除项。 |\n\n测试至少覆盖两个宿主、链接与复制两种安装方式，以及上表中的保护行为。关键往返场景是“安装 → 卸载 → 再安装”全部成功，源文件和无关文件始终不变。\n\n当前 `tests/test_package.py` 与代码已有不一致，例如测试使用脚本尚未支持的 `--voice`，默认技能数量也不一致。实施时需先记录这些基线问题，卸载功能以新增场景通过、现有可通过场景不退化为验收依据。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 和现有测试，再按它实际安装的内容拟定卸载验收标准。",
+  "我会用 `technical-bro` 技能，把验收标准写成能直接核对的场景和结果。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat tests/test_package.py tests/test_smoke.py'",
+  "/bin/bash -lc \"cat README.md .agents/skills/unslop/SKILL.md; rg --files -g 'AGENTS.md' -g '\"'!node_modules'\"' /tmp/ytev-zjjqk210 /tmp 2>/dev/null\"",
+  "/bin/bash -lc \"cat ytstack.json; rg -n 'uninstall|install.py|ownership|receipt|manifest|卸载' tools tests skills/acceptance-criteria .claude-plugin; git status --short; for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-zjjqk210"
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "id": "S3-sol-v02-r1",
+ "prompt": "我用 tools/install.py 只指定装一个技能，装完发现项目里还多出了别的技能目录，这是怎么回事？它对依赖是怎么处理的？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/evaluation/snapshots/v02/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 85.3,
+ "usage": {
+  "input_tokens": 73269,
+  "cached_input_tokens": 59392,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 931,
+  "reasoning_output_tokens": 253
+ },
+ "final": "这是脚本的预期行为：**指定一个技能，会把它声明的依赖也一起装上。**\n\n当前 [ytstack.json](/tmp/ytev-z6e8s1g5/project/ytstack.json:4) 里：\n\n- 装 `technical-bro`，会同时装 `unslop`。\n- 装 `bro` 或 `create-test-skill`，没有额外依赖。\n- 不传 `--skill`，会装全部 `primary_skills`，再补齐它们的依赖。`support_skills` 不会仅仅因为列在那里就全部安装。\n\n[依赖处理代码](/tmp/ytev-z6e8s1g5/project/tools/install.py:27) 的规则是：\n\n- **只认配置里的 `dependencies`**，不会读取技能正文来猜依赖。\n- 依赖还有依赖，就继续往下找；先装依赖，再装你选的技能。同一个技能只处理一次。\n- 依赖名称不在清单里，或出现“A 依赖 B、B 又依赖 A”，会报错停止。\n- 已有内容符合检查条件就跳过；同名内容有冲突就报错，保留原内容。这些检查都在开始安装前完成。\n\n另外，默认创建的是**指向源技能目录的链接**；加 `--method copy` 才会复制文件。可以加 `--dry-run`，提前查看将新增的目录；目前没有跳过依赖的参数。",
+ "commentary": [
+  "我先看 `tools/install.py` 和相关配置，确认多出来的技能目录是怎么选出来的。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g '*depend*' -g '*manifest*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g '*.json' -g '*.yaml' -g '*.yml'\"",
+  "/bin/bash -lc \"cat AGENTS.md && sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc \"cat ytstack.json && rg -n 'depend|依赖|install.py|requires|安装|transitive' README.md tests tools .agents\"",
+  "/bin/bash -lc \"rg -n 'unslop|dependencies|依赖' skills/technical-bro skills/unslop tools/validate.py && rg --files skills\"",
+  "/bin/bash -lc \"nl -ba tools/install.py | sed -n '20,100p'; nl -ba ytstack.json; sed -n '35,115p' tests/test_package.py\""
+ ]
+}

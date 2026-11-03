@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -54,7 +54,7 @@
+         by_category = {}
+         for item in active:
+             by_category[item['category']] = by_category.get(item['category'], 0) + item['cents']
+-        result = {'count': len(active), 'total_cents': sum(item['cents'] for item in active),
++        result = {'count': len(entries), 'total_cents': sum(item['cents'] for item in active),
+                   'by_category': by_category}
+     print(json.dumps(result, ensure_ascii=False))
+     return 0

@@ -1,0 +1,139 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ERROR
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ERROR
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... ERROR
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ERROR
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ERROR
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ERROR
+
+======================================================================
+ERROR: test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 38, in test_LL01_empty_reads
+    self.assertEqual(self.invoke('list'), [])
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 30, in invoke
+    return json.loads(result.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 49, in test_LL02_add_persistence
+    self.assertEqual(self.add(' 午餐 🍜 ', category=' 餐饮 '), first)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 30, in invoke
+    return json.loads(result.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 58, in test_LL03_void_and_ids
+    self.assertEqual(self.add(), original)
+                     ^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 30, in invoke
+    return json.loads(result.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 71, in test_LL04_summary
+    self.add('午餐', '1250')
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 30, in invoke
+    return json.loads(result.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 87, in test_LL05_invalid_inputs_preserve_data
+    self.assertEqual(self.add(), expected)
+                     ^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_behavior.py", line 30, in invoke
+    return json.loads(result.stdout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_empty_summary (test_smoke.SmokeTests.test_empty_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-ccxbb4ud/project/tests/test_smoke.py", line 17, in test_empty_summary
+    self.assertEqual(json.loads(result.stdout),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.311s
+
+FAILED (errors=6)

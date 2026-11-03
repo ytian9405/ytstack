@@ -1,0 +1,23 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... ok
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-xv6b49xz/project/tests/test_behavior.py", line 49, in test_LL02_add_persistence
+    self.assertEqual(self.add(' 午餐 🍜 ', category=' 餐饮 '), first)
+AssertionError: {'id': 1, 'title': '午餐 🍜', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False} != {'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}
+- {'category': ' 餐饮 ', 'cents': 1250, 'id': 1, 'title': '午餐 🍜', 'voided': False}
++ {'category': ' 餐饮 ', 'cents': 1250, 'id': 1, 'title': ' 午餐 🍜 ', 'voided': False}
+?                                                        +    +
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.782s
+
+FAILED (failures=1)

@@ -1,0 +1,2738 @@
+{
+  "version": "0.15.36",
+  "checked": "2026-11-02",
+  "skills": {
+    "poteto-mode": {
+      "name": "poteto-mode",
+      "role": "主入口与规则路由",
+      "trigger": "用户明确进入模式，或要求采用这套工作方式。",
+      "steps": [
+        "复述目标，读取原则索引。",
+        "匹配 playbook，把原文步骤复制到待办；跳过项保留 skip 原因。",
+        "在步骤中按条件调用技能，监督代理产物，核验后交付。"
+      ],
+      "note": "它由当前聊天负责执行；不是把整套 playbook 交给一个 poteto-agent。规则写在 Markdown 中，不是由代码强制运行的 DAG。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/SKILL.md"
+    },
+    "setup-pstack": {
+      "name": "setup-pstack",
+      "role": "设置角色模型与预算",
+      "trigger": "首次配置，或更改模型与推理预算。",
+      "steps": [
+        "检测可用模型。",
+        "选择预算及各角色的模型。",
+        "写入持久规则，后续技能读取。"
+      ],
+      "note": "配置影响后续角色分配；不是每次任务的必经前置步骤。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/setup-pstack/SKILL.md"
+    },
+    "poteto-help": {
+      "name": "poteto-help",
+      "role": "解释使用方法",
+      "trigger": "用户请求帮助或不知道如何选择技能。",
+      "steps": [
+        "明确问题。",
+        "读对应技能或指南。",
+        "给出说明、源码和可发送提示词。"
+      ],
+      "note": "帮助请求不会启动正式任务。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-help/SKILL.md"
+    },
+    "in-your-own-words": {
+      "name": "in-your-own-words",
+      "role": "复述用户意图",
+      "trigger": "用户单独要求复述；interrogate 也会显式调用。",
+      "steps": [
+        "用自己的话写出用户目标和真正要解决的问题。"
+      ],
+      "note": "poteto-mode 首条消息有相同行为的内联指令，但未显式调用这个技能。不能把行为相似一律画成技能依赖。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/in-your-own-words/SKILL.md"
+    },
+    "sharpen": {
+      "name": "sharpen",
+      "role": "深化任务提示词",
+      "trigger": "用户明确要求深化提示词。",
+      "steps": [
+        "补足专业做法、原始材料、方法工具、外部验证。",
+        "重写提示词，保留用户选择。"
+      ],
+      "note": "产物是提示词；默认主干没有规定自动调用 sharpen。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/sharpen/SKILL.md"
+    },
+    "how": {
+      "name": "how",
+      "role": "理解运行机制",
+      "trigger": "调查、非简单改动、架构判断。",
+      "steps": [
+        "简单问题用一个解释代理。",
+        "复杂问题并行探索 2–4 个方向。",
+        "解释代理核对源码，汇总概念、流程、位置、易错点。"
+      ],
+      "note": "它的探索者使用只读代理。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/how/SKILL.md"
+    },
+    "why": {
+      "name": "why",
+      "role": "追查历史原因",
+      "trigger": "动机问题、回归历史、既有设计原因。",
+      "steps": [
+        "先建立代码、提交、PR 的调查锚点。",
+        "按可用来源并行调查。",
+        "合并发现，区分证据、推断、猜测和未知。"
+      ],
+      "note": "为使用 MCP 会启用 agent 模式，但调查者不应修改数据；来源不可用要列为缺口。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/why/SKILL.md"
+    },
+    "teach": {
+      "name": "teach",
+      "role": "把机制与动机讲懂",
+      "trigger": "用户请求教学式解释。",
+      "steps": [
+        "按问题范围调用 how 和 why，可以并行。",
+        "组合成通俗解释，保留 why 的置信表述。",
+        "先给最小完整解释，再按追问逐步展开图示。"
+      ],
+      "note": "这是可直接调用的组合技能，默认主干没有要求每次都 teach。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/teach/SKILL.md"
+    },
+    "recall": {
+      "name": "recall",
+      "role": "恢复跨会话上下文",
+      "trigger": "开始或恢复一个主题，需要找回近期工作。",
+      "steps": [
+        "锁定工作区、主题和时间范围。",
+        "查聊天；具体功能还要借 why 的来源调查。",
+        "核对分支、PR 和工单现状，给出摘要与下一步。"
+      ],
+      "note": "默认近期为七天。接手一条具体旧会话，应走 Session pickup playbook。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/recall/SKILL.md"
+    },
+    "ketchup": {
+      "name": "ketchup",
+      "role": "汇报当前会话的新变化",
+      "trigger": "用户主动要求；Autopilot 有变化的审计 tick 也会调用。",
+      "steps": [
+        "汇总用户上次消息后的工作。",
+        "核对当前状态和证据。",
+        "解释变化，列出全部待用户决定的事项。"
+      ],
+      "note": "这一轮只读。不是 recall 的跨会话检索；也不是每一步都自动播报。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/ketchup/SKILL.md"
+    },
+    "ketchup-video": {
+      "name": "ketchup-video",
+      "role": "用视频汇报变化",
+      "trigger": "用户要求视频形式的 ketchup。",
+      "steps": [
+        "遵循 ketchup 的调查范围和决策清单。",
+        "用真实材料制作最多十页无声横屏视频。",
+        "检查字幕、逐页画面和停留时间。"
+      ],
+      "note": "对 ketchup 的复用关系不意味着先生成一份重复文字汇报。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/ketchup-video/SKILL.md"
+    },
+    "blast-radius": {
+      "name": "blast-radius",
+      "role": "检查改动的连带影响",
+      "trigger": "单独要求评估风险或检查小改动的隐性影响。",
+      "steps": [
+        "找出改动安全所依赖的关键事实。",
+        "追踪时序、协议和下游行为。",
+        "运行真实代码证明，分别报告风险和排除项。"
+      ],
+      "note": "PR 模板有 Blast Radius 标题，但并不等于自动调用这个技能。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/blast-radius/SKILL.md"
+    },
+    "architect": {
+      "name": "architect",
+      "role": "先设计数据和接口",
+      "trigger": "代码跨函数边界；Feature playbook 直接要求。",
+      "steps": [
+        "用 how 理解现有系统；改变所有权/分层时加 why。",
+        "调用 arena，比较至少两种结构，选出统一设计。",
+        "按草图实现；反复出现结构性摩擦时重新设计。"
+      ],
+      "note": "只有用户选择 checkpoint 时，才在设计后等待确认。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/architect/SKILL.md"
+    },
+    "arena": {
+      "name": "arena",
+      "role": "比较与融合多个候选",
+      "trigger": "architect 的设计探索；实现存在多种有效结构；显式调用。",
+      "steps": [
+        "同一任务分给隔离的候选代理。",
+        "按评分标准阅读与跨模型评判。",
+        "选择基底、吸收其他方案的优点，最后验证。"
+      ],
+      "note": "评判在候选完成后启动；这与 swarm 的分片汇总不同。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/arena/SKILL.md"
+    },
+    "swarm": {
+      "name": "swarm",
+      "role": "并行覆盖或竞赛",
+      "trigger": "需要分片验证、覆盖检查、竞赛或探索；Autopilot 独立验收。",
+      "steps": [
+        "声明完成标准、分片/竞赛形状和选择规则。",
+        "并行启动独立工作者。",
+        "核对 SHA、方法和证据，汇成一份报告。"
+      ],
+      "note": "缺失结果属于覆盖缺口，不能当作通过。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/swarm/SKILL.md"
+    },
+    "interrogate": {
+      "name": "interrogate",
+      "role": "对抗式寻找可复现缺陷",
+      "trigger": "有争议的设计；明确要求审查改动。",
+      "steps": [
+        "调用 in-your-own-words 明确意图。",
+        "复用 arena 的配置、隔离和并行启动步骤。",
+        "各审查者运行复现；主代理重跑，保留确证缺陷。"
+      ],
+      "note": "只复用 arena 的部分阶段，跳过选基底和融合；本技能不应用修复。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/interrogate/SKILL.md"
+    },
+    "tdd": {
+      "name": "tdd",
+      "role": "先得到失败证据再修复",
+      "trigger": "用户要求，或缺陷有明确且便宜的本地测试路径。",
+      "steps": [
+        "写最小回归测试。",
+        "先运行并确认因目标缺陷失败。",
+        "修复后重新运行，记录失败到成功。"
+      ],
+      "note": "昂贵、集成密集或不明确的测试路径可跳过；不能画成所有任务必经。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/tdd/SKILL.md"
+    },
+    "benchmark-checklist": {
+      "name": "benchmark-checklist",
+      "role": "核查性能数字可信度",
+      "trigger": "运行基准或报告实际测量的性能变化。",
+      "steps": [
+        "明确要支持的性能结论。",
+        "检查瓶颈、公平配置、错误、缓存和重复性。",
+        "核验端到端意义并保留证据。"
+      ],
+      "note": "Perf 的基线与后续数字都要检查；普通功能不自动跑基准。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/benchmark-checklist/SKILL.md"
+    },
+    "no-comments": {
+      "name": "no-comments",
+      "role": "审查注释和被掩盖的结构问题",
+      "trigger": "代码交付进入审查前。",
+      "steps": [
+        "调用 comment-sicko 审查范围内的注释。",
+        "核验发现及保留例外。",
+        "修正接受的问题，需要结构设计时调用 architect。"
+      ],
+      "note": "comment-sicko 是代理角色，不是技能节点；必要时会触发实现修复和再次验证。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/no-comments/SKILL.md"
+    },
+    "typescript-best-practices": {
+      "name": "typescript-best-practices",
+      "role": "TypeScript 类型规范",
+      "trigger": "读取或修改 TypeScript。",
+      "steps": [
+        "先应用 type-system-discipline。",
+        "采用判别联合、语义类型和边界解析。",
+        "避免不可信类型断言，穷尽变体。"
+      ],
+      "note": "语言条件触发，不是所有仓库的通用必经步骤。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/typescript-best-practices/SKILL.md"
+    },
+    "figure-it-out": {
+      "name": "figure-it-out",
+      "role": "为复杂单次任务设计流程",
+      "trigger": "大范围/跨模块改造、用户离开后审阅的复杂任务，或无现成流程。",
+      "steps": [
+        "定义可证伪的完成标准与范围。",
+        "设计阶段、基线和验证工具。",
+        "逐单元进行假设、修改、测量、保留或回退。",
+        "通过 show-me-your-work 贯穿记录决策。"
+      ],
+      "note": "它设计并执行一次专门流程；多日项目编排则走 Orchestrate playbook。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/figure-it-out/SKILL.md"
+    },
+    "show-me-your-work": {
+      "name": "show-me-your-work",
+      "role": "记录可审计决策",
+      "trigger": "长期、自主、多阶段任务，以及用户回来后审阅的工作。",
+      "steps": [
+        "维护一份 TSV。",
+        "逐条记录选择、理由、证据和结果。",
+        "按需要保留本地或提交为审计材料。"
+      ],
+      "note": "贯穿任务，不能只画在任务结束后。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/show-me-your-work/SKILL.md"
+    },
+    "create-verification-skill": {
+      "name": "create-verification-skill",
+      "role": "生成项目专属验收技能",
+      "trigger": "项目缺乏实际启动、操作和取证的验证方法。",
+      "steps": [
+        "调查启动、操作、观察和隔离方式。",
+        "生成 verify-<app> 与首批功能地图。",
+        "按产物跑通一个真实功能，取证、清理并确认材料保留。"
+      ],
+      "note": "不是所有工作自动调用的步骤。生成一次后，后续任务使用项目 verify 技能。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md"
+    },
+    "maintain-verification-skill": {
+      "name": "maintain-verification-skill",
+      "role": "维护已有验收技能",
+      "trigger": "功能和操作路径变化，验证地图可能过时。",
+      "steps": [
+        "逐功能源码调查。",
+        "一次真实操作覆盖所有功能。",
+        "只修改验收技能、地图及自有脚本。"
+      ],
+      "note": "产品回归要报告；不得为了通过而掩盖回归。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md"
+    },
+    "create-formal-verification-skill": {
+      "name": "create-formal-verification-skill",
+      "role": "创建关键性质的验证",
+      "trigger": "并发、重试或状态机需要超出常规测试的检查。",
+      "steps": [
+        "选关键性质与合适工具。",
+        "绑定模型和真实代码，保留界限与假设。",
+        "注入坏变体证明检查能失败，再生成可复查技能。"
+      ],
+      "note": "结论只覆盖明示范围。TLA+ 的结果交给 statechart 展示。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/create-formal-verification-skill/SKILL.md"
+    },
+    "maintain-formal-verification-skill": {
+      "name": "maintain-formal-verification-skill",
+      "role": "同步形式验证与代码",
+      "trigger": "被覆盖的代码变化，而验证材料未同步。",
+      "steps": [
+        "追踪同步提交后的改动。",
+        "依据代码更新模型和性质。",
+        "重新运行并区分过时、真实缺陷和阻塞。"
+      ],
+      "note": "默认只改验证材料；不能降低性质以求通过。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-formal-verification-skill/SKILL.md"
+    },
+    "statechart": {
+      "name": "statechart",
+      "role": "检查并展示状态路径",
+      "trigger": "需要用状态图解释 TLA+ 检查结果。",
+      "steps": [
+        "运行模型检查。",
+        "生成用户能读懂的 Mermaid 状态图。",
+        "给出每个违规状态的最短到达路径。"
+      ],
+      "note": "它是带脚本的具体技能；不代表所有 pstack 工作都经过形式验证。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/statechart/SKILL.md"
+    },
+    "unslop": {
+      "name": "unslop",
+      "role": "清理套路与空泛表达",
+      "trigger": "poteto-mode 下所有文字输出。",
+      "steps": [
+        "按规则删除空话、模糊归因和生硬套路。",
+        "使用具体机制、数据及自然语言。"
+      ],
+      "note": "横向写作约束；通常从写作时开始应用，不只在最后跑一次。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md"
+    },
+    "bro": {
+      "name": "bro",
+      "role": "简明重述上一条回答",
+      "trigger": "用户要求把上一条说得更通俗。",
+      "steps": [
+        "保留意思，用自然、简明、少术语的语言重述。"
+      ],
+      "note": "无资料调查步骤。ketchup 复用它的语气，但不照搬“重述上一条”的任务。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/bro/SKILL.md"
+    },
+    "technical-writing": {
+      "name": "technical-writing",
+      "role": "按读者目的组织技术写作",
+      "trigger": "文档、RFC、README、PR 及提交说明。",
+      "steps": [
+        "选择文档类型。",
+        "应用技术写作、简明语言和消歧规则。",
+        "应用 unslop。"
+      ],
+      "note": "PR 和提交说明应用除 Diátaxis 外的层次；不是每条短回复都要完整执行。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/technical-writing/SKILL.md"
+    },
+    "automate-me": {
+      "name": "automate-me",
+      "role": "生成个人工作模式",
+      "trigger": "用户希望固化或更新自己的工作方式。",
+      "steps": [
+        "提取当前工作区的工作习惯。",
+        "借 create-skill 编写个人 -mode。",
+        "用 unslop 整理指令。"
+      ],
+      "note": "这是建立个人入口的支线，不会在每个任务自动学习。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/automate-me/SKILL.md"
+    },
+    "reflect": {
+      "name": "reflect",
+      "role": "复盘并提议更新技能",
+      "trigger": "用户明确要求任务复盘。",
+      "steps": [
+        "三个视角并行审查当前会话。",
+        "综合为 Accepted / Rejected / Backlog。",
+        "获得明确批准后修改获选的技能副本。"
+      ],
+      "note": "能用结构化机制约束的经验转入待办；技能修改必须先得到用户批准。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/reflect/SKILL.md"
+    },
+    "correct": {
+      "name": "correct",
+      "role": "从结构上消除反复错误",
+      "trigger": "用户要求处理反复出现的错误。",
+      "steps": [
+        "从历史记录归纳至少重复发生的错误类。",
+        "优先架构，再类型、lint/CI、测试，最后文字。",
+        "用真实历史错误证明新约束有效。"
+      ],
+      "note": "与 reflect 的“改技能指令”不同，这里会实际改变仓库的约束。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/correct/SKILL.md"
+    },
+    "make-bot-ui": {
+      "name": "make-bot-ui",
+      "role": "网页触发机器人",
+      "trigger": "要求搭建通过 webhook 唤醒 Grok Bot 的界面。",
+      "steps": [
+        "创建 webhook routine。",
+        "服务端保管 sender key。",
+        "实现按钮和服务端请求，按需通过 Tailscale 访问。"
+      ],
+      "note": "特定集成支线，不是核心开发流水线中的固定步骤。",
+      "kind": "skill",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/make-bot-ui/SKILL.md"
+    },
+    "deslop": {
+      "name": "deslop",
+      "role": "提交前清理代码",
+      "trigger": "相关任务的提交或实际验收。",
+      "steps": [
+        "从 cursor-team-kit 读取并执行该技能。"
+      ],
+      "note": "pstack 引用，但不在 pstack 的技能目录内。",
+      "kind": "external",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/../cursor-team-kit"
+    },
+    "control-ui": {
+      "name": "control-ui",
+      "role": "操作浏览器 / Electron / Web 界面",
+      "trigger": "相关任务的提交或实际验收。",
+      "steps": [
+        "从 cursor-team-kit 读取并执行该技能。"
+      ],
+      "note": "pstack 引用，但不在 pstack 的技能目录内。",
+      "kind": "external",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/../cursor-team-kit"
+    },
+    "control-cli": {
+      "name": "control-cli",
+      "role": "操作 CLI / TUI",
+      "trigger": "相关任务的提交或实际验收。",
+      "steps": [
+        "从 cursor-team-kit 读取并执行该技能。"
+      ],
+      "note": "pstack 引用，但不在 pstack 的技能目录内。",
+      "kind": "external",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/../cursor-team-kit"
+    },
+    "create-skill": {
+      "name": "create-skill",
+      "role": "创建或更新技能",
+      "trigger": "编写 SKILL.md、个人模式或较大的技能修订。",
+      "steps": [
+        "使用 Cursor 内置 authoring 能力。"
+      ],
+      "note": "Cursor 内置依赖；不是 pstack 自带技能。",
+      "kind": "external",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/authoring-a-skill.md"
+    },
+    "verify-<app>": {
+      "name": "verify-<app>",
+      "role": "项目生成的真实验收",
+      "trigger": "生成项目验证技能后，检查实际行为。",
+      "steps": [
+        "按项目记录的启动、操作、取证和清理步骤执行。"
+      ],
+      "note": "这是占位命名约定，不是 pstack 内置技能；不是每个项目都已有。",
+      "kind": "external",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md"
+    },
+    "setup-benny": {
+      "name": "setup-benny",
+      "role": "配置独立的 Benny 自动化包",
+      "trigger": "用户明确要求安装或配置 Benny。",
+      "steps": [
+        "复制自动化包并配置项目范围的 pstack 依赖。",
+        "准备 Slack、工单、控制适配器与预算。",
+        "明确授权后配置两个在线自动化。"
+      ],
+      "note": "它不注册为普通斜杠技能；在目标仓库中直接读取。",
+      "kind": "automation",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/automations/benny/skills/setup-benny/SKILL.md"
+    },
+    "triage-issue-reports": {
+      "name": "triage-issue-reports",
+      "role": "分类和去重反馈",
+      "trigger": "已配置的 Benny 自动化收到指定 Slack 新报告。",
+      "steps": [
+        "读取报告和附件，按原因追踪归属。",
+        "工单去重，仅明确的新缺陷建单。",
+        "在原线程提交一次判定及可信标记。"
+      ],
+      "note": "此技能不复现或修复；后续自动化读取判定标记。",
+      "kind": "automation",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/automations/benny/skills/triage-issue-reports/SKILL.md"
+    },
+    "reproduce-and-fix-issues": {
+      "name": "reproduce-and-fix-issues",
+      "role": "复现和修复已确认反馈",
+      "trigger": "Benny 复现自动化等待并读到可信 triage 标记。",
+      "steps": [
+        "真实界面中复现两次并保留证据。",
+        "有既有修复则先验证；确认缺陷后尝试有界修复。",
+        "前后验证通过才开草稿 PR。"
+      ],
+      "note": "与普通 Opening a PR 的 ready 要求不同，此独立包只开草稿 PR，不合并部署。",
+      "kind": "automation",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/automations/benny/skills/reproduce-and-fix-issues/SKILL.md"
+    },
+    "principle-laziness-protocol": {
+      "name": "principle-laziness-protocol",
+      "role": "最小必要改动",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "删除重复决策，避免多余封装。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-laziness-protocol/SKILL.md"
+    },
+    "principle-foundational-thinking": {
+      "name": "principle-foundational-thinking",
+      "role": "先设计基础结构",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "先确定数据形状、共享状态和基础设施。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-foundational-thinking/SKILL.md"
+    },
+    "principle-redesign-from-first-principles": {
+      "name": "principle-redesign-from-first-principles",
+      "role": "把新需求纳入整体设计",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "把新要求当作最初就有的条件，重新设计并逐步交付。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-redesign-from-first-principles/SKILL.md"
+    },
+    "principle-attack-the-premise": {
+      "name": "principle-attack-the-premise",
+      "role": "验证反复失败的共同前提",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "同一前提下两次修复失败，先直接检验该前提。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-attack-the-premise/SKILL.md"
+    },
+    "principle-subtract-before-you-add": {
+      "name": "principle-subtract-before-you-add",
+      "role": "先减复杂度",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "删死代码、无效校验和多余引用，再增加能力。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-subtract-before-you-add/SKILL.md"
+    },
+    "principle-minimize-reader-load": {
+      "name": "principle-minimize-reader-load",
+      "role": "降低理解负担",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "减少跳转层数和必须记住的隐藏状态。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-minimize-reader-load/SKILL.md"
+    },
+    "principle-outcome-oriented-execution": {
+      "name": "principle-outcome-oriented-execution",
+      "role": "围绕最终架构推进",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "计划内、可逆的迁移用明确阶段验证最终状态。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-outcome-oriented-execution/SKILL.md"
+    },
+    "principle-experience-first": {
+      "name": "principle-experience-first",
+      "role": "使用体验优先",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "为最终用户和维护者改善核心工作流程。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-experience-first/SKILL.md"
+    },
+    "principle-exhaust-the-design-space": {
+      "name": "principle-exhaust-the-design-space",
+      "role": "比较真实原型",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "新交互或关键架构先比较两三个候选。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-exhaust-the-design-space/SKILL.md"
+    },
+    "principle-build-the-lever": {
+      "name": "principle-build-the-lever",
+      "role": "建立可重跑工具",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "用脚本、生成器、codemod 或验证工具替代大量手工。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-build-the-lever/SKILL.md"
+    },
+    "principle-model-the-domain": {
+      "name": "principle-model-the-domain",
+      "role": "用结构表达业务",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "状态机、类型、表和适当的数据结构优先。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-model-the-domain/SKILL.md"
+    },
+    "principle-boundary-discipline": {
+      "name": "principle-boundary-discipline",
+      "role": "边界校验",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "在外部输入边界解析校验，内部用可信类型。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-boundary-discipline/SKILL.md"
+    },
+    "principle-type-system-discipline": {
+      "name": "principle-type-system-discipline",
+      "role": "让类型排除非法状态",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "语义类型、穷尽变体，从权威结构推导类型。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-type-system-discipline/SKILL.md"
+    },
+    "principle-make-operations-idempotent": {
+      "name": "principle-make-operations-idempotent",
+      "role": "让操作安全重跑",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "中断、重试和半成品下仍收敛到正确状态。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-make-operations-idempotent/SKILL.md"
+    },
+    "principle-migrate-callers-then-delete-legacy-apis": {
+      "name": "principle-migrate-callers-then-delete-legacy-apis",
+      "role": "迁移调用者并删除旧接口",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "适用于没有外部兼容要求的协调式内部迁移。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md"
+    },
+    "principle-separate-before-serializing-shared-state": {
+      "name": "principle-separate-before-serializing-shared-state",
+      "role": "先隔离共享写入",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "独立文件、分支或状态；确需共享才用实际串行机制。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-separate-before-serializing-shared-state/SKILL.md"
+    },
+    "principle-prove-it-works": {
+      "name": "principle-prove-it-works",
+      "role": "检查真实产物",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "运行真实功能、读实际值，保留可复验的证据。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-prove-it-works/SKILL.md"
+    },
+    "principle-fix-root-causes": {
+      "name": "principle-fix-root-causes",
+      "role": "追到最初错误",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "先复现，用运行证据区分根因和症状。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-fix-root-causes/SKILL.md"
+    },
+    "principle-sequence-verifiable-units": {
+      "name": "principle-sequence-verifiable-units",
+      "role": "逐单元验证",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "每一步到达可验证状态，再推进下一步。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-sequence-verifiable-units/SKILL.md"
+    },
+    "principle-test-behavior-not-implementation": {
+      "name": "principle-test-behavior-not-implementation",
+      "role": "检查可观察行为",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "用户行为破坏时失败，内部重构时保持通过。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-test-behavior-not-implementation/SKILL.md"
+    },
+    "principle-explain-the-number": {
+      "name": "principle-explain-the-number",
+      "role": "解释测量数字",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "检查瓶颈、误差、缓存、错误和真正执行的工作。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-explain-the-number/SKILL.md"
+    },
+    "principle-guard-the-context-window": {
+      "name": "principle-guard-the-context-window",
+      "role": "保护上下文",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "批量材料交子代理，主线程保留有证据的摘要。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-guard-the-context-window/SKILL.md"
+    },
+    "principle-never-block-on-the-human": {
+      "name": "principle-never-block-on-the-human",
+      "role": "可逆工作自主推进",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "合理决策后展示结果，不可逆动作保留确认。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-never-block-on-the-human/SKILL.md"
+    },
+    "principle-encode-lessons-in-structure": {
+      "name": "principle-encode-lessons-in-structure",
+      "role": "把经验变成约束",
+      "trigger": "符合该原则的触发情境时，读取其完整文件。",
+      "steps": [
+        "能用 lint、脚本或类型执行的规则，优先程序化。"
+      ],
+      "note": "原则按情境贯穿任务；24 个原则不是按顺序执行的 24 步。",
+      "kind": "principle",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/principle-encode-lessons-in-structure/SKILL.md"
+    }
+  },
+  "flows": [
+    {
+      "id": "investigation",
+      "title": "只读调查",
+      "group": "理解与诊断",
+      "summary": "调查直接交付答案。代码变更应重新路由。",
+      "steps": [
+        {
+          "skill": "how",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "why",
+          "note": "动机问题才加",
+          "optional": true
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "交付调查答案",
+          "note": "无 PR / 无 babysit",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "源码明确禁止只读调查自动进入 PR、babysit 或 architect；需改代码时，交还用户并转 Bug fix 或 Feature。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/investigation.md"
+    },
+    {
+      "id": "bug-fix",
+      "title": "修复缺陷",
+      "group": "开发与交付",
+      "summary": "先在真实使用路径复现，再定位、修复并在同一路径验收。",
+      "steps": [
+        {
+          "skill": "control-ui",
+          "note": "Web / Electron 表面",
+          "optional": true
+        },
+        {
+          "skill": "control-cli",
+          "note": "CLI / TUI 表面",
+          "optional": true
+        },
+        {
+          "title": "真实复现",
+          "note": "选择匹配的操作技能",
+          "kind": "action"
+        },
+        {
+          "skill": "how",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "why",
+          "note": "回归历史",
+          "optional": false
+        },
+        {
+          "title": "运行证据定位根因",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "tdd",
+          "note": "有便宜测试时；先红后绿",
+          "optional": true
+        },
+        {
+          "skill": "architect",
+          "note": "跨函数边界",
+          "optional": true
+        },
+        {
+          "title": "实现修复",
+          "note": "poteto-agent 执行",
+          "kind": "action"
+        },
+        {
+          "title": "同一路径验收",
+          "note": "原复现由失败变成功",
+          "kind": "action"
+        },
+        {
+          "title": "Opening a PR",
+          "note": "见 PR 交付路径",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "TDD 是贯穿修复的包围关系，图中节点表示先建立失败测试；修复后还要再运行。",
+        "control-ui 与 control-cli 按操作表面选择；原生移动端采用项目可用控制方法。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/bug-fix.md"
+    },
+    {
+      "id": "feature",
+      "title": "开发新功能",
+      "group": "开发与交付",
+      "summary": "先理解，再比较结构，最后实现、验收和准备 PR。",
+      "steps": [
+        {
+          "skill": "how",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "architect",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "arena",
+          "note": "architect 内部的设计比较",
+          "optional": false
+        },
+        {
+          "title": "分解实现任务",
+          "note": "明确数据形状和成功条件",
+          "kind": "action"
+        },
+        {
+          "skill": "arena",
+          "note": "多种实现结构时替代单代理",
+          "optional": true
+        },
+        {
+          "title": "实现并真实验收",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "interrogate",
+          "note": "设计存在争议",
+          "optional": true
+        },
+        {
+          "title": "Opening a PR",
+          "note": "见 PR 交付路径",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "architect 已含 arena，不要理解为两个独立设计竞赛。第二个 arena 是实现存在多种有效结构时的实现竞赛。",
+        "实现阶段的 arena 替代单个编码代理；它不是在全部实现结束后再补跑一次。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/feature.md"
+    },
+    {
+      "id": "refactoring",
+      "title": "行为保持的重构",
+      "group": "开发与交付",
+      "summary": "先固定当前行为，再逐步改变结构并证明等价。",
+      "steps": [
+        {
+          "skill": "how",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "固定行为基线",
+          "note": "特征测试 / 快照 / 等价工具",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-redesign-from-first-principles",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "architect",
+          "note": "跨函数边界",
+          "optional": true
+        },
+        {
+          "skill": "principle-subtract-before-you-add",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "逐步迁移",
+          "note": "每一步保住基线",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-prove-it-works",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "Opening a PR",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "新功能或缺陷修复应拆出去。大范围、跨模块重构转 figure-it-out。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/refactoring.md"
+    },
+    {
+      "id": "prototype",
+      "title": "原型与方案决策",
+      "group": "理解与诊断",
+      "summary": "通过最小可运行原型消除可实验判断的不确定性。",
+      "steps": [
+        {
+          "title": "限定要决定的问题",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-exhaust-the-design-space",
+          "note": "有候选方案时",
+          "optional": false
+        },
+        {
+          "title": "隔离目录制作原型",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "control-ui",
+          "note": "可视原型操作与截图",
+          "optional": true
+        },
+        {
+          "title": "观察结果并比较",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "交付决策与临时产物",
+          "note": "选定方向再转 Feature / architect",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "原型是可丢弃产物，不是生产代码；行为/时序问题可以用最小脚本直接观察。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/prototype.md"
+    },
+    {
+      "id": "perf-issue",
+      "title": "一次性能修复",
+      "group": "理解与诊断",
+      "summary": "真实基线 → 有依据的改动 → 真实复测。",
+      "steps": [
+        {
+          "title": "采集基线 trace",
+          "note": "使用匹配的控制技能",
+          "kind": "action"
+        },
+        {
+          "skill": "benchmark-checklist",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "how",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "architect",
+          "note": "跨函数边界",
+          "optional": true
+        },
+        {
+          "title": "实现并重新采样",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "benchmark-checklist",
+          "note": "再次核验数字",
+          "optional": false
+        },
+        {
+          "title": "比较测量产物",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "Opening a PR",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "编译、截图或代理报告不能替代性能测量；实际基线和复测要可比。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/perf-issue.md"
+    },
+    {
+      "id": "hillclimb",
+      "title": "持续指标优化",
+      "group": "长期与多 PR",
+      "summary": "冻结可信测量方法，用逐轮实验追求目标。",
+      "steps": [
+        {
+          "skill": "how",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "principle-build-the-lever",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "benchmark-checklist",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "show-me-your-work",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "提出单一假设",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "最小修改与测量",
+          "note": "有效则保留，无效则回退",
+          "kind": "action"
+        },
+        {
+          "skill": "benchmark-checklist",
+          "note": "每个数字的可信度",
+          "optional": false
+        },
+        {
+          "title": "未到目标则回到假设",
+          "note": "逐个保留有效提交",
+          "kind": "action"
+        },
+        {
+          "title": "Opening a PR",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "这是一条循环。达到目标或剩余收益不值得成本时退出；不能降低目标冒充完成。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/hillclimb.md"
+    },
+    {
+      "id": "runtime-forensics",
+      "title": "运行时取证",
+      "group": "理解与诊断",
+      "summary": "从活进程采集信号，证明机制，交付诊断。",
+      "steps": [
+        {
+          "title": "匹配表面采集信号",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-guard-the-context-window",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "定位热点 / 保留链",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "插桩证实机制",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "映射到源码",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "交付诊断",
+          "note": "需修复则转 Bug fix / Perf",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "默认交付诊断，不自动修复。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/runtime-forensics.md"
+    },
+    {
+      "id": "trace-forensics",
+      "title": "已有 trace 取证",
+      "group": "理解与诊断",
+      "summary": "把已有性能文件变成可查询证据，再定位原因。",
+      "steps": [
+        {
+          "skill": "principle-guard-the-context-window",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "解析并转为可查询数据",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "定位热点 / 泄漏链",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "映射到源码",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "有成对采样则比较",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "交付诊断",
+          "note": "需修复则转 Bug fix / Perf",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "没有成对捕获时，按产物能支持的最强假设报告，不冒充已证实根因。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/trace-forensics.md"
+    },
+    {
+      "id": "visual-parity",
+      "title": "像素一致性迁移",
+      "group": "开发与交付",
+      "summary": "先保存视觉基线，再逐组件迁移和比较。",
+      "steps": [
+        {
+          "title": "建立视觉基线",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-separate-before-serializing-shared-state",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "逐组件迁移",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "control-ui",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "像素差异检查",
+          "note": "非零差异回到迁移",
+          "kind": "action"
+        },
+        {
+          "title": "Opening a PR",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "不得修改测试或篡改基线来通过比较；共享基础组件先迁移。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/visual-parity.md"
+    },
+    {
+      "id": "authoring-a-skill",
+      "title": "编写或修改技能",
+      "group": "技能与评估",
+      "summary": "用内置 authoring 能力编写，并验证结构与引用。",
+      "steps": [
+        {
+          "skill": "create-skill",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "验证元数据与引用",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "结构性测试",
+          "note": "主观规则可跳过",
+          "kind": "action"
+        },
+        {
+          "title": "Opening a PR",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/authoring-a-skill.md"
+    },
+    {
+      "id": "eval",
+      "title": "评估技能与提示词",
+      "group": "技能与评估",
+      "summary": "候选与裁判隔离，尽量不让候选知道被测目标。",
+      "steps": [
+        {
+          "title": "定义评分标准",
+          "note": "仅裁判可见",
+          "kind": "action"
+        },
+        {
+          "title": "隔离候选环境",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "arena",
+          "note": "只复用并行候选与盲评阶段",
+          "optional": false
+        },
+        {
+          "title": "检查完整执行记录",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "交付评估与证据",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "这是评估协议，不是照搬完整 arena；候选不应看到模型标签和测试意图。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/eval.md"
+    },
+    {
+      "id": "babysit",
+      "title": "把 PR 推到可合并状态",
+      "group": "PR 与运行控制",
+      "summary": "用户明确要求后才开始；修评审和检查，但合并另走 Shipping。",
+      "steps": [
+        {
+          "title": "声明工作模式",
+          "note": "check / drive / background / threads-only",
+          "kind": "action"
+        },
+        {
+          "title": "检查最低未合并 PR",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "处理评审与检查",
+          "note": "冲突需报告 owning branch",
+          "kind": "action"
+        },
+        {
+          "skill": "no-comments",
+          "note": "涉及修复后审查",
+          "optional": true
+        },
+        {
+          "title": "核对 forge 的可合并状态",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "报告 merge-ready",
+          "note": "并不代表已经合并",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "普通情况下开 PR 不启动 babysit。Autopilot owner 的任务书可显式包含该循环。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/babysit.md"
+    },
+    {
+      "id": "shipping",
+      "title": "独立验证后合并",
+      "group": "PR 与运行控制",
+      "summary": "独立验证覆盖实际补丁，只合并从栈底连续通过的部分。",
+      "steps": [
+        {
+          "title": "每 PR 一个独立验证者",
+          "note": "不能是原作者",
+          "kind": "action"
+        },
+        {
+          "skill": "control-ui",
+          "note": "或匹配的控制技能",
+          "optional": true
+        },
+        {
+          "skill": "principle-prove-it-works",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "核对补丁与当前 head",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "从栈底逐个合并",
+          "note": "只到连续验证通过的上限",
+          "kind": "action"
+        },
+        {
+          "title": "读回合并结果",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        }
+      ],
+      "notes": [
+        "Shipping 本身没有规定必须调用 swarm；Autopilot 的独立验收则显式使用 swarm。",
+        "用户、平台和项目原有批准门槛仍然有效；图示不构成合并授权。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/shipping.md"
+    },
+    {
+      "id": "autonomous-run",
+      "title": "单任务自主循环",
+      "group": "长期与多 PR",
+      "summary": "围绕明确的完成条件反复执行、验证和记录。",
+      "steps": [
+        {
+          "title": "定义可证伪完成条件",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "show-me-your-work",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "路由到具体任务流程",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "观察、修改、验证",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "未达条件则继续",
+          "note": "Cursor /loop 是运行控制",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "交付最终状态",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "show-me-your-work 贯穿每轮；平台 /loop 不是一个 pstack 技能。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autonomous-run.md"
+    },
+    {
+      "id": "orchestrate",
+      "title": "长期项目编排",
+      "group": "长期与多 PR",
+      "summary": "协调者负责拆解、派工和验收，多日程序由多批工作者完成。",
+      "steps": [
+        {
+          "title": "项目协调与工作队列",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "show-me-your-work",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "新工作者执行匹配流程",
+          "note": "poteto-agent 是角色",
+          "kind": "action"
+        },
+        {
+          "title": "不同模型的独立验证者",
+          "note": "每 PR 一个，非原作者",
+          "kind": "action"
+        },
+        {
+          "title": "检查真实进展与产物",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "继续派工 / 替换阻塞者",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "报告项目与 PR 状态",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "一项会话内可完成的工作不应因措辞宏大就升级为项目程序。此图仅展示技能接口，协调规则仍由 playbook 负责。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/orchestrate.md"
+    },
+    {
+      "id": "autopilot-full",
+      "title": "多 PR 自主完成并合并",
+      "group": "长期与多 PR",
+      "summary": "每 PR 一个 owner；根协调者的独立验收与作者自证分离。",
+      "steps": [
+        {
+          "title": "明确队列与用户门槛",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "show-me-your-work",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "各 owner 实现与自证",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "deslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "no-comments",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "swarm",
+          "note": "代码 ready head 的独立验收",
+          "optional": false
+        },
+        {
+          "title": "CI / babysit / 准备合并",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "owner 合并已验证补丁",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "ketchup",
+          "note": "有变化的审计 tick",
+          "optional": false
+        },
+        {
+          "title": "继续审计至队列完成",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "完整 swarm 在代码 ready 时执行；较小修改有更轻的复验规则，不是每次修改都重跑全部 swarm。",
+        "用户门槛优先；放宽检查需要独立证明和根协调者复核。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-full.md"
+    },
+    {
+      "id": "autopilot-stack",
+      "title": "多 PR 构建至已验证",
+      "group": "长期与多 PR",
+      "summary": "复用 Autopilot-full，交给用户合并。",
+      "steps": [
+        {
+          "title": "明确 PR 依赖",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "show-me-your-work",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "owner 实现与自证",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "deslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "no-comments",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "swarm",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "CI / babysit / 最终复核",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "ketchup",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "交付已验证 PR",
+          "note": "到此停止，不合并",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "只有依赖别的 PR 时才堆叠；用户接手后，没有新的 go 不再 push。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/autopilot-stack.md"
+    },
+    {
+      "id": "session-pickup",
+      "title": "接手一个旧会话",
+      "group": "PR 与运行控制",
+      "summary": "先重建具体会话状态，再把剩余任务交给匹配流程。",
+      "steps": [
+        {
+          "title": "读取原会话 / 分支",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "重建完成与未完成状态",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "选择剩余任务 playbook",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-prove-it-works",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "继续原任务",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "与 recall 的跨会话主题检索不同。不要无故重做已完成工作，同时要核验真实产物。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/session-pickup.md"
+    },
+    {
+      "id": "pause-safely",
+      "title": "安全暂停",
+      "group": "PR 与运行控制",
+      "summary": "停止新任务，固化当前状态，并留下恢复入口。",
+      "steps": [
+        {
+          "title": "停止于安全边界",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "保存未提交工作",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "show-me-your-work",
+          "note": "若已有记录则引用",
+          "optional": true
+        },
+        {
+          "title": "写恢复说明",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "暂停并交付恢复点",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "暂停不是完成；不因暂停额外开 PR 或 push。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/pause-safely.md"
+    },
+    {
+      "id": "multi-phase-plan",
+      "title": "多阶段计划",
+      "group": "长期与多 PR",
+      "summary": "计划是产物；执行需要用户明确 go。",
+      "steps": [
+        {
+          "title": "用原型回答可实验问题",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "探索并确定 PR 依赖",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "technical-writing",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "运行 check-plan.mjs",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "交付计划并暂停",
+          "note": "明确 go 后进 Autopilot / Orchestrate",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "计划还声明每个 PR 的真实验证与性能门槛；计划声明不是验证已通过。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/multi-phase-plan.md"
+    },
+    {
+      "id": "worktree-cleanup",
+      "title": "工作区与模拟器清理",
+      "group": "PR 与运行控制",
+      "summary": "先审计活跃使用与未保存状态，再清理确认可删除的对象。",
+      "steps": [
+        {
+          "skill": "principle-build-the-lever",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "审计路径和使用状态",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-prove-it-works",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "未提交或在用则暂停",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "清理确认集合",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "验证空间与剩余对象",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "这是磁盘清理 playbook，不是普通开发中每次自动执行的末尾步骤。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/worktree-cleanup.md"
+    },
+    {
+      "id": "opening-a-pr",
+      "title": "PR 交付通道",
+      "group": "开发与交付",
+      "summary": "代码清理、注释审查和提交/PR 文字各有不同技能。",
+      "steps": [
+        {
+          "skill": "deslop",
+          "note": "每次提交前",
+          "optional": false
+        },
+        {
+          "skill": "technical-writing",
+          "note": "提交说明及 PR 文字",
+          "optional": false
+        },
+        {
+          "skill": "unslop",
+          "note": "写作同时应用",
+          "optional": false
+        },
+        {
+          "skill": "no-comments",
+          "note": "审查前",
+          "optional": false
+        },
+        {
+          "title": "创建 ready PR",
+          "note": "读回真实状态",
+          "kind": "action"
+        },
+        {
+          "title": "继续构建 / 汇报 URL",
+          "note": "需另行请求 babysit",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "这些是各生命周期点的门槛，不是强制的单次串行顺序；no-comments 产生修改后仍需验证和清理。",
+        "main 文档说所有 playbook 结尾走 Opening a PR，但只读调查、取证、原型、暂停、计划等叶文件有更具体的结束规则。本图展示这些例外。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/opening-a-pr.md"
+    }
+  ],
+  "extra": [
+    {
+      "id": "teach",
+      "title": "教学：how 与 why",
+      "group": "技能组合",
+      "summary": "按范围真实调用两种调查，再组合解释。",
+      "steps": [
+        {
+          "skill": "teach",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "how",
+          "note": "运行机制",
+          "optional": false
+        },
+        {
+          "skill": "why",
+          "note": "历史动机；可与 how 并行",
+          "optional": false
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "分层讲解与图示",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "系统性问题可以并行调用 how 与 why；较小问题按需要缩小范围。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/teach/SKILL.md",
+      "diagram": {
+        "nodes": [
+          {
+            "key": "teach",
+            "skill": "teach",
+            "x": 24,
+            "y": 180
+          },
+          {
+            "key": "how",
+            "skill": "how",
+            "x": 299,
+            "y": 40,
+            "note": "运行机制 · 并行分支"
+          },
+          {
+            "key": "why",
+            "skill": "why",
+            "x": 299,
+            "y": 320,
+            "note": "历史动机 · 按问题范围"
+          },
+          {
+            "key": "unslop",
+            "skill": "unslop",
+            "x": 574,
+            "y": 180,
+            "note": "合并成通俗解释时应用"
+          },
+          {
+            "key": "answer",
+            "title": "逐层讲解与图示",
+            "kind": "action",
+            "x": 849,
+            "y": 180,
+            "note": "根据读者追问继续展开"
+          }
+        ],
+        "edges": [
+          {
+            "a": "teach",
+            "b": "how",
+            "label": "调查",
+            "type": "solid",
+            "axis": "horizontal"
+          },
+          {
+            "a": "teach",
+            "b": "why",
+            "label": "调查",
+            "type": "solid",
+            "axis": "horizontal"
+          },
+          {
+            "a": "how",
+            "b": "unslop",
+            "label": "汇合解释",
+            "type": "solid",
+            "axis": "horizontal"
+          },
+          {
+            "a": "why",
+            "b": "unslop",
+            "label": "保留置信表述",
+            "type": "solid",
+            "axis": "horizontal"
+          },
+          {
+            "a": "unslop",
+            "b": "answer",
+            "label": "交付",
+            "type": "solid",
+            "axis": "horizontal"
+          }
+        ],
+        "height": 470
+      }
+    },
+    {
+      "id": "recall",
+      "title": "恢复上下文",
+      "group": "技能组合",
+      "summary": "聊天历史、共享记录和真实状态三者交叉确认。",
+      "steps": [
+        {
+          "skill": "recall",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "按主题检索本地聊天",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "why",
+          "note": "具体功能的共享记录调查",
+          "optional": true
+        },
+        {
+          "title": "核验当前分支 / PR / 工单",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "摘要、问题与下一步",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/recall/SKILL.md"
+    },
+    {
+      "id": "ketchup-video",
+      "title": "视频汇报",
+      "group": "技能组合",
+      "summary": "复用汇报契约，视频替代文字进展摘要。",
+      "steps": [
+        {
+          "skill": "ketchup-video",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "ketchup",
+          "note": "复用调查范围与决策清单",
+          "optional": false
+        },
+        {
+          "skill": "bro",
+          "note": "只复用通俗语气",
+          "optional": false
+        },
+        {
+          "title": "真实材料制作与检查视频",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "视频 + 用户决策事项",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "此处箭头主要表示行为复用，不是先生成三份成品。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/ketchup-video/SKILL.md"
+    },
+    {
+      "id": "interrogate",
+      "title": "对抗式审查",
+      "group": "技能组合",
+      "summary": "审查者的主张必须能被主代理重新运行证明。",
+      "steps": [
+        {
+          "skill": "interrogate",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "in-your-own-words",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "arena",
+          "note": "只复用配置、隔离、fan-out",
+          "optional": false
+        },
+        {
+          "title": "各代理实际运行复现",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-prove-it-works",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "合并已验证发现",
+          "note": "不应用修复",
+          "kind": "action"
+        }
+      ],
+      "notes": [],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/interrogate/SKILL.md"
+    },
+    {
+      "id": "create-verification-skill",
+      "title": "建立验证体系",
+      "group": "技能组合",
+      "summary": "生成器、生成的技能、维护器是三种不同角色。",
+      "steps": [
+        {
+          "skill": "create-verification-skill",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "verify-<app>",
+          "note": "按生成步骤跑通真实功能",
+          "optional": false
+        },
+        {
+          "title": "后续任务复用 verify 技能",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "maintain-verification-skill",
+          "note": "功能变化后",
+          "optional": true
+        }
+      ],
+      "notes": [
+        "维护验证技能不是修复产品；发现产品回归要另外报告。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md"
+    },
+    {
+      "id": "create-formal-verification-skill",
+      "title": "关键性质验证",
+      "group": "技能组合",
+      "summary": "在明确范围内验证关键性质，并维护模型与代码对应。",
+      "steps": [
+        {
+          "skill": "create-formal-verification-skill",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "statechart",
+          "note": "采用 TLA+ 时",
+          "optional": true
+        },
+        {
+          "title": "生成可重跑的项目技能",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "maintain-formal-verification-skill",
+          "note": "覆盖代码变化后",
+          "optional": true
+        }
+      ],
+      "notes": [
+        "这里不代表整个系统被证明正确，范围、假设和界限要单独记录。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/create-formal-verification-skill/SKILL.md"
+    },
+    {
+      "id": "reflect",
+      "title": "复盘改进技能",
+      "group": "技能组合",
+      "summary": "三视角复盘、综合筛选、结构化分流、批准后编辑。",
+      "steps": [
+        {
+          "skill": "reflect",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "三视角并行审查",
+          "note": "判断 / 工具 / 发散",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-encode-lessons-in-structure",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "展示建议并等待批准",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "create-skill",
+          "note": "较大的获批技能修改",
+          "optional": true
+        },
+        {
+          "title": "修改技能副本",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "验证并汇报",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "小修可直接编辑；可用脚本/lint约束的经验转入待办。原版还包含写团队待办的动作，使用时受当前权限约束。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/reflect/SKILL.md"
+    },
+    {
+      "id": "automate-me",
+      "title": "形成个人模式",
+      "group": "技能组合",
+      "summary": "从自己的工作习惯形成一个可调用入口。",
+      "steps": [
+        {
+          "skill": "automate-me",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "提取工作习惯",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "create-skill",
+          "note": "",
+          "optional": false
+        },
+        {
+          "skill": "unslop",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "个人 -mode 技能",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/automate-me/SKILL.md"
+    },
+    {
+      "id": "correct",
+      "title": "消除反复错误",
+      "group": "技能组合",
+      "summary": "把重复纠正落实到仓库结构与自动检查。",
+      "steps": [
+        {
+          "skill": "correct",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "归纳重复错误",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "title": "架构 → 类型 → lint/CI → 测试",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "principle-encode-lessons-in-structure",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "用历史错误证明检查有效",
+          "note": "",
+          "kind": "action"
+        }
+      ],
+      "notes": [],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/correct/SKILL.md"
+    },
+    {
+      "id": "benny",
+      "title": "Benny 独立自动化",
+      "group": "技能组合",
+      "summary": "这组内部技能由两个事件自动化驱动，不经过普通 poteto-mode 路由。",
+      "steps": [
+        {
+          "skill": "setup-benny",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "报告事件触发两个自动化",
+          "note": "",
+          "kind": "action"
+        },
+        {
+          "skill": "triage-issue-reports",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "可信判定标记",
+          "note": "复现自动化等待这个契约",
+          "kind": "action"
+        },
+        {
+          "skill": "reproduce-and-fix-issues",
+          "note": "",
+          "optional": false
+        },
+        {
+          "title": "草稿 PR 或验证结论",
+          "note": "不合并、不部署",
+          "kind": "action"
+        }
+      ],
+      "notes": [
+        "两个自动化都由配置的事件触发。这里的先后表示判定标记的数据依赖，不是一个主代理按顺序执行全部技能。"
+      ],
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/automations/benny/FOR_AGENTS.md"
+    }
+  ],
+  "interest": [
+    "in-your-own-words",
+    "sharpen",
+    "how",
+    "why",
+    "teach",
+    "recall",
+    "ketchup",
+    "ketchup-video",
+    "interrogate",
+    "create-verification-skill",
+    "unslop",
+    "bro",
+    "technical-writing",
+    "reflect",
+    "principle-redesign-from-first-principles"
+  ],
+  "principles": [
+    {
+      "name": "principle-laziness-protocol",
+      "title": "最小必要改动",
+      "desc": "删除重复决策，避免多余封装。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-foundational-thinking",
+      "title": "先设计基础结构",
+      "desc": "先确定数据形状、共享状态和基础设施。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-redesign-from-first-principles",
+      "title": "把新需求纳入整体设计",
+      "desc": "把新要求当作最初就有的条件，重新设计并逐步交付。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-attack-the-premise",
+      "title": "验证反复失败的共同前提",
+      "desc": "同一前提下两次修复失败，先直接检验该前提。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-subtract-before-you-add",
+      "title": "先减复杂度",
+      "desc": "删死代码、无效校验和多余引用，再增加能力。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-minimize-reader-load",
+      "title": "降低理解负担",
+      "desc": "减少跳转层数和必须记住的隐藏状态。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-outcome-oriented-execution",
+      "title": "围绕最终架构推进",
+      "desc": "计划内、可逆的迁移用明确阶段验证最终状态。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-experience-first",
+      "title": "使用体验优先",
+      "desc": "为最终用户和维护者改善核心工作流程。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-exhaust-the-design-space",
+      "title": "比较真实原型",
+      "desc": "新交互或关键架构先比较两三个候选。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-build-the-lever",
+      "title": "建立可重跑工具",
+      "desc": "用脚本、生成器、codemod 或验证工具替代大量手工。",
+      "group": "核心"
+    },
+    {
+      "name": "principle-model-the-domain",
+      "title": "用结构表达业务",
+      "desc": "状态机、类型、表和适当的数据结构优先。",
+      "group": "架构"
+    },
+    {
+      "name": "principle-boundary-discipline",
+      "title": "边界校验",
+      "desc": "在外部输入边界解析校验，内部用可信类型。",
+      "group": "架构"
+    },
+    {
+      "name": "principle-type-system-discipline",
+      "title": "让类型排除非法状态",
+      "desc": "语义类型、穷尽变体，从权威结构推导类型。",
+      "group": "架构"
+    },
+    {
+      "name": "principle-make-operations-idempotent",
+      "title": "让操作安全重跑",
+      "desc": "中断、重试和半成品下仍收敛到正确状态。",
+      "group": "架构"
+    },
+    {
+      "name": "principle-migrate-callers-then-delete-legacy-apis",
+      "title": "迁移调用者并删除旧接口",
+      "desc": "适用于没有外部兼容要求的协调式内部迁移。",
+      "group": "架构"
+    },
+    {
+      "name": "principle-separate-before-serializing-shared-state",
+      "title": "先隔离共享写入",
+      "desc": "独立文件、分支或状态；确需共享才用实际串行机制。",
+      "group": "架构"
+    },
+    {
+      "name": "principle-prove-it-works",
+      "title": "检查真实产物",
+      "desc": "运行真实功能、读实际值，保留可复验的证据。",
+      "group": "验证"
+    },
+    {
+      "name": "principle-fix-root-causes",
+      "title": "追到最初错误",
+      "desc": "先复现，用运行证据区分根因和症状。",
+      "group": "验证"
+    },
+    {
+      "name": "principle-sequence-verifiable-units",
+      "title": "逐单元验证",
+      "desc": "每一步到达可验证状态，再推进下一步。",
+      "group": "验证"
+    },
+    {
+      "name": "principle-test-behavior-not-implementation",
+      "title": "检查可观察行为",
+      "desc": "用户行为破坏时失败，内部重构时保持通过。",
+      "group": "验证"
+    },
+    {
+      "name": "principle-explain-the-number",
+      "title": "解释测量数字",
+      "desc": "检查瓶颈、误差、缓存、错误和真正执行的工作。",
+      "group": "验证"
+    },
+    {
+      "name": "principle-guard-the-context-window",
+      "title": "保护上下文",
+      "desc": "批量材料交子代理，主线程保留有证据的摘要。",
+      "group": "协作"
+    },
+    {
+      "name": "principle-never-block-on-the-human",
+      "title": "可逆工作自主推进",
+      "desc": "合理决策后展示结果，不可逆动作保留确认。",
+      "group": "协作"
+    },
+    {
+      "name": "principle-encode-lessons-in-structure",
+      "title": "把经验变成约束",
+      "desc": "能用 lint、脚本或类型执行的规则，优先程序化。",
+      "group": "复盘"
+    }
+  ],
+  "overview": {
+    "nodes": [
+      {
+        "key": "setup",
+        "skill": "setup-pstack",
+        "x": 24,
+        "y": 28,
+        "note": "一次性 / 按需配置",
+        "optional": true
+      },
+      {
+        "key": "mode",
+        "skill": "poteto-mode",
+        "x": 435,
+        "y": 28,
+        "note": "复述目标 · 读取原则 · 路由"
+      },
+      {
+        "key": "invest",
+        "title": "只读调查流程",
+        "kind": "action",
+        "x": 24,
+        "y": 195,
+        "note": "Investigation"
+      },
+      {
+        "key": "build",
+        "title": "开发 / 重构流程",
+        "kind": "action",
+        "x": 299,
+        "y": 195,
+        "note": "代码变更与实际验收"
+      },
+      {
+        "key": "custom",
+        "title": "复杂单次任务",
+        "kind": "action",
+        "x": 574,
+        "y": 195,
+        "note": "定制流程"
+      },
+      {
+        "key": "program",
+        "title": "多 PR 项目流程",
+        "kind": "action",
+        "x": 849,
+        "y": 195,
+        "note": "Orchestrate / Autopilot"
+      },
+      {
+        "key": "h1",
+        "skill": "how",
+        "x": 24,
+        "y": 365,
+        "note": "运行机制"
+      },
+      {
+        "key": "h2",
+        "skill": "how",
+        "x": 299,
+        "y": 365,
+        "note": "理解受影响系统"
+      },
+      {
+        "key": "fig",
+        "skill": "figure-it-out",
+        "x": 574,
+        "y": 365,
+        "note": "设计可验证的阶段"
+      },
+      {
+        "key": "swarm",
+        "skill": "swarm",
+        "x": 849,
+        "y": 365,
+        "note": "Autopilot 独立验收"
+      },
+      {
+        "key": "why",
+        "skill": "why",
+        "x": 24,
+        "y": 535,
+        "note": "动机 / 历史问题时",
+        "optional": true
+      },
+      {
+        "key": "arch",
+        "skill": "architect",
+        "x": 299,
+        "y": 535,
+        "note": "Feature 必须 / 跨边界时"
+      },
+      {
+        "key": "log",
+        "skill": "show-me-your-work",
+        "x": 574,
+        "y": 535,
+        "note": "决策记录贯穿执行"
+      },
+      {
+        "key": "catch",
+        "skill": "ketchup",
+        "x": 849,
+        "y": 535,
+        "note": "Autopilot 审计有变化时",
+        "optional": true
+      },
+      {
+        "key": "clean",
+        "skill": "unslop",
+        "x": 24,
+        "y": 705,
+        "note": "交付调查答案"
+      },
+      {
+        "key": "arena",
+        "skill": "arena",
+        "x": 299,
+        "y": 705,
+        "note": "architect 内部比较候选"
+      },
+      {
+        "key": "proof",
+        "skill": "principle-prove-it-works",
+        "x": 574,
+        "y": 705,
+        "note": "每单元检查真实产物"
+      },
+      {
+        "key": "loop",
+        "title": "继续 / 验证 / 合并",
+        "kind": "action",
+        "x": 849,
+        "y": 705,
+        "note": "取决于授权与具体流程"
+      }
+    ],
+    "edges": [
+      {
+        "a": "setup",
+        "b": "mode",
+        "label": "读取模型配置",
+        "type": "conditional"
+      },
+      {
+        "a": "mode",
+        "b": "invest",
+        "label": "路由",
+        "type": "solid"
+      },
+      {
+        "a": "mode",
+        "b": "build",
+        "label": "路由",
+        "type": "solid"
+      },
+      {
+        "a": "mode",
+        "b": "custom",
+        "label": "路由",
+        "type": "solid"
+      },
+      {
+        "a": "mode",
+        "b": "program",
+        "label": "路由",
+        "type": "solid"
+      },
+      {
+        "a": "invest",
+        "b": "h1",
+        "label": "",
+        "type": "solid"
+      },
+      {
+        "a": "h1",
+        "b": "why",
+        "label": "涉及原因",
+        "type": "conditional"
+      },
+      {
+        "a": "why",
+        "b": "clean",
+        "label": "答案写作",
+        "type": "conditional"
+      },
+      {
+        "a": "build",
+        "b": "h2",
+        "label": "",
+        "type": "solid"
+      },
+      {
+        "a": "h2",
+        "b": "arch",
+        "label": "开发条件",
+        "type": "conditional"
+      },
+      {
+        "a": "arch",
+        "b": "arena",
+        "label": "技能内部调用",
+        "type": "solid"
+      },
+      {
+        "a": "custom",
+        "b": "fig",
+        "label": "",
+        "type": "solid"
+      },
+      {
+        "a": "fig",
+        "b": "log",
+        "label": "贯穿记录",
+        "type": "solid"
+      },
+      {
+        "a": "log",
+        "b": "proof",
+        "label": "逐单元验证",
+        "type": "solid"
+      },
+      {
+        "a": "program",
+        "b": "swarm",
+        "label": "独立验证阶段",
+        "type": "conditional"
+      },
+      {
+        "a": "swarm",
+        "b": "catch",
+        "label": "审计有变化",
+        "type": "conditional"
+      },
+      {
+        "a": "catch",
+        "b": "loop",
+        "label": "后续运行控制",
+        "type": "conditional"
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "material": "progress",
+  "A": "item-26",
+  "B": "item-72",
+  "natural_usability": "tie",
+  "evidence": {
+    "A_quotes": [
+      "11月6日是计划时间，尚不能确认交付。"
+    ],
+    "B_quotes": [
+      "计划在11月6日前完成，修复效果尚未验证。",
+      "如果确认延迟，修复计划可能顺延。"
+    ],
+    "reason": "A额外明确计划并非确认交付，具有正当澄清功能；B以计划、尚未验证和可能顺延已表达同一不确定性。不能将A的有效澄清机械当作slop，也不能只凭B更短判其更好。两稿均清楚呈现完成、阻塞和计划，判平局。"
+  },
+  "pair_difference_B_minus_A": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 0,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "new_slop_roots": 0
+  },
+  "condition_identity": "not_known_or_inferred",
+  "locked": true
+}

@@ -1,0 +1,28 @@
+{
+ "id": "AC7-sol-v01-r1",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 76.0,
+ "usage": {
+  "input_tokens": 70737,
+  "cached_input_tokens": 56704,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1204,
+  "reasoning_output_tokens": 528
+ },
+ "final": "建议按这 6 条验收：\n\n1. **入口可用**：`python3 tools/install.py --project <目录> --harness codex --list`；同样支持 `claude`，`--help` 有说明。\n2. **范围正确**：分别检查 `.agents/skills`、`.claude/skills`，只列出 `ytstack.json` 中已安装的技能，包含依赖技能。\n3. **识别准确**：支持软链接和复制安装；同名但内容不同的自定义技能不算，断链不算，且不会导致崩溃。\n4. **输出稳定**：沿用 JSON，包含 `project`、`harness`、`installed`；`installed` 为按技能名称排序的绝对路径列表。未安装或安装目录不存在时返回 `[]`，退出码为 0。\n5. **查询只读**：不创建目录、不安装、不修复、不修改文件。项目不存在时非零退出，错误写入 stderr。\n6. **有验证证据**：测试覆盖两个 harness、两种安装方式、空项目、依赖、无关技能、同名冲突和断链；原有安装行为不变。\n\n其中“怎样认定属于 ytstack”是关键：建议沿用现有安装器的判断——链接指向对应源技能，或副本内容与源目录一致。\n\n当前工作区为只读，本次未修改代码。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 和技能的安装目录，再给出 `--list` 的完成标准。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*test*' -g 'SKILL.md' -g 'README*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/bash -lc 'cat tests/test_package.py tests/test_smoke.py'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc \"cat README.md; rg --files --hidden -g '\"'!**/.git/**'\"' -g 'AGENTS.md' -g '*' .agents tools\"",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-8zjsf0jo/AGENTS.md /tmp/ytev-8zjsf0jo/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done; cat ytstack.json; rg --files --hidden -g '\"'\"'!**/.git/**'\""
+ ]
+}

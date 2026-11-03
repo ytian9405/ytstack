@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "导入后用另一个进程执行 `list`，能读取全部新增任务。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "即使前几行合法，也不导入任何任务；已有状态文件内容不变，原本不存在的状态文件不被创建。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "只移除行尾换行符，保留标题首尾空格、中文、表情和标点。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "退出码为 `0`；stdout 只输出一个 JSON 数组，包含本次新增任务的完整记录，顺序与文件一致；stderr 为空。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "UTF-8 文本每行对应一个任务，按文件顺序追加。\n跳过空行及全空白行，不占用 ID。\n`#` 开头的行也视为任务，不解析注释。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "即使前几行合法，也不导入任何任务；已有状态文件内容不变，原本不存在的状态文件不被创建。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "文件内重复标题、与已有任务同名的标题均正常追加。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "退出码为 `0`；stdout 只输出一个 JSON 数组，包含本次新增任务的完整记录，顺序与文件一致；stderr 为空。"
+  }
+ ]
+}

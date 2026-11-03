@@ -1,0 +1,25 @@
+{
+ "id": "H2-astra-v02-r1",
+ "prompt": "tools/install.py 的软链接安装和复制安装怎么选？",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 954.9,
+ "usage": {
+  "input_tokens": 32801,
+  "cached_input_tokens": 27904,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 469,
+  "reasoning_output_tokens": 86
+ },
+ "final": "**自己本机用、希望随这个仓库一起更新，选软链接；要把技能随项目交给别人或搬到其他机器，选复制。**\n\n按 [tools/install.py](/tmp/ytev-sipu_vo_/project/tools/install.py) 的实现：\n\n| | 软链接 `--method symlink`（默认） | 复制 `--method copy` |\n|---|---|---|\n| 仓库里的技能更新后 | 项目立即用到新内容 | 项目仍用安装时的版本 |\n| 在项目里修改技能 | 会直接改到源仓库，也影响其他链接到它的项目 | 只改项目里的副本 |\n| 移动或删除源仓库 | 可能导致技能无法使用；它依赖项目和源仓库的相对位置 | 不受影响 |\n| 分享项目 | 链接不会把源文件一起带过去 | 可以把副本随项目提交 |\n\n另外，**这个脚本不会覆盖已有内容，也不是更新工具**：\n\n- 复制安装后，若源仓库内容变了，再运行会报冲突。需要先保留自己的修改，再移走旧副本重新安装。\n- 换一个 `--method` 不一定能切换安装方式：已有软链接切到复制会报冲突；已有副本若与源文件相同，切到软链接也会原样保留。需要先移走已有项。",
+ "commentary": [
+  "我先看 `tools/install.py` 怎么处理这两种安装方式，再说明各自适合什么情况。\n"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"sed -n '1,260p' tools/install.py\""
+ ]
+}

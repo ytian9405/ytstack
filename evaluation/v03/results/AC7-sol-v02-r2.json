@@ -1,0 +1,33 @@
+{
+ "id": "AC7-sol-v02-r2",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/v02snap/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 131.9,
+ "usage": {
+  "input_tokens": 78325,
+  "cached_input_tokens": 65920,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2696,
+  "reasoning_output_tokens": 1034
+ },
+ "final": "算做完：**能查到指定项目里已经装好的 ytstack 技能，查询不改文件，空项目和错误输入都有明确结果。** 以下按推荐方案写，待你拍板。\n\n**待你决定**\n\n- **D1：怎样认定“已经装了”？** 推荐：名字在 `ytstack.json` 里，且目录内有可读的 `SKILL.md`；链接、复制、改过的副本都算。同名自建技能也可能被算入。另一种是核对来源和内容，但会漏掉改过的副本。\n- **D2：一次查哪里？** 推荐：继续要求 `--harness codex|claude`，分别查 `.agents/skills`、`.claude/skills`。另一种是一次查两处，需要区分结果属于哪个工具。\n- **D3：能否同时带安装参数？** 推荐：`--list` 与显式传入的 `--skill`、`--method`、`--dry-run` 同用时报错。另一种是定义筛选等额外行为，本次需求会扩大。\n\n**这次不做**\n\n- 安装、更新、修复或删除技能。\n- 查询全局安装位置、其他项目或网上可安装的技能。\n- 判断技能是否最新版、内容是否被修改。\n\n**验收条件**\n\n以下沿用脚本现有的 JSON 输出方式，成功退出码为 `0`。\n\n- **C1 [D1]：列出已装技能。**  \n  **做什么：** `/tmp/demo` 的 Codex 技能目录里有链接安装的 `bro`、复制安装的 `unslop`，运行 `python3 tools/install.py --project /tmp/demo --harness codex --list`。  \n  **应该看到：** JSON 包含项目绝对路径、`harness: \"codex\"`、`skills: [\"bro\", \"unslop\"]`；名称按字母排序且不重复。重新运行结果相同。  \n  **防的是：** 只认链接、漏掉辅助技能，或直接返回所有可安装技能。\n\n- **C2 [D2]：只查选中的工具。**  \n  **做什么：** 同一项目仅在 `.claude/skills` 放入 `bro`，分别用 `--harness codex` 和 `--harness claude` 查询。  \n  **应该看到：** 前者技能列表为空，后者只有 `bro`。  \n  **防的是：** 混淆两处安装结果。\n\n- **C3：空项目也能查询。**  \n  **做什么：** 对没有技能目录的已有项目运行查询。  \n  **应该看到：** `skills: []`，成功退出。  \n  **防的是：** 把“没装过”当成错误。\n\n- **C4 [D1]：排除不符合条件的条目。**  \n  **做什么：** 技能目录里放入清单外的技能、缺少 `SKILL.md` 的同名目录，以及指向已删除位置的同名链接，再查询。  \n  **应该看到：** 这三种条目都不出现在列表中。  \n  **防的是：** 只看目录名字就宣布已经安装。\n\n- **C5 [D1]：保留改过的副本。**  \n  **做什么：** 修改复制安装的 `bro/SKILL.md` 内容，再查询。  \n  **应该看到：** 仍列出 `bro`，文件内容保持修改后的样子。  \n  **防的是：** 把“和安装包不同”误当成“没安装”。\n\n- **C6：项目路径错误时明确失败。**  \n  **做什么：** `--project` 指向不存在的目录或普通文件。  \n  **应该看到：** 非零退出，错误写到 stderr，不输出成功结果。  \n  **防的是：** 把查不到项目伪装成空列表。\n\n- **C7 [D3]：拒绝混用安装参数。**  \n  **做什么：** 分别运行 `--list --skill bro`、`--list --method copy`、`--list --dry-run`。  \n  **应该看到：** 均非零退出，错误指出不能混用的参数。  \n  **防的是：** 用户以为在查询，实际执行了安装或参数被悄悄忽略。\n\n- **C8：查询不改变项目。**  \n  **做什么：** 对空项目和已有技能的项目分别查询，对照查询前后的文件、内容及链接目标。  \n  **应该看到：** 全部不变；空项目不新增 `.agents` 或 `.claude`。  \n  **防的是：** 查询时顺手创建目录、安装依赖或重写文件。\n\n**不能弄坏**\n\n- 不带 `--list` 时，仍按现有参数安装；选择 `technical-bro` 仍包含 `unslop`。\n- 重复安装相同内容不重复写入；遇到同名不同内容时保留旧文件，并且不安装一半。\n- `--dry-run` 仍只显示计划，不创建文件。\n\n当前仓库缺少安装所需的 `skills/`，旧测试也与当前脚本有差异；验证原有安装行为前需要可用的安装包，不能直接把旧测试失败算成这次改坏。\n\n改 D1 会影响 C1、C4、C5；改 D2 影响 C2 和查询命令；改 D3 影响 C7。",
+ "commentary": [
+  "我会用 acceptance-criteria 技能，先看安装脚本怎么识别技能，再列出可直接判断通过或不通过的完成标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*install*' -g '*README*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat AGENTS.md && cat README.md'",
+  "/bin/bash -lc \"sed -n '1,280p' tools/install.py\"",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!.git'\"' -g '\"'!.venv'\"' -g '\"'!node_modules'\"' && rg -n --hidden -g '\"'!.git'\"' -g '\"'!.venv'\"' -g '\"'!node_modules'\"' 'ytstack|install.py|unittest|pytest|--target|--list' .\"",
+  "/bin/bash -lc \"ls -la && sed -n '1,200p' tools/validate.py\"",
+  "/bin/bash -lc \"cat ytstack.json && sed -n '1,230p' tests/test_package.py\""
+ ]
+}

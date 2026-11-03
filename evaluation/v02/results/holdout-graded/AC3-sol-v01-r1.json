@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "链接指向本包对应技能时，只删除链接，源目录及其内容不变。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "建议第一版按“只删除能确认属于 ytstack 的条目”验收。当前脚本没有安装记录，可以先用链接目标和副本内容判断归属；无法确认的条目保留并报错。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "卸载 `technical-bro` 时保留 `unslop`；单独卸载 `unslop`、但仍保留依赖它的 `technical-bro` 时，拒绝执行。两者一起选择或全量卸载时允许删除。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "`--dry-run` 输出待删除路径和缺失项，所有文件、链接及目录保持原样。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "目标不存在时成功退出，列入 `missing`。连续执行两次，第二次不产生文件变更。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": "不删除其他技能、`.agents`、`.claude` 或 `skills` 父目录。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "卸载 `technical-bro` 时保留 `unslop`；单独卸载 `unslop`、但仍保留依赖它的 `technical-bro` 时，拒绝执行。两者一起选择或全量卸载时允许删除。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "与本包对应技能内容一致的副本可以删除。文件被修改、增加或删除时，保留整个副本并报错。无需用户指定当初的安装方式。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "当前脚本没有安装记录，可以先用链接目标和副本内容判断归属；无法确认的条目保留并报错。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "`--dry-run` 输出待删除路径和缺失项，所有文件、链接及目录保持原样。预览执行相同的归属和依赖检查。\n运行中删除失败时，说明失败路径并非零退出，不承诺恢复已删除项。"
+  }
+ ]
+}

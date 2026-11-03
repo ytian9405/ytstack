@@ -1,0 +1,92 @@
+test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok
+test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... FAIL
+test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... FAIL
+test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... FAIL
+test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... ok
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... 
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1')) ... FAIL
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... FAIL
+test_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 41, in test_C02_add_preserves_strings_and_persists_in_order
+    self.assertEqual(self.add(first['title'], '1', first['category']), first)
+AssertionError: {'id': 0, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[28 chars]alse} != {'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[28 chars]alse}
+  {'category': ' 食物 🥢 ',
+   'cents': 1,
+-  'id': 0,
+?        ^
+
++  'id': 1,
+?        ^
+
+   'title': '  午餐 🍜  ',
+   'voided': False}
+
+======================================================================
+FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 50, in test_C03_void_is_persistent_idempotent_and_ids_not_reused
+    self.assertEqual(self.success('void', '2'), expected)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+======================================================================
+FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 65, in test_C04_summary_aggregates_only_active_entries
+    self.success('void', '4')
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 92, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}] != [{'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False}]
+
+First differing element 0:
+{'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}
+{'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 0, 'title': '午餐', 'voided': True}]
+?                                                                        ^^^
+
++ [{'category': 'food', 'cents': 1250, 'id': 0, 'title': '午餐', 'voided': False}]
+?                                                                        ^^^^
+
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-vfld0w6t/project/tests/test_behavior.py", line 96, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.add('next')['id'], 2)
+AssertionError: 1 != 2
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.619s
+
+FAILED (failures=6)

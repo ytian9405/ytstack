@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical bro"
+  short_description: "Write clear technical docs with precise steps and facts"
+  default_prompt: "Use $technical-bro to write or revise this technical document."

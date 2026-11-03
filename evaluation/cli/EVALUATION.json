@@ -1,0 +1,155 @@
+{
+  "status": "COMPLETE",
+  "project": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+  "request": "Create a reusable project test skill and runnable behavior tests for this repository.",
+  "host": "Codex",
+  "scope": "Tiny Queue public JSON CLI; implementation unchanged; no third-party dependencies, network, credentials, or server",
+  "contract_sources": [
+    "README.md",
+    "queue_cli.py"
+  ],
+  "generated_artifacts": [
+    ".agents/skills/test-tiny-queue/SKILL.md",
+    ".agents/skills/test-tiny-queue/cases/README.md",
+    ".agents/skills/test-tiny-queue/scripts/prove_failure_detection.py",
+    "tests/test_queue_cli.py"
+  ],
+  "instructions_followed": {
+    "skill": ".agents/skills/test-tiny-queue/SKILL.md",
+    "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+    "commands": [
+      {
+        "command": "mkdir -p test-evidence/initial",
+        "exit_status": 0,
+        "purpose": "Create persistent evidence location"
+      },
+      {
+        "command": "timeout 15s python3 tests/test_queue_cli.py --doctor --evidence test-evidence/initial/doctor.json",
+        "exit_status": 0,
+        "evidence": "test-evidence/initial/doctor.json"
+      },
+      {
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/initial/suite.json",
+        "exit_status": 0,
+        "evidence": "test-evidence/initial/suite.json"
+      },
+      {
+        "command": "timeout 30s python3 tests/test_queue_cli.py --case TQ02 --evidence test-evidence/initial/TQ02.json",
+        "exit_status": 0,
+        "evidence": "test-evidence/initial/TQ02.json"
+      },
+      {
+        "command": "timeout 60s python3 .agents/skills/test-tiny-queue/scripts/prove_failure_detection.py --evidence-dir test-evidence/initial/failure-detection",
+        "exit_status": 0,
+        "evidence": "test-evidence/initial/failure-detection/proof.json"
+      },
+      {
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "exit_status": 0,
+        "evidence": "test-evidence/final/suite.json"
+      },
+      {
+        "command": "timeout 60s python3 .agents/skills/test-tiny-queue/scripts/prove_failure_detection.py --evidence-dir test-evidence/final/failure-detection",
+        "exit_status": 0,
+        "evidence": "test-evidence/final/failure-detection/proof.json"
+      }
+    ]
+  },
+  "product_results": {
+    "status": "PASS",
+    "target": "/tmp/ytstack-forward-20261102-4pldj5r3/project/queue_cli.py",
+    "target_sha256": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+    "cases": [
+      {
+        "id": "TQ01",
+        "status": "PASS",
+        "test": "test_TQ01_empty_queue",
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "executed_via": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "evidence": "test-evidence/final/suite.json#cases/0",
+        "assertions": 3
+      },
+      {
+        "id": "TQ02",
+        "status": "PASS",
+        "test": "test_TQ02_add_persistence_order",
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "executed_via": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "evidence": "test-evidence/final/suite.json#cases/1",
+        "assertions": 10
+      },
+      {
+        "id": "TQ03",
+        "status": "PASS",
+        "test": "test_TQ03_complete_idempotence",
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "executed_via": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "evidence": "test-evidence/final/suite.json#cases/2",
+        "assertions": 14
+      },
+      {
+        "id": "TQ04",
+        "status": "PASS",
+        "test": "test_TQ04_blank_title_rejected",
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "executed_via": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "evidence": "test-evidence/final/suite.json#cases/3",
+        "assertions": 12
+      },
+      {
+        "id": "TQ05",
+        "status": "PASS",
+        "test": "test_TQ05_unknown_id_rejected",
+        "command": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "executed_via": "timeout 45s python3 tests/test_queue_cli.py --evidence test-evidence/final/suite.json",
+        "evidence": "test-evidence/final/suite.json#cases/4",
+        "assertions": 10
+      }
+    ]
+  },
+  "test_artifact_validation": {
+    "status": "PASS",
+    "evidence": "test-evidence/final/artifact-validation.json"
+  },
+  "failure_detection": {
+    "status": "PASS",
+    "case": "TQ02",
+    "variant": "An isolated copy omits the disk write but still acknowledges add successfully.",
+    "unchanged_expectation": "A fresh list process returns exactly the task with ID 1, exact Unicode and whitespace title, and done false.",
+    "observed_broken_value": [],
+    "broken_exit_status": 1,
+    "restored_exit_status": 0,
+    "exact_test_command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --case TQ02 --target /tmp/tiny-queue-negative-n095jlx4/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/final/failure-detection/active.json",
+    "evidence": "test-evidence/final/failure-detection/proof.json",
+    "patch": "test-evidence/final/failure-detection/mutation.patch",
+    "variant_source": "test-evidence/final/failure-detection/broken-queue_cli.py",
+    "failure_receipt": "test-evidence/final/failure-detection/broken.json",
+    "restored_receipt": "test-evidence/final/failure-detection/restored.json",
+    "limits": "One meaningful negative control validates persistence assertion sensitivity, not suite completeness."
+  },
+  "cleanup": {
+    "all_case_scratch_removed": true,
+    "isolated_variant_scratch_removed": true,
+    "background_processes_started": [],
+    "all_spawned_cli_children_waited_for": true,
+    "evidence_survives_cleanup": true,
+    "live_product_unchanged": true
+  },
+  "remaining_coverage": [
+    "Corrupt JSON state",
+    "Concurrent writers",
+    "Filesystem permission failures",
+    "CLI parser permutations",
+    "Performance"
+  ],
+  "blockers": [],
+  "evidence_root": "test-evidence/final",
+  "historical_evidence_root": "test-evidence/initial",
+  "contract_note": "Error tests assert the documented nonzero exit and nonempty stderr rather than implementation-specific message wording.",
+  "artifact_hashes": {
+    ".agents/skills/test-tiny-queue/SKILL.md": "ce09a88f2b19702aeda438a0d04672f6032af17c9fcaf71a29926fe651aae1d0",
+    ".agents/skills/test-tiny-queue/cases/README.md": "83cbc59317a8a57b5b39e84a69cbc2deefd0ef4c06d6fe542f303d062ea92cc7",
+    ".agents/skills/test-tiny-queue/scripts/prove_failure_detection.py": "235f24d0321a792693a1e6021c58c0a4cce847050d2ad9d2e819348f90148c4f",
+    "tests/test_queue_cli.py": "d5d81c22500d76ac28ce86d425b1e93095ba5b92a7891bf951a593c5919aa8e8"
+  }
+}

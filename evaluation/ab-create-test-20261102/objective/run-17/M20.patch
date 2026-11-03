@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -7,7 +7,7 @@
+ 
+ 
+ def load(state):
+-    return json.loads(state.read_text()) if state.exists() else []
++    return json.loads(state.read_text())
+ 
+ 
+ def save(state, entries):

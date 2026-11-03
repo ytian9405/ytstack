@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "防的是：** 已作废支出仍占用预算。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "防的是：** 把上个月的支出带进本月，或重新打开后改变归属月份。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "正常输出仍各为一个 JSON 值，提醒单独写入 stderr，退出码为 0。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "防的是：** 预算只在当前运行期间有效。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "推荐支出严格大于预算才提醒；若达到预算就提醒，刚好花完也会触发。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "正常输出仍各为一个 JSON 值，提醒单独写入 stderr，退出码为 0。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**D2：支出算在哪个月？** 推荐按记账时电脑的本地年月；若按实际消费日期，需要增加补录日期的入口。\n- **D3：旧账如何处理？** 推荐保留旧账，不计入月度预算，并在查看月度预算时说明；若把旧账算进启用当月，可能立即触发超支。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "**这次不做**\n\n- 分类预算、预算自动结转。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**D5：如何提醒？** 推荐每次成功 `add` 或执行 `summary` 时，只要当月仍超支就显示提醒，记账照常成功；若只提醒首次超支，之后继续花钱不会重复提醒。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "以下命令均从项目根目录运行，前缀为 `python3 expense_cli.py --state /tmp/budget-check.json`；每条使用独立账本。金额单位为分，`10000` 表示 100 元。\n\n拟新增入口：`budget set --month 2026-11 --cents 10000` 设置预算，`budget show --month 2026-11` 查看预算。它们目前还不存在。"
+  }
+ ]
+}

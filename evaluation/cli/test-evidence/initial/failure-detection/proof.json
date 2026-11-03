@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "live_target_sha256_before": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+  "case": "TQ02",
+  "runs": [
+    {
+      "phase": "broken",
+      "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --case TQ02 --target /tmp/tiny-queue-negative-nztlxb_c/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/initial/failure-detection/active.json",
+      "exit_status": 1,
+      "receipt": "broken.json",
+      "output": "broken.log"
+    },
+    {
+      "phase": "restored",
+      "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --case TQ02 --target /tmp/tiny-queue-negative-nztlxb_c/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/initial/failure-detection/active.json",
+      "exit_status": 0,
+      "receipt": "restored.json",
+      "output": "restored.log"
+    }
+  ],
+  "exact_unchanged_test_command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --case TQ02 --target /tmp/tiny-queue-negative-nztlxb_c/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/initial/failure-detection/active.json",
+  "detected_assertion": [
+    {
+      "label": "fresh process sees first persisted task",
+      "actual": [],
+      "expected": [
+        {
+          "id": 1,
+          "title": "  Prepare slides 雪  ",
+          "done": false
+        }
+      ],
+      "status": "FAIL"
+    }
+  ],
+  "cleanup": {
+    "scratch_removed": true,
+    "background_processes_started": [],
+    "live_target_sha256_after": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb"
+  },
+  "live_target_unchanged": true,
+  "evidence_files_after_cleanup": [
+    "broken-queue_cli.py",
+    "broken.json",
+    "broken.log",
+    "mutation.patch",
+    "restored.json",
+    "restored.log"
+  ]
+}

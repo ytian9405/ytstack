@@ -1,0 +1,243 @@
+test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok
+test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... FAIL
+test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... FAIL
+test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... FAIL
+test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... FAIL
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... 
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '0', '--category', 'food')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '-1', '--category', 'food')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', 'abc', '--category', 'food')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', '', '--cents', '1', '--category', 'food')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', ' \t\n', '--cents', '1', '--category', 'food')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', '')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ' \t\n')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0')) ... ERROR
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1')) ... ERROR
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... FAIL
+test_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '0', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '-1', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', 'abc', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', '', '--cents', '1', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', ' \t\n', '--cents', '1', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ''))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ' \t\n'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+ERROR: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 90, in test_C06_invalid_commands_preserve_existing_bytes
+    before = self.state.read_bytes()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ablemu4v/nested/ledger.json'
+
+======================================================================
+FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 42, in test_C02_add_preserves_strings_and_persists_in_order
+    self.assertTrue(self.state.is_file())
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 50, in test_C03_void_is_persistent_idempotent_and_ids_not_reused
+    self.assertEqual(self.success('void', '2'), expected)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+======================================================================
+FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 64, in test_C04_summary_aggregates_only_active_entries
+    self.success('void', '2')
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+======================================================================
+FAIL: test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 76, in test_C05_summary_sums_repeated_categories
+    self.assertEqual(self.success('summary'), {'count': 3, 'total_cents': 320,
+AssertionError: {'count': 0, 'total_cents': 0, 'by_category': {}} != {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, ' Food ': 17}}
+- {'by_category': {}, 'count': 0, 'total_cents': 0}
+?                              ^
+
++ {'by_category': {' Food ': 17, 'food': 303}, 'count': 3, 'total_cents': 320}
+?                  +++++++++++++++++++++++++            ^                 ++
+
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py", line 96, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.add('next')['id'], 2)
+AssertionError: 1 != 2
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.050s
+
+FAILED (failures=5, errors=11)

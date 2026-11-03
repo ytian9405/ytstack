@@ -1,0 +1,17 @@
+{
+  "frozen_at": "2026-11-02T12:35:25.055668+00:00",
+  "generation_started": false,
+  "model": "gpt-6.1-sol",
+  "sha256": {
+    "design/FRAMEWORK.md": "076508f477a3a4fa7c6bc63efcaae8a50caad788ac66be705e7ea23782ac09f7",
+    "design/framework.json": "bbe270b138050ca535daf424312cbc070b0e84116e98ff83a89cc0f8cf30a772",
+    "design/PROTOCOL.md": "79c831512c913b6ca4cb95a012c650f4ea505fb7d6b47269d238f374989a0ddd",
+    "control/mutations.py": "fc85fc3c0b8b941a22b87d79cf5dd86ce42eac4bbe2f7c01dcf67e7e8612838d",
+    "control/oracle.py": "b6ca51616217aa65bb237849233e910642d57631e73590b18c4c32312b807c46",
+    "control/common-task.txt": "af5e70d709d128bbfc73910cfa71c6e08c0e2246041accd384463f6c691783bf",
+    "control/assignment.json": "7ab5149749b47455a545504b03cbc9745a4f4974709866212f5b0f6d0a5798fa"
+  },
+  "validated_mutants": 22,
+  "equivalent_variant": "PASS",
+  "fixture": "PASS"
+}

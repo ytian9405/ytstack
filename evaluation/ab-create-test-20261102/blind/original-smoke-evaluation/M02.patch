@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -35,7 +35,7 @@
+             return 1
+         entry = {'id': max((item['id'] for item in entries), default=0) + 1,
+                  'title': args.title, 'cents': args.cents,
+-                 'category': args.category, 'voided': False}
++                 'category': args.category.strip(), 'voided': False}
+         entries.append(entry)
+         save(args.state, entries)
+         result = entry

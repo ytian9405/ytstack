@@ -1,0 +1,17 @@
+cwd: /tmp/ledger-negative-j3bypxos
+command: ['/usr/bin/python3', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_behaviors.py', '-k', 'LL02', '-v']
+exit: 1
+test_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... FAIL
+
+======================================================================
+FAIL: test_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-negative-j3bypxos/tests/test_behaviors.py", line 39, in test_LL02_add_preserves_strings_and_persists
+    self.assertTrue(self.state.is_file())
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 0.058s
+
+FAILED (failures=1)

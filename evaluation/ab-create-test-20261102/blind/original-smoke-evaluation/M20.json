@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_smoke.py",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-s6ffleh3/project",
+  "target_sha256": "0d1aaa91043fd91bf260db602449a84be84377005fe0e629f5e585e5b287813e",
+  "started_at": "2026-11-02T12:36:43.625658+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... FAIL\n\n======================================================================\nFAIL: test_empty_summary (test_smoke.SmokeTests.test_empty_summary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-s6ffleh3/project/tests/test_smoke.py\", line 16, in test_empty_summary\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : Traceback (most recent call last):\n  File \"/tmp/ledger-eval-s6ffleh3/project/expense_cli.py\", line 64, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/ledger-eval-s6ffleh3/project/expense_cli.py\", line 31, in main\n    entries = load(args.state)\n              ^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-eval-s6ffleh3/project/expense_cli.py\", line 10, in load\n    return json.loads(state.read_text())\n                      ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1029, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpi3ng0ta3/state.json'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.101s\n\nFAILED (failures=1)\n",
+  "tests_run": 1,
+  "status": "FAIL",
+  "elapsed_seconds": 0.213,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-s6ffleh3",
+  "scratch_removed": true
+}

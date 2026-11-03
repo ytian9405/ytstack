@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -21,7 +21,7 @@
+     commands = parser.add_subparsers(dest='command', required=True)
+     add = commands.add_parser('add')
+     add.add_argument('title')
+-    add.add_argument('--cents', type=int, required=True)
++    add.add_argument('--cents', type=lambda value: int(float(value)), required=True)
+     add.add_argument('--category', required=True)
+     commands.add_parser('list')
+     void = commands.add_parser('void')

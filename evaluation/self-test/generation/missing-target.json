@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "tests/ytstack_skill/run.py",
+    "--target",
+    "/tmp/ytstack-blocked-hbt5wql4/missing",
+    "--evidence",
+    "/home/ytian9405/projects/ytstack/evaluation/self-test/generation/missing-target.json"
+  ],
+  "cwd": "/home/ytian9405/projects/ytstack",
+  "target": "/tmp/ytstack-blocked-hbt5wql4/missing",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "started_at": "2026-11-02T12:19:55.443728+00:00",
+  "cases": [],
+  "doctor": {
+    "status": "BLOCKED",
+    "reason": "Missing target inputs",
+    "missing": [
+      "tools/install.py",
+      "tools/validate.py",
+      "ytstack.json",
+      "provenance.json",
+      "LICENSE",
+      ".claude-plugin/plugin.json",
+      "skills/create-test-skill/SKILL.md",
+      "skills/bro/SKILL.md",
+      "skills/technical-bro/SKILL.md",
+      "skills/unslop/SKILL.md"
+    ]
+  },
+  "status": "BLOCKED"
+}

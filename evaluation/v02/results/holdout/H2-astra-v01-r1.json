@@ -1,0 +1,26 @@
+{
+ "id": "H2-astra-v01-r1",
+ "prompt": "tools/install.py 的软链接安装和复制安装怎么选？",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 366.1,
+ "usage": {
+  "input_tokens": 48293,
+  "cached_input_tokens": 36480,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 552,
+  "reasoning_output_tokens": 27
+ },
+ "final": "**本机开发、希望随源文件更新，选软链接；项目要独立保存、交给别人或放到 CI 跑，选复制。** 当前脚本默认使用软链接。\n\n按 [tools/install.py](/tmp/ytev-byuf5shw/project/tools/install.py) 的实现：\n\n| 对比 | 软链接 `symlink` | 复制 `copy` |\n|---|---|---|\n| 安装内容 | 指向源码目录的相对链接 | 一份独立的文件副本 |\n| 源文件更新 | 安装处立即看到更新 | 不会同步 |\n| 在安装处修改 | 会改到源文件 | 只改副本 |\n| 移动或删除源码目录 | 相对位置变化可能导致链接失效 | 不受影响 |\n| 适用场景 | 自己维护 skills，多个项目共用 | 固定版本、团队共享、独立运行 |\n\n```bash\n# 软链接安装（默认）\npython3 tools/install.py --project /你的项目 --harness codex\n\n# 复制安装\npython3 tools/install.py --project /你的项目 --harness codex --method copy\n```\n\n注意：**脚本不会覆盖已有内容，也不会自动切换安装方式。** 复制后源码更新，再运行安装会报冲突，需要先处理旧副本。已有相同内容的普通目录，即使指定软链接，也会保留原目录。可以加 `--dry-run` 先预览。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 的实现，确认这两种安装方式的区别和适用场景。\n"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g 'install.py' -g '*README*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc \"cat README.md; rg --files --hidden -g 'AGENTS.md' -g '\"'!'\"\\\\.git' /tmp/ytev-byuf5shw /tmp 2>/dev/null\""
+ ]
+}

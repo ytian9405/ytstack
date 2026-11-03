@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Artifact metadata, links, case mapping and file identities; separate from behavior results",
+  "case_count": 8,
+  "sha256": {
+    ".agents/skills/test-ytstack/SKILL.md": "5312d5fc5164b6ab4f6a91b927cd4a72a08dc4f6497bfb89bcd09f7ff6d808e8",
+    ".agents/skills/test-ytstack/cases/README.md": "eaf33604570dfaf9826933bb52d13279985e62392cb9e0ee7af4b37a1b23ad41",
+    "tests/ytstack_skill/run.py": "d9675eec55a9691cb6ec42a5f3be69f7d613f6e75a76bc9dc02139ded5a10d62",
+    "tests/ytstack_skill/prove_failure_detection.py": "1d24fbc738eade8c9e58c9e524ed0e58d38e2e0bdc31432573a28a290489e109",
+    "tests/test_package.py": "7a2ceb9833bcb8d5b48db76ec801b7fd6796dc3ca20bcb9a077c3b677cfc1ea6"
+  }
+}

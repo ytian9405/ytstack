@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "另起进程运行 `list`，仍能看到相同内容；首次导入自动创建保存目录。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "整批不添加，已有文件内容不变。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "UTF-8 文本，每行一个标题；中文、首尾空格保留，空白行跳过。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**文件内容**：推荐一行一条、跳过空白行；若需要每条任务跨多行，就要另定格式。"
+  },
+  {
+   "i": 1,
+   "state": "ASKED",
+   "quote": "**最要紧——失败处理**：推荐整批不添加，修好后可重试；若改成保留成功部分，重试时可能重复添加。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**重复任务**：推荐同名也添加，重复导入会再加一批；若要跳过重复项，需要明确按标题还是其他信息判断。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "成功退出码为 0，输出一个 JSON 数组，包含本次新增任务的 `id`、`title`、`done`。"
+  }
+ ]
+}

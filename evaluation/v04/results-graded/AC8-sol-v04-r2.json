@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "成功导出后，重新运行 `list`，账单也必须与导出前一致。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "中文正常、各列分开、金额正确、特殊字符没有把记录拆乱。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "作废显示“是／否”。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "空账本生成只有表头的 CSV，不创建账本文件。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": "已按推荐写进上面的条件，你可以改：\n\n- **最要紧：导出范围。** 推荐包含作废账单，方便核对历史；只导出未作废账单，文件里就看不到作废记录。\n- **金额单位。** 推荐按元显示，方便阅读；按分显示则 `12.50` 会变成 `1250`。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**最要紧：导出范围。** 推荐包含作废账单，方便核对历史；只导出未作废账单，文件里就看不到作废记录。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "运行 `python3 expense_cli.py --state ledger.json export --output bills.csv`，成功退出，生成 `bills.csv`，并用 JSON 返回文件位置和导出条数；\n缺少输出路径、目标文件已存在、目标就是账本文件或目标无法写入时，非零退出并说明原因；原账本和已有目标文件内容不变。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**金额单位。** 推荐按元显示，方便阅读；按分显示则 `12.50` 会变成 `1250`。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "空账本生成只有表头的 CSV，不创建账本文件。"
+  }
+ ]
+}

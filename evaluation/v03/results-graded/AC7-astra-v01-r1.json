@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "不安装技能、不补依赖、不创建目录、不修改文件；不依赖安装源 `skills/` 存在。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "支持普通目录和有效软链接；忽略其他技能、缺少 `SKILL.md` 的目录和断链。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "技能目录不存在时返回空列表，退出码为 `0`。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "`codex` 查 `.agents/skills`，`claude` 查 `.claude/skills`。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "支持普通目录和有效软链接；忽略其他技能、缺少 `SKILL.md` 的目录和断链。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "名称在 `ytstack.json` 的主技能或辅助技能名单内，且目标包含可读取的 `SKILL.md`，就列为已安装。支持普通目录和有效软链接；忽略其他技能、缺少 `SKILL.md` 的目录和断链。这是按名称识别，不验证安装来源。"
+  },
+  {
+   "i": 1,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "支持普通目录和有效软链接；忽略其他技能、缺少 `SKILL.md` 的目录和断链。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "输出 JSON，技能名按字母排序。"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_smoke.py",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-giipigpc/project",
+  "target_sha256": "533a13f3b95819368ba6eaca1183bddf1793d0d38bb15882e8a27782df029752",
+  "started_at": "2026-11-02T12:36:43.362984+00:00",
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.052s\n\nOK\n",
+  "tests_run": 1,
+  "status": "PASS",
+  "elapsed_seconds": 0.132,
+  "changed_paths": [],
+  "candidate_kill": false,
+  "scratch": "/tmp/ledger-eval-giipigpc",
+  "scratch_removed": true
+}

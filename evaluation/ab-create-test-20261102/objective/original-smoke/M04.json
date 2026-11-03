@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_smoke.py",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-eszq12i4/project",
+  "target_sha256": "2753866c3c7fd5a0169b5e79a49e42cdf984d6fe1b92b5664618bb96f8b7bdf9",
+  "started_at": "2026-11-02T12:36:41.746515+00:00",
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.041s\n\nOK\n",
+  "tests_run": 1,
+  "status": "PASS",
+  "elapsed_seconds": 0.11,
+  "changed_paths": [],
+  "candidate_kill": false,
+  "scratch": "/tmp/ledger-eval-eszq12i4",
+  "scratch_removed": true
+}

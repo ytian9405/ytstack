@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -40,7 +40,7 @@
+         save(args.state, entries)
+         result = entry
+     elif args.command == 'list':
+-        result = entries
++        result = [item for item in entries if not item['voided']]
+     elif args.command == 'void':
+         entry = next((item for item in entries if item['id'] == args.id), None)
+         if entry is None:

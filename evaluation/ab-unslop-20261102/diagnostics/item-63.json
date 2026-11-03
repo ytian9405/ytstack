@@ -1,0 +1,15 @@
+{
+  "label": "item-63",
+  "material": "update",
+  "source_inputs_unchanged": true,
+  "skill_inputs_match_if_present": true,
+  "only_new_file": "output.md",
+  "output_sha256": "360335ae2fdc2a367e56a397e51334753f62ea4e214a24b5016e4f47056d85ea",
+  "anonymous_bytes_match": true,
+  "characters": 193,
+  "non_whitespace_characters": 178,
+  "draft_characters": 427,
+  "exactly_matches_draft": false,
+  "collected_at": "2026-11-02T14:13:29.707554+00:00",
+  "note": "Character and unchanged-text measures are descriptive only, not quality scores."
+}

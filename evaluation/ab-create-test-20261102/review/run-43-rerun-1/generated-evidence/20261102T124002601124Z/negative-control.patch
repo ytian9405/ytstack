@@ -1,0 +1,11 @@
+--- expense_cli.py
++++ variant/expense_cli.py
+@@ -12,7 +12,7 @@
+ 
+ def save(state, entries):
+     state.parent.mkdir(parents=True, exist_ok=True)
+-    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\n')
++    pass  # negative control: discard writes
+ 
+ 
+ def main():

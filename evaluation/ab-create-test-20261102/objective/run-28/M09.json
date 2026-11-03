@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-y0bz0dt3/project",
+  "target_sha256": "a054ccb1fdca4da46d0678c83ec207c8b3e8b5723c205fe6b1ef0c8ed46b39a4",
+  "started_at": "2026-11-02T12:39:34.930366+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-y0bz0dt3/project/tests/test_behavior.py\", line 53, in test_LL02_add_persistence\n    self.assertEqual(self.invoke('list'), [first, second])\nAssertionError: Lists differ: [{'id': 2, 'title': '车票', 'cents': 300, 'category[25 chars]lse}] != [{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'cat[107 chars]lse}]\n\nFirst differing element 0:\n{'id': 2, 'title': '车票', 'cents': 300, 'category': 'travel', 'voided': False}\n{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n{'id': 2, 'title': '车票', 'cents': 300, 'category': 'travel', 'voided': False}\n\n+ [{'category': ' 餐饮 ',\n+   'cents': 1250,\n+   'id': 1,\n+   'title': ' 午餐 🍜 ',\n+   'voided': False},\n- [{'category': 'travel', 'cents': 300, 'id': 2, 'title': '车票', 'voided': False}]\n? ^\n\n+  {'category': 'travel', 'cents': 300, 'id': 2, 'title': '车票', 'voided': False}]\n? ^\n\n\n======================================================================\nFAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-y0bz0dt3/project/tests/test_behavior.py\", line 68, in test_LL03_void_and_ids\n    self.assertEqual(self.invoke('list'), [voided, second])\nAssertionError: Lists differ: [{'id': 2, 'title': '晚餐', 'cents': 900, 'category[23 chars]lse}] != [{'id': 1, 'title': '午餐', 'cents': 1250, 'categor[100 chars]lse}]\n\nFirst differing element 0:\n{'id': 2, 'title': '晚餐', 'cents': 900, 'category': 'food', 'voided': False}\n{'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n{'id': 2, 'title': '晚餐', 'cents': 900, 'category': 'food', 'voided': False}\n\n+ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': True},\n- [{'category': 'food', 'cents': 900, 'id': 2, 'title': '晚餐', 'voided': False}]\n? ^\n\n+  {'category': 'food', 'cents': 900, 'id': 2, 'title': '晚餐', 'voided': False}]\n? ^\n\n\n======================================================================\nFAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-y0bz0dt3/project/tests/test_behavior.py\", line 76, in test_LL04_summary\n    self.assertEqual(self.invoke('summary'),\nAssertionError: {'count': 0, 'total_cents': 0, 'by_category': {}} != {'count': 3, 'total_cents': 2300, 'by_category': {'food': 2000, 'travel': 300}}\n- {'by_category': {}, 'count': 0, 'total_cents': 0}\n?                              ^\n\n+ {'by_category': {'food': 2000, 'travel': 300}, 'count': 3, 'total_cents': 2300}\n?                  +++++++++++++++++++++++++++            ^                 +++\n\n\n----------------------------------------------------------------------\nRan 6 tests in 1.782s\n\nFAILED (failures=3)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.879,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-y0bz0dt3",
+  "scratch_removed": true
+}

@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-283_70i2/project",
+  "target_sha256": "e40dfe60310be23682a285680bbd2b3d85bc17fbd06fb21abfbadc60926a71c0",
+  "started_at": "2026-11-02T12:41:19.569216+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok\ntest_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... ok\ntest_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... FAIL\ntest_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... ok\ntest_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... ok\ntest_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... ok\ntest_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-283_70i2/project/tests/test_behavior.py\", line 56, in test_C03_void_is_persistent_idempotent_and_ids_not_reused\n    self.assertEqual(third, {'id': 3, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False})\nAssertionError: {'id': 2, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False} != {'id': 3, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False}\n- {'category': 'food', 'cents': 500, 'id': 2, 'title': '晚餐', 'voided': False}\n?                                          ^\n\n+ {'category': 'food', 'cents': 500, 'id': 3, 'title': '晚餐', 'voided': False}\n?                                          ^\n\n\n----------------------------------------------------------------------\nRan 8 tests in 1.701s\n\nFAILED (failures=1)\n",
+  "tests_run": 8,
+  "status": "FAIL",
+  "elapsed_seconds": 1.769,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-283_70i2",
+  "scratch_removed": true
+}

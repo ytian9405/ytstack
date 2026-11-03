@@ -1,0 +1,28 @@
+{
+  "status": "ALL_EIGHT_BLIND_REVIEWS_LOCKED_BEFORE_UNBLINDING",
+  "scale": "No fabricated 0-100 score; fixed-unit E/P/R/U and fidelity roots only",
+  "files": {
+    "item-14.json": "a138ba12bbd182847f1784d5a7f60266cf3b56735c71fcd5550f047e6d27312b",
+    "item-63.json": "b6b2ae9e314a7c99fd1fbcd4c5e36a6e6ad668d01371f4459e15303b6c07ce4c",
+    "item-58.json": "9e1e15d5824357d28659ffc3632cfb90ca994794e39fbb765c2372ebbda26fd5",
+    "item-85.json": "c73d2c09927e869356ea0d63f839584e6394d41b5b20ab3f81dfe522be9f9855",
+    "item-26.json": "c39716674cb63b4feea9f4fce76141e20daf49bc26c4c2b475938f482720a039",
+    "item-72.json": "5232b6f705d6c39377561e3188d6c02ca7a1911dcc604e22a8df718d7e19495f",
+    "item-37.json": "fbadcf5cf6844fb708ee2271b210195fbf41ea4052771142551de9aa11d3dcc7",
+    "item-49.json": "b6beb59ca2022d8608ca51ca1c3903ebefb5879c7d8fabf15540b6de62d2e62d",
+    "pair-update.json": "a767cb7dcf8cf4f752f1019383d0a52ce9d4b189d553b99e2db4818e6218697c",
+    "pair-change.json": "3e8769f3edc27dddb699265343a4e840e1d4acc50c09b2da7e2cfe2d0ce85e84",
+    "pair-progress.json": "0c814b377680a4c2187bf13b6d6496eb4f92981590f92faa207b049a6b59c840",
+    "pair-clean.json": "bfe71cf9c659b5ff08bb61e8a66772cadd6d9cd5598bbe33a4f40ba7b7a2adca",
+    "BLIND-REVIEW.md": "eed808bd113ea3771357b2a46ff52be4fc7ad2aae09e4a38d1644295dc67ad8b",
+    "calibration.json": "8929e1120869ad54f1bd2ed3f2b024b135af80b4448c0e4f32c7f9f6e53f8012",
+    "FIRST_THREE_LOCK.sha256": "c6fbddcd439a5a78960375b247b4f8309e8c9d159d1bbe0786cfbd668b1593c0"
+  },
+  "framework_files": {
+    "FRAMEWORK.md": "2cf52ea009513af31d17016e5083c93a28b6205d2ebfa92ce6619ee6e63ebaac",
+    "framework.json": "6ce30d936cae9b468bad9944e7740bc8e105e17d26b54273e5ccc8f4c555a7f6"
+  },
+  "pair_count": 4,
+  "candidate_count": 8,
+  "conditions_known": false
+}

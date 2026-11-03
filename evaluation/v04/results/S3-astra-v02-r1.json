@@ -1,0 +1,29 @@
+{
+ "id": "S3-astra-v02-r1",
+ "prompt": "我用 tools/install.py 只指定装一个技能，装完发现项目里还多出了别的技能目录，这是怎么回事？它对依赖是怎么处理的？",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/evaluation/snapshots/v02/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 133.4,
+ "usage": {
+  "input_tokens": 73897,
+  "cached_input_tokens": 62976,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 779,
+  "reasoning_output_tokens": 61
+ },
+ "final": "这是脚本的预期行为：**`--skill` 指定的是要装的技能，它需要的其他技能也会一起装。**\n\n当前 [ytstack.json](/tmp/ytev-6br56xdx/project/ytstack.json:6) 只声明了一组依赖：\n\n- 安装 `technical-bro`，会先装 `unslop`，所以出现两个目录是正常的。\n- 单独安装 `bro` 或 `create-test-skill`，按当前配置不会带上其他技能。\n\n[安装脚本](/tmp/ytev-6br56xdx/project/tools/install.py:27) 的处理规则是：\n\n- **依赖以 `ytstack.json` 为准**，不会扫描 `SKILL.md` 自动判断。\n- 依赖还有依赖，就继续往下找；先装依赖，再装你指定的技能。同一个技能只处理一次。\n- 不传 `--skill` 时，安装全部 `primary_skills` 及其依赖；不会无条件安装全部 `support_skills`。\n- 已有相同内容的目录，或符合当前安装方式、指向同一来源的链接，会跳过；同名内容不一致会报错，不覆盖。依赖互相绕回、名称不认识、缺少源技能，也会在开始写入前报错。\n- 默认创建指向源技能的链接；加 `--method copy` 才会复制整个目录。依赖和主技能使用相同方式。\n\n**目前没有跳过依赖的参数。** 想提前看会多装哪些目录，在原命令末尾加 `--dry-run`：`planned` 是准备新增的目录，`unchanged` 是已经存在、无需处理的目录。",
+ "commentary": [
+  "我先看 `tools/install.py` 怎么选择技能、怎么处理依赖，确认多出来的目录是从哪里来的。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g '*depend*' -g '*test*' -g 'README*' -g 'pyproject.toml'\"",
+  "/bin/bash -lc \"cat AGENTS.md && sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc \"rg -n 'depend|依赖|install.py|requires' README.md tests tools .agents skills\"",
+  "/bin/bash -lc \"sed -n '1,210p' tests/test_package.py && cat ytstack.json\"",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!'\"\\\\.git' -g '*ytstack*' -g '*manifest*' && nl -ba tools/install.py | sed -n '22,91p'\""
+ ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "checks": {
+    "codex_discovery_path": true,
+    "frontmatter_name": true,
+    "relative_case_index_link": true,
+    "suite_case_ids": true,
+    "all_baseline_cases_passed": true,
+    "negative_control_failed_behavior": true,
+    "restored_control_passed": true,
+    "same_failure_restore_command": true,
+    "live_product_unchanged": true,
+    "syntax_test_queue_cli.py": true,
+    "syntax_prove_failure_detection.py": true,
+    "all_case_scratch_removed": true,
+    "proof_scratch_removed": true,
+    "proof_evidence_survived_cleanup": true
+  },
+  "baseline_assertion_count": 49,
+  "note": "Artifact validation is separate from product behavior results."
+}

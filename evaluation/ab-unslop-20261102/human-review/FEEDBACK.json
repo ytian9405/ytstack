@@ -1,0 +1,76 @@
+{
+  "recorded_at": "2026-11-02T14:31:33.550370+00:00",
+  "rater": "user",
+  "verbatim_feedback": "第一题，B好一点，我喜欢每条信息一个bullet point；第二题：B好，虽然只差了3个字“重试时”但是changes everything；第三题：B好，A版本废话太多了；第四题，平局，完全一样的内容；",
+  "records": [
+    {
+      "question": 1,
+      "material": "update",
+      "status": "PREFERENCE_RECORDED",
+      "preferred_alias": "B",
+      "preferred_arm": "without",
+      "preferred_original_label": "item-63",
+      "reason_verbatim": "我喜欢每条信息一个bullet point",
+      "numeric_score": null
+    },
+    {
+      "question": 2,
+      "material": "change",
+      "status": "PREFERENCE_RECORDED",
+      "preferred_alias": "B",
+      "preferred_arm": "with",
+      "preferred_original_label": "item-85",
+      "reason_verbatim": "虽然只差了3个字“重试时”但是changes everything",
+      "numeric_score": null
+    },
+    {
+      "question": 3,
+      "material": "progress",
+      "status": "PREFERENCE_RECORDED",
+      "preferred_alias": "B",
+      "preferred_arm": "without",
+      "preferred_original_label": "item-72",
+      "reason_verbatim": "A版本废话太多了",
+      "numeric_score": null
+    },
+    {
+      "question": 4,
+      "material": "clean",
+      "status": "TIE",
+      "preferred_alias": null,
+      "preferred_arm": null,
+      "preferred_original_label": null,
+      "reason_verbatim": "完全一样的内容",
+      "numeric_score": null
+    }
+  ],
+  "counts": {
+    "with_preferred": 1,
+    "without_preferred": 2,
+    "ties": 1
+  },
+  "concrete_observations": [
+    {
+      "material": "update",
+      "type": "information_granularity",
+      "preferred": "Each independent restriction in a separate bullet; source limit and over-limit action are split in preferred output."
+    },
+    {
+      "material": "change",
+      "type": "shared_condition_scope",
+      "preferred": "Make retry context explicit in the lead-in governing both rules, rather than leaving retry only in the first bullet."
+    },
+    {
+      "material": "progress",
+      "type": "redundant_clarification",
+      "user_rejected_quote": "11月6日是计划时间，尚不能确认交付。",
+      "context": "The preceding text already says planned deadline, unverified effect and possible delay."
+    },
+    {
+      "material": "clean",
+      "type": "exact_equality",
+      "verified": true
+    }
+  ],
+  "scope": "One rater, four unique synthetic materials, one output per condition; no numeric human scores or universal superiority claim."
+}

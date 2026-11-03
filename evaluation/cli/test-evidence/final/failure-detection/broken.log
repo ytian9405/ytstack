@@ -1,0 +1,24 @@
+Evidence: /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/final/failure-detection/active.json
+test_TQ02_add_persistence_order (__main__.QueueCases.test_TQ02_add_persistence_order) ... FAIL
+
+======================================================================
+FAIL: test_TQ02_add_persistence_order (__main__.QueueCases.test_TQ02_add_persistence_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py", line 75, in test_TQ02_add_persistence_order
+    self.expect('fresh process sees first persisted task', self.cli('list'), [first])
+  File "/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py", line 42, in expect
+    self.assertEqual(actual, expected, label)
+AssertionError: Lists differ: [] != [{'id': 1, 'title': '  Prepare slides 雪  ', 'done': False}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 1, 'title': '  Prepare slides 雪  ', 'done': False}
+
+- []
++ [{'done': False, 'id': 1, 'title': '  Prepare slides 雪  '}] : fresh process sees first persisted task
+
+----------------------------------------------------------------------
+Ran 1 test in 0.043s
+
+FAILED (failures=1)

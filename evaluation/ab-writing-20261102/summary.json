@@ -1,0 +1,290 @@
+{
+  "status": "COMPLETE",
+  "completed_at": "2026-11-02T13:22:53.653283+00:00",
+  "generator_model": "gpt-6.1-sol",
+  "evaluator_model": "gpt-6-astra",
+  "same_inherited_reasoning_configuration": true,
+  "runs_per_arm_per_task": 2,
+  "runs": [
+    {
+      "task": "bro",
+      "pair": 1,
+      "arm": "without",
+      "label": "sample-66",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 16,
+      "facts_total": 16,
+      "major_errors": 0,
+      "characters": 391,
+      "non_whitespace_characters": 367,
+      "output": "runs/sample-66/project/output.md",
+      "score_file": "review/sample-66.json"
+    },
+    {
+      "task": "bro",
+      "pair": 1,
+      "arm": "with",
+      "label": "sample-35",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 16,
+      "facts_total": 16,
+      "major_errors": 0,
+      "characters": 405,
+      "non_whitespace_characters": 380,
+      "output": "runs/sample-35/project/output.md",
+      "score_file": "review/sample-35.json"
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "arm": "without",
+      "label": "sample-74",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 16,
+      "facts_total": 16,
+      "major_errors": 0,
+      "characters": 388,
+      "non_whitespace_characters": 362,
+      "output": "runs/sample-74/project/output.md",
+      "score_file": "review/sample-74.json"
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "arm": "with",
+      "label": "sample-48",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 16,
+      "facts_total": 16,
+      "major_errors": 0,
+      "characters": 401,
+      "non_whitespace_characters": 377,
+      "output": "runs/sample-48/project/output.md",
+      "score_file": "review/sample-48.json"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "arm": "without",
+      "label": "sample-53",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 32,
+      "facts_total": 32,
+      "major_errors": 0,
+      "characters": 1709,
+      "non_whitespace_characters": 1499,
+      "output": "runs/sample-53/project/output.md",
+      "score_file": "review/sample-53.json"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "arm": "with",
+      "label": "sample-89",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 32,
+      "facts_total": 32,
+      "major_errors": 0,
+      "characters": 1617,
+      "non_whitespace_characters": 1420,
+      "output": "runs/sample-89/project/output.md",
+      "score_file": "review/sample-89.json"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "arm": "without",
+      "label": "sample-27",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 32,
+      "facts_total": 32,
+      "major_errors": 0,
+      "characters": 1660,
+      "non_whitespace_characters": 1439,
+      "output": "runs/sample-27/project/output.md",
+      "score_file": "review/sample-27.json"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "arm": "with",
+      "label": "sample-12",
+      "total_score": 100,
+      "dimensions": {
+        "F": 45,
+        "U": 30,
+        "O": 15,
+        "D": 10
+      },
+      "facts_preserved": 32,
+      "facts_total": 32,
+      "major_errors": 0,
+      "characters": 1587,
+      "non_whitespace_characters": 1341,
+      "output": "runs/sample-12/project/output.md",
+      "score_file": "review/sample-12.json"
+    }
+  ],
+  "results": {
+    "bro": {
+      "groups": {
+        "without": {
+          "scores": [
+            100,
+            100
+          ],
+          "mean_score": 100,
+          "score_range": [
+            100,
+            100
+          ],
+          "mean_characters": 389.5,
+          "mean_non_whitespace_characters": 364.5,
+          "major_error_count": 0
+        },
+        "with": {
+          "scores": [
+            100,
+            100
+          ],
+          "mean_score": 100,
+          "score_range": [
+            100,
+            100
+          ],
+          "mean_characters": 403,
+          "mean_non_whitespace_characters": 378.5,
+          "major_error_count": 0
+        }
+      },
+      "mean_quality_gain": 0,
+      "paired_quality_differences": [
+        0,
+        0
+      ],
+      "mean_character_difference": 13.5,
+      "character_difference_percent": 3.465982028241335,
+      "length_is_not_quality_or_token_cost": true
+    },
+    "technical-bro": {
+      "groups": {
+        "without": {
+          "scores": [
+            100,
+            100
+          ],
+          "mean_score": 100,
+          "score_range": [
+            100,
+            100
+          ],
+          "mean_characters": 1684.5,
+          "mean_non_whitespace_characters": 1469,
+          "major_error_count": 0
+        },
+        "with": {
+          "scores": [
+            100,
+            100
+          ],
+          "mean_score": 100,
+          "score_range": [
+            100,
+            100
+          ],
+          "mean_characters": 1602,
+          "mean_non_whitespace_characters": 1380.5,
+          "major_error_count": 0
+        }
+      },
+      "mean_quality_gain": 0,
+      "paired_quality_differences": [
+        0,
+        0
+      ],
+      "mean_character_difference": -82.5,
+      "character_difference_percent": -4.897595725734639,
+      "length_is_not_quality_or_token_cost": true
+    }
+  },
+  "frameworks": [
+    "design/framework-bro.json",
+    "design/framework-technical-bro.json"
+  ],
+  "score_lock": "review/score-lock.json",
+  "unblinding": "review/UNBLIND.json",
+  "calibration": "review/calibration.json",
+  "cost": {
+    "tokens": "UNKNOWN",
+    "money": "UNKNOWN",
+    "precise_model_processing_wall_time": "UNKNOWN"
+  },
+  "conclusion": "Astra rubric scored all outputs 100. Subsequent user preference favored bro in both repeated-source comparisons and favored without technical-bro in one comparison; the second technical comparison was skipped. These are distinct evidence types, with no general superiority claim.",
+  "limitations": [
+    "One source material per skill and two runs per condition; no significance or cross-task generalization",
+    "technical-bro treatment includes required unslop dependency",
+    "Shared host writing instructions and skill-catalog metadata are common to both arms",
+    "Soft filesystem boundaries and retrospective self-report, not container isolation or complete tool traces",
+    "Astra semantic review is not a human reader study or actual CLI execution",
+    "Maximum rubric scores create ceiling effects; character length is descriptive only"
+  ],
+  "model_only_conclusion": "No measured quality gain for either skill on these fixed tasks and rubric; all eight scored 100. Not an equivalence or universal-effect claim.",
+  "human_evaluation": {
+    "feedback": "human-review/FEEDBACK.json",
+    "report": "human-review/FEEDBACK.md",
+    "bro_preferences": {
+      "with": 2,
+      "without": 0,
+      "distinct_source_texts": 1
+    },
+    "technical_bro_preferences": {
+      "with": 0,
+      "without": 1,
+      "skipped": 1,
+      "distinct_source_texts": 1
+    },
+    "not_numeric_scores": true
+  }
+}

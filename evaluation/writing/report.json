@@ -1,0 +1,46 @@
+{
+  "read_paths": [
+    "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/skills/bro/SKILL.md",
+    "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/skills/technical-bro/SKILL.md",
+    "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/skills/unslop/SKILL.md"
+  ],
+  "outputs": {
+    "bro": "/tmp/ytstack-forward-20261102-4pldj5r3/writing/bro.txt",
+    "technical_bro": "/tmp/ytstack-forward-20261102-4pldj5r3/writing/technical-bro.txt",
+    "report": "/tmp/ytstack-forward-20261102-4pldj5r3/writing/report.json"
+  },
+  "technical_bro_mode": "how-to",
+  "ambiguities_or_defects": [
+    {
+      "skill": "technical-bro",
+      "issue": "Unconditionally requests a new unslop offender and a diff in the reply, even when the user only needs a rewritten guide. This adds unrelated output and does not specify what to do if no new offender occurs in the input.",
+      "handling": "Kept the guide clean. Recorded the requested proposal separately in this report and in the parent handoff. Did not edit any skill."
+    },
+    {
+      "skill": "technical-bro",
+      "issue": "Several rules describe English grammar or word counts, without defining how they apply to Chinese.",
+      "handling": "Applied the underlying clarity rules: direct instructions, conditions before guarded actions, short complete sentences, literal command names, and stable terminology."
+    },
+    {
+      "skill": "bro",
+      "issue": "The instruction refers to the last assistant message. The test supplied that message explicitly.",
+      "handling": "Rewrote the exact supplied message, as requested by the test."
+    }
+  ],
+  "unslop_proposal_diff": "--- a/unslop/SKILL.md\n+++ b/unslop/SKILL.md\n@@\n-26. **Abstract metaphor nouns.** Substrate (base),\n+26. **Abstract metaphor nouns.** Runway (remaining time or budget), substrate (base),\n",
+  "checks": {
+    "literal_commands_preserved": [
+      "tool doctor",
+      "tool export --out result.json",
+      "tool budget --write"
+    ],
+    "export_fields_preserved": [
+      "id",
+      "title"
+    ],
+    "new_operational_facts_added": false,
+    "external_systems_inspected": false,
+    "skill_files_modified": false,
+    "writes_confined_to_requested_scratch_directory": true
+  }
+}

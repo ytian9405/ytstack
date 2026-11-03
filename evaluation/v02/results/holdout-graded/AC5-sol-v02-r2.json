@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "`add`、`list`、`void`、`summary` 的命令和结果说明继续与程序一致。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "没读过代码的人，只看 README，就能记下一笔账、查到它、作废它，并判断每一步是否成功。"
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**D2：从哪里开始教？** 推荐从“已经拿到项目文件、会打开终端，但不保证装过 Python”开始；如果要从下载项目开始，还需补上实际下载入口和步骤。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "**做什么：** 找 1 位没读过代码、符合 D2 起点的人，在 D1 范围内按 README 完成准备、记账、重开终端查询和作废。"
+  },
+  {
+   "i": 2,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "**做什么：** 找 1 位没读过代码、符合 D2 起点的人，在 D1 范围内按 README 完成准备、记账、重开终端查询和作废。"
+  }
+ ]
+}

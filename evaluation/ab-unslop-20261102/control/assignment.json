@@ -1,0 +1,108 @@
+{
+  "model": "gpt-6.1-sol",
+  "judge_model": "gpt-6-astra",
+  "reasoning": "same inherited setting, not overridden",
+  "samples_per_condition_per_material": 1,
+  "materials": {
+    "update": {
+      "input_sha256": {
+        "facts.md": "bbd3031dfaa14f3923bb97f3f577b753ed164116d0602cac4910254468a90d83",
+        "draft.md": "de497256bd8dd4d13304925d5ef1e5a3129d7f68d1a0418db32295a0b1334be6",
+        "brief.md": "24a2ac20fcc5e1a993b8e11aacfa1ea452c655c6b1783814d50583bb7224f311"
+      }
+    },
+    "change": {
+      "input_sha256": {
+        "facts.md": "fb999e737c67b6fdeeddf75553ba8f40da4603359216e9df6885fd1f0329033a",
+        "draft.md": "92830ee22bb92cdb0282097ad6277286467c15080db2365ce54d684f853a4b4e",
+        "brief.md": "0c75093379e4688586c6e3a0e6e1c972442b4fc244e846739ad72d28bf391bfa"
+      }
+    },
+    "progress": {
+      "input_sha256": {
+        "facts.md": "f5ea0e8c21bbe03fc34131e4fdf55ad1cbcd349c4b4d184aebf49d7d133212a2",
+        "draft.md": "865693a5f5880300551df0520212976885b30c6d4646461e437627d505e65771",
+        "brief.md": "a36b527a404951c9f3266cf28f8c2182396aff02bf1f3e62c9e5e960629fe4c8"
+      }
+    },
+    "clean": {
+      "input_sha256": {
+        "facts.md": "6173a38559c55c3e2d3f462780d6e62fd3d19201f1cbb0fb5871ffe7544ae1c9",
+        "draft.md": "94daf7b5f2ddf2d6a858c0835920347d2edefc4dca87d05cf06cf9cfc6eb627a",
+        "brief.md": "9da9cabd1b452ac437686cab7dfed3d814991c1aa72fb9ffcaa3b70cacbdc086"
+      }
+    }
+  },
+  "skill_sha256": {
+    "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "SKILL.md": "0503149a9b85dad02bbc747a3aeb534e2ba07f53c5fd57e491ea3d1e67659aa3",
+    "agents/openai.yaml": "52553af9876f0671a12f5eee742a4211fd02a42c258a30b7115ec5f8a6223cb5"
+  },
+  "runs": [
+    {
+      "material": "update",
+      "arm": "without",
+      "label": "item-63",
+      "project": "runs/item-63/project",
+      "prompt": "runs/item-63/prompt.txt",
+      "prompt_sha256": "3c0a4204b79b798d93f9d8b83f62cf1f42bfc5c4b69c11cf535da18413065822"
+    },
+    {
+      "material": "update",
+      "arm": "with",
+      "label": "item-14",
+      "project": "runs/item-14/project",
+      "prompt": "runs/item-14/prompt.txt",
+      "prompt_sha256": "8cd2de1f2aac64bdc0456edb7dad3ad8461b68163ffa02cae8f318100e433121"
+    },
+    {
+      "material": "change",
+      "arm": "without",
+      "label": "item-58",
+      "project": "runs/item-58/project",
+      "prompt": "runs/item-58/prompt.txt",
+      "prompt_sha256": "f78d5a8bfc7fdef1d5fb6ca238ea973b521c62416e1bb0bc961a27351c5cca37"
+    },
+    {
+      "material": "change",
+      "arm": "with",
+      "label": "item-85",
+      "project": "runs/item-85/project",
+      "prompt": "runs/item-85/prompt.txt",
+      "prompt_sha256": "80f2a373154a6679ee01fa34bdb2263e63a55ce4fd2c46aaa9544e541bf59646"
+    },
+    {
+      "material": "progress",
+      "arm": "without",
+      "label": "item-72",
+      "project": "runs/item-72/project",
+      "prompt": "runs/item-72/prompt.txt",
+      "prompt_sha256": "325bd90a7641983d53ff648e1787ce6398836ff16b7f3462a32964515b3fc290"
+    },
+    {
+      "material": "progress",
+      "arm": "with",
+      "label": "item-26",
+      "project": "runs/item-26/project",
+      "prompt": "runs/item-26/prompt.txt",
+      "prompt_sha256": "ae1290febea68ddb341b3f78dadb5af8323c298f2888e54f5a3c7d4818bdb29a"
+    },
+    {
+      "material": "clean",
+      "arm": "without",
+      "label": "item-49",
+      "project": "runs/item-49/project",
+      "prompt": "runs/item-49/prompt.txt",
+      "prompt_sha256": "f9974893ae90a9e2e190cd11a872e4eec0fbd7d3778e835611fdf3ba13b53fe3"
+    },
+    {
+      "material": "clean",
+      "arm": "with",
+      "label": "item-37",
+      "project": "runs/item-37/project",
+      "prompt": "runs/item-37/prompt.txt",
+      "prompt_sha256": "6ea259c0e3783db703d0d003e5eb19ffdc89386582537002fdd5d16a81366c11"
+    }
+  ],
+  "created_at": "2026-11-02T14:08:55.291761+00:00"
+}

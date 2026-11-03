@@ -1,0 +1,35 @@
+{
+ "id": "TR-pos2-sol-v02",
+ "prompt": "我要做 install.py 的升级命令，先列一下完成的判定条件。",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "exit": 0,
+ "seconds": 88.8,
+ "usage": {
+  "input_tokens": 99957,
+  "cached_input_tokens": 87936,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2724,
+  "reasoning_output_tokens": 428
+ },
+ "final": "目前 [`tools/install.py`](/tmp/ytev-rcej_9g8/project/tools/install.py) 只支持安装：内容不同的已有目录会被视为冲突，没有升级入口，也没有记录能判断旧副本是否被用户改过。\n\n下面是验收草案，按推荐选项写。当前目录缺少脚本依赖的 `ytstack.json`、`skills/`、`voice/`，这些条件尚未运行验证；本次不改代码。\n\n**待你决定**\n\n- **D1：升级什么、从哪里升级？** 推荐新增 `--upgrade`，从运行脚本所在的本地包更新项目中的技能；若要联网下载最新版或升级安装器本身，需要另定来源和版本规则。\n- **D2：默认升级哪些技能？** 推荐只升级当前项目已安装的本包技能，并补齐新版所需依赖；`--skill` 可限定范围。另一种选择是同步全部默认技能，会新增用户未安装过的技能。\n- **D3：遇到本地修改怎么办？** 推荐整次拒绝，列出冲突，保留原内容；无法确认归属或是否被修改的旧安装也拒绝。另一种选择是备份后覆盖，会替换用户修改。\n- **D4：升级时是否改变安装方式？** 推荐保留每个技能原有的 copy 或 symlink 方式，不兼做转换；另一种选择是允许通过 `--method` 转换，需要增加转换规则。\n\n**这次不做**\n\n- 联网下载、版本选择、降级。\n- 强制覆盖用户修改、自动接管无法确认归属的目录。\n- 自动卸载新版不再提供的技能，或清理无关项目文件。\n\n**验收条件**\n\n以下以 `/tmp/demo` 为已存在的测试项目，A、B 表示两份内容不同的本地包。基础命令为：\n\n```sh\npython3 tools/install.py --project /tmp/demo --harness codex --upgrade\n```\n\n1. **C1 [D1、D4]：副本确实更新。**  \n   **做什么：** 用 A 以 copy 方式安装 `bro`，再从 B 执行基础命令；B 中修改一个文件、新增一个文件、删除一个旧文件。  \n   **应该看到：** 退出码为 0；项目副本与 B 对应技能内容一致，旧文件消失，安装方式仍是 copy。  \n   **防的是：** 只新增文件，遗漏修改或残留过期文件。\n\n2. **C2 [D2]：范围与依赖明确。**  \n   **做什么：** 项目只安装 `bro`，执行默认升级；另在已安装 `bro`、`technical-bro` 的项目中加 `--skill technical-bro`，新版为它增加一个依赖。  \n   **应该看到：** 默认升级不额外安装无关默认技能；限定升级只更新所选技能及其依赖，缺失的新依赖被安装，`bro` 内容不变；指定未安装的技能时报错。  \n   **防的是：** 升级悄悄变成全量安装，或遗漏依赖。\n\n3. **C3 [D3]：用户修改得到保护。**  \n   **做什么：** 在有可信安装记录的副本中，分别修改、增加、删除文件后升级；同次选择另一个可以正常升级的技能。  \n   **应该看到：** 非零退出，stderr 列出冲突路径；所有技能及安装记录保持调用前状态。  \n   **防的是：** 覆盖用户改动，或报错前已升级一部分。\n\n4. **C4 [D3]：无法确认归属时不猜测。**  \n   **做什么：** 对没有可信安装记录的旧副本、同名自建目录、指向其他包的链接执行升级。  \n   **应该看到：** 非零退出，指出不能升级的条目及原因；原目录、链接和内容不变。  \n   **防的是：** 仅凭目录名相同就覆盖。\n\n5. **C5：预览与实际执行一致。**  \n   **做什么：** 对存在更新、新依赖及冲突的场景分别加 `--dry-run`。  \n   **应该看到：** 无冲突时输出将更新、新增和保持不变的条目；有冲突时非零退出并列出冲突；所有场景均不创建或修改文件、链接、安装记录。  \n   **防的是：** 预览发生写入，或把执行时必然失败的升级报告为可成功。\n\n6. **C6：重复执行与跨进程结果一致。**  \n   **做什么：** 成功升级后退出进程，再独立执行两次相同命令。  \n   **应该看到：** 均退出 0；stdout 是可解析的 JSON，能区分新增、更新、未变；后两次新增和更新均为空，已安装内容保持一致。  \n   **防的是：** 每次都声称更新，或升级状态只存在于当前进程。\n\n7. **C7 [D4]：两种宿主和链接行为正确。**  \n   **做什么：** 分别对 codex、claude 的 symlink 安装升级，并在一个副本中让技能发现目录指向项目外。  \n   **应该看到：** 正常安装的链接仍有效、保持相对链接，对应技能可读；项目外路径场景非零退出，外部目录无变化。  \n   **防的是：** 升级破坏链接、写错宿主目录或写到项目外。\n\n8. **C8：语气规则只在显式要求时更新。**  \n   **做什么：** 不带 `--voice` 升级，再带 `--voice` 升级；另用缺失结束标记或重复标记的规则文件执行后一命令。  \n   **应该看到：** 不带参数时规则文件逐字节不变；带参数时仅更新受管区块，区块外内容不变；标记异常时非零退出，技能和规则文件均不变。  \n   **防的是：** 顺带改写用户规则，或技能升级成功后才发现规则无法更新。\n\n9. **C9：无效输入和空范围可判定。**  \n   **做什么：** 分别使用未知技能名、不存在的项目目录、缺少所选技能 `SKILL.md` 的来源包；另对没有已安装技能的项目执行默认升级。  \n   **应该看到：** 前三者非零退出并说明原因，不产生写入；最后一种退出 0、各变更列表为空，不自动安装技能。  \n   **防的是：** 输入失败留下半成品，或空升级意外变成首次安装。\n\n**不能弄坏**\n\n- 不带 `--upgrade` 的原安装命令继续可用；重复安装相同内容仍报告未变。\n- 安装 `technical-bro` 仍带上 `unslop`；遇到同名冲突时保留原内容，不先安装部分依赖。\n- copy 安装在来源包移走后仍可读取；symlink 安装随包和项目整体搬迁后仍有效。\n- codex 使用 `.agents/skills` 和 `AGENTS.md`；claude 使用 `.claude/skills` 和 `CLAUDE.md`。\n\n修改 D1 会影响 C1，修改 D2 会影响 C2、C9，修改 D3 会影响 C3、C4，修改 D4 会影响 C1、C7；确认后可据此实现，也可交给 create-test-skill 转成可运行测试。",
+ "commentary": [
+  "我会先用 acceptance-criteria 技能，查看 `install.py` 现有命令和项目约定，再列出升级命令的验收条件，先不改代码。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g 'README*' -g 'pyproject.toml' -g '*test*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc 'cat README.md'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat tests/test_package.py && cat tests/test_smoke.py'",
+  "/bin/bash -lc \"rg --files -g 'AGENTS.md' -g '\"'!node_modules'\"' /tmp/ytev-rcej_9g8 /tmp 2>/dev/null | head -60\"",
+  "/bin/bash -lc \"rg --files -g '\"'! .git'\"' -g '*.md' -g '*.json' -g 'AGENTS.md' . | head -90\"",
+  "/bin/bash -lc \"cat ytstack.json && rg -n 'install.py|upgrade|升级|安装|--method|--voice' --glob '*.md' --glob '*.py' .\"",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-rcej_9g8/AGENTS.md; do if test -f \"$p\"; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc \"rg --hidden --no-ignore -n 'install.py|upgrade|升级|安装|--method|--voice' tools tests .agents --glob '*.md' --glob '*.json' --glob '*.py'\"",
+  "/bin/bash -lc 'ls -la && ls -la tools skills voice .claude-plugin .agents 2>/dev/null'"
+ ]
+}

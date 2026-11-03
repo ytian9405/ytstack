@@ -1,0 +1,32 @@
+{
+ "id": "AC6-sol-v01-r2",
+ "prompt": "queue_cli 想加任务截止时间，过期了要能看出来。先定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 72.9,
+ "usage": {
+  "input_tokens": 53345,
+  "cached_input_tokens": 45184,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1207,
+  "reasoning_output_tokens": 278
+ },
+ "final": "`queue_cli` 目前有 `add`、`list`、`complete`，结果都输出 JSON。建议本次按以下标准验收，先不改代码。\n\n1. **截止时间可选**  \n   `add \"任务\" --due \"2026-11-04T18:00:00+08:00\"` 可创建带截止时间的任务。不传 `--due` 时，任务没有截止时间。\n\n2. **时间格式明确**  \n   接受带秒和时区的时间，如 `2026-11-04T10:00:00Z` 或上述 `+08:00` 格式。统一以 UTC、`Z` 后缀保存和输出，字段名为 `due_at`；无截止时间时为 `null`。\n\n3. **过期状态有统一定义**  \n   输出增加布尔字段 `overdue`，规则如下：\n\n   | 任务情况 | `overdue` |\n   |---|---|\n   | 未设截止时间 | `false` |\n   | 未完成，当前时间早于或等于截止时间 | `false` |\n   | 未完成，当前时间晚于截止时间 | `true` |\n   | 已完成，包括逾期后完成 | `false` |\n\n4. **每次查看都能反映当前状态**  \n   `add`、`list`、`complete` 返回的任务均包含 `due_at` 和 `overdue`。`overdue` 按命令执行时的当前时间计算，跨过截止时间后再次 `list` 即显示 `true`，无需修改任务。`list` 不改写状态文件。\n\n5. **允许录入已过期任务**  \n   传入过去的截止时间可以成功创建任务，返回 `overdue: true`。执行 `complete` 后保留截止时间，返回 `done: true`、`overdue: false`。\n\n6. **错误输入不影响数据**  \n   缺少时区、只有日期、日期不存在或格式错误时，命令非零退出，向 stderr 输出明确错误。已有状态文件内容不变；尚无状态文件时不创建文件。\n\n7. **旧数据和原有行为兼容**  \n   旧任务缺少 `due_at` 时，视为没有截止时间，正常列出和完成。新增任务的截止时间跨进程保留；原有 ID 分配、标题、列表顺序和重复完成行为保持不变。\n\n验收测试使用固定当前时间，覆盖截止前、恰好截止、截止后，以及两个不同时区表示同一时刻的情况，避免依赖真实等待。",
+ "commentary": [
+  "我先看看 `queue_cli` 现有的任务字段和展示方式，再把截止时间的验收标准定到可检查的程度。",
+  "我会用 `technical-bro` 和它要求的 `unslop` 写作规范，把验收标准写成能直接验证的输入和预期结果。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g 'README*' -g 'SKILL.md' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-hos2gbey/AGENTS.md /tmp/ytev-hos2gbey/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc 'cat queue_cli.py && cat README.md'",
+  "/bin/bash -lc \"rg --files -g '\"'!node_modules'\"' -g '\"'!.git'\"' && cat .agents/skills/unslop/SKILL.md\""
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "id": "AC7-astra-v03-r1",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6-astra",
+ "package": "v03",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 185.5,
+ "usage": {
+  "input_tokens": 79065,
+  "cached_input_tokens": 67712,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1382,
+  "reasoning_output_tokens": 178
+ },
+ "final": "**做完的标准：能查清指定项目装了哪些 ytstack 技能，不把同名文件误认成已安装，查询也不改动文件。**\n\n读了 [tools/install.py](/tmp/ytev-ztl34wbq/project/tools/install.py)、`ytstack.json` 和现有测试：安装支持链接和复制，但没有保存安装记录。因此，**最要紧的是确定“什么算已安装”**。\n\n**待你决定**\n\n- D1：怎么认定已安装？推荐把指向当前 ytstack 源文件且能读取的链接、与源文件内容完全相同的副本列为“已安装”；其他同名项标为“无法确认”。只按名字判断更宽松，但会误认别人的技能。\n- D2：查哪个目录？推荐继续要求 `--project` 和 `--harness`，分别查 `.agents/skills` 或 `.claude/skills`；同时查两处则需要区分两份结果。\n- D3：怎么显示？推荐沿用 JSON，包含项目路径、使用方，以及按名称排序的技能名称、路径和状态；普通文字更适合直接阅读，但不方便其他程序使用。\n\n其余按推荐处理：包含自动装入的依赖；`--list` 与显式传入的 `--skill`、`--method`、`--dry-run` 不可同时使用。\n\n**这次不做**\n\n- 不修复、更新或卸载技能。\n- 不扫描全局目录，不追溯旧版本或修改过的副本来自哪里。\n\n**验收条件**\n\n以下按推荐选项拟定。用已存在的 `/tmp/yt-demo` 作测试项目，查询命令为：\n`python3 tools/install.py --project /tmp/yt-demo --harness codex --list`\n\n- C1 [D1,D2,D3]：先用 `--skill technical-bro` 安装，再执行查询 → 已安装项恰为 `technical-bro`、`unslop`；链接和 `--method copy` 安装分别验证，重新启动命令结果相同。防：漏掉依赖或复制安装。\n- C2 [D2,D3]：项目没有技能目录时查询 → 成功、列表为空；仅向 `.claude/skills` 安装 `bro` → Codex 查询为空，改用 `--harness claude` 后列出 `bro`。防：列出可安装清单或混入另一处技能。\n- C3 [D1]：放入内容不同的同名 `bro`、失效的同名链接，以及无关技能 `other` → 前两者显示“无法确认”，`other` 不出现。防：同名就算已安装，或悄悄漏掉异常项。\n- C4：项目不存在、技能目录无法读取、技能目录指向项目外时分别查询 → 非零退出，错误说明具体路径和原因。防：把查询失败说成“没有安装”。\n- C5：分别将 `--list` 与 `--skill bro`、`--method copy`、`--dry-run` 合用 → 非零退出并说明冲突；`--help` 说明查询用途及限制。防：参数被悄悄忽略。\n- C6：上述查询前后比较项目及源技能文件 → 内容、链接目标和目录条目均不变，空项目不新建技能目录。防：查询顺手安装或修复。\n\n**不能弄坏**\n\n- 不带 `--list` 时，自动安装依赖、重复安装不重复写入、冲突时保留原文件，以及 `--dry-run` 不写文件的行为保持不变。\n- 现有测试与代码已有差异：测试期待默认安装 5 项及支持 `--voice`，当前清单只有 4 项且代码没有 `--voice`；这些差异应单独记录，不能算作本次新增问题。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我会用 acceptance-criteria 技能，先看 `tools/install.py` 怎么记录已安装的技能，再把 `--list` 的完成标准写成能逐条核对的结果。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g '*manifest*' -g '*README*' -g '*test*' -g 'pyproject.toml'\"",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat README.md && cat tests/test_smoke.py && cat tests/test_package.py'",
+  "/bin/bash -lc \"cat ytstack.json && cat AGENTS.md && rg -n 'install.py|--list|--voice' tools tests .claude-plugin\""
+ ]
+}

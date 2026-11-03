@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-t0j8nd01/project",
+  "target_sha256": "19b0a808b272fb0993527e232ee1e14e7087732f2ced642f0e225216f672e88e",
+  "started_at": "2026-11-02T12:42:38.193858+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads_do_not_write (test_behaviors.LedgerBehaviorTests.test_LL01_empty_reads_do_not_write) ... ok\ntest_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... ok\ntest_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase) ... ok\ntest_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries) ... FAIL\ntest_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-t0j8nd01/project/tests/test_behaviors.py\", line 60, in test_LL04_summary_groups_only_active_entries\n    self.assertEqual(self.invoke('summary'), {'count': 3, 'total_cents': 1750,\nAssertionError: {'count': 3, 'total_cents': 1750, 'by_category': {'food': 1750}} != {'count': 3, 'total_cents': 1750, 'by_category': {'food': 1450, 'travel': 300}}\n- {'by_category': {'food': 1750}, 'count': 3, 'total_cents': 1750}\n?                           ^\n\n+ {'by_category': {'food': 1450, 'travel': 300}, 'count': 3, 'total_cents': 1750}\n?                           ^ +++++++++++++++\n\n\n----------------------------------------------------------------------\nRan 6 tests in 1.599s\n\nFAILED (failures=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.678,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-t0j8nd01",
+  "scratch_removed": true
+}

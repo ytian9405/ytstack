@@ -1,0 +1,21 @@
+{
+  "label": "sample-35",
+  "task": "bro",
+  "output_sha256": "09fb30b0556cdc5d01f9d86c5a301d630f4c883b2f892a91755703cd565fa3f5",
+  "characters": 405,
+  "non_whitespace_characters": 380,
+  "description": "Counts and literal matches are diagnostics, not quality or comprehension scores",
+  "source_unchanged": true,
+  "task_unchanged": true,
+  "literal_markers": {
+    "256": true,
+    "KiB": true,
+    "3": true,
+    "503": true,
+    "400": true,
+    "401": true,
+    "100%": true,
+    "24": true
+  },
+  "marker_note": "Chinese numbers or semantically equivalent phrasing require human review; absence is not automatically an error"
+}

@@ -1,0 +1,27 @@
+{
+ "id": "H1-astra-v02-r1",
+ "prompt": "tools/validate.py 到底检查了什么？它通过了能说明技能好用吗？",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 976.6,
+ "usage": {
+  "input_tokens": 80836,
+  "cached_input_tokens": 68992,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 696,
+  "reasoning_output_tokens": 17
+ },
+ "final": "**不能。它通过，只能说明技能包符合脚本列出的文件和内容检查，不能说明技能实际好用。** 它没有让 AI 使用技能完成任务，也没有评价结果。\n\n[`tools/validate.py`](/tmp/ytev-5pvcitzm/project/tools/validate.py:14) 具体检查：\n\n- **名单和版本对得上**：包名必须是 `ytstack`，两处版本一致；技能名单不重复，与 `skills/*/SKILL.md` 对应。\n- **技能文件有规定内容**：`name` 与目录名一致，`description` 非空；头部不含 `disable-model-invocation`，正文不含 `TODO`；存在 `agents/openai.yaml`。\n- **本地链接指向现有文件**：检查它识别到的 Markdown 链接，目标不能跑到包外。网址和页面内标题跳转不检查。\n- **依赖名称存在**：声明依赖的双方都在技能名单里；另外要求 `technical-bro` 文件中出现 `../unslop/SKILL.md`。\n- **被记录的引入正文没有变化**：与 `provenance.json` 保存的内容指纹比对；标为原样保留的，还要符合记录中的上游指纹。它不会联网核实上游。\n- **许可证包含指定文字**：每个技能和包根目录的 `LICENSE` 都要包含指定版权行和授权短句。\n\n这些检查比较浅：例如，`openai.yaml` 即使内容错误，只要文件存在就能过；技能指令即使难懂、相互矛盾，也可能通过。\n\n**要判断好不好用，还得实际试任务：**\n\n- 应该使用技能时能否用上，不该使用时是否误用。\n- 使用后能否完成要求，有没有遗漏条件或做错事。\n- 同类任务多试几个，并与不用技能的结果比较，确认它确实有帮助。\n\n另外，**当前目录实际运行没有通过**：缺少 `.claude-plugin/plugin.json`，程序在开头就停止了，后面的检查尚未执行。",
+ "commentary": [
+  "我先看 `tools/validate.py` 的检查内容，再确认它通过后能证明什么、不能证明什么。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g 'validate.py' -g 'SKILL.md' -g '*test*' -g 'README*'\"",
+  "/bin/bash -lc 'cat AGENTS.md tools/validate.py tests/test_package.py tests/test_smoke.py README.md'",
+  "/bin/bash -lc \"nl -ba tools/validate.py; cat ytstack.json; rg --files -g '*eval*' -g '*report*' -g '*result*'; python3 tools/validate.py\""
+ ]
+}

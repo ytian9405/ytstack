@@ -1,0 +1,17 @@
+{
+  "K01": {
+    "material": "change",
+    "candidate": "同一账户在24小时内，以相同request_id重试，无论请求内容是否变化，都返回原import_id，不创建任务。",
+    "scope": "Only the request-content condition involving C02/C03; do not score other absent facts in this isolated sentence."
+  },
+  "K02": {
+    "material": "clean",
+    "candidate": "看板将于11月3日22:00至22:10维护，期间无法打开。已提交的作业会排队，不会丢失；维护结束后会自动继续。\n\n如果22:10后仍无法打开看板，请在#ops-support发送出现问题的时间和错误截图。\n",
+    "scope": "Full clean notice with only N05 deleted."
+  },
+  "K03": {
+    "material": "update",
+    "candidate": "# 🚀 导出中心1.3：赋能每一次数据决策\n\n好问题！很高兴向大家介绍导出中心1.3。这是数据协作的重要里程碑。业内专家普遍认为，好的工具能够为组织注入持久活力，而此次更新正是这一理念的生动体现。\n\n**灵活性：** 灵活性获得了进一步提升。从项目到日期，从筛选到决策，导出中心、数据助手、协作伙伴将帮助你轻松驾驭复杂的数据全景。具体来说，1.3版在2026年11月2日开放，支持按项目和日期筛选，日期含开始日、不含结束日。\n\n**效率：** 为了进一步提升整体效率，单次最多导出5000条记录，格式为CSV。超过5000条时，需要缩小筛选范围，不会自动拆成多个文件。**可靠性：** 文件保留7天，到期后需要重新导出，确保用户始终拥有充满信心的数据旅程。\n\n值得注意的是，本版尚未增加定时导出，也没有公布下一版日期。这个能力边界将成为我们持续深耕、不断突破的坚实底座。让我们携手拥抱更加美好的数据未来！希望这能帮助到你！\n",
+    "scope": "Only US02 resolution; other parts intentionally remain original. Do not evaluate this as a generated model output."
+  }
+}

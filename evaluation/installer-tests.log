@@ -1,0 +1,12 @@
+test_conflict_is_preserved_without_partial_installation (test_package.PackageTests.test_conflict_is_preserved_without_partial_installation) ... ok
+test_copied_claude_skills_are_standalone (test_package.PackageTests.test_copied_claude_skills_are_standalone) ... ok
+test_copy_does_not_claim_a_link_is_standalone (test_package.PackageTests.test_copy_does_not_claim_a_link_is_standalone) ... ok
+test_dependency_is_installed_and_repeat_is_harmless (test_package.PackageTests.test_dependency_is_installed_and_repeat_is_harmless) ... ok
+test_dry_run_changes_nothing (test_package.PackageTests.test_dry_run_changes_nothing) ... ok
+test_package_integrity (test_package.PackageTests.test_package_integrity) ... ok
+test_project_install_does_not_follow_discovery_outside_project (test_package.PackageTests.test_project_install_does_not_follow_discovery_outside_project) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.235s
+
+OK

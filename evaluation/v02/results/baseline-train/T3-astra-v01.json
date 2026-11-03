@@ -1,0 +1,25 @@
+{
+ "id": "T3-astra-v01",
+ "prompt": "expense_cli 的金额是怎么存和算的，可能有什么坑？",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "exit": 0,
+ "seconds": 79.6,
+ "usage": {
+  "input_tokens": 64406,
+  "cached_input_tokens": 58496,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 938,
+  "reasoning_output_tokens": 61
+ },
+ "final": "`expense_cli` 用的是**整数“分”存储和计算**。正常通过 CLI 录入时，不会有浮点小数累加的精度问题。\n\n金额的流程：\n\n- **输入**：`--cents 1250` 表示 12.50 元；只接受正整数，`12.50`、0、负数都会被拒绝。[输入校验](/tmp/ytev-n0m02a9o/project/expense_cli.py:24)\n- **存储**：写入 `--state` 指定的 JSON 文件，字段是 `\"cents\": 1250`，保存时重写整个账本。[存储逻辑](/tmp/ytev-n0m02a9o/project/expense_cli.py:13)\n- **计算**：`summary` 排除已作废记录，再用整数加法计算 `total_cents` 和各类别合计。两者的单位都是分，没有换算或舍入；Python 整数也没有固定 64 位溢出问题。[汇总逻辑](/tmp/ytev-n0m02a9o/project/expense_cli.py:53)\n- **作废**：只标记 `voided=true`，金额仍保留；`list` 也会返回这些记录。[作废逻辑](/tmp/ytev-n0m02a9o/project/expense_cli.py:42)\n\n主要的坑：\n\n| 坑 | 具体影响 |\n|---|---|\n| **读取文件时没有数据校验** | CLI 只管新增输入。手改 JSON 后，小数金额会进入浮点计算，负数会抵扣总额，字符串金额或缺失字段可能直接报错。[读取入口](/tmp/ytev-n0m02a9o/project/expense_cli.py:9) |\n| **并发写入可能丢账** | 没有锁。两个进程同时读取旧账本后各自保存，后写的会覆盖先写的新增记录，也可能生成相同 ID。 |\n| **保存不是原子操作** | 直接覆盖文件，写入中断可能留下空文件或不完整 JSON；代码没有备份或恢复机制。 |\n| **单位和币种靠调用方约定** | 输入 `--cents 12` 就是 12 分，不是 12 元；记录没有币种字段，混用币种仍会直接求和。 |\n| **类别按原字符串分组** | `\"food\"`、`\"food \"`、`\"Food\"` 会分别统计，录入时只检查是否为空，不清理空格。 |\n| **不支持负数退款** | 可以整笔作废，但无法直接录入负数退款或部分退款。 |\n| **下游可能损失精度** | Python 内部整数精确，但非常大的金额交给 JavaScript 等使用浮点数解析 JSON 的系统时，可能丢失整数精度。 |\n\n最值得优先补的是**加载时的字段校验，以及写入时的锁和原子替换**。当前整数分的计算方式本身是合理的，风险主要在数据进入和落盘的环节。",
+ "commentary": [
+  "我先看一下 `expense_cli` 的金额字段、存储格式和计算逻辑，再结合代码指出可能的坑。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*expense*' -g '\"'!node_modules'\"' -g '\"'!vendor'\"'\"",
+  "/bin/bash -lc \"ls -la && sed -n '1,260p' expense_cli.py\"",
+  "/bin/bash -lc \"rg -n 'expense|cents|summary|void' README.md tests tools && nl -ba expense_cli.py\""
+ ]
+}

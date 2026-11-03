@@ -1,0 +1,16 @@
+{
+  "package": "ytstack",
+  "version": "0.1.0",
+  "skills": [
+    "create-test-skill",
+    "bro",
+    "technical-bro",
+    "unslop"
+  ],
+  "copied_bodies_checked": [
+    "skills/bro/SKILL.md",
+    "skills/technical-bro/SKILL.md",
+    "skills/unslop/SKILL.md"
+  ],
+  "status": "PASS"
+}

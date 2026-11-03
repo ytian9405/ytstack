@@ -1,0 +1,41 @@
+{
+  "method": "Post-generation self-report from each original agent; no new file reads or edits requested",
+  "independent_full_tool_trace_available": false,
+  "audited_at": "2026-11-02T12:46:52.835009+00:00",
+  "runs": [
+    {
+      "label": "run-17",
+      "reported_skill_resources_read": [],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_or_dependency_install": false,
+      "outside_project_exception": "Only assigned prompt.txt"
+    },
+    {
+      "label": "run-28",
+      "reported_skill_resources_read": [
+        ".agents/skills/create-test-skill/SKILL.md",
+        ".agents/skills/create-test-skill/references/output-contract.md"
+      ],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_or_dependency_install": false,
+      "outside_project_exception": "Only assigned prompt.txt"
+    },
+    {
+      "label": "run-65",
+      "reported_skill_resources_read": [],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_or_dependency_install": false,
+      "outside_project_exception": "Only assigned prompt.txt"
+    },
+    {
+      "label": "run-43",
+      "reported_skill_resources_read": [
+        ".agents/skills/create-test-skill/SKILL.md",
+        ".agents/skills/create-test-skill/references/output-contract.md"
+      ],
+      "reported_other_projects_or_scoring_read": false,
+      "reported_network_or_dependency_install": false,
+      "outside_project_exception": "Only assigned prompt.txt"
+    }
+  ]
+}

@@ -1,0 +1,715 @@
+{
+  "label": "run-65",
+  "framework_version": "1.0",
+  "blind": true,
+  "group_guess_before_reading": "UNKNOWN",
+  "initial_confidence": 0,
+  "quality_score": 95.0,
+  "quality_interval": [
+    95.0,
+    95.0
+  ],
+  "items": [
+    {
+      "id": "B01",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "原样标题/类别含 Unicode 与空格的完整记录断言",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M01.stderr.log",
+        "objective/M02.stderr.log"
+      ]
+    },
+    {
+      "id": "B02",
+      "weight": 6,
+      "level": 2,
+      "score": 6.0,
+      "reason": "正常金额和 0/-1/1.5/abc 拒绝、stderr、状态不变断言",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M03.stderr.log",
+        "objective/M04.stderr.log",
+        "objective/M05.stderr.log"
+      ]
+    },
+    {
+      "id": "B03",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "首 id、连续新增和 void 后新增 id 断言",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M06.stderr.log",
+        "objective/M07.stderr.log"
+      ]
+    },
+    {
+      "id": "B04",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "独立子进程写读、存在状态文件、多次新增保留历史",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M08.stderr.log",
+        "objective/M09.stderr.log"
+      ]
+    },
+    {
+      "id": "B05",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "空与多记录列表，作废记录仍可见",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M10.stderr.log"
+      ]
+    },
+    {
+      "id": "B06",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "void 保留目标字段和持久化；其他记录完整性见具体备注",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M11.stderr.log",
+        "objective/M12.stderr.log"
+      ]
+    },
+    {
+      "id": "B07",
+      "weight": 4,
+      "level": 2,
+      "score": 4.0,
+      "reason": "重复 void 成功且状态字节不变",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M13.stderr.log"
+      ]
+    },
+    {
+      "id": "B08",
+      "weight": 6,
+      "level": 2,
+      "score": 6.0,
+      "reason": "空、混合有效/作废、全部作废的 count 和 total_cents",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M14.stderr.log",
+        "objective/M15.stderr.log"
+      ]
+    },
+    {
+      "id": "B09",
+      "weight": 4,
+      "level": 2,
+      "score": 4.0,
+      "reason": "多类别、同类别累计和作废排除",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M16.stderr.log"
+      ]
+    },
+    {
+      "id": "B10",
+      "weight": 6,
+      "level": 2,
+      "score": 6.0,
+      "reason": "空白输入/未知 id 非零退出、stderr 非空、状态字节和重读数据不变",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M17.stderr.log",
+        "objective/M18.stderr.log",
+        "objective/M19.stderr.log"
+      ]
+    },
+    {
+      "id": "B11",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "缺失状态读取及不存在嵌套目录首次写入",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M20.stderr.log",
+        "objective/M21.stderr.log"
+      ]
+    },
+    {
+      "id": "B12",
+      "weight": 4,
+      "level": 2,
+      "score": 4.0,
+      "reason": "共用成功调用帮助函数解析完整 stdout JSON，覆盖四种命令",
+      "evidence": [
+        "project/tests/test_behavior.py",
+        "objective/M22.stderr.log"
+      ]
+    },
+    {
+      "id": "R01",
+      "weight": 10,
+      "level": 2,
+      "score": 10.0,
+      "reason": "技能说明有前提、根目录、原始命令、通过/失败标准、证据保存和范围",
+      "evidence": [
+        "project/.agents/skills/test-ledger/SKILL.md",
+        "../../review/run-65-rerun-1",
+        "../../review/run-65-rerun-2"
+      ]
+    },
+    {
+      "id": "R02",
+      "weight": 8,
+      "level": 2,
+      "score": 8.0,
+      "reason": "标准库独立 TemporaryDirectory；两轮原交付命令通过且临时副本删除",
+      "evidence": [
+        "project/.agents/skills/test-ledger/SKILL.md",
+        "../../review/run-65-rerun-1",
+        "../../review/run-65-rerun-2"
+      ]
+    },
+    {
+      "id": "R03",
+      "weight": 7,
+      "level": 2,
+      "score": 7.0,
+      "reason": "旧 smoke 字节保留并由发现入口执行；行为命名及文档映射支持定位/扩展",
+      "evidence": [
+        "project/.agents/skills/test-ledger/SKILL.md",
+        "../../review/run-65-rerun-1",
+        "../../review/run-65-rerun-2"
+      ]
+    },
+    {
+      "id": "E01",
+      "weight": 10,
+      "level": 1,
+      "score": 5,
+      "reason": "有原始 unittest 和检测日志、环境及退出结果，不能推断未执行；但基线日志不记录实际命令/cwd/目标版本，result.txt 也没有绑定所测目标。检测日志的测试路径不能完整绑定基线执行对象。按“真实执行但版本或命令关联不完整”锚点计1，非因缺平台轨迹扣分。",
+      "evidence": [
+        "DELIVERY.md",
+        "project/TESTING.md",
+        "project/test-results/result.txt",
+        "project/test-results/unittest.txt",
+        "project/test-results/detection.txt",
+        "../../review/run-65-rerun-1",
+        "../../review/run-65-rerun-2"
+      ]
+    },
+    {
+      "id": "E02",
+      "weight": 5,
+      "level": 2,
+      "score": 5.0,
+      "reason": "原始日志、作者报告、独立复跑结论一致；明确非穷尽变异及未覆盖范围",
+      "evidence": [
+        "DELIVERY.md",
+        "project/TESTING.md",
+        "project/test-results/result.txt",
+        "project/test-results/unittest.txt",
+        "project/test-results/detection.txt",
+        "../../review/run-65-rerun-1",
+        "../../review/run-65-rerun-2"
+      ]
+    }
+  ],
+  "major_gates": {
+    "G01": "NOT_TRIGGERED",
+    "G02": "NOT_TRIGGERED",
+    "G03": "NOT_TRIGGERED",
+    "G04": "NOT_TRIGGERED",
+    "G05": "NOT_TRIGGERED"
+  },
+  "defects": [
+    {
+      "defect_id": "run-65-D01",
+      "owner": "E01",
+      "reason": "作者原始基线日志与最终所测目标的命令/版本关联不完整；有执行证据但追溯信息不足。",
+      "score_impact": 5,
+      "cross_impact": "不再扣R01/E02；独立复跑成功不追认原始执行对象。"
+    }
+  ],
+  "mutation_review": [
+    {
+      "id": "M01",
+      "valid_kill": true,
+      "evidence": "objective/M01.stderr.log",
+      "patch": "objective/M01.patch",
+      "witness": [
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.add(first['title'], '1', first['category']), first)",
+        "AssertionError: {'id': 1, 'title': '午餐 🍜', 'cents': 1, 'category': ' 食物 🥢 ', 'voided': False} != {'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'category': ' 食物 🥢[15 chars]alse}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M02",
+      "valid_kill": true,
+      "evidence": "objective/M02.stderr.log",
+      "patch": "objective/M02.patch",
+      "witness": [
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.add(first['title'], '1', first['category']), first)",
+        "AssertionError: {'id'[13 chars] '  午餐 🍜  ', 'cents': 1, 'category': '食物 🥢', 'voided': False} != {'id'[13 chars] '  午餐 🍜  ', 'cents': 1, 'category': ' 食物 🥢 ', 'voided': False}",
+        "FAIL: test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories)",
+        "    self.assertEqual(self.success('summary'), {'count': 3, 'total_cents': 320,",
+        "AssertionError: {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, 'Food': 17}} != {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, ' Food ': 17}}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M03",
+      "valid_kill": true,
+      "evidence": "objective/M03.stderr.log",
+      "patch": "objective/M03.patch",
+      "witness": [
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '0', '--category', 'food'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '-1', '--category', 'food'))",
+        "    self.assertEqual(self.success('list'), [entry])",
+        "AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food'))"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M04",
+      "valid_kill": true,
+      "evidence": "objective/M04.stderr.log",
+      "patch": "objective/M04.patch",
+      "witness": [
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '-1', '--category', 'food'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food'))",
+        "    self.assertEqual(self.success('list'), [entry])",
+        "AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': -1, 'c[30 chars]lse}] != [{'id[67 chars]alse}]",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', 'abc', '--category', 'food'))"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M05",
+      "valid_kill": true,
+      "evidence": "objective/M05.stderr.log",
+      "patch": "objective/M05.patch",
+      "witness": [
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', 'abc', '--category', 'food'))",
+        "    self.assertEqual(self.success('list'), [entry])",
+        "AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 1, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', '', '--cents', '1', '--category', 'food'))"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M06",
+      "valid_kill": true,
+      "evidence": "objective/M06.stderr.log",
+      "patch": "objective/M06.patch",
+      "witness": [
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.add(first['title'], '1', first['category']), first)",
+        "AssertionError: {'id': 0, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[28 chars]alse} != {'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[28 chars]alse}",
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(self.success('void', '2'), expected)",
+        "    self.assertEqual(result.returncode, 0, result.stderr)",
+        "AssertionError: 1 != 0 : unknown expense id"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M07",
+      "valid_kill": true,
+      "evidence": "objective/M07.stderr.log",
+      "patch": "objective/M07.patch",
+      "witness": [
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(third, {'id': 3, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False})",
+        "AssertionError: {'id': 2, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False} != {'id': 3, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M08",
+      "valid_kill": true,
+      "evidence": "objective/M08.stderr.log",
+      "patch": "objective/M08.patch",
+      "witness": [
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "----------------------------------------------------------------------",
+        "Traceback (most recent call last):",
+        "  File \"/tmp/ledger-eval-1j0y4ctf/project/tests/test_behavior.py\", line 42, in test_C02_add_preserves_strings_and_persists_in_order",
+        "    self.assertTrue(self.state.is_file())",
+        "AssertionError: False is not true",
+        "",
+        "======================================================================",
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_"
+      ],
+      "reason": "C02 在 add 成功后检查状态文件存在，断言 False；直接识别未持久化。其他用例缺文件 ERROR 不作为依据。"
+    },
+    {
+      "id": "M09",
+      "valid_kill": true,
+      "evidence": "objective/M09.stderr.log",
+      "patch": "objective/M09.patch",
+      "witness": [
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.success('list'), [first, second])",
+        "AssertionError: Lists differ: [{'id': 2, 'title': '交通', 'cents': 250, 'category[25 chars]lse}] != [{'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[108 chars]lse}]",
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(self.success('list'), [first, expected])",
+        "AssertionError: Lists differ: [{'id': 2, 'title': '车票', 'cents': 300, 'category[24 chars]rue}] != [{'id': 1, 'title': '午餐', 'cents': 1250, 'categor[102 chars]rue}]",
+        "FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M10",
+      "valid_kill": true,
+      "evidence": "objective/M10.stderr.log",
+      "patch": "objective/M10.patch",
+      "witness": [
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(self.success('list'), [first, expected])",
+        "AssertionError: Lists differ: [{'id[67 chars]alse}] != [{'id[67 chars]alse}, {'id': 2, 'title': '车票', 'cents': 300, [33 chars]rue}]"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M11",
+      "valid_kill": true,
+      "evidence": "objective/M11.stderr.log",
+      "patch": "objective/M11.patch",
+      "witness": [
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(self.success('list'), [first, expected])",
+        "AssertionError: Lists differ: [{'id[67 chars]alse}] != [{'id[67 chars]alse}, {'id': 2, 'title': '车票', 'cents': 300, [33 chars]rue}]"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M12",
+      "valid_kill": true,
+      "evidence": "objective/M12.stderr.log",
+      "patch": "objective/M12.patch",
+      "witness": [
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(self.success('list'), [first, expected])",
+        "AssertionError: Lists differ: [{'id[61 chars]ed': True}, {'id': 2, 'title': '车票', 'cents': [38 chars]rue}] != [{'id[61 chars]ed': False}, {'id': 2, 'title': '车票', 'cents':[39 chars]rue}]",
+        "FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)",
+        "    self.assertEqual(self.success('summary'), {'count': 2, 'total_cents': 118,",
+        "AssertionError: {'count': 0, 'total_cents': 0, 'by_category': {}} != {'count': 2, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M13",
+      "valid_kill": true,
+      "evidence": "objective/M13.stderr.log",
+      "patch": "objective/M13.patch",
+      "witness": [
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(self.success('void', '2'), expected)",
+        "    self.assertEqual(result.returncode, 0, result.stderr)",
+        "AssertionError: 1 != 0 : already voided"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M14",
+      "valid_kill": true,
+      "evidence": "objective/M14.stderr.log",
+      "patch": "objective/M14.patch",
+      "witness": [
+        "FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)",
+        "    self.assertEqual(self.success('summary'), {'count': 2, 'total_cents': 118,",
+        "AssertionError: {'count': 2, 'total_cents': 1319, 'by_category': {'food': 101, 'travel': 17}} != {'count': 2, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M15",
+      "valid_kill": true,
+      "evidence": "objective/M15.stderr.log",
+      "patch": "objective/M15.patch",
+      "witness": [
+        "FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)",
+        "    self.assertEqual(self.success('summary'), {'count': 2, 'total_cents': 118,",
+        "AssertionError: {'count': 4, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}} != {'count': 2, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M16",
+      "valid_kill": true,
+      "evidence": "objective/M16.stderr.log",
+      "patch": "objective/M16.patch",
+      "witness": [
+        "FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)",
+        "    self.assertEqual(self.success('summary'), {'count': 2, 'total_cents': 118,",
+        "AssertionError: {'count': 2, 'total_cents': 118, 'by_category': {'food': 118}} != {'count': 2, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}}",
+        "FAIL: test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories)",
+        "    self.assertEqual(self.success('summary'), {'count': 3, 'total_cents': 320,",
+        "AssertionError: {'count': 3, 'total_cents': 320, 'by_category': {'food': 320}} != {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, ' Food ': 17}}"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M17",
+      "valid_kill": true,
+      "evidence": "objective/M17.stderr.log",
+      "patch": "objective/M17.patch",
+      "witness": [
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', '', '--cents', '1', '--category', 'food'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', ' \\t\\n', '--cents', '1', '--category', 'food'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ''))"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M18",
+      "valid_kill": true,
+      "evidence": "objective/M18.stderr.log",
+      "patch": "objective/M18.patch",
+      "witness": [
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ''))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ' \\t\\n'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999'))"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M19",
+      "valid_kill": true,
+      "evidence": "objective/M19.stderr.log",
+      "patch": "objective/M19.patch",
+      "witness": [
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0'))",
+        "    self.assertNotEqual(result.returncode, 0)",
+        "AssertionError: 0 == 0",
+        "FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1'))"
+      ],
+      "reason": "相应输入/状态断言失败，已核对补丁与断言目标。"
+    },
+    {
+      "id": "M20",
+      "valid_kill": true,
+      "evidence": "objective/M20.stderr.log",
+      "patch": "objective/M20.patch",
+      "witness": [
+        "FAIL: test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write)",
+        "    self.assertEqual(self.success('list'), [])",
+        "    self.assertEqual(result.returncode, 0, result.stderr)",
+        "AssertionError: 1 != 0 : Traceback (most recent call last):",
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.add(first['title'], '1', first['category']), first)",
+        "    self.assertEqual(result.returncode, 0, result.stderr)"
+      ],
+      "reason": "缺失状态 list 的成功退出断言失败，FileNotFoundError 来自目标缺失状态语义；属于目标行为，不是测试导入错误。"
+    },
+    {
+      "id": "M21",
+      "valid_kill": true,
+      "evidence": "objective/M21.stderr.log",
+      "patch": "objective/M21.patch",
+      "witness": [
+        "FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.add(first['title'], '1', first['category']), first)",
+        "    self.assertEqual(result.returncode, 0, result.stderr)",
+        "AssertionError: 1 != 0 : Traceback (most recent call last):",
+        "FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)",
+        "    self.assertEqual(result.returncode, 0, result.stderr)",
+        "AssertionError: 1 != 0 : Traceback (most recent call last):"
+      ],
+      "reason": "首次写入不存在的嵌套父目录失败，目标 mkdir 缺失导致 FileNotFoundError；属于目标行为。"
+    },
+    {
+      "id": "M22",
+      "valid_kill": true,
+      "evidence": "objective/M22.stderr.log",
+      "patch": "objective/M22.patch",
+      "witness": [
+        "ERROR: test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write)",
+        "    self.assertEqual(self.success('list'), [])",
+        "json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        "ERROR: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)",
+        "    self.assertEqual(self.add(first['title'], '1', first['category']), first)",
+        "json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        "ERROR: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)"
+      ],
+      "reason": "完整 stdout 的 json.loads 因前置 INFO 杂音失败，JSONDecodeError 正是目标 JSON 输出合同违例，算有效检出。"
+    }
+  ],
+  "K_old": [
+    "M20",
+    "M22"
+  ],
+  "K_added": "UNKNOWN",
+  "K_added_note": "未把新增测试作为独立入口另跑全部22变异；现有最终运行日志均有新增测试目标失败证据，但不冒充独立拆分实验。",
+  "K_final": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "M17",
+    "M18",
+    "M19",
+    "M20",
+    "M21",
+    "M22"
+  ],
+  "net_added_kills": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "M17",
+    "M18",
+    "M19",
+    "M21"
+  ],
+  "net_added_count": 20,
+  "regressions": [],
+  "original_inputs_byte_equal": {
+    "README.md": true,
+    "expense_cli.py": true,
+    "tests/test_smoke.py": true
+  },
+  "clean_reruns": [
+    {
+      "label": "run-65",
+      "trial": 1,
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-pul3rish/project",
+      "exit_code": 0,
+      "elapsed_seconds": 2.5433709621429443,
+      "python": "3.12.3",
+      "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+      "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-rerun-1",
+      "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-pul3rish",
+      "scratch_removed": true
+    },
+    {
+      "label": "run-65",
+      "trial": 1,
+      "command": [
+        "python3",
+        "scripts/check_test_detection.py"
+      ],
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-pul3rish/project",
+      "exit_code": 0,
+      "elapsed_seconds": 2.5857341289520264,
+      "python": "3.12.3",
+      "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+      "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-rerun-1",
+      "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-pul3rish",
+      "scratch_removed": true
+    },
+    {
+      "label": "run-65",
+      "trial": 2,
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-9yuaq_06/project",
+      "exit_code": 0,
+      "elapsed_seconds": 2.478879928588867,
+      "python": "3.12.3",
+      "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+      "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-rerun-2",
+      "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-9yuaq_06",
+      "scratch_removed": true
+    },
+    {
+      "label": "run-65",
+      "trial": 2,
+      "command": [
+        "python3",
+        "scripts/check_test_detection.py"
+      ],
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-9yuaq_06/project",
+      "exit_code": 0,
+      "elapsed_seconds": 2.6911380290985107,
+      "python": "3.12.3",
+      "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+      "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-rerun-2",
+      "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-65-scratch-9yuaq_06",
+      "scratch_removed": true
+    }
+  ],
+  "cost": {
+    "model": "gpt-6.1-sol",
+    "reasoning": "same inherited setting, no per-arm override",
+    "tokens": "UNKNOWN",
+    "money": "UNKNOWN",
+    "exact_model_processing_wall_seconds": "UNKNOWN",
+    "note": "Coordinator observation timestamps are available but are not exact processing time or used to rank efficiency."
+  },
+  "scope": "仅本项目公开合同、固定22个变异与当前Linux/Python3.12.3；不证明穷尽缺陷或跨平台。旧 smoke 检出2个，净新增20个。成本未知，不排名效率。",
+  "locked_at": "2026-11-02T12:47:02.437931+00:00"
+}

@@ -1,0 +1,341 @@
+{
+  "version": "1.0-frozen-before-generation",
+  "scale": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "dimensions": [
+    {
+      "id": "F",
+      "name": "事实、数字与条件保真",
+      "weight": 45,
+      "ownership": "唯一容纳遗漏、歪曲、新增无来源事实、命令错误、条件/顺序/分支错误。事实错误造成的理解或操作失败只在此计分。"
+    },
+    {
+      "id": "U",
+      "name": "读者理解或可操作性",
+      "weight": 30,
+      "ownership": "在事实内容正确的前提下，是否能找到并理解问题答案、辨认应做的操作。仅惩罚术语未解释、指代不清、动作难辨等独立障碍。"
+    },
+    {
+      "id": "O",
+      "name": "信息组织与表达负担",
+      "weight": 15,
+      "ownership": "仅惩罚可见的重复、无关铺垫、无目的跳转、句子嵌套等独立表达障碍。不因长短、标题数量、列表数量或未使用某种体系扣分。"
+    },
+    {
+      "id": "D",
+      "name": "交付范围与格式",
+      "weight": 10,
+      "ownership": "只输出所需中文正文；无改写过程说明、评价者旁白、实际执行或伪造执行声明、越界任务。格式以内容可读为准，不规定结构或标题。"
+    }
+  ],
+  "fact_atom_scoring": {
+    "1": "事实明确、语义等价，必要限定完整；命令例外须逐字一致。",
+    "0.5": "已表达核心事实，但非关键细节含混或不完整；对关键条件缺失不得给0.5。",
+    "0": "遗漏、矛盾、关键限定缺失。",
+    "aggregation": "r = 原子得分总和 / 原子数。F=4 当 r=1；F=3 当 0.90<=r<1；F=2 当 0.75<=r<0.90；F=1 当 0.50<=r<0.75；否则 F=0。新增事实逐条记 extra：无来源且可能改变结论/操作的新增事实每条从原子总分减1；纯衔接、同义解释不算新增。r 最低为0。同一缺陷既与原子冲突又是新增时只记原子。"
+  },
+  "other_anchors": {
+    "U": {
+      "4": "所有答案在事实正确的部分均易辨认，目标读者无需外部知识即可理解/执行。",
+      "3": "1个独立局部理解障碍，结合上下文可恢复。",
+      "2": "2至3个独立局部障碍，或1个导致需要外部解释的严重理解障碍。",
+      "1": "4个及以上局部障碍，或2个严重障碍。",
+      "0": "3个及以上严重障碍，或整体难以供目标读者使用。"
+    },
+    "O": {
+      "4": "信息衔接自然，无实质重复或无关内容，阅读路线清楚。",
+      "3": "1处独立、局部的表达负担。",
+      "2": "2至3处局部负担，或1处贯穿多个段落的结构负担。",
+      "1": "4处及以上局部负担，或2处广泛结构负担。",
+      "0": "3处及以上广泛结构负担，整体需要反复重建逻辑。"
+    },
+    "D": {
+      "4": "中文正文，范围完整符合任务，无多余交付。",
+      "3": "1处轻微旁白或无关套话，删除不影响正文。",
+      "2": "多处轻微旁白或1段明显偏离交付的内容。",
+      "1": "主要输出为分析、建议或越界工作，仍有少量可用正文。",
+      "0": "没有所请求正文，或声称实际执行本任务明令禁止的流程。"
+    }
+  },
+  "defect_assignment": "先建立带引文的唯一缺陷清单。事实内容/条件/命令/顺序/分支 -> F；事实正确但目标读者无法解码 -> U；已能解码但重复或组织使阅读费力 -> O；交付外围或越界 -> D。同一根因只给一个ID、一个维度；相同错误重复出现算一个缺陷。一个根因影响多个原子时，原子都标状态，但只对最直接原子计损，其他关联原子标 linked、不再计损；事实比例分母仍为全部原子数。独立漏掉多个事实则分别计损。",
+  "overall": "总分=各维度评分/4×权重之和，0至100。先报告重大错误门槛，再报告维度和总分；有门槛失败的稿件不标为合格，不能用流畅性补偿。无门槛失败且总分>=80为达到本次交付目标；此阈值只用于描述，不推断总体优劣。",
+  "major_gate": "重大事实错误=明确给出错误关键数字/范围/环境/完成判据/安全操作，或缺失关键停止/完成条件使输出允许源文禁止的操作。以下任务列出关键事实；门槛是独立重大错误数>=1。仅关键词缺失但语义完整不算；非关键遗漏扣F而不自动触发。对额外事实若其允许同样的危险操作也触发。",
+  "unknown": "看不到正文、产物截断且原因未知、来源映射未提供等记UNKNOWN并说明证据缺口；不当作0，也不猜测组别。正文自身没写源事实是遗漏，不是UNKNOWN。任一维度UNKNOWN则总分UNKNOWN。无关的实际系统运行结果不可由文本评估，记不适用。",
+  "measurement": "字符数单列：Unicode code points，统一换行LF后统计全文与去空白字符数；只作描述，绝不参与评分。",
+  "blind_protocol": "只接收随机匿名编号的正文，组别/重复次序/提示词/技能内容/生成日志由主持人保管。每份先原子审查、独立缺陷、问题作答，再维度评分与门槛。完成全部8份并锁定评分后才揭盲。引用短证据；不依据猜测的风格判组。",
+  "small_sample": "每任务两组各2次独立运行，只报告每份结果、组内范围与均值差、重大错误数。两任务分别分析，不把8份混成一个任务。不作显著性/普遍性/因果强度推断；依赖组合的结论限于完整组合。若两次方向不一致，明确称结果不稳定。",
+  "task": "technical-bro",
+  "target": "可照做的中文操作指南，保留真实命令、路径、前置/停止条件和结果判断；不实际执行。",
+  "treatment": "目标技能technical-bro及随包unslop依赖的完整组合",
+  "facts": [
+    {
+      "id": "T01",
+      "truth": "服务器必须有Python 3.11。",
+      "critical": false
+    },
+    {
+      "id": "T02",
+      "truth": "命令从/srv/briefcase运行。",
+      "critical": true
+    },
+    {
+      "id": "T03",
+      "truth": "先建立exports目录。",
+      "critical": false
+    },
+    {
+      "id": "T04",
+      "truth": "REPORT_TOKEN由值班人员预先配置。",
+      "critical": false
+    },
+    {
+      "id": "T05",
+      "truth": "不得在日志打印token。",
+      "critical": true
+    },
+    {
+      "id": "T06",
+      "truth": "配置是profiles/review.toml，不可换prod。",
+      "critical": true
+    },
+    {
+      "id": "T07",
+      "truth": "inspect命令完整保留。",
+      "critical": true,
+      "exact_command": "briefctl inspect --profile review --json"
+    },
+    {
+      "id": "T08",
+      "truth": "inspect须healthy=true并且pending_count=0，仅退出0不够。",
+      "critical": true
+    },
+    {
+      "id": "T09",
+      "truth": "inspect字段不满足须停止后续，处理问题后重做inspect，不能绕过。",
+      "critical": true
+    },
+    {
+      "id": "T10",
+      "truth": "满足inspect后才export；export命令完整保留。",
+      "critical": true,
+      "exact_command": "briefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv"
+    },
+    {
+      "id": "T11",
+      "truth": "导出范围为2026-10-01含至2026-11-01不含，即2026年十月。",
+      "critical": true
+    },
+    {
+      "id": "T12",
+      "truth": "export必须退出0才继续。",
+      "critical": true
+    },
+    {
+      "id": "T13",
+      "truth": "export只生成本地文件，不自动发布。",
+      "critical": false
+    },
+    {
+      "id": "T14",
+      "truth": "目标文件已存在则工具报错退出。",
+      "critical": false
+    },
+    {
+      "id": "T15",
+      "truth": "文件存在时停止并确认旧文件归属，不可为通过删除或加--force。",
+      "critical": true
+    },
+    {
+      "id": "T16",
+      "truth": "获准处理旧文件后须从inspect重新开始。",
+      "critical": true
+    },
+    {
+      "id": "T17",
+      "truth": "export成功后verify；verify命令完整保留。",
+      "critical": true,
+      "exact_command": "briefctl verify --input exports/october.csv --json"
+    },
+    {
+      "id": "T18",
+      "truth": "verify返回valid和row_count。",
+      "critical": false
+    },
+    {
+      "id": "T19",
+      "truth": "verify须退出0且valid=true才继续。",
+      "critical": true
+    },
+    {
+      "id": "T20",
+      "truth": "row_count可以为0，空数据不是失败。",
+      "critical": true
+    },
+    {
+      "id": "T21",
+      "truth": "verify不修复文件。",
+      "critical": false
+    },
+    {
+      "id": "T22",
+      "truth": "verify失败须停止发布，确认原因并重新生成，不得手改CSV伪造通过。",
+      "critical": true
+    },
+    {
+      "id": "T23",
+      "truth": "真正发布前先dry-run；dry-run命令完整保留。",
+      "critical": true,
+      "exact_command": "briefctl publish --profile review --input exports/october.csv --dry-run"
+    },
+    {
+      "id": "T24",
+      "truth": "dry-run校验发布参数并显示目标位置。",
+      "critical": false
+    },
+    {
+      "id": "T25",
+      "truth": "dry-run不上传文件也不创建远程记录。",
+      "critical": true
+    },
+    {
+      "id": "T26",
+      "truth": "dry-run必须退出0，失败停止，成功才正式publish。",
+      "critical": true
+    },
+    {
+      "id": "T27",
+      "truth": "正式publish命令完整保留。",
+      "critical": true,
+      "exact_command": "briefctl publish --profile review --input exports/october.csv"
+    },
+    {
+      "id": "T28",
+      "truth": "仅最终命令退出0且输出publish_id才算成功。",
+      "critical": true
+    },
+    {
+      "id": "T29",
+      "truth": "最终退出0但无publish_id不算成功；不要立即重发，先请值班人员核实远端，避免重复创建。",
+      "critical": true
+    },
+    {
+      "id": "T30",
+      "truth": "成功后交接CSV路径、row_count和publish_id给审阅者。",
+      "critical": false
+    },
+    {
+      "id": "T31",
+      "truth": "交接不需要附token。",
+      "critical": true
+    },
+    {
+      "id": "T32",
+      "truth": "指南止于交接，数据审核属于另一流程。",
+      "critical": false
+    }
+  ],
+  "command_rule": "仅technical-bro适用：五条命令正文必须逐字保留，忽略代码围栏和包裹用反引号；不接受参数重排、别名、改路径或换命令。仅排版换行可恢复原命令时是格式问题，不虚构命令语义失败。无语义影响的逐字不一致扣F但不自动触发重大门槛；改变操作、环境、日期、路径或参数意义则触发。",
+  "private_questions": [
+    {
+      "id": "technical-bro-Q1",
+      "question": "运行前要准备哪些环境、目录、凭据与配置？凭据可以记日志吗？",
+      "answer_fact_ids": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "standard_answer": "服务器必须有Python 3.11。；命令从/srv/briefcase运行。；先建立exports目录。；REPORT_TOKEN由值班人员预先配置。；不得在日志打印token。；配置是profiles/review.toml，不可换prod。"
+    },
+    {
+      "id": "technical-bro-Q2",
+      "question": "第一条命令是什么？退出0但pending_count=2，能否导出？",
+      "answer_fact_ids": [
+        "T07",
+        "T08",
+        "T09"
+      ],
+      "standard_answer": "inspect命令完整保留。；inspect须healthy=true并且pending_count=0，仅退出0不够。；inspect字段不满足须停止后续，处理问题后重做inspect，不能绕过。"
+    },
+    {
+      "id": "technical-bro-Q3",
+      "question": "导出命令是什么，11月1日数据包含吗，导出后已发布吗？",
+      "answer_fact_ids": [
+        "T10",
+        "T11",
+        "T12",
+        "T13"
+      ],
+      "standard_answer": "满足inspect后才export；export命令完整保留。；导出范围为2026-10-01含至2026-11-01不含，即2026年十月。；export必须退出0才继续。；export只生成本地文件，不自动发布。"
+    },
+    {
+      "id": "technical-bro-Q4",
+      "question": "october.csv已存在能否删文件或加force？获准处理后从哪步重新开始？",
+      "answer_fact_ids": [
+        "T14",
+        "T15",
+        "T16"
+      ],
+      "standard_answer": "目标文件已存在则工具报错退出。；文件存在时停止并确认旧文件归属，不可为通过删除或加--force。；获准处理旧文件后须从inspect重新开始。"
+    },
+    {
+      "id": "technical-bro-Q5",
+      "question": "导出成功后检查命令是什么，怎样过关，0行可以吗？",
+      "answer_fact_ids": [
+        "T17",
+        "T18",
+        "T19",
+        "T20"
+      ],
+      "standard_answer": "export成功后verify；verify命令完整保留。；verify返回valid和row_count。；verify须退出0且valid=true才继续。；row_count可以为0，空数据不是失败。"
+    },
+    {
+      "id": "technical-bro-Q6",
+      "question": "verify失败会自动修复吗？能否手改CSV使通过？怎么办？",
+      "answer_fact_ids": [
+        "T21",
+        "T22"
+      ],
+      "standard_answer": "verify不修复文件。；verify失败须停止发布，确认原因并重新生成，不得手改CSV伪造通过。"
+    },
+    {
+      "id": "technical-bro-Q7",
+      "question": "预览命令是什么，会上传或创建记录吗，失败后可继续吗？",
+      "answer_fact_ids": [
+        "T23",
+        "T24",
+        "T25",
+        "T26"
+      ],
+      "standard_answer": "真正发布前先dry-run；dry-run命令完整保留。；dry-run校验发布参数并显示目标位置。；dry-run不上传文件也不创建远程记录。；dry-run必须退出0，失败停止，成功才正式publish。"
+    },
+    {
+      "id": "technical-bro-Q8",
+      "question": "正式发布命令是什么，成功需什么证据？退出0但没ID应如何处理？",
+      "answer_fact_ids": [
+        "T27",
+        "T28",
+        "T29"
+      ],
+      "standard_answer": "正式publish命令完整保留。；仅最终命令退出0且输出publish_id才算成功。；最终退出0但无publish_id不算成功；不要立即重发，先请值班人员核实远端，避免重复创建。"
+    },
+    {
+      "id": "technical-bro-Q9",
+      "question": "最后交给谁哪些信息，需要token吗，还要写数据审核流程吗？",
+      "answer_fact_ids": [
+        "T30",
+        "T31",
+        "T32"
+      ],
+      "standard_answer": "成功后交接CSV路径、row_count和publish_id给审阅者。；交接不需要附token。；指南止于交接，数据审核属于另一流程。"
+    }
+  ],
+  "question_use": "仅评价者可见，不发给生成者。逐题仅依据输出作答并记可回答/部分/不可回答及引文。原因是事实缺漏或错误的归F；术语/表达障碍归U；不把问题通过率再算额外分。标准答案的语义等价表达均接受。"
+}

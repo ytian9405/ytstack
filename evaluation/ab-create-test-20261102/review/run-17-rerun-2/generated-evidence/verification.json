@@ -1,0 +1,61 @@
+{
+  "timestamp_utc": "2026-11-02T12:43:45.840957+00:00",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "sha256": {
+    "README.md": "005c055344d9145e84979c17604fba2c4819c9ee0facb8c9a6dcbf4d016e72bd",
+    "expense_cli.py": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "tests/test_behavior.py": "896a85aa425b2a1c9176e7927cff1c8f03f76bfe054a72a072da0699cea0b945",
+    "tests/test_smoke.py": "c23b9f1f7d027e6d5ecd6eb3cf238f6235973d7b2bf7fbd315816dc3408e7b5e",
+    "scripts/verify_tests.py": "f68fd42ea3a38d6c706fce82fd66f63adec64cd89c21a9b6f85ffd5e1de651de",
+    ".agents/skills/test-ledger-lite/SKILL.md": "89e666f42014457489e1d8e5ce898a37919cb1cc20e4d4b3fc633d1471d467ea"
+  },
+  "mutations": [
+    {
+      "name": "M01_void_included",
+      "expected_case": "LL04",
+      "returncode": 1,
+      "detected": true
+    },
+    {
+      "name": "M02_trim_title",
+      "expected_case": "LL02",
+      "returncode": 1,
+      "detected": true
+    },
+    {
+      "name": "M03_reuse_void_id",
+      "expected_case": "LL03",
+      "returncode": 1,
+      "detected": true
+    },
+    {
+      "name": "M04_accept_zero",
+      "expected_case": "LL05",
+      "returncode": 1,
+      "detected": true
+    },
+    {
+      "name": "M05_remove_void_record",
+      "expected_case": "LL03",
+      "returncode": 1,
+      "detected": true
+    },
+    {
+      "name": "M06_overwrite_category_total",
+      "expected_case": "LL04",
+      "returncode": 1,
+      "detected": true
+    }
+  ],
+  "baseline_returncode": 0,
+  "passed": true
+}

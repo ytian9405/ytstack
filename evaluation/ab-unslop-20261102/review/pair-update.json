@@ -1,0 +1,28 @@
+{
+  "material": "update",
+  "A": "item-14",
+  "B": "item-63",
+  "natural_usability": "tie",
+  "evidence": {
+    "A_quotes": [
+      "使用时请留意以下限制：",
+      "超过7天后需重新导出。"
+    ],
+    "B_quotes": [
+      "导出时请留意以下限制：",
+      "超过后需重新导出。"
+    ],
+    "reason": "两稿均可直接发布。A把上限和超限操作放在同一列表项，B分列；A重复7天，B依上文指代。条件、操作和范围均清楚，未形成可辨的自然可用性优势。"
+  },
+  "pair_difference_B_minus_A": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 0,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "new_slop_roots": 0
+  },
+  "condition_identity": "not_known_or_inferred",
+  "locked": true
+}

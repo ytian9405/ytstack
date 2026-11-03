@@ -1,0 +1,72 @@
+{
+ "recorded_at": "2026-11-03T02:40:30.763297+00:00",
+ "rater": "user",
+ "records": [
+  {
+   "question": 1,
+   "source": "S1",
+   "preferred_alias": "B",
+   "preferred_arm": "v04",
+   "A": "v02",
+   "B": "v04",
+   "chars_A": 250,
+   "chars_B": 340,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 2,
+   "source": "S2",
+   "preferred_alias": "A",
+   "preferred_arm": "v04",
+   "A": "v04",
+   "B": "v02",
+   "chars_A": 320,
+   "chars_B": 264,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 3,
+   "source": "S3",
+   "preferred_alias": "A",
+   "preferred_arm": "v02",
+   "A": "v02",
+   "B": "v04",
+   "chars_A": 581,
+   "chars_B": 645,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 4,
+   "source": "S4",
+   "preferred_alias": "A",
+   "preferred_arm": "v02",
+   "A": "v02",
+   "B": "v04",
+   "chars_A": 335,
+   "chars_B": 378,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 5,
+   "source": "AC8",
+   "preferred_alias": "B",
+   "preferred_arm": "v04",
+   "A": "v01",
+   "B": "v04",
+   "chars_A": 908,
+   "chars_B": 981,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 6,
+   "source": "AC9",
+   "preferred_alias": "A",
+   "preferred_arm": "v04",
+   "A": "v04",
+   "B": "v01",
+   "chars_A": 775,
+   "chars_B": 1078,
+   "reason_verbatim": ""
+  }
+ ]
+}

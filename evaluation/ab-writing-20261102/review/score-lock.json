@@ -1,0 +1,44 @@
+{
+  "status": "LOCKED_BEFORE_UNBLINDING",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "file": "sample-48.json",
+      "sha256": "acc3b49f69fdb66e6e751a0fd0897fe057f122b2bd0e7c557c1bac1d7471caf8"
+    },
+    {
+      "file": "sample-66.json",
+      "sha256": "8de3c1f11fd7673be13250e25dabe16794134d93fe436bcbd8534414aff5dce0"
+    },
+    {
+      "file": "sample-35.json",
+      "sha256": "6fc5b8958a50781aebb5fd1c10be2114a57d87bcd1bfcce1152db8c75f94dd0d"
+    },
+    {
+      "file": "sample-74.json",
+      "sha256": "d996c4c01f6569a9bf89d6dd654ddeb1e5b22eb9f23b737d02159f0ce9069d68"
+    },
+    {
+      "file": "sample-89.json",
+      "sha256": "01c326748f3aa02fa8fbe4be1d9d3674ac80f7859d12e0f0b9d349ede113a938"
+    },
+    {
+      "file": "sample-27.json",
+      "sha256": "666413b402719894b4fffa79f7f2ade1be334e3c00740558b681bfaee4043171"
+    },
+    {
+      "file": "sample-12.json",
+      "sha256": "10b9a06fcde336ee5db9831da613bba4adbabda6adbe853fe764a131da1f1a7e"
+    },
+    {
+      "file": "sample-53.json",
+      "sha256": "257a8cb65c1d64c62109885844021c1607bec3b71126cec686a0eeb2fe620aa8"
+    },
+    {
+      "file": "BLIND-REVIEW.md",
+      "sha256": "4043c20a2ce79a7151b2447504c366d059dbe87d5dd27c9673351313d80a86fc"
+    }
+  ],
+  "cost": "UNKNOWN",
+  "bro_previous_lock_verified": true
+}

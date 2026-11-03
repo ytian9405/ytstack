@@ -1,0 +1,31 @@
+{
+ "id": "AC4-sol-v01-r2",
+ "prompt": "给 expense 工具加个月度预算超支提醒，验收标准帮我写一下。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 56.1,
+ "usage": {
+  "input_tokens": 53961,
+  "cached_input_tokens": 45312,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1538,
+  "reasoning_output_tokens": 546
+ },
+ "final": "建议采用以下口径：按本地时区的自然月设置总预算，金额单位为分，超支后在终端提醒。\n\n| 编号 | 验收场景 | 通过标准 |\n|---|---|---|\n| 1 | 设置预算 | 可按 `YYYY-MM` 设置、查看和修改预算；重启后仍可读取。不同月份、不同 `--state` 账本互不影响。 |\n| 2 | 校验输入 | 预算必须为正整数分；非法月份、非整数或非正数预算导致非零退出，stderr 显示错误，原数据不变。 |\n| 3 | 确定消费月份 | 新增消费默认使用本地当天日期，也可指定有效日期；月度统计按消费日期归属月份。 |\n| 4 | 计算月度支出 | 只累计目标月内未作废记录，覆盖所有类别；跨月记录不计入，金额按整数分精确计算。 |\n| 5 | 判断超支边界 | 预算为 `100000` 分时，累计 `99999` 分和 `100000` 分均不提醒；累计 `100001` 分时提醒，超支金额为 `1` 分。 |\n| 6 | 触发提醒 | 成功新增消费、作废消费、修改预算或查询月度汇总后，重新检查对应月份；只要仍超支，本次命令就显示提醒。 |\n| 7 | 展示提醒 | 提醒包含月份、预算、实际支出和超支金额。提醒写入 stderr；记账成功仍退出 `0`，stdout 保持可解析的单个 JSON 值。 |\n| 8 | 解除超支 | 作废消费或提高预算后，若支出已不高于预算，后续检查不再提醒。重复作废不重复扣减支出。 |\n| 9 | 未配置预算及跨月 | 未配置预算的月份不提醒；进入新月份后独立统计，不自动沿用上月预算或支出。 |\n| 10 | 兼容旧数据 | 升级后原记录及 ID 保留，原有命令行为保持兼容。旧记录没有日期时，不自动归入升级当月；月度查询明确显示未归属日期的记录数。 |\n\n例如预算为 `100000` 分、当月支出为 `105000` 分时，提醒为：`2026-11 月度预算已超支：预算 1000.00 元，支出 1050.00 元，超支 50.00 元。`",
+ "commentary": [
+  "我先看看 expense 工具现有的记账和预算逻辑，再写成可直接用于验收的条目。",
+  "现有 expense 是本地 CLI，还没有预算或消费日期字段。我会按 technical-bro 和 unslop 的写作规则整理验收条目，先采用“按自然月设置总预算、在终端提示超支”的方案，并写清金额边界和旧数据处理规则。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat /tmp/ytev-hsp3mbbz/project/.agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*expense*' -g '*budget*' -g 'README*' -g 'package.json'\"",
+  "/bin/bash -lc 'cat .agents/skills/unslop/SKILL.md; for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-hsp3mbbz/AGENTS.md /tmp/ytev-hsp3mbbz/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!.git'\"' -g '\"'!node_modules'\"' -g '\"'!vendor'\"' && cat README.md && sed -n '1,260p' expense_cli.py\""
+ ]
+}

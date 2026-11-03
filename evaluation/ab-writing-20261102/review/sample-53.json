@@ -1,0 +1,454 @@
+{
+  "label": "sample-53",
+  "task": "technical-bro",
+  "review_mode": "BLIND",
+  "facts": [
+    {
+      "id": "T01",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T02",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T03",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T04",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T05",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T06",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T07",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 2. 检查环境状态\n\n运行：\n\n```bash\nbriefctl inspect --profile review --json\n```\n\n检查返回的健康报告。必须同时满足以下条件才能继续：\n\n- `healthy` 为 `true`。\n- `pending_count` 等于 `0`。\n\n仅命令退出码为 `0` 不足以通过检查。任一字段不满足要求时，停止后续操作；处理积压或健康问题后，重新运行 `inspect`。不得用后续命令绕过检查。",
+      "reason": "命令正文逐字一致；代码块缩进不属于命令正文。相邻文字明确操作顺序。",
+      "linked_defect": null
+    },
+    {
+      "id": "T08",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 2. 检查环境状态\n\n运行：\n\n```bash\nbriefctl inspect --profile review --json\n```\n\n检查返回的健康报告。必须同时满足以下条件才能继续：\n\n- `healthy` 为 `true`。\n- `pending_count` 等于 `0`。\n\n仅命令退出码为 `0` 不足以通过检查。任一字段不满足要求时，停止后续操作；处理积压或健康问题后，重新运行 `inspect`。不得用后续命令绕过检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T09",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 2. 检查环境状态\n\n运行：\n\n```bash\nbriefctl inspect --profile review --json\n```\n\n检查返回的健康报告。必须同时满足以下条件才能继续：\n\n- `healthy` 为 `true`。\n- `pending_count` 等于 `0`。\n\n仅命令退出码为 `0` 不足以通过检查。任一字段不满足要求时，停止后续操作；处理积压或健康问题后，重新运行 `inspect`。不得用后续命令绕过检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T10",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "命令正文逐字一致；代码块缩进不属于命令正文。相邻文字明确操作顺序。",
+      "linked_defect": null
+    },
+    {
+      "id": "T11",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T12",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T13",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T14",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T15",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T16",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T17",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。",
+      "reason": "命令正文逐字一致；代码块缩进不属于命令正文。相邻文字明确操作顺序。",
+      "linked_defect": null
+    },
+    {
+      "id": "T18",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T19",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T20",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T21",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T22",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。",
+      "reason": "保留失败停止、查因、重新生成及禁止伪造；对既有检查和旧文件规则的回引不增加事实。",
+      "linked_defect": null
+    },
+    {
+      "id": "T23",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 5. 预览发布\n\n验证通过后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv --dry-run\n```\n\n预览会校验发布参数并显示目标位置，不上传文件，也不创建远程记录。\n\n预览命令必须以退出码 `0` 结束才能继续；预览失败时停止发布。",
+      "reason": "命令正文逐字一致；代码块缩进不属于命令正文。相邻文字明确操作顺序。",
+      "linked_defect": null
+    },
+    {
+      "id": "T24",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 5. 预览发布\n\n验证通过后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv --dry-run\n```\n\n预览会校验发布参数并显示目标位置，不上传文件，也不创建远程记录。\n\n预览命令必须以退出码 `0` 结束才能继续；预览失败时停止发布。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T25",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 5. 预览发布\n\n验证通过后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv --dry-run\n```\n\n预览会校验发布参数并显示目标位置，不上传文件，也不创建远程记录。\n\n预览命令必须以退出码 `0` 结束才能继续；预览失败时停止发布。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T26",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 5. 预览发布\n\n验证通过后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv --dry-run\n```\n\n预览会校验发布参数并显示目标位置，不上传文件，也不创建远程记录。\n\n预览命令必须以退出码 `0` 结束才能继续；预览失败时停止发布。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T27",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 6. 正式发布\n\n预览成功后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv\n```\n\n只有同时满足以下条件，才算发布成功：\n\n- 命令退出码为 `0`。\n- 输出中出现 `publish_id`。\n\n未同时满足时，不得判定发布成功。如果退出码为 `0`，但输出中没有 `publish_id`，不要立即重试，以免重复创建远程记录；先请值班人员核实远端结果。",
+      "reason": "命令正文逐字一致；代码块缩进不属于命令正文。相邻文字明确操作顺序。",
+      "linked_defect": null
+    },
+    {
+      "id": "T28",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 6. 正式发布\n\n预览成功后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv\n```\n\n只有同时满足以下条件，才算发布成功：\n\n- 命令退出码为 `0`。\n- 输出中出现 `publish_id`。\n\n未同时满足时，不得判定发布成功。如果退出码为 `0`，但输出中没有 `publish_id`，不要立即重试，以免重复创建远程记录；先请值班人员核实远端结果。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T29",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 6. 正式发布\n\n预览成功后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv\n```\n\n只有同时满足以下条件，才算发布成功：\n\n- 命令退出码为 `0`。\n- 输出中出现 `publish_id`。\n\n未同时满足时，不得判定发布成功。如果退出码为 `0`，但输出中没有 `publish_id`，不要立即重试，以免重复创建远程记录；先请值班人员核实远端结果。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T30",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 7. 交接给审阅者\n\n发布成功后，将以下信息交给审阅者：\n\n- CSV 路径：`/srv/briefcase/exports/october.csv`。\n- 验证返回的 `row_count`。\n- 发布返回的 `publish_id`。\n\n不要附上 token。",
+      "reason": "绝对CSV路径由源文工作目录与相对输出路径直接组成，语义等价，不属新增事实。",
+      "linked_defect": null
+    },
+    {
+      "id": "T31",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "## 7. 交接给审阅者\n\n发布成功后，将以下信息交给审阅者：\n\n- CSV 路径：`/srv/briefcase/exports/october.csv`。\n- 验证返回的 `row_count`。\n- 发布返回的 `publish_id`。\n\n不要附上 token。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    },
+    {
+      "id": "T32",
+      "score": 1,
+      "status": "PRESERVED",
+      "quote": "# 十月份数据导出与发布操作指南\n\n本流程将 review 环境中 2026 年十月份的数据导出为 CSV，发布后交给审阅者。流程到交接为止，数据内容审核按另一份流程执行。",
+      "reason": "事实及必要条件完整，接受语义等价表达。",
+      "linked_defect": null
+    }
+  ],
+  "fact_total": 32,
+  "fact_max": 32,
+  "fact_ratio": 1,
+  "questions": [
+    {
+      "id": "technical-bro-Q1",
+      "question": "运行前要准备哪些环境、目录、凭据与配置？凭据可以记日志吗？",
+      "answerability": "可回答",
+      "answer_from_output": "服务器安装Python 3.11；在/srv/briefcase运行，先创建exports；值班人员预配REPORT_TOKEN，不得记入日志；使用profiles/review.toml和review，不切prod。",
+      "fact_ids": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "evidence": [
+        "## 1. 确认前置条件\n\n- 服务器已安装 Python 3.11。\n- 所有命令均从 `/srv/briefcase` 运行，且已建好 `exports` 目录。\n- 值班人员已预先配置 `REPORT_TOKEN`。不要在日志中打印 token，也不要在交接时提供 token。\n- 使用配置 `profiles/review.toml` 和 `review` 环境，不要切换到 `prod`。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q2",
+      "question": "第一条命令是什么？退出0但pending_count=2，能否导出？",
+      "answerability": "可回答",
+      "answer_from_output": "先运行briefctl inspect --profile review --json。必须healthy=true且pending_count=0；退出0但pending_count=2不能继续，处理问题后重做inspect，不绕过。",
+      "fact_ids": [
+        "T07",
+        "T08",
+        "T09"
+      ],
+      "evidence": [
+        "## 2. 检查环境状态\n\n运行：\n\n```bash\nbriefctl inspect --profile review --json\n```\n\n检查返回的健康报告。必须同时满足以下条件才能继续：\n\n- `healthy` 为 `true`。\n- `pending_count` 等于 `0`。\n\n仅命令退出码为 `0` 不足以通过检查。任一字段不满足要求时，停止后续操作；处理积压或健康问题后，重新运行 `inspect`。不得用后续命令绕过检查。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q3",
+      "question": "导出命令是什么，11月1日数据包含吗，导出后已发布吗？",
+      "answerability": "可回答",
+      "answer_from_output": "运行briefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv。包含10月1日，不包含11月1日；须退出0，仅生成本地CSV，没有自动发布。",
+      "fact_ids": [
+        "T10",
+        "T11",
+        "T12",
+        "T13"
+      ],
+      "evidence": [
+        "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q4",
+      "question": "october.csv已存在能否删文件或加force？获准处理后从哪步重新开始？",
+      "answerability": "可回答",
+      "answer_from_output": "工具报错退出；停止并确认旧文件归属，不能为通过导出删除旧文件或加--force；获准处理后从inspect重新检查。",
+      "fact_ids": [
+        "T14",
+        "T15",
+        "T16"
+      ],
+      "evidence": [
+        "## 3. 导出 CSV\n\n检查通过后运行：\n\n```bash\nbriefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv\n```\n\n日期范围为左闭右开，即包含 `2026-10-01`，不包含 `2026-11-01`，导出的是 2026 年十月份的数据。\n\n导出命令必须以退出码 `0` 结束才能继续。该命令只生成本地文件，不会自动发布。\n\n如果 `exports/october.csv` 已存在，工具会报错退出。此时停止操作，先确认旧文件归属。不得为使导出通过而删除旧文件或添加 `--force`。获准处理旧文件后，必须从第 2 步的 `inspect` 开始重新检查。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q5",
+      "question": "导出成功后检查命令是什么，怎样过关，0行可以吗？",
+      "answerability": "可回答",
+      "answer_from_output": "运行briefctl verify --input exports/october.csv --json。须退出0且valid=true；记录row_count，0行合法。",
+      "fact_ids": [
+        "T17",
+        "T18",
+        "T19",
+        "T20"
+      ],
+      "evidence": [
+        "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q6",
+      "question": "verify失败会自动修复吗？能否手改CSV使通过？怎么办？",
+      "answerability": "可回答",
+      "answer_from_output": "verify不会修复文件；失败则停止发布、确认原因并重新生成，不可手改CSV伪造通过。",
+      "fact_ids": [
+        "T21",
+        "T22"
+      ],
+      "evidence": [
+        "## 4. 验证 CSV\n\n导出成功后运行：\n\n```bash\nbriefctl verify --input exports/october.csv --json\n```\n\n必须同时满足以下条件才能继续：\n\n- 命令退出码为 `0`。\n- 返回的 `valid` 为 `true`。\n\n记录返回的 `row_count`，用于交接。`row_count` 允许为 `0`，不能仅因没有数据就判定失败。\n\n`verify` 不会修复文件。验证失败时，停止发布，确认原因并重新生成文件；不得手动修改 CSV 来伪造通过结果。重新生成时仍须遵守前述检查和旧文件处理要求。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q7",
+      "question": "预览命令是什么，会上传或创建记录吗，失败后可继续吗？",
+      "answerability": "可回答",
+      "answer_from_output": "运行briefctl publish --profile review --input exports/october.csv --dry-run。校验参数并显示目标位置，不上传或创建远程记录；须退出0，失败停止。",
+      "fact_ids": [
+        "T23",
+        "T24",
+        "T25",
+        "T26"
+      ],
+      "evidence": [
+        "## 5. 预览发布\n\n验证通过后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv --dry-run\n```\n\n预览会校验发布参数并显示目标位置，不上传文件，也不创建远程记录。\n\n预览命令必须以退出码 `0` 结束才能继续；预览失败时停止发布。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q8",
+      "question": "正式发布命令是什么，成功需什么证据？退出0但没ID应如何处理？",
+      "answerability": "可回答",
+      "answer_from_output": "预览成功后运行briefctl publish --profile review --input exports/october.csv。仅退出0且有publish_id才成功；退出0但无ID不要立即重发，先请值班人员核实远端结果。",
+      "fact_ids": [
+        "T27",
+        "T28",
+        "T29"
+      ],
+      "evidence": [
+        "## 6. 正式发布\n\n预览成功后运行：\n\n```bash\nbriefctl publish --profile review --input exports/october.csv\n```\n\n只有同时满足以下条件，才算发布成功：\n\n- 命令退出码为 `0`。\n- 输出中出现 `publish_id`。\n\n未同时满足时，不得判定发布成功。如果退出码为 `0`，但输出中没有 `publish_id`，不要立即重试，以免重复创建远程记录；先请值班人员核实远端结果。"
+      ],
+      "defect_id": null
+    },
+    {
+      "id": "technical-bro-Q9",
+      "question": "最后交给谁哪些信息，需要token吗，还要写数据审核流程吗？",
+      "answerability": "可回答",
+      "answer_from_output": "成功后交给审阅者CSV路径、row_count和publish_id；不附token；止于交接，审核另有流程。",
+      "fact_ids": [
+        "T30",
+        "T31",
+        "T32"
+      ],
+      "evidence": [
+        "## 7. 交接给审阅者\n\n发布成功后，将以下信息交给审阅者：\n\n- CSV 路径：`/srv/briefcase/exports/october.csv`。\n- 验证返回的 `row_count`。\n- 发布返回的 `publish_id`。\n\n不要附上 token。",
+        "# 十月份数据导出与发布操作指南\n\n本流程将 review 环境中 2026 年十月份的数据导出为 CSV，发布后交给审阅者。流程到交接为止，数据内容审核按另一份流程执行。"
+      ],
+      "defect_id": null
+    }
+  ],
+  "defects": [],
+  "major_gate": {
+    "status": "PASS",
+    "major_error_count": 0,
+    "evidence": "关键命令、环境和检查条件、空结果合法、旧文件处置及重新inspect、dry-run无写入、最终退出0加publish_id、不得盲目重发均完整保留。"
+  },
+  "dimensions": [
+    {
+      "id": "F",
+      "level": 4,
+      "weight": 45,
+      "points": 45,
+      "reason": "32项事实完整保留；五条命令正文逐字一致；前置、停止、恢复分支及最终双条件均完整。原子得分32/32，r=1。"
+    },
+    {
+      "id": "U",
+      "level": 4,
+      "weight": 30,
+      "points": 30,
+      "reason": "九组操作问题均可直接回答；每步有动作、继续判据与相应停止分支，可依据正文照做。"
+    },
+    {
+      "id": "O",
+      "level": 4,
+      "weight": 15,
+      "points": 15,
+      "reason": "准备、检查、导出、验证、预览、发布及交接沿操作顺序组织，条件紧邻对应动作，无独立实质阅读负担。"
+    },
+    {
+      "id": "D",
+      "level": 4,
+      "weight": 10,
+      "points": 10,
+      "reason": "仅交付所请求中文指南正文，止于交接；无改写过程说明或实际执行声明。"
+    }
+  ],
+  "total_score": 100,
+  "delivery_threshold": "PASS",
+  "character_counts": {
+    "method": "Unicode code points; newline normalized to LF; counts descriptive only",
+    "full_text": 1709,
+    "excluding_whitespace": 1499
+  },
+  "cost": "UNKNOWN",
+  "notes": "只核对文字操作流程，未执行源文命令，不构成实际软件运行验证；不猜测组别。"
+}

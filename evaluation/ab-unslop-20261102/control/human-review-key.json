@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-11-02T14:16:04.940780+00:00",
+  "mapping": [
+    {
+      "question": 1,
+      "material": "update",
+      "alias": "A",
+      "original_label": "item-14",
+      "arm": "with",
+      "file": "human-review/1-A.md",
+      "sha256": "540bb3ce8ae05cae54fc9cd62e9a8919572ff0a066283542426c511d7a18fdf2"
+    },
+    {
+      "question": 1,
+      "material": "update",
+      "alias": "B",
+      "original_label": "item-63",
+      "arm": "without",
+      "file": "human-review/1-B.md",
+      "sha256": "360335ae2fdc2a367e56a397e51334753f62ea4e214a24b5016e4f47056d85ea"
+    },
+    {
+      "question": 2,
+      "material": "change",
+      "alias": "A",
+      "original_label": "item-58",
+      "arm": "without",
+      "file": "human-review/2-A.md",
+      "sha256": "1e698d9a042ed6ece9f524da4dd655598f9082e86e91e2bfba55cea768ccb0de"
+    },
+    {
+      "question": 2,
+      "material": "change",
+      "alias": "B",
+      "original_label": "item-85",
+      "arm": "with",
+      "file": "human-review/2-B.md",
+      "sha256": "df1bf6edb22c57738dcbbe7b417c31113a40f63a91f6dde3177e70239b4bb6cc"
+    },
+    {
+      "question": 3,
+      "material": "progress",
+      "alias": "A",
+      "original_label": "item-26",
+      "arm": "with",
+      "file": "human-review/3-A.md",
+      "sha256": "4d81748815898c665e7f65057e672cb88bb55567260327c0486cb50725b400c8"
+    },
+    {
+      "question": 3,
+      "material": "progress",
+      "alias": "B",
+      "original_label": "item-72",
+      "arm": "without",
+      "file": "human-review/3-B.md",
+      "sha256": "8744692c4aaa2f99d680db5a53f03abccbbdbccea8eb95fc977a899a2ff5d598"
+    },
+    {
+      "question": 4,
+      "material": "clean",
+      "alias": "A",
+      "original_label": "item-37",
+      "arm": "with",
+      "file": "human-review/4-A.md",
+      "sha256": "94daf7b5f2ddf2d6a858c0835920347d2edefc4dca87d05cf06cf9cfc6eb627a"
+    },
+    {
+      "question": 4,
+      "material": "clean",
+      "alias": "B",
+      "original_label": "item-49",
+      "arm": "without",
+      "file": "human-review/4-B.md",
+      "sha256": "94daf7b5f2ddf2d6a858c0835920347d2edefc4dca87d05cf06cf9cfc6eb627a"
+    }
+  ]
+}

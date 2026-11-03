@@ -1,0 +1,31 @@
+{
+ "id": "AC7-astra-v02-r1",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/v02snap/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 160.8,
+ "usage": {
+  "input_tokens": 75204,
+  "cached_input_tokens": 64768,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1671,
+  "reasoning_output_tokens": 202
+ },
+ "final": "算做完：**能查出指定项目已安装的 ytstack 技能，结果明确，查询不会改动文件，原来的安装功能照常使用。**\n\n有几个会影响结果的选择，下面先按推荐方案写标准。\n\n**待你决定**\n\n- **D1：什么算“已安装”？** 推荐沿用脚本目前的判断：名称在 `ytstack.json` 中，且链接指向当前 ytstack 对应技能，或复制的文件内容与当前版本完全相同。这样不会误认同名技能，但修改过的副本、旧版本会被排除。另一种是只看名称和 `SKILL.md` 是否存在，能包含这些副本，也可能误认别人的同名技能。\n- **D2：显示什么？** 推荐延续现有 JSON 输出，包含 `project`、`harness`、`skills`；`skills` 是按名称排序的列表。另一种是每行显示一个名称，更适合直接阅读。\n- **D3：能否同时传安装选项？** 推荐 `--list` 与显式传入的 `--skill`、`--method`、`--dry-run` 冲突时报错。另一种是忽略这些选项，但用户可能误以为它们影响了查询。\n\n**这次不做**\n\n- 不查询账户里或其他项目的技能；继续要求指定 `--project` 和 `--harness`。\n- 不安装、修复、升级或删除技能。\n- 不检查技能运行效果，也不检查依赖是否齐全。\n\n**验收条件**\n\n以下命令中的 `/tmp/demo` 是预先准备好的项目目录；成功退出码为 `0`，报错时为非 `0`。\n\n| 条件 | 做什么 | 应该看到 | 防的是 |\n|---|---|---|---|\n| **C1 [D1、D2]** | 在两个项目中分别用默认方式和 `--method copy` 安装 `--skill technical-bro`，再分别执行 `python3 tools/install.py --project /tmp/demo --harness codex --list` | 两种安装方式都返回 `skills: [\"technical-bro\", \"unslop\"]`；`project` 是完整项目路径，`harness` 是 `codex` | 漏掉复制安装或自动装入的依赖 |\n| **C2** | 同一项目只在 `.agents/skills` 安装 `bro`，只在 `.claude/skills` 安装 `unslop`；分别用 `--harness codex` 和 `--harness claude` 查询 | 前者只列 `bro`，后者只列 `unslop` | 混淆两处安装位置 |\n| **C3 [D2]** | 在没有技能目录的项目中查询；再对已有空技能目录的项目查询 | 两次都成功，`skills` 均为 `[]` | 把“尚未安装”当成错误 |\n| **C4 [D1]** | 项目中分别放入无关技能、内容不同的同名技能、目标已不存在的技能链接，再查询 | 这些条目均不出现在 `skills` 中，查询正常结束 | 仅凭目录名就宣称已安装 |\n| **C5** | 对空项目和已安装技能的项目各连续运行两次查询 | 每个项目的两次输出相同；不新增目录，不改变任何已有文件内容或链接目标 | 查询触发安装或修复 |\n| **C6** | 分别查询不存在的项目路径、普通文件路径，以及 `.agents` 指向项目外目录的项目 | 均报错并说明原因，不输出成功结果 | 查错位置却给出可信的清单 |\n| **C7 [D3]** | 分别将 `--list` 与 `--skill bro`、`--method copy`、`--dry-run` 一起使用 | 每次都报错，明确指出冲突选项，项目内容不变 | 悄悄忽略选项或执行安装 |\n| **C8** | 执行 `python3 tools/install.py --help` | 能看到 `--list` 的用途，以及查询仍需指定项目和 `harness` | 功能只能靠读代码发现 |\n\n**不能弄坏**\n\n- 不带 `--list` 时，安装 `technical-bro` 仍会一并安装 `unslop`；重复安装不新增文件，结果仍区分 `installed` 和 `unchanged`。\n- 安装遇到同名但不同内容的条目时，仍报错并保留原内容，也不留下部分新装的技能。\n- `--dry-run` 仍只显示计划，不创建技能目录；`--method copy` 仍产生独立副本。\n\n现有测试有与当前代码不一致的要求，例如默认安装数量写成了 **5**，当前清单实际是 **4**；验收时应单独记录，不能把这些旧问题混算成 `--list` 的问题。\n\n修改 D1 会影响 C1、C4；修改 D2 会影响 C1、C3 的输出要求；修改 D3 会影响 C7。",
+ "commentary": [
+  "我会按 acceptance-criteria 技能，先看安装脚本怎样识别已安装的技能，再列出 `--list` 的完成标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g '*ytstack*' -g 'README*' -g 'pyproject.toml'\"",
+  "/bin/bash -lc \"rg --files -g '*test*' -g '*manifest*' -g '*.json' -g 'AGENTS.md' && cat AGENTS.md && cat ytstack.json\"",
+  "/bin/bash -lc 'cat README.md && cat tools/install.py'",
+  "/bin/bash -lc \"cat tests/test_package.py && cat tests/test_smoke.py && rg -n 'install.py|--harness|--dry-run' . --glob '*.md'\""
+ ]
+}

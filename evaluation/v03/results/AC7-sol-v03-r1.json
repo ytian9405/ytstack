@@ -1,0 +1,34 @@
+{
+ "id": "AC7-sol-v03-r1",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6.1-sol",
+ "package": "v03",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 86.5,
+ "usage": {
+  "input_tokens": 81223,
+  "cached_input_tokens": 63616,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1822,
+  "reasoning_output_tokens": 520
+ },
+ "final": "**做完的标准：`--list` 能查出指定项目已安装的 ytstack 技能，结果可重复核对，而且查询不会安装或改动文件。**\n\n读了 `tools/install.py` 和现有测试：目前支持 Codex、Claude 两个安装位置，以及链接、复制两种安装方式。最要紧的是先确定“什么算已安装”。\n\n**待你决定**\n\n- **D1（最要紧）识别范围**：推荐只确认“指向当前 ytstack 原文件的链接”或“内容与当前原文件完全一致的副本”；同名但内容不同、链接已失效的，提示无法确认，不算已安装。另一种选法是只看名称和 `SKILL.md`，但可能把别人的同名技能算进去。\n- **D2 查询位置**：推荐继续要求 `--harness codex|claude`，每次只查一个位置；另一种选法是一次查两处，需要区分重复名称。\n- **D3 输出形式**：推荐沿用现有 JSON，返回 `project`、`harness`、`skills`，每项包含名称、完整安装路径和安装方式；纯文字更方便直接阅读，但不方便其他程序读取。\n\n以下按推荐选项验收。\n\n**这次不做**\n\n- 不安装、更新、删除或修复技能。\n- 不查用户账户下的全局技能。\n- 不判断其他版本或修改过的副本是否确实来自 ytstack。\n\n**验收条件**\n\n共同准备：用完整的 ytstack 源文件，在 `/tmp/yt-demo` 建立独立样例项目。\n\n- **C1 [D1,D3]**：安装 `technical-bro` 后，运行 `python3 tools/install.py --project /tmp/yt-demo --harness codex --list` → 成功返回 JSON，恰好列出 `technical-bro` 和自动带上的 `unslop`，路径、安装方式与实际一致，名称按字母排序。防：列出所有可安装技能，或漏掉依赖。\n- **C2 [D1,D2]**：分别用链接、复制方式安装到 Codex 和 Claude 的位置，再用对应 `--harness` 查询 → 两种方式都能识别，两个位置互不混入。防：只认链接或查错目录。\n- **C3**：对没有安装目录的空项目查询 → 成功返回 `skills: []`，不创建目录；关闭命令后再次查询，结果相同。防：把空项目当错误，或查询时自动安装。\n- **C4 [D1]**：放入无关技能、修改过的同名副本、失效的同名链接后查询 → 无关技能不显示；后两者不计入已安装，并向 stderr 提示具体路径，其他正常项仍返回。防：把同名当成来源证明。\n- **C5**：查询前后比较项目文件内容、目录和链接目标 → 全部不变。防：查询顺手修复或覆盖已有内容。\n- **C6**：项目不存在，或把 `--list` 与 `--skill`、`--method`、`--dry-run` 混用 → 非零退出，stderr 说明原因，文件不变。防：忽略参数或意外执行安装。\n\n**不能弄坏**\n\n- 不带 `--list` 时，现有安装、自动带上依赖、重复安装和 `--dry-run` 的行为及输出保持不变。\n- 遇到同名冲突仍保留已有文件，不先安装一部分；安装位置指向项目之外时仍拒绝操作。\n- 当前项目缺少 `skills/` 源文件，且 `ytstack.json` 列了 4 项、部分测试却要求 5 项；正式验收前须明确这次采用哪份完整技能清单，不能直接拿现有数量断言判定通过。\n\n确认后可以交给 `create-test-skill` 变成可运行的测试。",
+ "commentary": [
+  "我会用 `acceptance-criteria` 技能，先看 `tools/install.py` 怎么识别已安装的技能，再整理“怎么算做完”的标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*install*' -g '*manifest*' -g '*test*' -g 'README*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat README.md'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat tests/test_package.py tests/test_smoke.py'",
+  "/bin/bash -lc \"cat AGENTS.md && rg --files --hidden -g '\"'!'\"\\\\.git/**' -g '\"'!node_modules/**'\"'\"",
+  "/bin/bash -lc \"cat ytstack.json && sed -n '1,220p' tools/validate.py\"",
+  "/bin/bash -lc 'ls -la && python3 tools/install.py --help'"
+ ]
+}

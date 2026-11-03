@@ -1,0 +1,25 @@
+test_LL01_empty_reads_do_not_write (test_behaviors.LedgerBehaviorTests.test_LL01_empty_reads_do_not_write) ... ok
+test_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... ok
+test_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase) ... ok
+test_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries) ... FAIL
+test_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-t0j8nd01/project/tests/test_behaviors.py", line 60, in test_LL04_summary_groups_only_active_entries
+    self.assertEqual(self.invoke('summary'), {'count': 3, 'total_cents': 1750,
+AssertionError: {'count': 3, 'total_cents': 1750, 'by_category': {'food': 1750}} != {'count': 3, 'total_cents': 1750, 'by_category': {'food': 1450, 'travel': 300}}
+- {'by_category': {'food': 1750}, 'count': 3, 'total_cents': 1750}
+?                           ^
+
++ {'by_category': {'food': 1450, 'travel': 300}, 'count': 3, 'total_cents': 1750}
+?                           ^ +++++++++++++++
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.599s
+
+FAILED (failures=1)

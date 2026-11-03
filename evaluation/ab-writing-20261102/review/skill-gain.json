@@ -1,0 +1,510 @@
+{
+  "status": "POST_UNBLIND_INTERPRETATION_ONLY",
+  "model": "gpt-6.1-sol",
+  "score_lock_verified": true,
+  "tasks": [
+    {
+      "task": "bro",
+      "treatment": "bro",
+      "samples": [
+        {
+          "label": "sample-66",
+          "condition": "without",
+          "pair": 1,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "16项事实全部完整保留，没有新增会改变结论的事实；原子得分16/16，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "七组理解问题均可直接回答；上传编号、分片序号通过识别重复内容的用途解释，完成状态及需采取的动作清楚。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "按上传与重试、完成判断、保留期限及跨设备限制组织，衔接清楚，无实质重复或无关铺垫。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付中文改写正文，无过程说明、旁白或范围越界。"
+            }
+          ],
+          "fact_total": 16,
+          "fact_max": 16,
+          "major_gate": "PASS",
+          "full_text_characters": 391
+        },
+        {
+          "label": "sample-35",
+          "condition": "with",
+          "pair": 1,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "16项事实全部完整保留，没有新增会改变结论的事实；原子得分16/16，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "七组理解问题均可直接回答；上传编号、分片序号通过识别重复内容的用途解释，完成状态及需采取的动作清楚。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "按上传与重试、完成判断、保留期限及跨设备限制组织，衔接清楚，无实质重复或无关铺垫。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付中文改写正文，无过程说明、旁白或范围越界。"
+            }
+          ],
+          "fact_total": 16,
+          "fact_max": 16,
+          "major_gate": "PASS",
+          "full_text_characters": 405
+        },
+        {
+          "label": "sample-74",
+          "condition": "without",
+          "pair": 2,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "16项事实全部完整保留，没有新增会改变结论的事实；原子得分16/16，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "七组理解问题均可直接回答；上传编号、分片序号通过识别重复内容的用途解释，完成状态及需采取的动作清楚。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "按上传与重试、完成判断、保留期限及跨设备限制组织，衔接清楚，无实质重复或无关铺垫。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付中文改写正文，无过程说明、旁白或范围越界。"
+            }
+          ],
+          "fact_total": 16,
+          "fact_max": 16,
+          "major_gate": "PASS",
+          "full_text_characters": 388
+        },
+        {
+          "label": "sample-48",
+          "condition": "with",
+          "pair": 2,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "16项事实全部完整保留，没有新增会改变结论的事实；原子得分16/16，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "七组理解问题均可直接回答；上传编号、分片序号通过识别重复内容的用途解释，完成状态及需采取的动作清楚。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "按上传与重试、完成判断、保留期限及跨设备限制组织，衔接清楚，无实质重复或无关铺垫。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付中文改写正文，无过程说明、旁白或范围越界。"
+            }
+          ],
+          "fact_total": 16,
+          "fact_max": 16,
+          "major_gate": "PASS",
+          "full_text_characters": 401
+        }
+      ],
+      "groups": {
+        "without": {
+          "n": 2,
+          "mean_total": 100,
+          "range_total": [
+            100,
+            100
+          ],
+          "dimension_mean_levels": {
+            "F": 4,
+            "U": 4,
+            "O": 4,
+            "D": 4
+          },
+          "dimension_mean_points": {
+            "F": 45,
+            "U": 30,
+            "O": 15,
+            "D": 10
+          },
+          "facts_preserved_each": 16,
+          "major_failure_count": 0,
+          "full_text_characters": [
+            391,
+            388
+          ],
+          "mean_full_text_characters": 389.5
+        },
+        "with": {
+          "n": 2,
+          "mean_total": 100,
+          "range_total": [
+            100,
+            100
+          ],
+          "dimension_mean_levels": {
+            "F": 4,
+            "U": 4,
+            "O": 4,
+            "D": 4
+          },
+          "dimension_mean_points": {
+            "F": 45,
+            "U": 30,
+            "O": 15,
+            "D": 10
+          },
+          "facts_preserved_each": 16,
+          "major_failure_count": 0,
+          "full_text_characters": [
+            405,
+            401
+          ],
+          "mean_full_text_characters": 403.0
+        }
+      },
+      "mean_gain_with_minus_without": 0,
+      "paired_gains": [
+        {
+          "pair": 1,
+          "total_difference": 0,
+          "dimension_level_differences": {
+            "F": 0,
+            "U": 0,
+            "O": 0,
+            "D": 0
+          }
+        },
+        {
+          "pair": 2,
+          "total_difference": 0,
+          "dimension_level_differences": {
+            "F": 0,
+            "U": 0,
+            "O": 0,
+            "D": 0
+          }
+        }
+      ],
+      "interpretation": "本次冻结量表未测出质量增益；不能据此证明等效、无用或完美。"
+    },
+    {
+      "task": "technical-bro",
+      "treatment": "technical-bro + 随包unslop",
+      "samples": [
+        {
+          "label": "sample-53",
+          "condition": "without",
+          "pair": 1,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "32项事实完整保留；五条命令正文逐字一致；前置、停止、恢复分支及最终双条件均完整。原子得分32/32，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "九组操作问题均可直接回答；每步有动作、继续判据与相应停止分支，可依据正文照做。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "准备、检查、导出、验证、预览、发布及交接沿操作顺序组织，条件紧邻对应动作，无独立实质阅读负担。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付所请求中文指南正文，止于交接；无改写过程说明或实际执行声明。"
+            }
+          ],
+          "fact_total": 32,
+          "fact_max": 32,
+          "major_gate": "PASS",
+          "full_text_characters": 1709
+        },
+        {
+          "label": "sample-89",
+          "condition": "with",
+          "pair": 1,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "32项事实完整保留；五条命令正文逐字一致；前置、停止、恢复分支及最终双条件均完整。原子得分32/32，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "九组操作问题均可直接回答；每步有动作、继续判据与相应停止分支，可依据正文照做。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "准备、检查、导出、验证、预览、发布及交接沿操作顺序组织，条件紧邻对应动作，无独立实质阅读负担。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付所请求中文指南正文，止于交接；无改写过程说明或实际执行声明。"
+            }
+          ],
+          "fact_total": 32,
+          "fact_max": 32,
+          "major_gate": "PASS",
+          "full_text_characters": 1617
+        },
+        {
+          "label": "sample-27",
+          "condition": "without",
+          "pair": 2,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "32项事实完整保留；五条命令正文逐字一致；前置、停止、恢复分支及最终双条件均完整。原子得分32/32，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "九组操作问题均可直接回答；每步有动作、继续判据与相应停止分支，可依据正文照做。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "准备、检查、导出、验证、预览、发布及交接沿操作顺序组织，条件紧邻对应动作，无独立实质阅读负担。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付所请求中文指南正文，止于交接；无改写过程说明或实际执行声明。"
+            }
+          ],
+          "fact_total": 32,
+          "fact_max": 32,
+          "major_gate": "PASS",
+          "full_text_characters": 1660
+        },
+        {
+          "label": "sample-12",
+          "condition": "with",
+          "pair": 2,
+          "total_score": 100,
+          "dimensions": [
+            {
+              "id": "F",
+              "level": 4,
+              "weight": 45,
+              "points": 45,
+              "reason": "32项事实完整保留；五条命令正文逐字一致；前置、停止、恢复分支及最终双条件均完整。原子得分32/32，r=1。"
+            },
+            {
+              "id": "U",
+              "level": 4,
+              "weight": 30,
+              "points": 30,
+              "reason": "九组操作问题均可直接回答；每步有动作、继续判据与相应停止分支，可依据正文照做。"
+            },
+            {
+              "id": "O",
+              "level": 4,
+              "weight": 15,
+              "points": 15,
+              "reason": "准备、检查、导出、验证、预览、发布及交接沿操作顺序组织，条件紧邻对应动作，无独立实质阅读负担。"
+            },
+            {
+              "id": "D",
+              "level": 4,
+              "weight": 10,
+              "points": 10,
+              "reason": "仅交付所请求中文指南正文，止于交接；无改写过程说明或实际执行声明。"
+            }
+          ],
+          "fact_total": 32,
+          "fact_max": 32,
+          "major_gate": "PASS",
+          "full_text_characters": 1587
+        }
+      ],
+      "groups": {
+        "without": {
+          "n": 2,
+          "mean_total": 100,
+          "range_total": [
+            100,
+            100
+          ],
+          "dimension_mean_levels": {
+            "F": 4,
+            "U": 4,
+            "O": 4,
+            "D": 4
+          },
+          "dimension_mean_points": {
+            "F": 45,
+            "U": 30,
+            "O": 15,
+            "D": 10
+          },
+          "facts_preserved_each": 32,
+          "major_failure_count": 0,
+          "full_text_characters": [
+            1709,
+            1660
+          ],
+          "mean_full_text_characters": 1684.5
+        },
+        "with": {
+          "n": 2,
+          "mean_total": 100,
+          "range_total": [
+            100,
+            100
+          ],
+          "dimension_mean_levels": {
+            "F": 4,
+            "U": 4,
+            "O": 4,
+            "D": 4
+          },
+          "dimension_mean_points": {
+            "F": 45,
+            "U": 30,
+            "O": 15,
+            "D": 10
+          },
+          "facts_preserved_each": 32,
+          "major_failure_count": 0,
+          "full_text_characters": [
+            1617,
+            1587
+          ],
+          "mean_full_text_characters": 1602.0
+        }
+      },
+      "mean_gain_with_minus_without": 0,
+      "paired_gains": [
+        {
+          "pair": 1,
+          "total_difference": 0,
+          "dimension_level_differences": {
+            "F": 0,
+            "U": 0,
+            "O": 0,
+            "D": 0
+          }
+        },
+        {
+          "pair": 2,
+          "total_difference": 0,
+          "dimension_level_differences": {
+            "F": 0,
+            "U": 0,
+            "O": 0,
+            "D": 0
+          }
+        }
+      ],
+      "interpretation": "本次冻结量表未测出质量增益；不能据此证明等效、无用或完美。"
+    }
+  ],
+  "cost": "UNKNOWN",
+  "limitations": [
+    "每任务每条件仅2次独立运行，不合并任务放大样本，不作显著性或等效性推断。",
+    "模型评审并非真人阅读或操作实验，也未实际运行源文中的软件命令。",
+    "用户提示明确要求保留事实、条件和命令，共享宿主规范及可见技能目录元数据可能给两组提供共同引导；对照不等于完全没有技能相关线索。",
+    "使用软目录隔离及操作自报，无法据此证明严格环境隔离或完全排除潜在污染；本分析不把未经独立审计的隔离当作已证实。",
+    "technical-bro处理包含unslop依赖，无法拆分各自贡献。",
+    "字符数只描述文本长度，不折算质量或token；成本UNKNOWN。",
+    "各维度全部达到上限，本次离散量表存在天花板效应；微小措辞偏好不被解释为增益。"
+  ],
+  "next_round_suggestion": "下一轮预注册多份难度递增的新源文，加入合理但易遗漏的条件分支、跨段指代和相近数字，在保持两组任务/模型/配置一致的前提下扩大独立运行数量；由不知道组别的真实目标读者回答预设理解题或进行纸面操作决策，以答案正确率和错误行动数作为主要结果。仍先冻结事实表、门槛和评分，不修改本轮分数，也不通过任意风格偏好强行拉开差距。"
+}

@@ -1,0 +1,12 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -46,7 +46,8 @@
+         if entry is None:
+             print('unknown expense id', file=sys.stderr)
+             return 1
+-        entry['voided'] = True
++        for item in entries:
++            item['voided'] = True
+         save(args.state, entries)
+         result = entry
+     else:

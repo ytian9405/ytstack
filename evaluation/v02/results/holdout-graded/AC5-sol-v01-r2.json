@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "所有命令、输出和测试入口都经过验证。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "关键命令后给预期 JSON，并解释必要字段。"
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "文档里的承诺有依据"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "一个没用过 Ledger Lite、会打开终端的新手"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "只看 README，就能完成“记一笔 → 查看 → 汇总 → 作废 → 再次汇总”，并判断每一步是否成功"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "快速开始与详细行为说明分开，避免新手先读完整份接口约定才能动手。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "最终验收用一次实际试跑：\n\n1. 找一位符合上述前提、没用过项目的人，从全新账本开始操作。\n2. 作者不做口头补充，记录他停住、猜测或执行失败的位置。\n3. 他完成整个流程，并能说清账本存在哪里、金额单位是什么、作废后记录是否保留。\n4. 换一个新账本路径再跑一次，结果与文档一致。"
+  }
+ ]
+}

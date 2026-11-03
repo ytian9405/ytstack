@@ -1,0 +1,37 @@
+{
+  "trial": "technical-bro v2 forward trial on the original Chinese operation-guide input",
+  "read_paths": [
+    "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/skills/technical-bro/SKILL.md",
+    "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/skills/unslop/SKILL.md",
+    "/tmp/ytstack-forward-20261102-4pldj5r3/writing/technical-bro-v2.txt"
+  ],
+  "outputs": [
+    "/tmp/ytstack-forward-20261102-4pldj5r3/writing/technical-bro-v2.txt",
+    "/tmp/ytstack-forward-20261102-4pldj5r3/writing/report-v2.json"
+  ],
+  "mode": "how-to",
+  "verification": {
+    "requested_language_is_chinese": true,
+    "literal_commands_preserved": true,
+    "output_fields_preserved": true,
+    "doctor_failure_blocks_export": true,
+    "fix_and_recheck_before_export": true,
+    "budget_update_fact_preserved": true,
+    "lowering_only_condition_preserved": true,
+    "no_budget_increase_to_bypass_failure": true,
+    "no_vocabulary_rule_diff": true,
+    "only_requested_guide": true,
+    "no_new_operational_facts": true
+  },
+  "verification_method": "Read the changed skill and dependency. Manually compared the guide with the supplied draft for fact preservation and absence of unrelated content, then read back the saved output and asserted the literal commands and guarded operations.",
+  "previous_issues": {
+    "language_and_format": "Resolved for this trial. The guide is Chinese with literal commands and field names preserved.",
+    "unconditional_rule_proposal": "Resolved for this trial. No rule-maintenance request was made, and the generated guide contains no rule proposal or diff."
+  },
+  "ambiguities_or_defects_observed": [],
+  "scope": {
+    "external_systems_inspected": false,
+    "ytstack_modified": false,
+    "writes_confined_to_requested_scratch_directory": true
+  }
+}

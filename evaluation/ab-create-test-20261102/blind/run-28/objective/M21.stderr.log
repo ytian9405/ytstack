@@ -1,0 +1,126 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... FAIL
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 49, in test_LL02_add_persistence
+    self.assertEqual(self.add(' 午餐 🍜 ', category=' 餐饮 '), first)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 40, in main
+    save(args.state, entries)
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 15, in save
+    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\n')
+  File "/usr/lib/python3.12/pathlib.py", line 1049, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-eval-_eu9rti6/project/ledger-behavior-bm6llu41/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 58, in test_LL03_void_and_ids
+    self.assertEqual(self.add(), original)
+                     ^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 40, in main
+    save(args.state, entries)
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 15, in save
+    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\n')
+  File "/usr/lib/python3.12/pathlib.py", line 1049, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-eval-_eu9rti6/project/ledger-behavior-w6b85ecl/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 71, in test_LL04_summary
+    self.add('午餐', '1250')
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 40, in main
+    save(args.state, entries)
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 15, in save
+    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\n')
+  File "/usr/lib/python3.12/pathlib.py", line 1049, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-eval-_eu9rti6/project/ledger-behavior-db8ft9xh/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 87, in test_LL05_invalid_inputs_preserve_data
+    self.assertEqual(self.add(), expected)
+                     ^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 35, in add
+    return self.invoke('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 40, in main
+    save(args.state, entries)
+  File "/tmp/ledger-eval-_eu9rti6/project/expense_cli.py", line 15, in save
+    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\n')
+  File "/usr/lib/python3.12/pathlib.py", line 1049, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-eval-_eu9rti6/project/ledger-behavior-kmweha5q/nested/ledger.json'
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.636s
+
+FAILED (failures=4)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create test skill"
+  short_description: "Generate runnable behavior tests and a reusable test skill"
+  default_prompt: "Use $create-test-skill to generate and prove a project-local testing skill."

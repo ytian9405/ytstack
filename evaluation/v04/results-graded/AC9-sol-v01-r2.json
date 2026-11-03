@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "另起进程执行 `list`，能读到全部新增任务。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "不得导入部分任务，已有状态文件字节不变，也不创建新状态文件。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "中文、标点正常保留。去掉行结束符，保留标题首尾空格，与现有 `add` 一致。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "退出码为 0，stdout 只输出一个 JSON 数组，内容为本次新增的完整记录。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "一个命令读取整个文本文件，每个非空白行生成一个任务，按文件顺序追加到队列。使用 UTF-8，支持 LF、CRLF，以及末行没有换行符。中文、标点正常保留。去掉行结束符，保留标题首尾空格，与现有 `add` 一致。空行及仅含空白字符的行跳过。`#` 开头的行也作为任务。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "不得导入部分任务，已有状态文件字节不变，也不创建新状态文件。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "相同标题的多行分别生成任务。再次导入同一文件会再次追加，分配新的 ID。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "退出码为 0，stdout 只输出一个 JSON 数组，内容为本次新增的完整记录。"
+  }
+ ]
+}

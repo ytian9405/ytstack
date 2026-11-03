@@ -1,0 +1,10 @@
+test_TQ01_empty_queue (__main__.QueueCases.test_TQ01_empty_queue) ... ok
+test_TQ02_add_persistence_order (__main__.QueueCases.test_TQ02_add_persistence_order) ... ok
+test_TQ03_complete_idempotence (__main__.QueueCases.test_TQ03_complete_idempotence) ... ok
+test_TQ04_blank_title_rejected (__main__.QueueCases.test_TQ04_blank_title_rejected) ... ok
+test_TQ05_unknown_id_rejected (__main__.QueueCases.test_TQ05_unknown_id_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.423s
+
+OK

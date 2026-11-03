@@ -1,0 +1,61 @@
+{
+  "method": "Post-generation self-report by each original Sol agent; no independent complete tool trace available",
+  "runs": [
+    {
+      "label": "item-63",
+      "reported_skill_resources_read": [],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-14",
+      "reported_skill_resources_read": [
+        ".agents/skills/unslop/SKILL.md"
+      ],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-58",
+      "reported_skill_resources_read": [],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-85",
+      "reported_skill_resources_read": [
+        ".agents/skills/unslop/SKILL.md"
+      ],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-72",
+      "reported_skill_resources_read": [],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-26",
+      "reported_skill_resources_read": [
+        ".agents/skills/unslop/SKILL.md"
+      ],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-49",
+      "reported_skill_resources_read": [],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    },
+    {
+      "label": "item-37",
+      "reported_skill_resources_read": [
+        ".agents/skills/unslop/SKILL.md"
+      ],
+      "reported_outside_project_reads_except_assigned_prompt": false,
+      "reported_network_dependency_install_or_source_operation": false
+    }
+  ]
+}

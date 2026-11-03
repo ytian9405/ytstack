@@ -1,0 +1,34 @@
+{
+ "id": "AC1-sol-v01",
+ "prompt": "我要给 queue_cli 加一个“任务超时后自动重试”的功能，开发前先帮我把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "exit": 0,
+ "seconds": 160.9,
+ "usage": {
+  "input_tokens": 131918,
+  "cached_input_tokens": 118528,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2454,
+  "reasoning_output_tokens": 988
+ },
+ "final": "目前 [queue_cli.py](/tmp/ytev-jz5t1bcy/project/queue_cli.py:9) 只有添加、查看和标记完成，还没有执行任务或计时功能。因此，**需要先确定“超时后重试”具体指什么**。我已发出选择问题，下面先按“领取任务后超时，自动重新入队”拟一版验收草案。\n\n建议用超时时间 `T=60 秒`、最多重试 `R=3 次`作为默认值，两者均可配置。以下数值和行为均为提案。\n\n| 编号 | 验收场景 | 通过条件 |\n|---|---|---|\n| AC1 | 开始计时 | 从任务被领取时计时；任务等待领取的时间不计入超时。每次重新领取独立计时。 |\n| AC2 | 超时边界 | 运行时长小于 `T` 时不重试；达到 `T` 且尚未完成时，判定本轮超时。 |\n| AC3 | 自动重试 | 监测程序运行期间，超时后最多 1 秒内重新入队，无需手动操作；任务再次可领取。 |\n| AC4 | 保留任务身份 | 重试保留原任务的 ID、标题和配置，不新增一条独立任务；能够查看执行次数及超时原因。 |\n| AC5 | 重试次数 | `R` 指首次执行之外允许的次数。`R=3` 最多执行 4 次；`R=0` 首次超时后直接进入最终失败状态。 |\n| AC6 | 成功与终止 | 任意一轮成功完成后不再重试；次数耗尽后明确显示最终失败，也不再自动入队。 |\n| AC7 | 避免重复处理 | 同一轮超时被重复检查，只入队一次。旧轮次迟到的完成确认，不能把新轮次标记为完成。 |\n| AC8 | 重启恢复 | 重启后保留执行次数、截止时间和最终状态；恢复监测后处理已过期任务，不重置重试额度。 |\n| AC9 | 参数与错误 | `T` 必须为正整数秒，`R` 必须为非负整数。非法输入非零退出，错误写入 stderr，已有数据不变。 |\n| AC10 | 兼容旧数据 | 原有状态文件可直接读取；旧任务的 ID、标题和 `done` 保留。未启用超时重试的任务，原有命令行为保持一致。 |\n\n验收测试应能控制时间，直接验证 `T` 前、恰好达到 `T`、超过 `T` 三种情况，无需实际等待一分钟。另需覆盖重试后成功、次数耗尽、重复检查、旧轮次迟到完成和跨进程重启。\n\n还有一个必须明确的运行条件：**CLI 退出后，由谁持续监测超时？** 若希望退出后仍自动重试，需要常驻进程；若只在下一次调用 CLI 时处理，应将 AC3 改为“下次调用时恢复过期任务”。这两种行为需要在开发前选定。\n\n本轮未修改代码。",
+ "commentary": [
+  "我先看一下 queue_cli 的实现和现有测试，确认超时、失败与重试现在怎么处理，再整理成可验证的验收标准。",
+  "当前 `queue_cli` 只有 `add`、`list`、`complete`，任务只记录 `id`、`title`、`done`，还没有“开始执行”和超时计时的概念。我会用 `technical-bro` 和 `unslop` 整理验收条款，先明确超时从何时算起，以及谁触发重试。",
+  "你说的“任务超时后自动重试”，期望是哪种行为？目前 queue_cli 只记录任务，不执行任务。\n- 任务被领取后，规定时间内未完成，就自动重新入队，供执行方再次领取（推荐）\n- queue_cli 执行实际命令，运行超时后终止命令并自动再次执行\n- 任务添加后，规定时间内未完成，就触发重试"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat /tmp/ytev-jz5t1bcy/project/.agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g 'package.json' -g 'Cargo.toml' -g 'go.mod'\"",
+  "/bin/bash -lc 'cat queue_cli.py README.md tests/test_package.py tests/test_smoke.py'",
+  "/bin/bash -lc 'cat .agents/skills/unslop/SKILL.md'",
+  "/bin/bash -lc \"ls -la && rg --files -g 'AGENTS.md' /tmp/ytev-jz5t1bcy /tmp 2>/dev/null\"",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-jz5t1bcy/AGENTS.md /tmp/ytev-jz5t1bcy/project/AGENTS.md; do if [ -f \"$p\" ]; then printf '\"'%s\\\\n' \\\"\"'$p\"; cat \"$p\"; fi; done'",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!.git'\"' -g '\"'!test_package.py'\"' && git status --short && nl -ba queue_cli.py\""
+ ]
+}

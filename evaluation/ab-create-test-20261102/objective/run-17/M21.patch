@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -11,7 +11,7 @@
+ 
+ 
+ def save(state, entries):
+-    state.parent.mkdir(parents=True, exist_ok=True)
++    pass  # omit parent creation
+     state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\n')
+ 
+ 

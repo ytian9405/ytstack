@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "不创建目录、不安装技能、不修改文件"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "复制目录和有效软链接都能识别；断链、缺少 `SKILL.md`、其他技能不计入。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "技能目录不存在或未安装时，返回 `installed: []`，退出码为 0。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "Codex 查 `.agents/skills`，Claude 查 `.claude/skills`"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 1,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "断链、缺少 `SKILL.md`、其他技能不计入。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "沿用 JSON，包含 `project`、`harness`、`installed`；`installed` 是按名称排序的技能名称数组。"
+  }
+ ]
+}

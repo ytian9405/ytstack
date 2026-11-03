@@ -1,0 +1,23 @@
+{
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection.stdout.log": "1a32f93cfadee65198e021c9643fac5cff7505a555bd95ba467b83673a181ecf",
+  "test-evidence/cold-evaluation-1ipllyd2/doctor.json": "32d7824b65d545e6022dee312638825da0d59481776ff2152dbacdb1d0f91464",
+  "test-evidence/cold-evaluation-1ipllyd2/protected-after.json": "b6c9ee05408ead2e22f98d839376c88a82a410ba834678650ec4881f89d08f3d",
+  "test-evidence/cold-evaluation-1ipllyd2/runs.json": "1c78b2d42d82df2f96c258aa4209a3a59b9bbc3e00f9e650f0ec3575d55e8473",
+  "test-evidence/cold-evaluation-1ipllyd2/suite.stderr.log": "ca5edccc00eeceeba897a48c5e8c52643ce12b12336719a5a9f33a20381ac7b8",
+  "test-evidence/cold-evaluation-1ipllyd2/TQ02.json": "c47cef3c6bdf33e62da80af492ef94a0d8853d41e595ff7a77a45bfb58b50350",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "test-evidence/cold-evaluation-1ipllyd2/doctor.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "test-evidence/cold-evaluation-1ipllyd2/TQ02.stderr.log": "d7bf9af85f6013964b673e0a20a42e413eb5dfd11f6dc293da81fca904aba85e",
+  "test-evidence/cold-evaluation-1ipllyd2/baseline.json": "b6c9ee05408ead2e22f98d839376c88a82a410ba834678650ec4881f89d08f3d",
+  "test-evidence/cold-evaluation-1ipllyd2/suite.stdout.log": "99b92120c7d9efae696e9cb7f21396087c57c746d0ae46f91837aaf4b25f7160",
+  "test-evidence/cold-evaluation-1ipllyd2/TQ02.stdout.log": "a0291f503bbfb415e5570b31031f473ce442d27952cb3b663c3d30baf83e42da",
+  "test-evidence/cold-evaluation-1ipllyd2/suite.json": "26f901496e781ada271ee79538be5bd87ce15c0f658a2c223906ce87ddce422a",
+  "test-evidence/cold-evaluation-1ipllyd2/doctor.stdout.log": "2084d3a7253de22f0b0132fd5b4e13226a42842ae8881b67600c7bc53ead1d3f",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/mutation.patch": "145340e478f592e09e1ceec0ec6012f59b095d016b8cb7b1ef41f071251d5cad",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/restored.log": "3898b555921ebe8c09e7ac166bb752a3a231f3be1891ad4d19d4bca41db083ec",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/proof.json": "1a32f93cfadee65198e021c9643fac5cff7505a555bd95ba467b83673a181ecf",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/broken.json": "667060459625dfef9a3a41245e1ee40ece15759dc3139f2461cb5b2de2008980",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/broken.log": "9ef6c14a7412a1a3d0673eb8111f308474516080f414a87d012eb72d4befee1d",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/restored.json": "a6271a826bb59e9847c3c2fd083527c50bb54ba9bea5ee41ec2edaaf3df8f713",
+  "test-evidence/cold-evaluation-1ipllyd2/failure-detection/broken-queue_cli.py": "e6b773d7479cf1f3c361175cfa742e30a6c33b953284d59dfca73cf9b6ff2a9e"
+}

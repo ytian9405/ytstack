@@ -1,0 +1,31 @@
+{
+ "id": "AC5-sol-v01-r2",
+ "prompt": "我想把这个 README 改到新手能照着跑通，什么样算改好了？帮我定标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 58.8,
+ "usage": {
+  "input_tokens": 75250,
+  "cached_input_tokens": 64896,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1374,
+  "reasoning_output_tokens": 230
+ },
+ "final": "建议把“改好了”定成一句可验收的话：\n\n**一个没用过 Ledger Lite、会打开终端的新手，只看 README，就能完成“记一笔 → 查看 → 汇总 → 作废 → 再次汇总”，并判断每一步是否成功，全程不需要读源码或向作者提问。**\n\n结合现在的 [README.md](/tmp/ytev-h7z65mzu/project/README.md)，建议以下标准全部满足才算通过。\n\n| 验收项 | 通过标准 |\n|---|---|\n| 知道从哪里开始 | 写清如何获取项目、进入哪个目录，以及怎样确认目录里有 `expense_cli.py`。 |\n| 能检查运行环境 | 写明 Python 3.9+，提供版本检查命令；明确不需要安装第三方依赖。示例注明适用的终端环境。 |\n| 命令可以照抄 | 按执行顺序给完整命令。说明 `--state` 是账本文件路径，整套示例使用同一路径。需要替换的内容必须明确标出。 |\n| 每一步都能判断对错 | 关键命令后给预期 JSON，并解释必要字段。例如 `1250` 表示 12.50 元，`voided: true` 表示已作废。 |\n| 能验证完整记账流程 | 新账本添加“午餐”后，汇总应为 1 条、1250 分；作废后应为 0 条、0 分。再次查看时，原记录仍在，且标记为已作废。 |\n| 重跑不会造成困惑 | 说明示例如何使用一个全新的账本路径。解释已有账本会继续累积记录，所以 ID 不一定是 `1`，作废时要用实际返回的 ID。 |\n| 遇到常见错误能继续 | 覆盖找不到 Python、运行目录错误、金额不是正整数、作废 ID 不存在。每项写出错误表现和下一步操作。 |\n| 文档里的承诺有依据 | 所有命令、输出和测试入口都经过验证。快速开始与详细行为说明分开，避免新手先读完整份接口约定才能动手。 |\n\n当前 README 最需要补的是：**起步步骤、每步预期输出，以及重跑说明**。尤其是固定使用 `/tmp/my-ledger.json` 和 `void 1`，第二次照抄时，结果可能与第一次不同。另外，现在先作废再汇总，新手看不到刚记入的金额如何影响汇总。\n\n最终验收用一次实际试跑：\n\n1. 找一位符合上述前提、没用过项目的人，从全新账本开始操作。\n2. 作者不做口头补充，记录他停住、猜测或执行失败的位置。\n3. 他完成整个流程，并能说清账本存在哪里、金额单位是什么、作废后记录是否保留。\n4. 换一个新账本路径再跑一次，结果与文档一致。\n\n**必须靠作者补一句话才能继续的地方，都算 README 尚未完成。**",
+ "commentary": [
+  "我先看看 README 和项目入口，再把“新手能照着跑通”整理成可验收的标准。我会用 technical-bro 技能来检查文档结构和操作步骤。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*README*' -g 'package.json' -g 'pyproject.toml' -g 'Makefile' -g 'Cargo.toml' -g 'go.mod' -g '*lock*' -g '.env*' -g 'compose*.yml' -g 'docker-compose*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat /tmp/ytev-h7z65mzu/project/.agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'cat .agents/skills/unslop/SKILL.md; for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-h7z65mzu/AGENTS.md /tmp/ytev-h7z65mzu/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc \"cat README.md && rg --files -g '\"'!node_modules'\"' -g '\"'!.git'\"' -g '\"'!vendor'\"' | head -80\"",
+  "/bin/bash -lc \"sed -n '1,240p' expense_cli.py; sed -n '1,220p' tests/test_smoke.py; sed -n '1,160p' tests/test_package.py; cat ytstack.json\""
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "id": "AC3-sol-v02-r2",
+ "prompt": "tools/install.py 现在只能装不能卸，我想加卸载。动手前帮我定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 102.5,
+ "usage": {
+  "input_tokens": 77982,
+  "cached_input_tokens": 62592,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2840,
+  "reasoning_output_tokens": 1009
+ },
+ "final": "建议按“能确认内容没变才删除；有冲突就整次停下”的规则验收。下面先按推荐选项写，你可以一次调整。\n\n**待你决定**\n\n- **D1：不写 `--skill` 时删多少？** 推荐 `--uninstall` 删除指定项目、指定 `--harness` 下本包的全部 skill；另一种选择是必须逐个指定，减少一次删多项的可能。\n- **D2：要不要连带删依赖？** 推荐卸载 `technical-bro` 时保留 `unslop`；只要还留着 `technical-bro`，就禁止单独卸载 `unslop`。另一种选择是自动连带删除，命令更省事，但删除范围更大。\n- **D3：怎样判断可以删？** 推荐只删除指向当前包的链接，或内容、目录结构与当前包完全一致的复制目录；改过的、无法确认的都保留并报错。**手动复制的同名同内容目录也会被删**，现有脚本没有安装记录，分不出来。更保守的选项是复制目录全部留给用户手动删除。\n\n**这次不做**\n\n- 不清理项目的 `AGENTS.md`、`CLAUDE.md`，也不删除卸载后留下的空父目录。\n- 不增加强制删除功能；遇到改过的内容，由用户自行处理。\n- 不自动识别旧版本复制目录、原包已被移走的链接；无法确认时保留并报错。\n\n**验收条件**\n\n以下命令里的 `/tmp/demo` 是已存在的测试项目。\n\n- **C1 [D1、D3]：完整卸载。**  \n  **做什么：** 默认安装后，运行 `python3 tools/install.py --project /tmp/demo --harness codex --uninstall`。`codex`、`claude` 和两种安装方式分别检查。  \n  **应该看到：** 退出码为 `0`，输出 JSON 列出实际删除的路径；当前默认安装的 4 个 skill 全部消失。另开进程检查，仍不存在；原包和项目其他文件保持原样。  \n  **防的是：** 只删了一部分，或顺着链接删掉原包。\n\n- **C2 [D1]：重复卸载。**  \n  **做什么：** 成功卸载后，再运行同一命令；也在从未安装过的项目运行一次。  \n  **应该看到：** 都以 `0` 退出，删除列表为空，不创建任何文件或目录。  \n  **防的是：** 已经没有内容可删，却被当成失败。\n\n- **C3 [D2]：只删指定项。**  \n  **做什么：** 默认安装后，卸载时加 `--skill technical-bro`。  \n  **应该看到：** 只删除 `technical-bro`；`unslop`、`bro`、`create-test-skill` 保留。  \n  **防的是：** 指定删一个，却顺带删了其他内容。\n\n- **C4 [D2]：保留的 skill 仍然能用。**  \n  **做什么：** 已安装 `technical-bro` 和 `unslop` 时，单独卸载 `unslop`。  \n  **应该看到：** 非零退出，错误写到 stderr，说明 `technical-bro` 仍需要它；两个都保留。同时指定卸载这两个时可以成功。  \n  **防的是：** 卸载成功后，留下的 skill 缺少必需内容。\n\n- **C5 [D3]：发现冲突时不先删一部分。**  \n  **做什么：** 默认复制安装后，修改 `technical-bro/SKILL.md`，再执行全部卸载。另分别用新增文件、同名普通文件、指向其他位置的链接检查。  \n  **应该看到：** 非零退出，指出冲突路径；所有候选项均保持原样，包括本来可以删除的项。  \n  **防的是：** 删掉用户内容，或删到一半才发现冲突。\n\n- **C6：预览不删除。**  \n  **做什么：** 默认安装后，运行全部卸载并加 `--dry-run`。  \n  **应该看到：** 退出码为 `0`，JSON 中的 `planned` 列出正式执行会删除的路径；所有文件、目录和链接保持原样。  \n  **防的是：** 预览也动了文件，或预览范围与正式执行不同。\n\n- **C7：错误输入不动文件。**  \n  **做什么：** 分别指定不存在的项目，以及 `--skill does-not-exist`。  \n  **应该看到：** 非零退出，stderr 说明原因；不删除、不创建任何内容。  \n  **防的是：** 输入写错后仍执行删除。\n\n- **C8：不删除项目外的内容。**  \n  **做什么：** 让项目的 `.agents` 指向项目外一个包含 skill 的目录，再运行卸载；`.claude` 同样检查。  \n  **应该看到：** 非零退出，说明路径到了项目外；外部目录及其内容保持原样。  \n  **防的是：** 用户指定一个项目，却删掉别处共用的 skill。\n\n**不能弄坏**\n\n- 原来的安装命令无需增加参数，仍默认安装当前配置中的 4 个 skill。\n- 单独安装 `technical-bro` 仍自动安装 `unslop`；重复安装仍成功，`installed` 为空。\n- 安装遇到同名冲突时仍保留原内容，且不先安装其他项。\n- 安装的 `--dry-run` 仍不创建目录；复制方式仍可在原包移走后使用。\n- 卸载成功后，原安装命令仍能重新安装并使用。\n\n修改 D1 会影响 C1、C2；修改 D2 会影响 C3、C4；修改 D3 会影响 C1、C5。",
+ "commentary": [
+  "我会先用 acceptance-criteria 技能，看清 `tools/install.py` 现在怎么安装，再列出卸载前要定的规则和验收标准。",
+  "卸载前最需要定两件事：改过的 skill 要不要保留，以及卸载一个 skill 时要不要连带删除它依赖的 skill。当前脚本没有记录哪些目录是它装的，复制安装只能靠内容比对判断；我会把这个限制写进待定项。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g AGENTS.md -g 'install.py' -g '*install*' -g 'SKILL.md' -g 'README*' -g 'pyproject.toml' -g '*test*'\"",
+  "/bin/bash -lc 'cat /tmp/ytev-dsigtzzd/project/.agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat AGENTS.md && cat README.md'",
+  "/bin/bash -lc 'cat tests/test_package.py && cat tests/test_smoke.py'",
+  "/bin/bash -lc 'rg --files tools .claude-plugin voice && git status --short'",
+  "/bin/bash -lc \"cat ytstack.json && rg -n 'install.py|--voice|uninstall|卸载|安装' --glob '*.md' --glob '*.py' --glob '*.json' .\""
+ ]
+}

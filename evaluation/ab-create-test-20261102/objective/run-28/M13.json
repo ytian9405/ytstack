@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-kckmtqe0/project",
+  "target_sha256": "0bab915efd92fcff67c2c017fe108e459922604d3cd67c4e44cc88c26cf12f89",
+  "started_at": "2026-11-02T12:39:43.050004+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-kckmtqe0/project/tests/test_behavior.py\", line 63, in test_LL03_void_and_ids\n    self.assertEqual(self.invoke('void', '1'), voided)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-eval-kckmtqe0/project/tests/test_behavior.py\", line 28, in invoke\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : already voided\n\n\n----------------------------------------------------------------------\nRan 6 tests in 2.006s\n\nFAILED (failures=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 2.068,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-kckmtqe0",
+  "scratch_removed": true
+}

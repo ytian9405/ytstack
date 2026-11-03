@@ -1,0 +1,31 @@
+{
+ "id": "AC6-astra-v01-r1",
+ "prompt": "queue_cli 想加任务截止时间，过期了要能看出来。先定一下验收标准。",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 109.6,
+ "usage": {
+  "input_tokens": 55694,
+  "cached_input_tokens": 44928,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1001,
+  "reasoning_output_tokens": 96
+ },
+ "final": "当前 `queue_cli.py` 有 `add`、`list`、`complete`，输出都是 JSON。建议第一版增加可选截止时间 `due_at`，并用 `overdue` 表示是否逾期。以下是拟定的验收标准，尚未改代码。\n\n建议先约定：**任务未完成，且当前时间晚于截止时间，才算逾期；恰好到点不算。**\n\n| 场景 | 验收标准 |\n|---|---|\n| 添加截止时间 | `add \"交报告\" --due \"2026-11-03T18:00:00+08:00\"` 成功，截止时间跨进程保存，输出 `due_at` 和 `overdue`。 |\n| 时间格式 | 接受带 `Z` 或 `±HH:MM` 时区的完整日期时间，精确到秒；统一输出为 UTC，例如 `2026-11-03T10:00:00Z`。不接受只有日期或没有时区的输入。 |\n| 不设置截止时间 | 原有 `add \"交报告\"` 仍然成功，输出 `due_at: null`、`overdue: false`。 |\n| 查看逾期任务 | `list` 每条记录都有 `due_at` 和布尔值 `overdue`，保留原有字段及添加顺序。 |\n| 到期边界 | 对未完成任务，在截止前、恰好截止时，`overdue` 为 `false`；截止后为 `true`。每次执行命令按当时的时间重新判断。 |\n| 添加已过期任务 | 允许设置过去的截止时间，添加成功后立即输出 `overdue: true`。 |\n| 完成任务 | `complete ID` 保留截止时间，返回 `done: true`、`overdue: false`；后续查询也不再标为逾期。重复完成没有额外副作用。 |\n| 无效输入 | 非法日期、缺少时区、空值或不支持的格式使命令非零退出，stderr 给出错误和合法示例；已有状态文件内容不变，也不创建新文件。 |\n| 兼容旧数据 | 缺少 `due_at` 的旧任务按无截止时间处理，仍可查看和完成；`list` 不改写状态文件。 |\n\n验收测试使用固定时钟，覆盖截止前、恰好截止、截止后三种情况；验证 `18:00:00+08:00` 与 `10:00:00Z` 的判断一致，并通过独立 CLI 进程验证保存和读取。\n\n本版范围限定为设置截止时间及显示当前逾期状态。修改截止时间、逾期筛选、提醒通知和记录“是否曾经逾期”留到后续。",
+ "commentary": [
+  "我先看一下 `queue_cli` 的任务结构和展示方式，再拟一版能直接验证的验收标准。",
+  "我会按 `technical-bro` 和 `unslop` 的写作规则，把标准写成明确的操作和预期结果。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g '*README*' -g '*test*' -g '*SKILL.md'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'cat queue_cli.py README.md tests/test_smoke.py tests/test_package.py'",
+  "/bin/bash -lc \"cat .agents/skills/unslop/SKILL.md; rg --files --hidden -g AGENTS.md -g '\"'! .git'\"'; ls -a\""
+ ]
+}

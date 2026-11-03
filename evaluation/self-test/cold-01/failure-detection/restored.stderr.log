@@ -1,0 +1,6 @@
+test_dependency_is_installed_and_repeat_is_harmless (ytstack_package_tests.PackageTests.test_dependency_is_installed_and_repeat_is_harmless) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.134s
+
+OK

@@ -1,0 +1,32 @@
+{
+ "id": "AC5-sol-v02-r2",
+ "prompt": "我想把这个 README 改到新手能照着跑通，什么样算改好了？帮我定标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 89.9,
+ "usage": {
+  "input_tokens": 76166,
+  "cached_input_tokens": 64256,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2355,
+  "reasoning_output_tokens": 738
+ },
+ "final": "改好的标准是：**没读过代码的人，只看 README，就能记下一笔账、查到它、作废它，并判断每一步是否成功。**\n\n现在的 README 已有命令，但缺少运行前的准备、每步结果，以及出错后该怎么办。\n\n**待你决定**\n\n- **D1：支持哪些电脑？** 推荐先覆盖 macOS、Linux；如果也支持 Windows，就需要提供对应命令，不能继续统一使用 `/tmp/...`。\n- **D2：从哪里开始教？** 推荐从“已经拿到项目文件、会打开终端，但不保证装过 Python”开始；如果要从下载项目开始，还需补上实际下载入口和步骤。\n\n下面按推荐选项定标准。\n\n**这次不做**\n\n- 不改记账功能，不增加图形界面。\n- 不教完整的 Python 编程或终端使用课程。\n- 不解决多人同时保存、账本文件损坏或文件权限问题；README 要说明这些限制。\n\n**验收条件**\n\n各场景使用新的演示账本；同一场景中的命令始终使用同一个 `--state` 路径。\n\n**C1［D1、D2］：能完成运行准备**\n\n- **做什么：** 按 README 检查 `python3 --version`，进入存放 `expense_cli.py` 的目录，运行 `python3 expense_cli.py --help`。\n- **应该看到：** Python 版本至少为 3.9，随后显示命令帮助；找不到 Python 或版本过低时，README 有明确的安装或升级指引。\n- **防的是：** 一上来就贴命令，新手不知道缺什么、在哪里运行。\n\n**C2：第一次记账能核对结果**\n\n- **做什么：** 按示例先运行 `list`，再添加“午餐”，金额 `--cents 1250`、类别 `food`，随后运行 `list` 和 `summary`。\n- **应该看到：** 初始为 `[]`；新增记录的 `id` 为 `1`、`voided` 为 `false`；汇总为 `count: 1`、`total_cents: 1250`、`by_category: {\"food\": 1250}`。README 明说 `1250` 表示 12 元 50 分。\n- **防的是：** 命令能复制，但用户不知道金额怎么填、结果对不对。\n\n**C3：关掉终端后还能找到账**\n\n- **做什么：** 完成 C2 后关闭终端，重新打开，按说明进入项目目录，用原来的账本路径运行 `list`。\n- **应该看到：** “午餐”仍在；README 说明账本存在哪里、以后怎样继续使用，也提醒演示不要借用已有账本。\n- **防的是：** 换了路径就以为数据丢了，或把示例写进自己的账本。\n\n**C4：能理解并验证作废**\n\n- **做什么：** 对 C2 的记录运行 `void 1`，再运行 `list`、`summary`，并再次运行 `void 1`。\n- **应该看到：** 记录仍在，`voided` 为 `true`；汇总变为 `{\"count\": 0, \"total_cents\": 0, \"by_category\": {}}`；再次作废仍成功，结果不变。\n- **防的是：** 把作废理解成删除，或以为汇总为零就是记录丢失。\n\n**C5：填错金额后知道怎么继续**\n\n- **做什么：** 尝试添加 `--cents 0` 的记录，再运行 `list`。\n- **应该看到：** 程序报错，没有新增记录；README 说明金额必须是正整数分，并给出改为 `--cents 1250` 后重新执行的例子。\n- **防的是：** 用户卡在报错上，或误以为失败的命令已经保存。\n\n**C6：最小金额也讲得清楚**\n\n- **做什么：** 在新账本添加一笔 `--cents 1` 的记录，再运行 `summary`。\n- **应该看到：** 添加成功，`total_cents` 为 `1`；README 说明这表示 1 分。\n- **防的是：** 把最小金额写成 1 元，或误导用户输入小数。\n\n**C7：确实有人只靠 README 跑通**\n\n- **做什么：** 找 1 位没读过代码、符合 D2 起点的人，在 D1 范围内按 README 完成准备、记账、重开终端查询和作废。\n- **应该看到：** 全程无需口头补步骤，能指出账本文件并核对结果；需要额外解释的地方补进 README 后，重新检查。\n- **防的是：** 作者凭自己熟悉项目就宣布“新手能用”。\n\n**不能弄坏**\n\n- `add`、`list`、`void`、`summary` 的命令和结果说明继续与程序一致。\n- 保留“Python 3.9+、无需额外依赖、运行记账不需要网络或账号”的条件。\n- 保留空账本、作废后仍保留记录、错误输入不改变已有数据的说明。\n\n改 D1 会影响 C1、C7 和所有示例路径；改 D2 会影响 C1、C7。",
+ "commentary": [
+  "我会用 `acceptance-criteria` 技能，先看 README，再把“新手照着能跑通”写成能逐条检查的标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"pwd; rg --files -g '*README*' -g 'AGENTS.md' -g 'package.json' -g 'pyproject.toml' -g 'Makefile' -g 'Cargo.toml' -g 'go.mod' -g 'requirements*.txt' -g 'docker-compose*' -g 'compose.y*' -g '.env*'\"",
+  "/bin/bash -lc 'cat README.md'",
+  "/bin/bash -lc \"rg --files -g '\"'!node_modules'\"' -g '\"'!.git'\"' -g '\"'!dist'\"' -g '\"'!build'\"' | head -100; cat AGENTS.md\"",
+  "/bin/bash -lc 'cat expense_cli.py; cat tests/test_smoke.py'",
+  "/bin/bash -lc 'cat tests/test_package.py; cat ytstack.json; cat tools/install.py; cat tools/validate.py'"
+ ]
+}

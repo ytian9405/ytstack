@@ -1,0 +1,26 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-v656wn0l/project/tests/test_behavior.py", line 61, in test_LL03_void_and_ids
+    self.assertEqual(self.invoke('list'), [voided])
+AssertionError: Lists differ: [] != [{'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}
+
+- []
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': True}]
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.121s
+
+FAILED (failures=1)

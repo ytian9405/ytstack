@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "`complete ID` 保留截止时间，返回 `done: true`、`overdue: false`；后续查询也不再标为逾期。重复完成没有额外副作用。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "`add \"交报告\" --due \"2026-11-03T18:00:00+08:00\"` 成功，截止时间跨进程保存，输出 `due_at` 和 `overdue`。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "缺少 `due_at` 的旧任务按无截止时间处理，仍可查看和完成；`list` 不改写状态文件。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "对未完成任务，在截止前、恰好截止时，`overdue` 为 `false`；截止后为 `true`。每次执行命令按当时的时间重新判断。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "非法日期、缺少时区、空值或不支持的格式使命令非零退出，stderr 给出错误和合法示例；已有状态文件内容不变，也不创建新文件。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "接受带 `Z` 或 `±HH:MM` 时区的完整日期时间，精确到秒；统一输出为 UTC，例如 `2026-11-03T10:00:00Z`。不接受只有日期或没有时区的输入。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "`list` 每条记录都有 `due_at` 和布尔值 `overdue`，保留原有字段及添加顺序。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "建议先约定：**任务未完成，且当前时间晚于截止时间，才算逾期；恰好到点不算。**"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "本版范围限定为设置截止时间及显示当前逾期状态。修改截止时间、逾期筛选、提醒通知和记录“是否曾经逾期”留到后续。"
+  }
+ ]
+}

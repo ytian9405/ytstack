@@ -1,0 +1,270 @@
+{
+  "evaluation": "cold independent project-local skill use",
+  "status": "PASS",
+  "target": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+  "skill": ".agents/skills/test-tiny-queue/SKILL.md",
+  "completed_at_utc": "2026-11-02T09:04:11.217036+00:00",
+  "scope": {
+    "sources_used": [
+      "project-local skill",
+      "project README",
+      "case index",
+      "test runner",
+      "proof helper",
+      "product CLI",
+      "new run receipts"
+    ],
+    "generator_context_used": false,
+    "sibling_project_read": false,
+    "other_agent_reports_read": false,
+    "external_dependencies_installed": false,
+    "product_or_expectations_changed": false
+  },
+  "evidence_directory": "test-evidence/cold-evaluation-1ipllyd2",
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py",
+    "sha256": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "commands": [
+    {
+      "name": "doctor",
+      "command": [
+        "timeout",
+        "15s",
+        "python3",
+        "tests/test_queue_cli.py",
+        "--doctor",
+        "--evidence",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/doctor.json"
+      ],
+      "exit_status": 0,
+      "elapsed_seconds": 0.0676,
+      "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/doctor.stdout.log",
+      "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/doctor.stderr.log"
+    },
+    {
+      "name": "suite",
+      "command": [
+        "timeout",
+        "45s",
+        "python3",
+        "tests/test_queue_cli.py",
+        "--evidence",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/suite.json"
+      ],
+      "exit_status": 0,
+      "elapsed_seconds": 0.4888,
+      "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/suite.stdout.log",
+      "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/suite.stderr.log"
+    },
+    {
+      "name": "TQ02",
+      "command": [
+        "timeout",
+        "30s",
+        "python3",
+        "tests/test_queue_cli.py",
+        "--case",
+        "TQ02",
+        "--evidence",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/TQ02.json"
+      ],
+      "exit_status": 0,
+      "elapsed_seconds": 0.1438,
+      "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/TQ02.stdout.log",
+      "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/TQ02.stderr.log"
+    },
+    {
+      "name": "failure-detection",
+      "command": [
+        "timeout",
+        "60s",
+        "python3",
+        ".agents/skills/test-tiny-queue/scripts/prove_failure_detection.py",
+        "--evidence-dir",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/failure-detection"
+      ],
+      "exit_status": 0,
+      "elapsed_seconds": 0.2671,
+      "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/failure-detection.stdout.log",
+      "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/failure-detection.stderr.log"
+    }
+  ],
+  "suite": {
+    "status": "PASS",
+    "exit_status": 0,
+    "case_count": 5,
+    "action_count": 21,
+    "assertion_count": 49,
+    "cases": [
+      {
+        "id": "TQ01",
+        "status": "PASS",
+        "action_count": 1,
+        "assertion_count": 3
+      },
+      {
+        "id": "TQ02",
+        "status": "PASS",
+        "action_count": 4,
+        "assertion_count": 10
+      },
+      {
+        "id": "TQ03",
+        "status": "PASS",
+        "action_count": 7,
+        "assertion_count": 14
+      },
+      {
+        "id": "TQ04",
+        "status": "PASS",
+        "action_count": 5,
+        "assertion_count": 12
+      },
+      {
+        "id": "TQ05",
+        "status": "PASS",
+        "action_count": 4,
+        "assertion_count": 10
+      }
+    ],
+    "runner_error": null
+  },
+  "targeted_TQ02": {
+    "status": "PASS",
+    "exit_status": 0
+  },
+  "failure_detection": {
+    "status": "PASS",
+    "mutation": "Only the write_text persistence call was replaced by pass in a disposable copy; product remains unchanged.",
+    "patch": "test-evidence/cold-evaluation-1ipllyd2/failure-detection/mutation.patch",
+    "broken_exit_status": 1,
+    "broken_status": "FAIL",
+    "broken_add_exit_status": 0,
+    "broken_add_stdout": "{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}\n",
+    "detected_assertions": [
+      {
+        "label": "fresh process sees first persisted task",
+        "actual": [],
+        "expected": [
+          {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          }
+        ],
+        "status": "FAIL"
+      }
+    ],
+    "restored_status": "PASS",
+    "restored_exit_status": 0,
+    "exact_same_test_command": true,
+    "live_target_unchanged": true,
+    "proof_receipt": "test-evidence/cold-evaluation-1ipllyd2/failure-detection/proof.json"
+  },
+  "cleanup": {
+    "status": "PASS",
+    "paths_checked": [
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/suite.json",
+        "case": "TQ01",
+        "scratch": "/tmp/tiny-queue-test-5xghhnx2",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/suite.json",
+        "case": "TQ02",
+        "scratch": "/tmp/tiny-queue-test-l2wczpvr",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/suite.json",
+        "case": "TQ03",
+        "scratch": "/tmp/tiny-queue-test-ften8b_l",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/suite.json",
+        "case": "TQ04",
+        "scratch": "/tmp/tiny-queue-test-ezy8x25m",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/suite.json",
+        "case": "TQ05",
+        "scratch": "/tmp/tiny-queue-test-mfaok4rq",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/TQ02.json",
+        "case": "TQ02",
+        "scratch": "/tmp/tiny-queue-test-di4rvkz5",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/failure-detection/broken.json",
+        "case": "TQ02",
+        "scratch": "/tmp/tiny-queue-test-jxiptrqi",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/failure-detection/restored.json",
+        "case": "TQ02",
+        "scratch": "/tmp/tiny-queue-test-nwlu9ppx",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      },
+      {
+        "receipt": "test-evidence/cold-evaluation-1ipllyd2/failure-detection/proof.json",
+        "scratch": "/tmp/tiny-queue-negative-v6n_i8ao",
+        "receipt_scratch_removed": true,
+        "independently_absent": true
+      }
+    ],
+    "case_scratch_directory_count": 8,
+    "proof_scratch_directory_count": 1,
+    "process_handling": "All commands completed synchronously through subprocess.run. Runner and helper child processes are waited for; source starts no daemon or background process. No process-name kill or manual scratch removal was needed.",
+    "evidence_retained": true
+  },
+  "protected_file_integrity": {
+    "unchanged": true,
+    "sha256_before": {
+      "queue_cli.py": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+      "README.md": "4f48c7ceccdd51f5d3cc732d35b1c7fe92b54d6d4e7d99ba4e42fff16db7da69",
+      "tests/test_queue_cli.py": "d5d81c22500d76ac28ce86d425b1e93095ba5b92a7891bf951a593c5919aa8e8",
+      ".agents/skills/test-tiny-queue/SKILL.md": "ce09a88f2b19702aeda438a0d04672f6032af17c9fcaf71a29926fe651aae1d0",
+      ".agents/skills/test-tiny-queue/cases/README.md": "83cbc59317a8a57b5b39e84a69cbc2deefd0ef4c06d6fe542f303d062ea92cc7",
+      ".agents/skills/test-tiny-queue/scripts/prove_failure_detection.py": "235f24d0321a792693a1e6021c58c0a4cce847050d2ad9d2e819348f90148c4f"
+    },
+    "sha256_after": {
+      "queue_cli.py": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+      "README.md": "4f48c7ceccdd51f5d3cc732d35b1c7fe92b54d6d4e7d99ba4e42fff16db7da69",
+      "tests/test_queue_cli.py": "d5d81c22500d76ac28ce86d425b1e93095ba5b92a7891bf951a593c5919aa8e8",
+      ".agents/skills/test-tiny-queue/SKILL.md": "ce09a88f2b19702aeda438a0d04672f6032af17c9fcaf71a29926fe651aae1d0",
+      ".agents/skills/test-tiny-queue/cases/README.md": "83cbc59317a8a57b5b39e84a69cbc2deefd0ef4c06d6fe542f303d062ea92cc7",
+      ".agents/skills/test-tiny-queue/scripts/prove_failure_detection.py": "235f24d0321a792693a1e6021c58c0a4cce847050d2ad9d2e819348f90148c4f"
+    }
+  },
+  "unresolved_claims": [
+    "No observed blocker or failed live-target case. The proof validates persistence failure detection only, not complete fault coverage.",
+    "Timeout, external-kill and runner-blocker branches were inspected in source but not experimentally triggered by the documented sequence.",
+    "Python 3.8+ portability is documented; this run exercised Python 3.12.3 only.",
+    "Malformed or corrupt JSON, concurrent writers, filesystem permission failures, CLI parser permutations and performance remain explicitly outside the documented test contract."
+  ],
+  "cold_usability_assessment": "The local skill, README, case index and included scripts were sufficient to execute the prescribed workflow without generator context, repairs, installs, or changing expectations."
+}

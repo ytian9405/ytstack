@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-rjg99dhk/project",
+  "target_sha256": "099a37f8811e3d20092797cf63af35696315b1bb72b6def16c43eab84ef5cff7",
+  "started_at": "2026-11-02T12:39:36.848438+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-rjg99dhk/project/tests/test_behavior.py\", line 61, in test_LL03_void_and_ids\n    self.assertEqual(self.invoke('list'), [voided])\nAssertionError: Lists differ: [] != [{'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}]\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n{'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': True}\n\n- []\n+ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': True}]\n\n----------------------------------------------------------------------\nRan 6 tests in 1.889s\n\nFAILED (failures=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.968,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-rjg99dhk",
+  "scratch_removed": true
+}

@@ -1,0 +1,25 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... ok
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-yr_v6x7y/project/tests/test_behavior.py", line 76, in test_LL04_summary
+    self.assertEqual(self.invoke('summary'),
+AssertionError: {'count': 4, 'total_cents': 2300, 'by_category': {'food': 2000, 'travel': 300}} != {'count': 3, 'total_cents': 2300, 'by_category': {'food': 2000, 'travel': 300}}
+- {'by_category': {'food': 2000, 'travel': 300}, 'count': 4, 'total_cents': 2300}
+?                                                         ^
+
++ {'by_category': {'food': 2000, 'travel': 300}, 'count': 3, 'total_cents': 2300}
+?                                                         ^
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.750s
+
+FAILED (failures=1)

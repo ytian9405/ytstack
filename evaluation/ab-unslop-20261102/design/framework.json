@@ -1,0 +1,357 @@
+{
+  "version": "1.0",
+  "status": "FROZEN_BEFORE_OUTPUTS",
+  "tasks": {
+    "update": {
+      "facts": [
+        {
+          "id": "U01",
+          "requirement": "导出中心1.3于2026年11月2日开放",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "U02",
+          "requirement": "支持按项目和日期筛选",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "U03",
+          "requirement": "日期包含开始日、不包含结束日",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "U04",
+          "requirement": "单次最多5000条，格式只有CSV",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "U05",
+          "requirement": "超过5000条需缩小筛选范围，不会自动拆文件",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "U06",
+          "requirement": "文件保留7天，到期需重新导出",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "U07",
+          "requirement": "没有新增定时导出，没有下一版日期",
+          "major_if_wrong_or_missing": true
+        }
+      ],
+      "negative_constraints": [
+        {
+          "id": "U08",
+          "rule": "不得新增或保留无依据的性能比较、客户满意度、行业排名、专家评价",
+          "major_if_violated": true
+        }
+      ],
+      "slop_units": [
+        {
+          "id": "US01",
+          "quotes": [
+            "好问题！",
+            "希望这能帮助到你！"
+          ],
+          "reason": "公告中模拟问答和助手交付话术，没有真实问题或对话承接",
+          "expected_function": "删除不适用的对话包装；友好招呼本身不扣分",
+          "weight": 1
+        },
+        {
+          "id": "US02",
+          "quotes": [
+            "赋能每一次数据决策",
+            "它不仅是一次功能迭代，更是迈向高效数据协作的重要里程碑。",
+            "这个能力边界将成为我们持续深耕、不断突破的坚实底座。"
+          ],
+          "reason": "将小范围功能或限制提升为抽象成就，同一宏大定位根因合为一单元",
+          "expected_function": "删除或改为底稿支持的功能与限制",
+          "weight": 1
+        },
+        {
+          "id": "US03",
+          "quotes": [
+            "**灵活性：** 灵活性获得了进一步提升。"
+          ],
+          "reason": "标题与句子同义重复，未说明变化",
+          "expected_function": "删除重复，或用项目和日期筛选说明变化",
+          "weight": 1
+        },
+        {
+          "id": "US04",
+          "quotes": [
+            "从项目到日期，从筛选到决策，导出中心、数据助手、协作伙伴将帮助你轻松驾驭复杂的数据全景。"
+          ],
+          "reason": "排比、别名堆叠把明确产品和筛选范围变为模糊功能全景",
+          "expected_function": "保留有依据的产品、筛选功能，去除模糊别名与排比包装",
+          "weight": 1
+        },
+        {
+          "id": "US05",
+          "quotes": [
+            "确保用户始终拥有充满信心的数据旅程。",
+            "让我们携手拥抱更加美好的数据未来！"
+          ],
+          "reason": "用抽象情绪回报和集体号召替代读者操作信息，同一情绪收尾根因",
+          "expected_function": "删掉或提供有依据的保留期限及后续操作",
+          "weight": 1
+        }
+      ],
+      "excluded_or_review": [
+        "很高兴向大家介绍：可能是合适的友好语气，不单列扣分。",
+        "业内专家普遍认为及其背书：属于U08事实依据问题，不计源slop。",
+        "为了进一步提升整体效率：是否构成实测性能承诺需看上下文，不预设扣分；若有无依据性能断言归U08。",
+        "标题、粗体、emoji、值得注意的是不因形式本身扣分。"
+      ]
+    },
+    "change": {
+      "facts": [
+        {
+          "id": "C01",
+          "requirement": "变更涉及POST /imports，请求体可传request_id",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "C02",
+          "requirement": "同一账户、24小时内、相同request_id且相同请求内容重试，返回原import_id且不新建导入任务",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "C03",
+          "requirement": "同一账户、24小时内复用request_id但内容不同，返回HTTP 409",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "C04",
+          "requirement": "不同账户分别处理，不跨账户去重",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "C05",
+          "requirement": "不传request_id仍可调用，但不受此机制的防重复保护",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "C06",
+          "requirement": "原有重复任务不会自动合并",
+          "major_if_wrong_or_missing": true
+        }
+      ],
+      "negative_constraints": [
+        {
+          "id": "C07",
+          "rule": "不得保留或新增吞吐或延迟提升、彻底消除重复任务的保证",
+          "major_if_violated": true
+        }
+      ],
+      "slop_units": [
+        {
+          "id": "CS01",
+          "quotes": [
+            "本次POST /imports的演进构建了一个以幂等性为核心的可靠性底座，不仅为请求重放提供坚实支点，更为稳定性护城河铺就了新的路径。",
+            "从调用侧到数据侧，这一能力矢量将持续释放协同价值。",
+            "综上所述，新的幂等保障将为我们的系统带来更多可能，让可靠性真正触手可及。"
+          ],
+          "reason": "同一组宏大工程比喻和抽象价值许诺，未界定幂等能力",
+          "expected_function": "删去或改为准确的接口行为与范围",
+          "weight": 1
+        },
+        {
+          "id": "CS02",
+          "quotes": [
+            "**实现机制：** 在实现机制方面，"
+          ],
+          "reason": "标签后重复标签，未添加内容",
+          "expected_function": "直接说明请求体参数",
+          "weight": 1
+        },
+        {
+          "id": "CS03",
+          "quotes": [
+            "彰显了确定性执行的强大力量。",
+            "这一行为体现了面向未来的契约精神。",
+            "换句话说，这不只是一个参数，更是一种工程态度。"
+          ],
+          "reason": "给技术行为附加价值评语或道德态度，与接口契约无关；合并为一个根因",
+          "expected_function": "删除评语，保留机制和限制",
+          "weight": 1
+        },
+        {
+          "id": "CS04",
+          "quotes": [
+            "接下来，我们应继续秉持精益求精的精神，推动这一底层原语开花结果。"
+          ],
+          "reason": "没有负责人、动作或期限的未来号召",
+          "expected_function": "删除；不能凭空补计划",
+          "weight": 1
+        }
+      ],
+      "excluded_or_review": [
+        "快是快了，稳也稳了：速度提升断言归C07保真，不计源slop。",
+        "幂等性、请求重放、契约、底层原语等术语不因陌生扣分；仅评估具体上下文是否承载信息。",
+        "需要强调的是及小标题不单列扣分。"
+      ]
+    },
+    "progress": {
+      "facts": [
+        {
+          "id": "P01",
+          "requirement": "统计截至2026年11月2日",
+          "major_if_wrong_or_missing": false
+        },
+        {
+          "id": "P02",
+          "requirement": "12家试用客户：7家成功导入、3家因字段映射未完成、2家未开始",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "P03",
+          "requirement": "林工负责字段映射修复，计划11月6日前完成",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "P04",
+          "requirement": "修复效果尚未验证；计划不能表述为已完成或保证交付",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "P05",
+          "requirement": "仍需3家受阻客户确认字段定义，延迟确认可能导致修复计划顺延",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "P06",
+          "requirement": "下一次更新11月4日",
+          "major_if_wrong_or_missing": true
+        }
+      ],
+      "negative_constraints": [
+        {
+          "id": "P07",
+          "rule": "不得新增客户满意度、收入、最终全部上线日期或成功率提升比较数据",
+          "major_if_violated": true
+        }
+      ],
+      "slop_units": [
+        {
+          "id": "PS01",
+          "quotes": [
+            "本周我们在协同、执行、交付三个维度取得了可喜进展，充分彰显了团队的韧性与潜力。",
+            "这些数字不仅呈现了阶段成果，更映射出团队持续成长的鲜活图景。"
+          ],
+          "reason": "把进度数字包装为团队品质的笼统评价；同一根因合并",
+          "expected_function": "删除或直接说明进度，不删除客户分布",
+          "weight": 1
+        },
+        {
+          "id": "PS02",
+          "quotes": [
+            "项目正在稳中求进，为后续规模化落地奠定坚实基础。",
+            "从问题定位到未来增长，每一次对齐都在为成功蓄势。",
+            "相信只要我们持续凝心聚力，就一定能共创更加辉煌的明天！"
+          ],
+          "reason": "没有依据或具体下一步的未来成功叙事；同一根因合并",
+          "expected_function": "删除，或用已有负责人、计划及阻塞信息替代",
+          "weight": 1
+        },
+        {
+          "id": "PS03",
+          "quotes": [
+            "这里需要一个小小的提醒：我们可能也许还需要保持一定程度的审慎，不宜将这一计划视为已经完成或确定交付。"
+          ],
+          "reason": "多层缓冲和重复可能性包装必要的不确定性说明",
+          "expected_function": "直接保留尚未验证和非交付保证，删除重复缓冲；不能删掉不确定性本身",
+          "weight": 1
+        }
+      ],
+      "excluded_or_review": [
+        "各位伙伴、感谢大家持续不断的投入与支持：具有群消息礼貌功能，不预设为slop。",
+        "计划、可能顺延、效果还没有验证是必要语义，不能按含糊词扣分。"
+      ]
+    },
+    "clean": {
+      "facts": [
+        {
+          "id": "N01",
+          "requirement": "看板11月3日22:00至22:10维护，期间无法打开",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "N02",
+          "requirement": "已提交作业排队且不会丢失",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "N03",
+          "requirement": "维护后排队作业自动继续",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "N04",
+          "requirement": "22:10后仍不能打开时，在#ops-support发送问题发生时间和错误截图",
+          "major_if_wrong_or_missing": true
+        },
+        {
+          "id": "N05",
+          "requirement": "截图不要包含访问令牌",
+          "major_if_wrong_or_missing": true
+        }
+      ],
+      "negative_constraints": [],
+      "slop_units": [],
+      "excluded_or_review": [
+        "原稿适用，源slop固定为0；改词、调整句序或格式均不自动算损坏或新增slop。"
+      ]
+    }
+  },
+  "calibrations": [
+    {
+      "id": "K01",
+      "source": "change/facts.md",
+      "construction": "仅构造一句：同一账户在24小时内，以相同request_id重试，无论请求内容是否变化，都返回原import_id，不创建任务。",
+      "expected": "C02和C03涉及同一错误根因：忽略请求内容条件。计1个重大保真缺陷，触发重大损坏；不归slop。"
+    },
+    {
+      "id": "K02",
+      "source": "clean/draft.md",
+      "construction": "原稿仅删除最后一句“截图不要包含访问令牌。”，其余逐字保留。",
+      "expected": "N05缺失，1个重大保真缺陷；即使更短、自然也判重大损坏。源slop仍为0。"
+    },
+    {
+      "id": "K03",
+      "source": "update/draft.md",
+      "construction": "只用片段对照：把“它不仅是一次功能迭代，更是迈向高效数据协作的重要里程碑。”缩为“这是数据协作的重要里程碑。”；其他内容不变。",
+      "expected": "US02仍为原样残留：措辞虽短，宏大定位根因未被处理；US02其他引句也仍在。不得以字数下降记部分处理或消除。"
+    }
+  ],
+  "metrics": {
+    "fact_statuses": [
+      "preserved",
+      "minor_damage",
+      "major_damage",
+      "unknown"
+    ],
+    "source_slop_statuses": [
+      "eliminated",
+      "partial",
+      "retained",
+      "unknown"
+    ],
+    "source_slop_weight": 1,
+    "aggregation": "每任务先报E/P/R/U数量及分母；主指标E/N。P不折算半分；未知不归成功。clean N=0，比例N/A。可补充跨三个包装任务等任务权重宏平均，同时报告每单元等权微平均；两者不得替换分任务结果。",
+    "pair_difference": "每任务ΔE、ΔP、ΔR、ΔU；Δ重大/非重大保真根因数；Δ新增slop根因数；可用性A/B/平局。先呈保真门槛，再看slop。",
+    "costs": {
+      "exact_tokens": "UNKNOWN",
+      "exact_cost": "UNKNOWN",
+      "processing_duration": "UNKNOWN"
+    }
+  },
+  "rules_reference": "FRAMEWORK.md: 判定与唯一归属、盲评步骤与记录（与本JSON共同构成冻结协议）",
+  "calibration_self_check": {
+    "K01": "PASS: major fidelity root involving C02/C03",
+    "K02": "PASS: major omission N05",
+    "K03": "PASS: US02 retained despite shorter wording",
+    "method": "规则演算，未阅读模型输出"
+  }
+}

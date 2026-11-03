@@ -1,0 +1,169 @@
+{
+  "label": "item-58",
+  "material": "change",
+  "pair_side": "A",
+  "review_phase": "blind_locked_first_three_pairs",
+  "fidelity": [
+    {
+      "fact_id": "C01",
+      "requirement": "变更涉及POST /imports，请求体可传request_id",
+      "status": "preserved",
+      "evidence": [
+        "`POST /imports` 新增基于 `request_id` 的幂等机制。客户端可在请求体中传入 `request_id`，标识一次导入请求。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "C02",
+      "requirement": "同一账户、24小时内、相同request_id且相同请求内容重试，返回原import_id且不新建导入任务",
+      "status": "preserved",
+      "evidence": [
+        "同一账户在 24 小时内：",
+        "- 使用相同 `request_id` 和相同请求内容重试，接口返回原 `import_id`，不再创建导入任务。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "C03",
+      "requirement": "同一账户、24小时内复用request_id但内容不同，返回HTTP 409",
+      "status": "preserved",
+      "evidence": [
+        "同一账户在 24 小时内：",
+        "- 复用 `request_id` 但改变请求内容，接口返回 HTTP 409。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "同一账户、24小时的共同引导句覆盖两个列表项；变更请求内容时返回HTTP 409。"
+    },
+    {
+      "fact_id": "C04",
+      "requirement": "不同账户分别处理，不跨账户去重",
+      "status": "preserved",
+      "evidence": [
+        "不同账户的 `request_id` 分别处理，不做跨账户去重。不传 `request_id` 仍可调用接口，但不能依靠此机制避免重复创建任务。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "C05",
+      "requirement": "不传request_id仍可调用，但不受此机制的防重复保护",
+      "status": "preserved",
+      "evidence": [
+        "不同账户的 `request_id` 分别处理，不做跨账户去重。不传 `request_id` 仍可调用接口，但不能依靠此机制避免重复创建任务。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "C06",
+      "requirement": "原有重复任务不会自动合并",
+      "status": "preserved",
+      "evidence": [
+        "原先已经创建的重复任务不会自动合并。本次变更不保证提升吞吐或降低延迟，也不保证彻底消除重复任务。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "C07",
+      "requirement": "不得保留或新增吞吐或延迟提升、彻底消除重复任务的保证",
+      "status": "preserved",
+      "evidence": [
+        "原先已经创建的重复任务不会自动合并。本次变更不保证提升吞吐或降低延迟，也不保证彻底消除重复任务。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "未出现无依据断言。负向约束不要求将未提供数据逐项写入正文。"
+    }
+  ],
+  "source_slop": [
+    {
+      "unit_id": "CS01",
+      "status": "eliminated",
+      "source_quotes": [
+        "本次POST /imports的演进构建了一个以幂等性为核心的可靠性底座，不仅为请求重放提供坚实支点，更为稳定性护城河铺就了新的路径。",
+        "从调用侧到数据侧，这一能力矢量将持续释放协同价值。",
+        "综上所述，新的幂等保障将为我们的系统带来更多可能，让可靠性真正触手可及。"
+      ],
+      "output_quotes_or_absence": [
+        "`POST /imports` 新增基于 `request_id` 的幂等机制。客户端可在请求体中传入 `request_id`，标识一次导入请求。",
+        "同一账户在 24 小时内："
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "可靠性底座、护城河、能力矢量及抽象价值许诺均消失，改为具体幂等行为和范围。"
+    },
+    {
+      "unit_id": "CS02",
+      "status": "eliminated",
+      "source_quotes": [
+        "**实现机制：** 在实现机制方面，"
+      ],
+      "output_quotes_or_absence": [
+        "`POST /imports` 新增基于 `request_id` 的幂等机制。客户端可在请求体中传入 `request_id`，标识一次导入请求。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "实现机制标签的重复消失，直接说明请求体参数。"
+    },
+    {
+      "unit_id": "CS03",
+      "status": "eliminated",
+      "source_quotes": [
+        "彰显了确定性执行的强大力量。",
+        "这一行为体现了面向未来的契约精神。",
+        "换句话说，这不只是一个参数，更是一种工程态度。"
+      ],
+      "output_quotes_or_absence": [
+        "- 使用相同 `request_id` 和相同请求内容重试，接口返回原 `import_id`，不再创建导入任务。",
+        "- 复用 `request_id` 但改变请求内容，接口返回 HTTP 409。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "确定性力量、契约精神和工程态度的价值评语均消失，技术行为本身保留。"
+    },
+    {
+      "unit_id": "CS04",
+      "status": "eliminated",
+      "source_quotes": [
+        "接下来，我们应继续秉持精益求精的精神，推动这一底层原语开花结果。"
+      ],
+      "output_quotes_or_absence": [
+        "原先已经创建的重复任务不会自动合并。本次变更不保证提升吞吐或降低延迟，也不保证彻底消除重复任务。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "精益求精和开花结果号召消失；结尾说明真实保证边界，没有虚构计划。"
+    }
+  ],
+  "new_slop": [],
+  "independent_usability_issues": [],
+  "major_damage_gate": false,
+  "metrics": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 4,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "source_slop_N": 4,
+    "source_slop_elimination_rate": 1,
+    "new_slop_roots": 0
+  },
+  "characters_description_only": {
+    "unicode_codepoints_including_whitespace": 314,
+    "unicode_codepoints_excluding_whitespace": 284,
+    "used_for_quality_scoring": false
+  },
+  "input_sha256": "1e698d9a042ed6ece9f524da4dd655598f9082e86e91e2bfba55cea768ccb0de",
+  "unknown_resources": {
+    "exact_tokens": "UNKNOWN",
+    "exact_cost": "UNKNOWN",
+    "processing_duration": "UNKNOWN"
+  },
+  "summary": "事实保留，预注册源slop均消除，未见新增slop或独立可用性障碍。"
+}

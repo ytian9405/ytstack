@@ -1,0 +1,19 @@
+{
+  "frozen_at": "2026-11-02T13:10:47.996243+00:00",
+  "sol_rewriting_started": false,
+  "model": "gpt-6.1-sol",
+  "sha256": {
+    "design/FRAMEWORK.md": "97b5e1d50c882e7f19e5ac9d14e8dc832f06bcdff9688fa9f8101587a1839f04",
+    "design/framework-bro.json": "41fee047fbdbae3fbc592e253d13df8dab9d3d6aa751c8cd480107ba9fc40885",
+    "design/framework-technical-bro.json": "01a8781a205ba997d0504f2fc5cee89008ec3137bbfdfd5adcba44fc0dc9f145",
+    "design/PROTOCOL.md": "8a8a9684636c261de26b5f4d2a9386f124043506c879669b051034958f8681ed",
+    "control/assignment.json": "e40c30161e1fca3c8ae8589065acf1852d33b22208f5c891362eca697592bd2d",
+    "control/seed-message.txt": "98e0f93239dd3345f1827b04d7eaf2840537e6032d017f2bfcd236d8254e7535",
+    "control/diagnose.py": "a4d24044ad00a7d2a985e068c31b9e10413409538bc9dc1f5ce63e47ce9e0a3e",
+    "calibration/index.json": "c81c2dbfbfff27de6a7392d676a91e2d6c50b8c3f7506c95a5bdab7d592e3886",
+    "inputs/bro/source.md": "3115ed87567efca3771a5b99d26f1aa9273538e5f451c01f7f9f99cdad9f4ab3",
+    "inputs/bro/task.txt": "eb2d68f32f3a9a1315bbdfa374a2ab8d7c85ed3ef6b0f9d6f169e578f5731356",
+    "inputs/technical-bro/source.md": "fea06084f62704e3276f2b478a3417382fecf0757c368861afadc0a8b4c31c24",
+    "inputs/technical-bro/task.txt": "74b8d2dee34f74ef20aa5bc6ad20f38d6f41e37e3f7b8c4075c45136c79822a0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "T2-sol-v02",
+ "prompt": "tools/install.py 遇到已有同名入口时怎么处理？会不会把我的东西弄坏？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "exit": 0,
+ "seconds": 49.3,
+ "usage": {
+  "input_tokens": 77259,
+  "cached_input_tokens": 66176,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1105,
+  "reasoning_output_tokens": 225
+ },
+ "final": "**已有同名 skill 入口时，脚本会保留它；遇到冲突就停止，不会直接覆盖。** 这是读代码的结论，没实际跑过。\n\n对 `.agents/skills/名字` 或 `.claude/skills/名字`，处理方式是：\n\n- **已有链接指向本次安装的来源，且使用 `--method symlink`**：跳过，记为 `unchanged`。\n- **已有普通目录，里面的文件路径和内容都与来源一致**：也跳过。这里不比较空目录和文件权限。\n- **其他同名情况**：报 `Existing entry preserved; resolve the conflict before installing: …`，退出码为 `1`。包括内容不同的目录、普通文件、指向别处的链接、已经失效的链接。\n- **先检查完所有要装的 skill，再开始安装**。所以检查时发现任何一个冲突，本次其他 skill 也不会安装。[对应代码](/tmp/ytev-pzb_4c_k/project/tools/install.py:70)\n\n但不能据此保证整个命令出错时什么都不变：\n\n- **安装途中失败**，例如复制到一半磁盘满了，可能留下已经装好的入口或只复制了一部分的目录；脚本不会自动撤回。[对应代码](/tmp/ytev-pzb_4c_k/project/tools/install.py:85)\n- **加了 `--voice` 会修改已有的 `AGENTS.md` 或 `CLAUDE.md`**：没有 ytstack 标记就追加规则；有标记就替换标记内的内容，你在里面的修改也会被替换。它直接保存整个文件，保存中断可能损坏原内容；文件若是链接，也会写到链接指向的文件。[对应代码](/tmp/ytev-pzb_4c_k/project/tools/install.py:28)\n- **skill 先安装，`--voice` 后执行**。因此后者失败时，前面装好的 skill 仍然保留。[执行顺序](/tmp/ytev-pzb_4c_k/project/tools/install.py:110)\n\n建议先给原命令加 `--dry-run` 预览；遇到冲突，把自己的入口移到备份位置后再重试。要用 `--voice`，先备份对应规则文件。\n\n另外，当前工作区缺少脚本必需的 `ytstack.json`，按现状运行会先报缺文件，尚未走到同名检查。",
+ "commentary": [
+  "我先看看 `tools/install.py` 怎么处理同名入口，以及中途失败时会留下什么。\n"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*install*test*' -g 'test*install*'\"",
+  "/bin/bash -lc \"sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc \"cat AGENTS.md && rg -n 'install_voice|Existing entry preserved|dry.run|install.py|digest_tree' tests tools README* docs ytstack.json\"",
+  "/bin/bash -lc 'nl -ba tools/install.py && rg --files tests tools && cat ytstack.json'",
+  "/bin/bash -lc \"sed -n '1,245p' tests/test_package.py && rg --files -g 'ytstack.json' -g 'plain-talk.md' -g 'README*' -g 'SKILL.md' -g '\"'!*node_modules*'\"' -g '\"'!*venv*'\"' | head -70\""
+ ]
+}

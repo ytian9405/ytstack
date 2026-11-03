@@ -1,0 +1,19 @@
+{
+  "command": "/usr/bin/python3 tests/test_queue_cli.py --doctor --evidence /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/doctor.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+  "cases": [],
+  "doctor": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py",
+    "sha256": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "status": "PASS",
+  "exit_status": 0
+}

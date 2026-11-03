@@ -1,0 +1,62 @@
+{
+ "recorded_at": "2026-11-03T00:18:47.712839+00:00",
+ "rater": "user",
+ "records": [
+  {
+   "question": 1,
+   "source": "H1",
+   "preferred_alias": "A",
+   "preferred_arm": "v02",
+   "reason_verbatim": "B的“包”和“哈希”过于黑话"
+  },
+  {
+   "question": 2,
+   "source": "H2",
+   "preferred_alias": "A",
+   "preferred_arm": "v02",
+   "reason_verbatim": "B的“本仓库”其实很confusing，到底是本机的仓库还是远端的仓库"
+  },
+  {
+   "question": 3,
+   "source": "H3",
+   "preferred_alias": "B",
+   "preferred_arm": "v01",
+   "reason_verbatim": "B给了一些context，比较好理解"
+  },
+  {
+   "question": 4,
+   "source": "H4",
+   "preferred_alias": "B",
+   "preferred_arm": "v02",
+   "reason_verbatim": "（与第5题同）更优的答案给了我一些context"
+  },
+  {
+   "question": 5,
+   "source": "H5",
+   "preferred_alias": "B",
+   "preferred_arm": "v02",
+   "reason_verbatim": "第四题和第五题更优的答案都是给了我一些context"
+  },
+  {
+   "question": 6,
+   "source": "H6",
+   "preferred_alias": "B",
+   "preferred_arm": "v01",
+   "reason_verbatim": "我喜欢那个“主要问题按优先级排列”以及后续的表述"
+  },
+  {
+   "question": 7,
+   "source": "AC3",
+   "preferred_alias": "B",
+   "preferred_arm": "v01",
+   "reason_verbatim": "简洁"
+  },
+  {
+   "question": 8,
+   "source": "AC4",
+   "preferred_alias": "A",
+   "preferred_arm": "v01",
+   "reason_verbatim": ""
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok
+test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... FAIL
+test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... ok
+test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... ok
+test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... FAIL
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... ok
+test_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1_2rgouv/project/tests/test_behavior.py", line 41, in test_C02_add_preserves_strings_and_persists_in_order
+    self.assertEqual(self.add(first['title'], '1', first['category']), first)
+AssertionError: {'id'[13 chars] '  午餐 🍜  ', 'cents': 1, 'category': '食物 🥢', 'voided': False} != {'id'[13 chars] '  午餐 🍜  ', 'cents': 1, 'category': ' 食物 🥢 ', 'voided': False}
+- {'category': '食物 🥢', 'cents': 1, 'id': 1, 'title': '  午餐 🍜  ', 'voided': False}
++ {'category': ' 食物 🥢 ',
++  'cents': 1,
++  'id': 1,
++  'title': '  午餐 🍜  ',
++  'voided': False}
+
+======================================================================
+FAIL: test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-1_2rgouv/project/tests/test_behavior.py", line 76, in test_C05_summary_sums_repeated_categories
+    self.assertEqual(self.success('summary'), {'count': 3, 'total_cents': 320,
+AssertionError: {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, 'Food': 17}} != {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, ' Food ': 17}}
+- {'by_category': {'Food': 17, 'food': 303}, 'count': 3, 'total_cents': 320}
++ {'by_category': {' Food ': 17, 'food': 303}, 'count': 3, 'total_cents': 320}
+?                   +    +
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.343s
+
+FAILED (failures=2)

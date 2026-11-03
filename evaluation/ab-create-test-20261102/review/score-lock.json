@@ -1,0 +1,25 @@
+{
+  "locked_at": "2026-11-02T12:48:18.354122+00:00",
+  "blind": true,
+  "group_mapping_received": false,
+  "framework_version": "1.0",
+  "scores": {
+    "run-28": 97.5,
+    "run-17": 100.0,
+    "run-43": 97.5,
+    "run-65": 95.0
+  },
+  "files": {
+    "run-28.json": "8fb7548bd6a25eb00f4be7beb445f15ad68f2f66461c5171f9c92b5f44360400",
+    "run-17.json": "da0a967da592c9ad90269f3e443747a2bb47fb48c71945bf61c5d62cad4ae7a7",
+    "run-43.json": "a0727b90e1a78fd0608b2edb6d0bf7b2b8d4661a3672bcdd1fce84acf8356772",
+    "run-65.json": "80474c646a4405a4f99582714d4757355694474822eccec107d80c2a7ef5b5fe",
+    "BLIND-REVIEW.md": "758b220c4db10eacb0d1a2ce3224d007a42f5964b3468de35e58d14a286288bb",
+    "rerun-records.json": "2d50ffaafa7308b5476c4579fb0188e737b0ccdeecc2a97bacc08d2ba3d42e60",
+    "second-rerun-records.json": "fe752c6468f628b6f60677561baa478d73c47dceb8fed993dc31a0bd10a28dda",
+    "first-batch-lock.json": "6164bbc42cab478ee34356b5cf2b587cb3f465fab45428aeddc85e3d0a120699",
+    "initial-guesses.json": "92816b2ea9a9b5b6689f13223636ed9a4747382348f74d6499942444372f0f0f",
+    "second-initial-guesses.json": "cb4e5b415c9f051869d7c2c40a045eb5015e6a5ec0e75db654167000b5b311d9"
+  },
+  "validation": "17项各100权重；首批哈希未变；16条顶层复跑命令退出0且临时目录已删除"
+}

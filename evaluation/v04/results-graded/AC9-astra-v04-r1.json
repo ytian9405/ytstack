@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "导入命令结束后，另起进程运行 `python3 queue_cli.py --state /tmp/queue-check.json list`，结果须包含全部新任务，内容与导入输出一致"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "整批不添加，即使文件前半段有效也一样。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "每个非空白行生成一条任务，保留标题首尾空格；空白行跳过，`#` 开头的行也按任务处理。分别导入这些样例，核对输出标题与条数。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "已按推荐写进上面的条件，你可以改：\n\n- **最要紧：文件格式**。推荐每行一个标题；若要同时指定截止日期、优先级，需要扩大此次范围，现有任务还没有这些信息。\n- **空白行**。推荐跳过；改为报错，则多一个空行也会让整批导入失败。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "整批不添加，即使文件前半段有效也一样。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "- **重复任务**。推荐允许；改为跳过同名任务，可减少重复，但同名的不同任务也可能被漏掉。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "文件含两行任务时，成功退出，输出一个包含两条新任务的 JSON 数组，顺序与文件一致。"
+  }
+ ]
+}

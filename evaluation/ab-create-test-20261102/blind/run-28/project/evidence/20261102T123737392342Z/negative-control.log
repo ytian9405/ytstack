@@ -1,0 +1,22 @@
+{"case": "test_behavior.LedgerBehaviorTests.test_LL02_add_persistence", "command": ["/usr/bin/python3", "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-28/project/evidence/20261102T123737392342Z/negative-control-jomhnp36/expense_cli.py", "--state", "/tmp/ledger-behavior-vu6t4zqt/nested/ledger.json", "add", " 午餐 🍜 ", "--cents", "1250", "--category", " 餐饮 "], "stdout": "{\"id\": 1, \"title\": \" 午餐 🍜 \", \"cents\": 1250, \"category\": \" 餐饮 \", \"voided\": false}\n", "stderr": "", "exit_code": 0}
+{"case": "test_behavior.LedgerBehaviorTests.test_LL02_add_persistence", "command": ["/usr/bin/python3", "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-28/project/evidence/20261102T123737392342Z/negative-control-jomhnp36/expense_cli.py", "--state", "/tmp/ledger-behavior-vu6t4zqt/nested/ledger.json", "add", "车票", "--cents", "300", "--category", "travel"], "stdout": "{\"id\": 1, \"title\": \"车票\", \"cents\": 300, \"category\": \"travel\", \"voided\": false}\n", "stderr": "", "exit_code": 0}
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL
+
+======================================================================
+FAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-28/project/evidence/20261102T123737392342Z/negative-control-jomhnp36/tests/test_behavior.py", line 51, in test_LL02_add_persistence
+    self.assertEqual(self.add('车票', '300', 'travel'), second)
+AssertionError: {'id': 1, 'title': '车票', 'cents': 300, 'category': 'travel', 'voided': False} != {'id': 2, 'title': '车票', 'cents': 300, 'category': 'travel', 'voided': False}
+- {'category': 'travel', 'cents': 300, 'id': 1, 'title': '车票', 'voided': False}
+?                                            ^
+
++ {'category': 'travel', 'cents': 300, 'id': 2, 'title': '车票', 'voided': False}
+?                                            ^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.126s
+
+FAILED (failures=1)

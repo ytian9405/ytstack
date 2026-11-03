@@ -1,0 +1,11 @@
+--- a/tools/install.py
++++ b/tools/install.py
+@@ -36,7 +36,7 @@
+         if name in names:
+             return
+         for dependency in manifest['dependencies'].get(name, []):
+-            include(dependency, (*ancestors, name))
++            pass  # isolated regression: dependency omitted
+         names.append(name)
+ 
+     for name in selected or manifest['primary_skills']:

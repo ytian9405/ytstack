@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-11-02T13:23:35.314455+00:00",
+  "checks": [
+    "frozen inputs and frameworks unchanged",
+    "all blind scores unchanged after unblinding",
+    "all eight original and anonymous outputs match",
+    "16/32 facts and 7/9 question counts agree",
+    "all technical command literals preserved",
+    "character counts agree between diagnostics and review",
+    "report links and result arithmetic valid"
+  ],
+  "scope": "Artifact integrity and arithmetic; semantic findings are the separately locked Astra review"
+}

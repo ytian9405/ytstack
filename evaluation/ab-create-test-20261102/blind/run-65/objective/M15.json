@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-2de1g4q8/project",
+  "target_sha256": "0f91b8810aaa4bd53022bdf57b60dcc6e325b6f7eb77ac68cfcd4c8c1bf11279",
+  "started_at": "2026-11-02T12:41:36.070489+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok\ntest_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... ok\ntest_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... ok\ntest_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... FAIL\ntest_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... ok\ntest_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... ok\ntest_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-2de1g4q8/project/tests/test_behavior.py\", line 66, in test_C04_summary_aggregates_only_active_entries\n    self.assertEqual(self.success('summary'), {'count': 2, 'total_cents': 118,\nAssertionError: {'count': 4, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}} != {'count': 2, 'total_cents': 118, 'by_category': {'food': 101, 'travel': 17}}\n- {'by_category': {'food': 101, 'travel': 17}, 'count': 4, 'total_cents': 118}\n?                                                       ^\n\n+ {'by_category': {'food': 101, 'travel': 17}, 'count': 2, 'total_cents': 118}\n?                                                       ^\n\n\n----------------------------------------------------------------------\nRan 8 tests in 2.205s\n\nFAILED (failures=1)\n",
+  "tests_run": 8,
+  "status": "FAIL",
+  "elapsed_seconds": 2.262,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-2de1g4q8",
+  "scratch_removed": true
+}

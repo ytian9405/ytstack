@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -33,7 +33,7 @@
+         if not args.title.strip() or not args.category.strip() or args.cents <= 0:
+             print('title and category must be nonblank; cents must be positive', file=sys.stderr)
+             return 1
+-        entry = {'id': max((item['id'] for item in entries), default=0) + 1,
++        entry = {'id': len([item for item in entries if not item['voided']]) + 1,
+                  'title': args.title, 'cents': args.cents,
+                  'category': args.category, 'voided': False}
+         entries.append(entry)

@@ -1,0 +1,14 @@
+{
+ "id": "T1-astra-v02",
+ "prompt": "这个 queue_cli 的持久化设计有什么问题？要不要改？给我结论。",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "exit": "timeout",
+ "seconds": 420.0,
+ "usage": null,
+ "final": "",
+ "commentary": [],
+ "skills_read": [],
+ "commands": []
+}

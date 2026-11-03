@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "原包和项目其他文件保持原样。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "只删除 `technical-bro`；`unslop`、`bro`、`create-test-skill` 保留。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "退出码为 `0`，JSON 中的 `planned` 列出正式执行会删除的路径；所有文件、目录和链接保持原样。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "都以 `0` 退出，删除列表为空，不创建任何文件或目录。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": "不清理项目的 `AGENTS.md`、`CLAUDE.md`，也不删除卸载后留下的空父目录。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**D2：要不要连带删依赖？** 推荐卸载 `technical-bro` 时保留 `unslop`；只要还留着 `technical-bro`，就禁止单独卸载 `unslop`。另一种选择是自动连带删除，命令更省事，但删除范围更大。"
+  },
+  {
+   "i": 1,
+   "state": "ASKED",
+   "quote": "**D3：怎样判断可以删？** 推荐只删除指向当前包的链接，或内容、目录结构与当前包完全一致的复制目录；改过的、无法确认的都保留并报错。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**手动复制的同名同内容目录也会被删**，现有脚本没有安装记录，分不出来。更保守的选项是复制目录全部留给用户手动删除。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "**C6：预览不删除。**\n退出码为 `0`，JSON 中的 `planned` 列出正式执行会删除的路径；所有文件、目录和链接保持原样。\n非零退出，指出冲突路径；所有候选项均保持原样，包括本来可以删除的项。"
+  }
+ ]
+}

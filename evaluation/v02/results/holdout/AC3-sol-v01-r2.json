@@ -1,0 +1,30 @@
+{
+ "id": "AC3-sol-v01-r2",
+ "prompt": "tools/install.py 现在只能装不能卸，我想加卸载。动手前帮我定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 54.3,
+ "usage": {
+  "input_tokens": 79543,
+  "cached_input_tokens": 62592,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1424,
+  "reasoning_output_tokens": 285
+ },
+ "final": "建议把这次卸载定为：**删除可识别的安装项，保留用户改动，支持预演和重复执行。** 以下是拟定的验收标准，尚未改代码。\n\n入口建议保持现有调用兼容：\n\n```sh\npython3 tools/install.py --project /path/to/project --harness codex --uninstall\n```\n\n| 验收项 | 通过条件 |\n|---|---|\n| 兼容现有安装 | 不传 `--uninstall` 时，现有安装参数、行为和输出保持兼容。 |\n| 支持两种宿主 | `codex` 只操作 `.agents/skills`；`claude` 只操作 `.claude/skills`。另一处不变。 |\n| 选择卸载范围 | 支持重复传 `--skill`。指定时只卸载所选技能；不指定时，处理当前清单中的全部主技能及其依赖。未知技能报错，且不删除任何内容。 |\n| 保护依赖 | 单独卸载 `technical-bro` 时保留 `unslop`。卸载 `unslop` 而仍保留依赖它的 `technical-bro` 时，拒绝整次操作并说明原因。 |\n| 识别可删除项 | 指向本包对应技能目录的软链接，只删除链接，源目录不变。普通目录只有在目录内容与当前源技能完全一致时才允许删除。无需用户指定安装方式。 |\n| 保护已有内容 | 同名普通文件、指向其他位置的链接、有新增或修改内容的目录均保留，并报出冲突路径。删除前检查全部目标，发现冲突时不删除任何目标。 |\n| 重复执行 | 项目存在但技能目录或所选技能不存在时，成功退出并报告缺失项，不创建文件或目录。重复卸载结果相同。 |\n| 预演 | `--uninstall --dry-run` 使用与实际卸载相同的检查，输出拟删除项与缺失项，文件系统完全不变。 |\n| 路径边界 | 项目不存在时报错。技能发现目录解析到项目外时拒绝操作。卸载后保留 `.agents`、`.claude` 和 `skills` 父目录。 |\n| 输出与失败 | 成功退出码为 `0`，stdout 输出 JSON，包含 `project`、`harness`、`removed`、`missing`；预演用 `planned` 替代 `removed`。失败非零退出，stderr 给出原因。运行中发生删除错误时，如实报告已完成部分，不承诺回滚。 |\n\n验收测试使用临时项目，至少覆盖两个宿主、两种安装方式，以及依赖保护、内容冲突、预演、重复卸载和项目外路径保护。删除链接后还要检查源技能完整，冲突时检查其他目标未被删除。\n\n这里有一个明确边界：当前安装器没有安装记录，**内容完全相同的手工副本也会被视为可卸载项**；无法匹配当前源码的旧版本副本则保留。\n\n另外，现有 `tests/test_package.py` 包含 `--voice` 和默认安装 5 个技能的断言，但当前安装器没有 `--voice`，清单也只有 4 个技能。验收时需区分这些已有不一致与新增卸载功能的回归。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 的安装流程和相关说明，再据此拟一份可验证的卸载验收标准，暂不改代码。这里会用 technical-bro 技能来组织验收说明。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*install*' -g '*test*' -g 'README*' -g 'SKILL.md' -g 'pyproject.toml' -g 'package.json' -g 'Makefile'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md; cat tools/install.py'",
+  "/bin/bash -lc 'for f in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-p3mtaq8h/AGENTS.md /tmp/ytev-p3mtaq8h/project/AGENTS.md tools/AGENTS.md; do if [ -f \"$f\" ]; then cat \"$f\"; fi; done\ncat .agents/skills/unslop/SKILL.md\ncat READM",
+  "/bin/bash -lc \"rg -n 'install.py|uninstall|卸载|--voice' --glob '*.md' --glob '*.py' --glob '*.json' .\""
+ ]
+}

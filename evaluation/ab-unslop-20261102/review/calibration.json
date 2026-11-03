@@ -1,0 +1,51 @@
+{
+  "protocol": "design/FRAMEWORK.md + design/framework.json，未修改冻结框架",
+  "calibration_input_sha256": "d647b547550794e9e954e96c40619f9d4f05075cdeee70baed5440a6f6da1e87",
+  "method": "读取实际校准候选逐项核对，不使用模型输出",
+  "results": [
+    {
+      "id": "K01",
+      "scope": "Only the request-content condition involving C02/C03; do not score other absent facts in this isolated sentence.",
+      "actual_status": "major_damage",
+      "affected_fact_ids": [
+        "C02",
+        "C03"
+      ],
+      "defect_root_id": "K01-R1",
+      "major_defect_count": 1,
+      "evidence": "无论请求内容是否变化，都返回原import_id，不创建任务。",
+      "reason": "将相同内容才复用导入任务的条件删除，并把变更内容时应返回HTTP 409改成返回原import_id。两个事实ID由同一内容条件错误造成，仅计一个重大根因；不检查片段范围外遗漏。",
+      "matches_preregistered_expectation": true,
+      "result": "PASS"
+    },
+    {
+      "id": "K02",
+      "scope": "Full clean notice with only N05 deleted.",
+      "actual_status": "major_damage",
+      "affected_fact_ids": [
+        "N05"
+      ],
+      "defect_root_id": "K02-R1",
+      "major_defect_count": 1,
+      "evidence": "通篇缺失“截图不要包含访问令牌”。末句止于“发送出现问题的时间和错误截图”。",
+      "reason": "原文唯一删除的是截图安全限制N05。N01至N04保留，源slop仍为0；变短不能抵消核心限制遗漏。",
+      "matches_preregistered_expectation": true,
+      "result": "PASS"
+    },
+    {
+      "id": "K03",
+      "scope": "Only US02 resolution; other parts intentionally remain original. Do not evaluate this as a generated model output.",
+      "unit_id": "US02",
+      "actual_status": "retained",
+      "evidence": [
+        "这是数据协作的重要里程碑。",
+        "赋能每一次数据决策",
+        "这个能力边界将成为我们持续深耕、不断突破的坚实底座。"
+      ],
+      "reason": "改短的句子仍以重要里程碑作抽象成就定位，功能未变；同单元的其他宏大定位也保留。未发生真正处理，因此不是partial或eliminated。其余单元不在本校准评估范围。",
+      "matches_preregistered_expectation": true,
+      "result": "PASS"
+    }
+  ],
+  "overall_result": "PASS"
+}

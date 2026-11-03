@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-11-02T14:22:38.907636+00:00",
+  "checks": [
+    "frozen prompts, sources and framework unchanged",
+    "blind reviews unchanged after mapping reveal",
+    "eight generated, anonymous and human-review bodies match",
+    "source slop quotes are present in original drafts",
+    "summary arithmetic and report links verified"
+  ],
+  "scope": "Artifact integrity and arithmetic, separate from model semantic judgments"
+}

@@ -1,0 +1,31 @@
+{
+ "id": "AC5-sol-v02-r1",
+ "prompt": "我想把这个 README 改到新手能照着跑通，什么样算改好了？帮我定标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 73.6,
+ "usage": {
+  "input_tokens": 75831,
+  "cached_input_tokens": 60160,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2145,
+  "reasoning_output_tokens": 497
+ },
+ "final": "**改好的标准：一个没读过代码的新手，只看 README，就能记一笔账、查到账、作废它，并知道数据存在哪里、报错后怎么继续。** 现在的 README 已有命令和字段说明，主要缺准备步骤、预期结果和出错后的做法。\n\n**待你决定**\n\n- **D1：支持哪些系统？** 推荐先保证 macOS、Linux 能照做。若也支持 Windows，就要补对应命令和路径，并在 Windows 上验收。\n- **D2：新手从哪里开始？** 推荐从“已拿到项目文件，但可能没装 Python”开始。若从零开始，还需提供获取项目的入口和下载步骤。\n\n以下按推荐选项定标准。\n\n**这次不做**\n\n- 不增加记账功能，不改变现有命令。\n- 不写完整的 Python 或终端教程，只解释完成操作必需的内容。\n- 不承诺解决损坏的数据文件、多人同时保存、目录无写入权限的问题。\n\n**验收条件**\n\n- **C1［D1、D2］准备步骤能照做。**  \n  **做什么：** 从项目文件夹开始，按 README 检查 Python，并进入运行命令的位置。  \n  **应该看到：** 文档给出 `python3 --version`，说明需要 Python 3.9 或以上、无需安装额外依赖，并解释怎样确认当前文件夹里有 `expense_cli.py`；缺少 Python 时有明确的安装指引。  \n  **防的是：** 一上来贴命令，新手却不知道在哪里输入、缺什么。\n\n- **C2：第一笔账有可核对的结果。**  \n  **做什么：** 使用一个尚不存在的演示数据文件，按顺序添加“午餐”，金额为 `1250`、类别为 `food`，再执行 `list` 和 `summary`。  \n  **应该看到：** README 提供完整可复制的命令和对应输出；记录 ID 为 `1`，汇总为一笔、`1250` 分；明确解释 `1250` 表示 12.50 元。  \n  **防的是：** 命令虽然能执行，读者却不知道金额填得对不对、结果算不算成功。\n\n- **C3：关闭后还能找回数据。**  \n  **做什么：** 完成 C2 后关闭终端，重新打开，按文档再次查询同一个数据文件。  \n  **应该看到：** 午餐记录仍在；文档说明 `--state` 指定保存位置，相对路径从哪个文件夹算起，以及换路径会打开另一份账本。  \n  **防的是：** 换个终端或文件夹后查不到记录，误以为数据丢了。\n\n- **C4：金额边界和错误写法讲清楚。**  \n  **做什么：** 在独立演示账本中分别尝试 `--cents 1`、`--cents 0`、`--cents 12.5`。  \n  **应该看到：** `1` 成功，代表一分钱；后两种报错且不增加记录。文档解释原因，并给出改成整数分的正确写法。  \n  **防的是：** 新手把“元”直接填进去，报错后不知道怎么改。\n\n- **C5：作废后的变化能看懂。**  \n  **做什么：** 在 C2 的账本中执行 `void 1`，再执行 `list` 和 `summary`。  \n  **应该看到：** 记录仍能查到，`voided` 为 `true`；汇总变为 `{\"count\": 0, \"total_cents\": 0, \"by_category\": {}}`。文档解释“作废保留记录，但不再计入合计”。  \n  **防的是：** 读者以为作废会删除记录，或不知道合计为什么变了。\n\n- **C6：复制示例不会混账。**  \n  **做什么：** 完成一次教程后，按 README 的说明再练一遍。  \n  **应该看到：** 文档说明怎样使用新的演示数据文件重新开始；示例不要求覆盖或删除真实账本，预期输出注明适用的起始状态。  \n  **防的是：** 第二次复制命令时 ID、金额都变了，或为了重来误删自己的账。\n\n- **C7：整篇实际照做一次。**  \n  **做什么：** 找一位没读过代码的人，在 D1 选定的每种系统上，只靠 README 完成 C1—C6，并执行文档列出的测试命令。  \n  **应该看到：** 不需要作者口头补步骤；逐项留下实际结果。测试若失败，文档不能声称“全部通过”，必须说明失败会不会影响记账操作。  \n  **防的是：** 作者自己觉得写清楚了，实际仍靠读者猜步骤。\n\n**不能弄坏**\n\n- 保留 `add`、`list`、`void`、`summary` 的现有参数和含义；示例输出与程序一致。\n- 保留“Python 3.9+、无需额外依赖、无需网络、账号或服务器”的使用条件。\n- 不把“作废”写成删除，也不把金额单位从“分”写成“元”。\n\n改 D1 会影响 C1、C7；改 D2 会影响 C1 的起点和需要补充的准备步骤。",
+ "commentary": [
+  "我先按 `acceptance-criteria` 技能看一下 README 和项目的启动方式，再把“新手照着跑通”写成能逐条判断通过或不通过的标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat /tmp/ytev-pl3meje6/project/.agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*README*' -g '*readme*' -g 'package.json' -g 'pyproject.toml' -g 'requirements*.txt' -g 'Makefile' -g 'compose*.yml' -g 'Dockerfile' -g '*lock*' -g '*.csproj' -g 'Cargo",
+  "/bin/bash -lc \"cat README.md AGENTS.md && rg --files -g '\"'!.git'\"' -g '\"'!node_modules'\"' -g '\"'!vendor'\"'\"",
+  "/bin/bash -lc 'cat expense_cli.py'",
+  "/bin/bash -lc 'cat tests/test_smoke.py tests/test_package.py tools/validate.py tools/install.py ytstack.json'"
+ ]
+}

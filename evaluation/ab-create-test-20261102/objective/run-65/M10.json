@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-kun1pzo_/project",
+  "target_sha256": "099a37f8811e3d20092797cf63af35696315b1bb72b6def16c43eab84ef5cff7",
+  "started_at": "2026-11-02T12:41:24.402344+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok\ntest_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... ok\ntest_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... FAIL\ntest_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... ok\ntest_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... ok\ntest_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... ok\ntest_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-kun1pzo_/project/tests/test_behavior.py\", line 51, in test_C03_void_is_persistent_idempotent_and_ids_not_reused\n    self.assertEqual(self.success('list'), [first, expected])\nAssertionError: Lists differ: [{'id[67 chars]alse}] != [{'id[67 chars]alse}, {'id': 2, 'title': '车票', 'cents': 300, [33 chars]rue}]\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n{'id': 2, 'title': '车票', 'cents': 300, 'category': 'travel', 'voided': True}\n\n- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]\n?                                                                              ^\n\n+ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},\n?                                                                              ^\n\n+  {'category': 'travel', 'cents': 300, 'id': 2, 'title': '车票', 'voided': True}]\n\n----------------------------------------------------------------------\nRan 8 tests in 2.450s\n\nFAILED (failures=1)\n",
+  "tests_run": 8,
+  "status": "FAIL",
+  "elapsed_seconds": 2.529,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-kun1pzo_",
+  "scratch_removed": true
+}

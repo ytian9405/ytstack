@@ -1,0 +1,27 @@
+{"case": "test_behavior.LedgerBehaviorTests.test_LL02_add_persistence", "command": ["/usr/bin/python3", "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project/evidence/20261102T124312953385Z/negative-control-02i9ym5r/expense_cli.py", "--state", "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project/evidence/20261102T124312953385Z/negative-control-02i9ym5r/ledger-behavior-1_ughcqv/nested/ledger.json", "add", " 午餐 🍜 ", "--cents", "1250", "--category", " 餐饮 "], "stdout": "{\"id\": 1, \"title\": \" 午餐 🍜 \", \"cents\": 1250, \"category\": \" 餐饮 \", \"voided\": false}\n", "stderr": "", "exit_code": 0}
+{"case": "test_behavior.LedgerBehaviorTests.test_LL02_add_persistence", "command": ["/usr/bin/python3", "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project/evidence/20261102T124312953385Z/negative-control-02i9ym5r/expense_cli.py", "--state", "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project/evidence/20261102T124312953385Z/negative-control-02i9ym5r/ledger-behavior-1_ughcqv/nested/ledger.json", "list"], "stdout": "[]\n", "stderr": "", "exit_code": 0}
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL
+
+======================================================================
+FAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project/evidence/20261102T124312953385Z/negative-control-02i9ym5r/tests/test_behavior.py", line 51, in test_LL02_add_persistence
+    self.assertEqual(self.invoke('list'), [first])
+AssertionError: Lists differ: [] != [{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 125[35 chars]lse}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}
+
+- []
++ [{'category': ' 餐饮 ',
++   'cents': 1250,
++   'id': 1,
++   'title': ' 午餐 🍜 ',
++   'voided': False}]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.131s
+
+FAILED (failures=1)

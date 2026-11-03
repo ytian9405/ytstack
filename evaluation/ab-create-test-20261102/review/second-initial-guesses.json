@@ -1,0 +1,14 @@
+{
+  "before_reading": true,
+  "guesses": {
+    "run-43": {
+      "group": "UNKNOWN",
+      "confidence": 0
+    },
+    "run-65": {
+      "group": "UNKNOWN",
+      "confidence": 0
+    }
+  },
+  "limitation": "无法保证完全盲评"
+}

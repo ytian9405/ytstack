@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-tx_u778i/project",
+  "target_sha256": "b32c636bfeae83b22c683d61bc228fff064310095ba5ad409a07a23cfc98d3c5",
+  "started_at": "2026-11-02T12:39:31.438410+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... FAIL\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py\", line 49, in test_LL02_add_persistence\n    self.assertEqual(self.add(' 午餐 🍜 ', category=' 餐饮 '), first)\nAssertionError: {'id': 0, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False} != {'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}\n- {'category': ' 餐饮 ', 'cents': 1250, 'id': 0, 'title': ' 午餐 🍜 ', 'voided': False}\n?                                           ^\n\n+ {'category': ' 餐饮 ', 'cents': 1250, 'id': 1, 'title': ' 午餐 🍜 ', 'voided': False}\n?                                           ^\n\n\n======================================================================\nFAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py\", line 58, in test_LL03_void_and_ids\n    self.assertEqual(self.add(), original)\nAssertionError: {'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False} != {'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False}\n- {'category': 'food', 'cents': 1250, 'id': 0, 'title': '午餐', 'voided': False}\n?                                           ^\n\n+ {'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}\n?                                           ^\n\n\n======================================================================\nFAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py\", line 75, in test_LL04_summary\n    self.invoke('void', '4')\n  File \"/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py\", line 28, in invoke\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : unknown expense id\n\n\n======================================================================\nFAIL: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py\", line 87, in test_LL05_invalid_inputs_preserve_data\n    self.assertEqual(self.add(), expected)\nAssertionError: {'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False} != {'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False}\n- {'category': 'food', 'cents': 1250, 'id': 0, 'title': '午餐', 'voided': False}\n?                                           ^\n\n+ {'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}\n?                                           ^\n\n\n----------------------------------------------------------------------\nRan 6 tests in 0.684s\n\nFAILED (failures=4)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 0.771,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-tx_u778i",
+  "scratch_removed": true
+}

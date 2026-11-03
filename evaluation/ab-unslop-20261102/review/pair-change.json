@@ -1,0 +1,28 @@
+{
+  "material": "change",
+  "A": "item-58",
+  "B": "item-85",
+  "natural_usability": "tie",
+  "evidence": {
+    "A_quotes": [
+      "新增基于 `request_id` 的幂等机制。",
+      "同一账户在 24 小时内："
+    ],
+    "B_quotes": [
+      "新增基于 `request_id` 的幂等处理。",
+      "同一账户在 24 小时内重试时："
+    ],
+    "reason": "机制/处理及重试一词位置不同，不改变列表共同条件、冲突响应或幂等范围。两稿同样准确直接，必要术语保留，无可辨功能差异。"
+  },
+  "pair_difference_B_minus_A": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 0,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "new_slop_roots": 0
+  },
+  "condition_identity": "not_known_or_inferred",
+  "locked": true
+}

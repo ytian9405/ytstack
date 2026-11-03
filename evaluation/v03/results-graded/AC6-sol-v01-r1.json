@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "只有“未完成、有截止时间、当前时间严格晚于截止时间”的任务，`overdue` 才为 `true`。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "截止时间持久保存。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "旧任务缺少截止时间时，按无截止时间处理。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "恰好到截止时刻仍为 `false`。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "非法截止时间导致非零退出，错误写入 stderr，stdout 不输出成功结果。已有状态文件内容不变；尚无状态文件时不创建文件。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "接受带时区的 `YYYY-MM-DDTHH:MM:SS+08:00` 或 UTC 格式 `YYYY-MM-DDTHH:MM:SSZ`。拒绝纯日期、无时区时间和不存在的日期。\n另需验证：不同时区表示的同一时刻，判断结果一致。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "`add`、`list`、`complete` 返回的任务保留 `id`、`title`、`done`，增加：\n   - `due_at`：统一为 UTC、以 `Z` 结尾的截止时间，无截止时间时为 `null`。\n   - `overdue`：布尔值，直接表示是否过期。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "`complete ID` 将 `done` 改为 `true`，保留截止时间，返回 `overdue: false`。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "第一版范围限定为创建时设置截止时间，以及在 JSON 中显示过期状态；修改截止时间、过期筛选和主动提醒留待后续。"
+  }
+ ]
+}

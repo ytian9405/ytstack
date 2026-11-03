@@ -1,0 +1,14 @@
+{
+ "id": "T2-astra-v02",
+ "prompt": "tools/install.py 遇到已有同名入口时怎么处理？会不会把我的东西弄坏？",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "exit": "timeout",
+ "seconds": 420.0,
+ "usage": null,
+ "final": "",
+ "commentary": [],
+ "skills_read": [],
+ "commands": []
+}

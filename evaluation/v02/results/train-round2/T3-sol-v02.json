@@ -1,0 +1,28 @@
+{
+ "id": "T3-sol-v02",
+ "prompt": "expense_cli 的金额是怎么存和算的，可能有什么坑？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 109.6,
+ "usage": {
+  "input_tokens": 77071,
+  "cached_input_tokens": 62720,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1517,
+  "reasoning_output_tokens": 246
+ },
+ "final": "**正常通过 CLI 录入时，金额按整数“分”保存和相加，不会有小数计算的尾差。更需要注意的是单位输错、退款怎么记，以及保存时丢数据。**\n\n怎么存、怎么算：\n\n- **存储**：`--state` 指定一个 JSON 文件，金额存在每条记录的 `cents` 字段。`--cents 1250` 就是 1250 分，按人民币理解是 **12.50 元**；只接受正整数，零、负数、小数都拒绝。[代码](/tmp/ytev-befo8k_f/project/expense_cli.py:24)\n- **计算**：`summary` 只加未作废记录，输出总分数 `total_cents` 和各类别的总分数 `by_category`。没有除以 100、四舍五入或税费计算。`void` 保留原记录，但让它退出汇总；`list` 仍会显示它。[代码](/tmp/ytev-befo8k_f/project/expense_cli.py:44)\n\n主要的坑：\n\n- **单位输错也能成功保存**：想记 12 元却传 `--cents 12`，实际只记了 0.12 元。接入界面时，应明确显示单位，并把“元”准确换成整数分再提交。\n- **退款无法直接抵扣**：负数不允许。整笔撤销可以作废；部分退款目前没有对应功能，不能靠作废准确表达。\n- **不同币种会直接加在一起**：记录没有币种字段。如果同时记人民币和美元，汇总结果就没有意义；当前应每个账本只记一种币种。\n- **类别多一个空格，就会分开统计**：`food` 和 `food ` 是两个类别。我实际验证了这一点；录入时最好使用固定类别。[代码](/tmp/ytev-befo8k_f/project/expense_cli.py:36)\n- **手改文件可能让金额算错或让程序报错**：读取时只解析 JSON，不检查金额是不是正整数。我在内存中模拟 `cents` 被改成 `0.1` 和 `0.2`，汇总得到 `0.30000000000000004`。读取时也应检查每条记录。[代码](/tmp/ytev-befo8k_f/project/expense_cli.py:9)\n- **同时保存可能丢记录，保存中断可能毁掉旧账本**：每次添加、作废都会重写整个文件；两个进程同时操作，后保存的可能盖掉先保存的。应限制同时写入，并先写到新文件，写完再替换旧文件。[代码](/tmp/ytev-befo8k_f/project/expense_cli.py:13)",
+ "commentary": [
+  "我先看 `expense_cli` 怎么保存金额、怎么汇总，再确认哪些情况可能算错或丢数据。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"rg --files -g 'AGENTS.md' -g '*expense*' -g '*test*' -g 'pyproject.toml' -g 'README*' -g 'package.json'\"",
+  "/bin/bash -lc 'cat AGENTS.md && nl -ba expense_cli.py'",
+  "/bin/bash -lc 'nl -ba tests/test_smoke.py && nl -ba tests/test_package.py && cat README.md'",
+  "/bin/bash -lc \"python3 -B - <<'PY'\nimport contextlib\nimport copy\nimport io\nimport json\nfrom pathlib import Path\nfrom unittest.mock import patch\n\nscope = {'__name__': 'expense_probe'}\nexec(compile(Path('expense_cli.py').r"
+ ]
+}

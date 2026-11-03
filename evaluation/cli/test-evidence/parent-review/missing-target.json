@@ -1,0 +1,8 @@
+{
+  "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --target /tmp/ytstack-forward-20261102-4pldj5r3/project/not-present.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/missing-target.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+  "cases": [],
+  "status": "BLOCKED",
+  "blocker": "CLI missing: /tmp/ytstack-forward-20261102-4pldj5r3/project/not-present.py",
+  "exit_status": 2
+}

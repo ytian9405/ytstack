@@ -1,0 +1,142 @@
+<title>说人话盲看</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one column of questions; each shows the two answers side by side on wide screens, stacked on phones. */
+:root{--bg:#f6f7f9;--panel:#ffffff;--fg:#1d2430;--muted:#5d6878;--line:#dde2ea;--accent:#2d5b8c;--accent-soft:#e3ebf5;--pick:#1f7a5a;--pick-soft:#e2f2ea;--mark:#fbe7b5;
+--display:"Noto Serif SC","Songti SC",serif;--body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13171d;--panel:#1b2129;--fg:#e4e8ee;--muted:#9aa5b4;--line:#2c3440;--accent:#7fa8d6;--accent-soft:#22303f;--pick:#5cc49a;--pick-soft:#1c3329;--mark:#5a4a1e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#13171d;--panel:#1b2129;--fg:#e4e8ee;--muted:#9aa5b4;--line:#2c3440;--accent:#7fa8d6;--accent-soft:#22303f;--pick:#5cc49a;--pick-soft:#1c3329;--mark:#5a4a1e;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.7}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1{font-family:var(--display);font-size:1.75rem;margin:0;text-wrap:balance}
+.intro{display:flex;flex-direction:column;gap:10px;max-width:68ch;color:var(--muted)}
+.intro p{margin:0}
+.intro strong{color:var(--fg)}
+.progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.dot{font:12px/1 var(--mono);min-width:2.2em;padding:6px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none;text-align:center;font-variant-numeric:tabular-nums}
+.dot.done{background:var(--pick-soft);border-color:var(--pick);color:var(--pick)}
+.progress .count{margin-left:auto;font-size:13px;color:var(--muted)}
+section.q{display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px}
+.qhead{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font:12px var(--mono);letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.qhead h2{font-family:var(--display);font-size:1.2rem;margin:0;text-wrap:balance}
+.qhead .hint{color:var(--muted);font-size:13px;margin:0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.ans{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column}
+.ans.chosen{border-color:var(--pick);box-shadow:0 0 0 1px var(--pick)}
+.ans header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.tag{font:600 14px var(--mono);width:28px;height:28px;border-radius:6px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ans header .len{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ans header button{margin-left:auto}
+.md{padding:4px 16px 14px;overflow-wrap:anywhere}
+.md :is(p,ul,ol){margin:.6em 0}
+.md ul,.md ol{padding-left:1.3em}
+.md code{font:13px var(--mono);background:var(--accent-soft);padding:1px 4px;border-radius:4px}
+.md pre{overflow-x:auto;background:var(--accent-soft);padding:10px;border-radius:6px}
+.md pre code{background:none;padding:0}
+.md table{border-collapse:collapse;display:block;overflow-x:auto;font-size:13px}
+.md th,.md td{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+.md mark{background:var(--mark);color:inherit;border-radius:2px}
+.vote{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 14px}
+button:hover{border-color:var(--accent)}
+button:focus-visible,textarea:focus-visible,.dot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.choices button[aria-pressed="true"]{background:var(--pick);border-color:var(--pick);color:var(--panel)}
+.small{font-size:12px;padding:3px 10px;color:var(--muted)}
+.terms{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted);min-height:26px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--mark);color:var(--fg);border-radius:999px;padding:1px 4px 1px 10px}
+.chip button{border:0;background:none;padding:0 6px;color:var(--muted)}
+label{font-size:13px;color:var(--muted)}
+textarea{font:inherit;width:100%;box-sizing:border-box;min-height:56px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);padding:8px 10px;resize:vertical}
+.finish{display:flex;flex-direction:column;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.finish h2{font-family:var(--display);font-size:1.2rem;margin:0}
+.finish p{margin:0;color:var(--muted)}
+.primary{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:500;align-self:flex-start;padding:8px 18px}
+#out{font:13px var(--mono);min-height:120px}
+.status{font-size:13px;color:var(--pick)}
+</style>
+<div class="wrap">
+  <div class="intro">
+    <h1>说人话盲看</h1>
+    <p>每题是一个问题和两份回答，A、B 的顺序已随机，看不出哪份是新版。前 6 题是普通提问的回答，最后 2 题是验收标准。</p>
+    <p><strong>选你更愿意收到的一份</strong>，或者平局，再写一句原因。<strong>看到黑话就选中那个词，点“标为黑话”</strong>，这对下一轮最有用。做完点页面底部的“复制结果”，贴回对话里。</p>
+    <p>你的选择会保存在这个浏览器里，中途关掉也不会丢。</p>
+  </div>
+  <nav class="progress" id="progress" aria-label="题目进度"></nav>
+  <div id="qs"></div>
+  <div class="finish">
+    <h2>复制结果</h2>
+    <p id="remain"></p>
+    <button class="primary" id="copy" type="button">复制结果</button>
+    <span class="status" id="status" role="status"></span>
+    <textarea id="out" readonly aria-label="结果文本"></textarea>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+const QS=[{"n": 1, "kind": "speech", "q": "tools/validate.py 到底检查了什么？它通过了能说明技能好用吗？", "A": "**不能。它通过只说明技能包符合这些文件检查，不能说明技能实际好用。**\n\n`tools/validate.py` 检查的是：\n\n- **名称和版本**：两份配置都叫 `ytstack`，版本一致。\n- **技能清单**：没有重复名字；清单与 `skills/*/SKILL.md` 对得上。\n- **说明文件**：`name` 与目录名一致，`description` 不为空；头部没有 `disable-model-invocation`，正文没有 `TODO`。\n- **配套文件**：每个技能有 `agents/openai.yaml`；各技能和整个包的 `LICENSE` 含指定版权和授权文字。\n- **本地链接**：正文里它能识别的 Markdown 本地链接，目标存在且没有指向包外。外部网址和页内标题是否有效不检查。\n- **技能依赖**：配置中提到的技能都在清单里；`technical-bro` 包含 `../unslop/SKILL.md` 这段文字。\n- **复制来的正文**：对 `provenance.json` 中带 `adoption` 的记录，检查正文与记录的内容指纹一致；标为 `body-preserved` 时，也要求与记录的上游指纹一致。**不会联网核实原文。**\n\n**它没有让模型实际使用技能**，所以没有检查：\n\n- 该用时能否用上、不该用时会不会误用。\n- 指令是否清楚、模型能否照做。\n- 结果是否正确、易懂，是否比不用技能更好。\n- 安装后是否真的能被目标应用使用。\n\n要判断“好用”，还需要用真实任务试：明确预期结果，比较使用前后的表现，并覆盖容易出错的情况。\n\n另外，**当前这份目录实际没有通过**：我运行后，它因缺少 `.claude-plugin/plugin.json` 直接退出了。", "B": "**不能。`tools/validate.py` 通过，只能说明技能包满足它写死的结构和一致性规则，不能证明技能实际好用。** 它没有调用模型，也没有让技能完成任何任务。\n\n具体检查如下：\n\n| 检查项 | 实际检查内容 |\n|---|---|\n| 包信息 | 插件和清单的名称都是 `ytstack`，版本一致 |\n| 技能清单 | 名称不重复，与 `skills/*/SKILL.md` 的目录集合一致 |\n| 技能文件 | `name` 与目录名一致；单行 `description` 非空；头部不含 `disable-model-invocation`；正文不含 `TODO` |\n| 配套文件 | 存在 `agents/openai.yaml`；许可证包含两段指定文字 |\n| 本地链接 | 正文中被正则识别的本地 Markdown 链接，目标存在且不越出包目录 |\n| 依赖 | 声明的技能和依赖都在清单里；`technical-bro` 包含指定的 `unslop` 引用 |\n| 正文哈希 | 对来源记录中带 `adoption` 的条目，正文与记录的 SHA-256 一致；标为原样保留的，还要匹配记录的上游哈希 |\n\n实现见 validate.py。这里有几个边界：`openai.yaml` 只检查存在，不检查内容；外部链接不检查；哈希只与本地记录比较，不会去上游核实。\n\n要证明“好用”，还需要实际任务评测：该触发时是否触发、不该触发时是否避开、能否完成任务、输出是否符合要求，以及相比不用技能有没有改善。**即使正文逻辑很差，只要满足上表规则，也可能拿到 `PASS`。**\n\n另外，我实际运行了当前副本，结果是**未通过**：缺少 `.claude-plugin/plugin.json`，脚本在读取该文件时就退出了，后续检查没有执行。"}, {"n": 2, "kind": "speech", "q": "tools/install.py 的软链接安装和复制安装怎么选？", "A": "**自己本机使用、希望随源仓库更新，选软链接；要随项目交给别人、希望版本固定，选复制。** 脚本默认是软链接。\n\n| 你关心的事 | 软链接 `symlink` | 复制 `copy` |\n|---|---|---|\n| 源仓库里的 skill 更新 | 项目立即用到新内容 | 项目保留安装时的内容 |\n| 在项目里修改 skill | 会改到源仓库，其他链接它的项目也受影响 | 只改项目里的副本 |\n| 搬走项目、删除源仓库 | 两者相对位置改变或源文件消失后，链接会失效 | 副本仍可使用 |\n| 随项目提交给团队 | Git 只保存链接，不包含它指向的内容 | 可以提交完整内容 |\n\n例如给 Codex 安装：\n\n```bash\npython tools/install.py --project /你的项目路径 --harness codex --method symlink\n```\n\n选复制就把末尾换成 `--method copy`；给 Claude 安装则用 `--harness claude`。\n\n**复制后更新要自己处理：** 重新运行脚本不会覆盖内容不同的旧副本，也不会自动切换安装方式；需要先移走旧目录或链接，保留需要的修改，再安装。", "B": "**本机使用、希望技能随源码更新，选软链接；项目需要独立保存或交给别人，选复制。** 脚本默认使用软链接。\n\n| | 软链接 `symlink` | 复制 `copy` |\n|---|---|---|\n| 安装内容 | 指向本仓库技能目录的相对链接 | 一份独立的技能文件 |\n| 本仓库技能更新后 | 项目立即使用更新后的内容 | 项目中的副本不变 |\n| 从项目里修改技能 | 会修改本仓库的源文件 | 只修改项目内的副本 |\n| 搬动或删除本仓库 | 相对位置改变时，链接可能失效 | 不受影响 |\n| 适合场景 | 本机多个项目共享、开发调试技能 | 团队分发、独立保存、固定版本 |\n\n例如，给 Codex 安装：\n\n```bash\n# 软链接安装（默认）\npython3 tools/install.py --project /你的项目路径 --harness codex\n\n# 复制安装\npython3 tools/install.py --project /你的项目路径 --harness codex --method copy\n```\n\n**注意：这个脚本不会覆盖已有内容。** 复制安装后，如果源文件更新，再运行安装会报冲突，不会自动升级；切换安装方式也不能当作覆盖操作使用。需要先处理已有目录或链接。可以加 `--dry-run` 预览并检查冲突。\n\n实现见 tools/install.py。"}, {"n": 3, "kind": "speech", "q": "queue_cli 要支持一万条任务，现在的做法撑得住吗？", "A": "**一万条存得下，单个程序偶尔操作，性能大概率够用；如果要频繁更新、多个程序同时操作，当前做法不够稳。**\n\n- **数据量本身不大。** 按每条标题 20 个汉字估算，一万条约 1 MB。本机测得，读取这些 JSON、添加一条再转回 JSON 约 **4.8 毫秒**，不含读写磁盘和启动程序，不能当作完整命令耗时。\n- **每改一条，都要读完并重写一万条。** 添加任务还要检查所有 ID；完成任务要逐条找。逐个批量导入、频繁更新时，重复工作会明显增加。代码位置\n- **两个程序同时保存，可能丢任务或撤销完成状态。** 它们各自读取旧内容，后保存的会盖掉先保存的修改，也可能生成相同 ID。\n- **保存中途退出，整个任务文件可能损坏。** 现在直接覆盖旧文件，没有先写好新文件再替换。保存位置\n- **`list` 会一次返回全部任务。** 一万条仍能输出，但没有分页，查看和传输都得处理整份列表。代码位置\n\n**建议：** 如果只是单人低频使用，可以保留 JSON，但先解决保存中断和同时保存的问题。如果一万条是正式使用要求，还要批量操作或多个程序共同使用，建议改用 SQLite，让每次修改只处理相关任务，并避免同时保存互相覆盖。", "B": "**一万条任务存得下，单进程、低频操作基本撑得住；批量写入和并发使用，当前实现不够稳。**\n\n我用一万条、每条 20 个汉字标题做了测量：JSON 文件约 **1 MB**；新增或完成任务的内存处理约 **5 ms**。这些数字不含磁盘读写和进程启动，不能当完整操作耗时。\n\n主要问题有三个：\n\n- **每次操作都处理全量数据。** 读取会加载整个文件，写入会重写整个文件。新增还要遍历找最大 ID，完成任务要遍历查找，单次成本都是 O(n)。按上述样本逐条新增一万条，累计写入约 **5.1 GB**，还没算读取。\n- **并发会丢更新。** 两个进程可能读到同一份状态，生成相同 ID，后写入的覆盖先写入的结果。\n- **写入中断可能损坏整个队列。** 直接覆盖原文件，没有事务或原子替换；进程中断或写入失败时可能留下不完整 JSON。\n\n如果只是个人偶尔增删查，暂时可以用。**如果一万条是正式支持目标，尤其会批量导入或有多个进程操作，我建议改成 SQLite**：用事务保护更新、主键定位任务，再补批量新增和分页查询。一万条本身不大，当前更需要解决的是写入方式和数据可靠性。"}, {"n": 4, "kind": "speech", "q": "我想给 expense 工具加撤销功能，大概要改哪些地方，难不难？", "A": "**不算难，主要取决于“撤销”指什么。** 看了代码，expense 是一个 64 行的 Python CLI，数据存在本地 JSON 文件里，没有数据库或服务端。\n\n有两种范围：\n\n- **恢复被作废的账目**，例如 `restore ID`：很简单，把 `voided` 改回 `false`，补上参数、错误处理和测试即可。\n- **撤销上一次操作**，例如 `undo` 能撤销新增或作废：工作量稍大，因为目前只保存最终账本，没有操作历史。\n\n如果你想要第二种，主要改这些地方：\n\n| 位置 | 要改什么 |\n|---|---|\n| expense_cli.py 命令入口 | 增加 `undo` 分支；现在最后的 `else` 默认执行汇总，需要改成明确的 `summary` 分支 |\n| expense_cli.py 读写逻辑 | 持久化撤销历史，并兼容现有的 JSON 数组格式 |\n| expense_cli.py 新增、作废逻辑 | 成功修改时记录如何恢复；失败或重复作废不占用撤销历史 |\n| `tests/` | 补撤销新增、撤销作废、跨进程恢复、无历史时的行为测试 |\n| README.md | 说明命令、返回值和撤销规则 |\n\n**有一个容易漏的点：ID。** 现在用“现有最大 ID + 1”生成新 ID。撤销新增如果直接删掉记录，下次新增就可能复用 ID；需要单独保存递增计数，才能保持 README 里“不复用 ID”的约定。\n\n我建议第一版做 **`undo` 撤销最近一次实际改变数据的操作，支持连续撤销，暂不加重做**。按当前规模，含兼容旧数据和测试，粗估半天左右；如果只是恢复作废记录，就是更小的一次改动。当前只做了代码评估，没有修改文件。", "B": "**能加，改动比较集中。难度主要取决于你说的“撤销”包含哪些操作。**\n\n- **只恢复误作废的记录**：比较简单。现有 `void` 只是把记录标成作废，原内容还在；加一个恢复命令即可，粗估几小时，包含测试。\n- **撤销最近一次新增或作废**：工作量中等。现在只保存账本当前内容，没有操作历史，需要把“操作前是什么样”也保存下来，关掉程序后才能继续撤销。粗估 **1～2 个工作日**，包含测试和说明更新。\n\n如果做第二种，主要改三处：\n\n- expense_cli.py：增加 `undo` 命令，在新增、作废时保存撤销所需的信息；旧账本仍然要能读取。撤销新增后，已用过的 ID 不应再次分给其他记录。\n- tests：补测新增后撤销、作废后撤销、退出再运行仍能撤销、没有历史时报错；失败操作和重复作废不应占用撤销次数。\n- README.md：说明能撤销什么、能退几步，以及命令返回什么。\n\n**建议第一版先做“撤销最近一次成功的新增或作废”，支持退出后再撤销，暂不加“重做”。** 范围清楚，也能覆盖常见误操作。"}, {"n": 5, "kind": "speech", "q": "tests 跑绿了，我能放心发布这个 expense 工具吗？", "A": "**现在还不能仅凭测试全绿就放心发布。** 我看了代码和测试，主要缺口在验证范围：\n\n- **expense 只有一个测试**：test_smoke.py:10 只验证空账本的 `summary`。即使新增、作废、持久化全部坏掉，它仍可能通过。\n- **当前目录的完整测试也存在失败项**：`test_package.py` 测的是另一套技能安装工具。我实际运行其校验入口，因缺少 `.claude-plugin/plugin.json` 失败，需要核对你“跑绿”的具体命令和版本。\n\n发布前至少应按 README 的约定 验证：\n\n- 新增后由独立进程读取；首次写入创建父目录。\n- 作废和重复作废、ID 不复用、列表顺序。\n- 多类别汇总准确，作废记录不计入。\n- 非法输入返回错误，已有账本内容不变。\n- Unicode、首尾空格和完整 JSON 字段保留。\n\n我实际确认了空账本的 `list`、`summary` 正常；当前环境只读，尚未验证真实写入和跨进程持久化。**这说明发布证据不足，暂时不能据此认定工具可靠。**", "B": "**还不能放心正式发布。** 当前测试通过，证明的范围太小。\n\n- **expense 只有一条测试：空账本汇总。** 其他测试检查的是技能包安装，不能证明记账功能可靠。测试位置\n- **发布前至少补测真实保存的完整过程：** 添加后重新启动还能查到；作废后记录仍在、汇总不再计入；重复作废不会改变结果；ID 不重复；错误输入不会改坏已有账本。现在这些都没有测试保护。\n- **保存失败仍可能伤到旧账。** 代码直接覆盖账本文件，写到一半失败可能损坏原内容；两个命令同时保存也可能互相覆盖。保存代码\n\nREADME 已明确不承诺处理文件损坏、同时写入和权限异常。若只发布试用版，应明确这些限制，要求备份、避免同时操作；正式承担记账用途前，建议先补齐上述测试，并改成先写新文件、写完再替换旧文件。"}, {"n": 6, "kind": "speech", "q": "帮我评估一下这个仓库的测试够不够。", "A": "**不够。按 README 承诺的记账功能，现有测试不足以判断改动后还能不能正确记账。**\n\n仓库共 11 个测试，10 个测技能安装；记账只有 一个测试，检查空账本汇总为零。即使添加、作废或保存功能坏了，这个测试仍可能通过。\n\n建议优先补这几组：\n\n| 优先级 | 要测什么 | 防止什么问题漏过去 |\n|---|---|---|\n| 最高 | 添加多笔记录，再启动独立进程读取；核对字段、顺序和递增 ID | 命令显示成功，重新打开却少账或内容变了 |\n| 最高 | 多类别汇总；作废后重新汇总；全部作废 | 总金额、分类金额算错，或把作废记录算进去 |\n| 最高 | 非整数、零和负数金额，空白标题或类别，不存在的 ID；检查失败退出、错误输出及原文件不变 | 错误输入被接受，或操作失败却改坏已有账目 |\n| 随后 | 重复作废、作废后继续添加、中文及首尾空格、新建多层目录、读取空账本不创建文件 | README 承诺的细节被改坏 |\n\n另有两处会影响测试是否可信：\n\n- **安装测试与当前仓库不一致。** 测试依赖缺失的 `skills/`、`voice/` 等文件，还使用程序不支持的 `--voice`，并预期安装 5 个技能，而清单只有 4 个。应先确定这些安装功能是否继续维护，再对应修正测试或补全文件。\n- **实际运行受环境限制。** 当前环境只读，需要临时目录的测试未能执行；包完整性检查另因缺少 `.claude-plugin/plugin.json` 失败。单独运行空账本汇总成功，不能据此判断其他功能正常。\n\n损坏 JSON、并发写入和权限异常已被 README明确排除，当前可以先不补。若 `queue_cli.py` 也要继续交付，它目前同样没有测试。", "B": "**不够。按 README 定义的记账功能看，现有测试还不能有效防止核心功能回归。**\n\n仓库共有 **11 个测试方法**：其中 10 个测试技能安装包，只有 test_smoke.py:10 测试记账功能，而且只检查“空账本的 summary”。\n\n主要问题按优先级排列：\n\n| 优先级 | 问题 | 影响 |\n|---|---|---|\n| 高 | 添加、列表、作废和非空汇总均无测试 | 核心功能坏了，记账测试仍可能通过 |\n| 高 | 没有跨进程持久化测试 | 写入丢失、作废未保存都无法发现 |\n| 高 | 没有非法输入及失败后数据不变的测试 | 错误输入可能被接受或影响已有数据 |\n| 高 | 安装包测试与当前仓库脱节 | 测试套件本身无法全绿 |\n| 中 | Unicode、空格保留、ID 递增、重复作废未覆盖 | README 明确承诺的边界行为缺乏保障 |\n\n**这不是仅凭测试数量判断的。** 我在内存中分别模拟了 6 种故障：添加不保存、列表恒为空、作废无效、汇总包含作废记录、总额恒为零、接受非法输入。现有记账测试的断言全部仍然通过。\n\n安装包方面也确认了具体问题：\n\n- 实跑 包完整性测试 失败：缺少 `.claude-plugin/plugin.json`。\n- 安装器 dry-run 失败：引用的 `skills/create-test-skill` 不存在。\n- 测试使用的 `--voice` 参数，当前安装器不支持。\n- 部分测试预期安装 5 个技能，当前清单只有 4 个。\n\n建议先完成两件事：\n\n1. **修复测试与仓库结构的脱节**，明确技能安装包是否仍属于维护范围。\n2. **补齐记账行为测试**：跨独立进程添加→列表→作废→汇总；检查多类别金额、作废排除、ID 不复用、重复作废，以及非法输入失败后状态文件内容不变。另补 Unicode、首尾空格和父目录自动创建。\n\n损坏 JSON、并发写入、权限异常已被 README 排除，暂时无需优先补。\n\n当前环境只读，因此未运行需要创建临时目录的完整套件；以上来自源码检查、可只读执行的检查及内存变异验证，未修改仓库，也未测得覆盖率。"}, {"n": 7, "kind": "acceptance", "q": "tools/install.py 现在只能装不能卸，我想加卸载。动手前帮我定一下验收标准。", "A": "建议：**明确指定删什么，保留用户改过的内容，不自动连带删除其他技能。** 以下按推荐选项拟定。\n\n**待你决定**\n\n- **D1｜怎么发起卸载？** 推荐新增 `--uninstall`，并要求提供 `--skill 名称` 或 `--all`；漏写时提示错误。另一种是省略名称就全部卸载，但容易误删。\n- **D2｜是否连带删除依赖？** 推荐只删指定技能；卸载 `technical-bro` 时保留 `unslop`，但还有 `technical-bro` 时拒绝单独删除 `unslop`。另一种是自动清理不再需要的依赖，删掉的东西会更多。\n- **D3｜哪些副本允许删除？** 当前没有安装记录，无法确定普通目录是不是本工具装的。推荐：允许删除指向本安装包的链接；以后新安装的副本留下记录，只有内容没变才允许删除；旧副本和修改过的副本保留并报错。另一种是允许删除与当前源文件完全相同的旧副本，但手工放入的相同目录也可能被删。\n\n**这次不做**\n\n- 不提供强制删除修改内容的选项，也不自动清理无法确认来源的旧副本。\n- 不删除技能源文件、项目自己的规则文件或全局安装；卸载后可以留下空的 `.agents/skills`、`.claude/skills` 目录。\n\n**验收条件**\n\n以下命令从安装包根目录运行，`/tmp/demo` 是验收专用项目。涉及删除的条件，分别检查 `codex` 和 `claude`。\n\n- **C1 [D1、D2]｜指定卸载。**  \n  **做什么：** 已用默认链接方式安装 `technical-bro`、`unslop`、`bro`，执行 `python3 tools/install.py --project /tmp/demo --harness codex --uninstall --skill technical-bro`。  \n  **应该看到：** 退出码为 `0`，JSON 列出删除的路径；重新运行独立命令检查，只有 `technical-bro` 入口消失，另外两项和源文件仍在。  \n  **防的是：** 只报告成功却没删除，或连带删掉其他内容。\n\n- **C2 [D3]｜卸载新安装的副本。**  \n  **做什么：** 用新版安装命令和 `--method copy --skill bro` 安装，再指定卸载 `bro`。  \n  **应该看到：** 退出码为 `0`，副本消失，源文件内容不变。卸载时无需再指定 `--method`。  \n  **防的是：** 卸载只支持链接，副本依然删不掉。\n\n- **C3 [D3]｜保护不能放心删除的内容。**  \n  **做什么：** 分别准备修改过的副本、没有安装记录的旧副本、指向其他位置的同名链接；每次同时指定它和一个允许删除的技能。  \n  **应该看到：** 非零退出，错误指出具体路径和保留原因；本次指定的所有内容均保持原样。  \n  **防的是：** 误删用户内容，或删到一半才发现冲突。\n\n- **C4 [D2]｜防止留下不能用的技能。**  \n  **做什么：** 保留 `technical-bro`，只指定卸载 `unslop`。  \n  **应该看到：** 非零退出，说明 `technical-bro` 仍需要它，两者都保留；同时指定卸载两者时可以成功。  \n  **防的是：** 卸载后，剩下的技能缺少必需文件。\n\n- **C5 [D1]｜明确全部卸载。**  \n  **做什么：** 安装本包全部技能，另放入一个自建技能，执行 `--uninstall --all`。  \n  **应该看到：** 本包允许删除的技能全部消失，自建技能保留；JSON 列出实际删除路径。  \n  **防的是：** 直接删掉整个 `skills` 目录。\n\n- **C6｜先看计划。**  \n  **做什么：** 对 C5 的项目先执行 `--uninstall --all --dry-run`。  \n  **应该看到：** JSON 列出准备删除的路径；文件、链接和安装记录均不变；随后正式卸载的删除清单一致。  \n  **防的是：** 预览时已经删除内容，或预览漏报。\n\n- **C7｜重复卸载。**  \n  **做什么：** 成功卸载 `bro` 后，再用独立进程执行相同命令；也检查项目中完全没有技能目录的情况。  \n  **应该看到：** 退出码为 `0`，说明该项不存在，删除清单为空，不创建目录或文件。  \n  **防的是：** 重复操作报错，或为卸载反而创建文件。\n\n- **C8 [D1]｜错误输入不删除。**  \n  **做什么：** 分别使用未知名称 `--skill does-not-exist`、不存在的项目路径、漏写 `--skill/--all`、同时提供 `--skill bro --all`。  \n  **应该看到：** 均非零退出，stderr 说明错误；已有内容不变。  \n  **防的是：** 输入有误时仍执行删除。\n\n- **C9｜不沿项目目录入口删到外面。**  \n  **做什么：** 让项目的 `.agents` 或 `.claude` 指向项目外的共享目录，再尝试卸载。  \n  **应该看到：** 非零退出，指出目标位于项目外；共享目录里的内容全部保留。  \n  **防的是：** 卸载一个项目，却删掉其他项目共用的技能。\n\n**不能弄坏**\n\n- 原安装命令不加 `--uninstall` 时仍执行安装；指定 `technical-bro` 仍会安装 `unslop`。\n- 重复安装相同内容仍成功且不重复创建；遇到同名冲突仍保留原内容，并且不先安装一部分。\n- `--method copy` 仍生成可独立使用的副本；默认链接仍使用相对路径；安装的 `--dry-run` 仍不改文件。\n\n当前工作区缺少 `skills/`，现有测试还假定默认安装五项、支持 `--voice`，与当前文件不符。验收时需准备完整安装材料，并按当前 `ytstack.json` 的四项核对数量。\n\n改 D1 会影响 C1、C5、C8；改 D2 会影响 C1、C4；改 D3 会影响 C2、C3、C5。", "B": "建议第一版按“只删除能确认属于 ytstack 的条目”验收。当前脚本没有安装记录，可以先用链接目标和副本内容判断归属；无法确认的条目保留并报错。以下是建议标准，尚未修改代码。\n\n卸载入口建议为：\n\n```sh\npython3 tools/install.py --uninstall --project PATH --harness codex\n```\n\n| 场景 | 验收结果 |\n|---|---|\n| 兼容现有安装 | 不带 `--uninstall` 时，现有参数、默认行为和输出保持兼容。 |\n| 指定卸载范围 | 支持 `codex`、`claude` 和重复传入 `--skill`。只操作指定宿主的目录；不传 `--skill` 时，处理清单中的全部技能。 |\n| 卸载链接 | 链接指向本包对应技能时，只删除链接，源目录及其内容不变。指向其他位置的同名链接保留并报错。 |\n| 卸载副本 | 与本包对应技能内容一致的副本可以删除。文件被修改、增加或删除时，保留整个副本并报错。无需用户指定当初的安装方式。 |\n| 保护依赖 | 卸载 `technical-bro` 时保留 `unslop`；单独卸载 `unslop`、但仍保留依赖它的 `technical-bro` 时，拒绝执行。两者一起选择或全量卸载时允许删除。 |\n| 重复卸载 | 目标不存在时成功退出，列入 `missing`。连续执行两次，第二次不产生文件变更。 |\n| 预览卸载 | `--dry-run` 输出待删除路径和缺失项，所有文件、链接及目录保持原样。预览执行相同的归属和依赖检查。 |\n| 保护其他内容 | 不删除其他技能、`.agents`、`.claude` 或 `skills` 父目录。发现目录解析到项目之外时拒绝执行，外部文件保持原样。 |\n| 错误处理 | 无效项目、未知技能、归属冲突或依赖冲突均非零退出，错误写入 stderr。删除前检查全部目标，发现这些问题时不删除任何条目。 |\n| 可核对的输出 | 成功时退出码为 `0`，stdout 输出 JSON，包含 `project`、`harness`、`removed` 和 `missing`；预览用 `planned` 替代 `removed`。运行中删除失败时，说明失败路径并非零退出，不承诺恢复已删除项。 |\n\n测试至少覆盖两个宿主、链接与复制两种安装方式，以及上表中的保护行为。关键往返场景是“安装 → 卸载 → 再安装”全部成功，源文件和无关文件始终不变。\n\n当前 `tests/test_package.py` 与代码已有不一致，例如测试使用脚本尚未支持的 `--voice`，默认技能数量也不一致。实施时需先记录这些基线问题，卸载功能以新增场景通过、现有可通过场景不退化为验收依据。"}, {"n": 8, "kind": "acceptance", "q": "给 expense 工具加个月度预算超支提醒，验收标准帮我写一下。", "A": "当前 expense 是本地命令行工具，还没有预算和记账日期。建议首版按以下口径验收：按系统本地自然月统计总支出，金额以分为单位，超支时在终端提醒。\n\n下面是可直接用于需求单的验收标准。命令名称为建议接口。\n\n| 编号 | 场景 | 验收标准 |\n|---|---|---|\n| AC01 | 设置月度预算 | 支持 `budget --month YYYY-MM --cents 正整数`。重复设置同一个月时覆盖原预算，其他月份不受影响。 |\n| AC02 | 保存与隔离 | 预算在退出后重新运行时仍有效。不同 `--state` 路径的预算和账目互不影响。 |\n| AC03 | 确定所属月份 | 新增账目保存记账日期，按系统本地时间所属自然月统计。月初零点起计入新月份。 |\n| AC04 | 计算月度支出 | 月度支出为该月所有未作废账目的金额合计，包含所有类别，不计入其他月份的账目。 |\n| AC05 | 判断是否超支 | 仅当月度支出**大于**该月预算时提醒。低于或恰好等于预算时不提醒。所有计算使用整数分。 |\n| AC06 | 记账时提醒 | 成功执行 `add` 后，若账目所属月份已超支，立即提醒。提醒包含月份、预算、累计支出和超支金额。超支不阻止记账，命令退出码仍为 `0`。 |\n| AC07 | 持续超支 | 同月后续每次成功记账，只要累计支出仍超预算，均显示最新提醒。 |\n| AC08 | 调整预算 | 设置预算后立即检查该月支出。若已超支，当次命令显示提醒；若预算提高至不再超支，则不提醒。 |\n| AC09 | 作废账目 | 作废后，该账目不再计入所属月支出。后续查询和提醒使用更新后的金额，重复作废不重复扣减。 |\n| AC10 | 查询月度状态 | 支持 `summary --month YYYY-MM`，返回该月支出、预算、是否超支及超支金额。未超支时，超支金额为 `0`；未设置预算时，预算为空且不提醒。 |\n| AC11 | 跨月处理 | 各月预算独立，余额和超支均不结转。新月份未设置预算时正常记账，不沿用上月预算。 |\n| AC12 | 输出兼容 | 提醒写入 `stderr`，`stdout` 仍只输出一个合法 JSON 值。原有命令及不带月份的 `summary` 保持现有行为。 |\n| AC13 | 非法输入 | 非正整数预算、非法月份必须非零退出，并向 `stderr` 输出错误；已有预算和账目不变。 |\n| AC14 | 历史账目 | 旧账目缺少日期时，保留原有查询、作废和总汇总能力，不自动归入当前月，也不计入月度预算统计。 |\n\n核心边界用例：预算为 `10000` 分时，月支出 `9999`、`10000` 分均不提醒；达到 `10001` 分时提醒超支 `1` 分。作废后降至 `10000` 分，月度状态恢复为未超支。", "B": "建议先做“按月设置总预算，记账后超支就提醒”。目前 expense 没有记录日期，需要一起补上，否则无法区分每个月的支出。下面是按推荐选项写的验收草案。\n\n**待你决定**\n\n- **D1：支出算在哪个月？** 推荐按支出日期，新增 `--date YYYY-MM-DD`，不填时用电脑当天日期；旧记录没有日期，暂不计入月度预算。另一种做法是把旧记录全部算到启用当月，但当月支出可能因此被高估。\n- **D2：预算是否每月单独设置？** 推荐每个账本、每个月分别设置总预算，不自动沿用；未设置的月份不提醒。自动沿用更省事，但上个月的额度会继续影响下个月。\n- **D3：何时提醒？** 推荐新增、作废、修改预算或查看预算时，只要对应月份仍超支，就提醒一次。若只在首次超支时提醒，之后继续超支可能看不到提示。\n- **D4：提醒会不会阻止记账？** 推荐仍然保存成功，在 stderr 显示提醒；stdout 保留原有 JSON，退出码仍为 0。若改成拒绝保存，超支的真实支出就记不进账本。\n\n**这次不做**\n\n- 按类别分别设置预算、结转剩余额度。\n- 邮件、手机通知、后台定时提醒。\n\n**验收条件**\n\n以下命令是拟新增的入口。为缩短示例，`expense` 代表 `python3 expense_cli.py --state /tmp/budget-check.json`。每条使用独立账本，金额单位均为分；只有支出**大于**预算才算超支。\n\n- **C1 [D2]：预算保存后能再次读取。**  \n  **做什么：** 执行 `expense budget set --month 2026-11 --cents 10000`，退出后重新运行 `expense budget status --month 2026-11`。  \n  **应该看到：** 预算为 10000、支出为 0、超支为 0；查询 2026-12 显示未设置预算。  \n  **防的是：** 预算退出后丢失，或误用于其他月份。\n\n- **C2 [D1]：只计算所选月份的支出。**  \n  **做什么：** 用 `expense add \"午餐\" --cents 2000 --category food --date 2026-11-01` 这样的命令，分别添加 10 月 31 日的 1000、11 月 1 日的 2000、11 月 30 日的 3000、12 月 1 日的 4000；使用不同类别，再重新运行程序查询 11 月预算。  \n  **应该看到：** 11 月支出为 5000，包含不同类别，排除另外两个月。  \n  **防的是：** 月初、月末漏算，或把全部历史支出算进本月。\n\n- **C3 [D3、D4]：刚好用完预算不提醒，超过才提醒。**  \n  **做什么：** 11 月预算设为 10000，依次添加该月支出 9000、1000、1。  \n  **应该看到：** 前两次无超支提醒；第三次提示月份、预算 10000、累计支出 10001、超支 1。第三笔保存成功，stdout 仍是原有记录 JSON，退出码为 0。  \n  **防的是：** 提前报警、算错差额，或因提醒而漏记支出。\n\n- **C4 [D3、D4]：持续超支时仍能看到提醒。**  \n  **做什么：** 在 C3 的结果上，连续两次执行 `expense budget status --month 2026-11`，再新增该月支出 99。  \n  **应该看到：** 两次查询均显示超支 1；新增后提醒超支 100。每条命令只提醒一次，查询不改变账目。  \n  **防的是：** 只提醒首次超支，或一次操作重复刷出提醒。\n\n- **C5 [D3]：作废后重新计算。**  \n  **做什么：** 预算为 10000，有两笔该月支出 9000 和 2000，执行 `expense void 2`，再重复执行一次。  \n  **应该看到：** 作废后支出为 9000、超支为 0，不再提醒；重复作废仍为 9000。  \n  **防的是：** 作废记录继续占预算，或重复作废重复扣减。\n\n- **C6：错误输入不能改变已有数据。**  \n  **做什么：** 分别设置预算金额为 `0`、`-1`、`1.5`，月份为 `2026-13`，以及添加日期为 `2026-02-30` 的支出。  \n  **应该看到：** 每次均非零退出，stderr 说明错误；原有预算和记录保持原样。  \n  **防的是：** 无效预算生效，或错误日期的支出仍被保存。\n\n- **C7 [D1]：旧账本仍可使用。**  \n  **做什么：** 打开含一笔 80000 分、没有日期的旧记录的账本，设置 11 月预算 10000，再新增 11 月支出 2000。  \n  **应该看到：** 旧记录仍能查看和作废；11 月支出为 2000；原有 `summary` 合计仍为 82000。  \n  **防的是：** 旧数据打不开、被删除，或被擅自归到本月。\n\n- **C8 [D1、D2]：跨月后使用新月份。**  \n  **做什么：** 电脑本地日期为 11 月 30 日时，不填 `--date` 添加支出；到 12 月 1 日再次添加，并执行不带月份的 `expense budget status`。只给 11 月设置预算。  \n  **应该看到：** 两笔分别计入 11 月和 12 月；查询默认显示 12 月及其支出，预算显示未设置，无超支提醒。  \n  **防的是：** 跨月后继续累计到上个月，或偷偷沿用上月预算。\n\n- **C9 [D3]：修改预算立即影响提醒。**  \n  **做什么：** 11 月已有支出 9000，将预算从 10000 改为 8000，再改回 10000。  \n  **应该看到：** 降低时提醒超支 1000；调回后不提醒；重新打开程序仍显示预算 10000、支出 9000。  \n  **防的是：** 修改预算后仍按旧额度判断。\n\n**不能弄坏**\n\n- 原有 `add`、`list`、`void`、`summary` 的 stdout JSON 结构保持不变；成功时仍为一个 JSON 值、退出码 0。\n- `list` 继续按添加顺序保留作废记录；ID 不因作废而复用；`summary` 继续统计所有未作废记录。\n- 标题和类别中的中文、首尾空格仍原样保留；原有无效输入仍报错且不改变数据。\n- 状态文件不存在时，`list` 仍返回 `[]`，`summary` 仍返回原有空账本结果，读取不创建文件。\n\n修改 D1 会影响 C2、C7、C8；D2 影响 C1、C8；D3 影响 C3—C5、C9；D4 影响 C3、C4。"}];
+const KEY='ytstack-blind-v02';
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const st=n=>S[n]||(S[n]={pick:'',why:'',A:[],B:[]});
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const render=md=>window.marked?marked.parse(md,{gfm:true,breaks:false}):'<pre>'+esc(md)+'</pre>';
+function highlight(el,terms){
+  if(!terms.length)return;
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  const re=new RegExp(terms.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).sort((a,b)=>b.length-a.length).join('|'),'g');
+  for(const n of nodes){if(!re.test(n.data))continue;re.lastIndex=0;const f=document.createDocumentFragment();let last=0;
+    n.data.replace(re,(m,i)=>{f.append(n.data.slice(last,i));const k=document.createElement('mark');k.textContent=m;f.append(k);last=i+m.length;return m});
+    f.append(n.data.slice(last));n.replaceWith(f)}
+}
+function build(){
+  const root=document.getElementById('qs');root.innerHTML='';
+  for(const q of QS){
+    const s=st(q.n);const sec=document.createElement('section');sec.className='q';sec.id='q'+q.n;
+    const kind=q.kind==='acceptance'?'验收标准':'普通提问';
+    sec.innerHTML=`<div class="qhead"><span class="eyebrow">第 ${q.n} 题 · ${kind}</span><h2>${esc(q.q)}</h2>${q.kind==='acceptance'?'<p class="hint">想象你要照这份标准拍板，再交给别人去做。</p>':''}</div>
+    <div class="pair">${['A','B'].map(x=>`<article class="ans${s.pick===x?' chosen':''}" data-side="${x}"><header><span class="tag">${x}</span><button type="button" class="small mark-btn" data-side="${x}">标为黑话</button></header><div class="md">${render(q[x])}</div></article>`).join('')}</div>
+    <div class="vote"><div class="choices" role="group" aria-label="第 ${q.n} 题选择">${[['A','选 A'],['TIE','平局'],['B','选 B']].map(([v,t])=>`<button type="button" data-v="${v}" aria-pressed="${s.pick===v}">${t}</button>`).join('')}</div>
+    <div class="terms" data-terms></div>
+    <label for="why${q.n}">一句原因（可不填）</label><textarea id="why${q.n}" placeholder="比如：A 的黑话少，但第二段重复了">${esc(s.why)}</textarea></div>`;
+    root.append(sec);
+    sec.querySelectorAll('.ans').forEach(a=>highlight(a.querySelector('.md'),s[a.dataset.side]));
+    drawTerms(sec,q.n);
+    sec.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{s.pick=b.dataset.v;save();
+      sec.querySelectorAll('.choices button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+      sec.querySelectorAll('.ans').forEach(a=>a.classList.toggle('chosen',a.dataset.side===s.pick));update()});
+    sec.querySelector('textarea').oninput=e=>{s.why=e.target.value;save();update()};
+    sec.querySelectorAll('.mark-btn').forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>{
+      const side=b.dataset.side;const sel=window.getSelection();const md=sec.querySelector(`.ans[data-side="${side}"] .md`);
+      const t=(sel?sel.toString():'').trim();
+      if(!t||!sel.rangeCount||!md.contains(sel.getRangeAt(0).commonAncestorContainer)){flash(sec,`先在 ${side} 里用鼠标选中一个词，再点这里。`);return}
+      if(t.length>40){flash(sec,'选中的内容太长了，选一个词或短语就行。');return}
+      if(!s[side].includes(t))s[side].push(t);save();sel.removeAllRanges();build();update();document.getElementById('q'+q.n).scrollIntoView({block:'nearest'})}});
+  }
+}
+function flash(sec,msg){const t=sec.querySelector('[data-terms]');t.textContent=msg;setTimeout(()=>drawTerms(sec,+sec.id.slice(1)),2200)}
+function drawTerms(sec,n){const s=st(n);const t=sec.querySelector('[data-terms]');t.innerHTML='';
+  const all=[...s.A.map(w=>['A',w]),...s.B.map(w=>['B',w])];
+  if(!all.length){t.textContent='还没标黑话。';return}
+  t.append('已标黑话：');
+  for(const [side,w] of all){const c=document.createElement('span');c.className='chip';c.innerHTML=`${side}：${esc(w)}<button type="button" aria-label="删除 ${esc(w)}">×</button>`;
+    c.querySelector('button').onclick=()=>{s[side]=s[side].filter(x=>x!==w);save();build();update()};t.append(c)}}
+function update(){
+  const p=document.getElementById('progress');p.innerHTML='';let done=0;
+  for(const q of QS){const ok=!!st(q.n).pick;done+=ok;const a=document.createElement('a');a.href='#q'+q.n;a.className='dot'+(ok?' done':'');a.textContent=q.n;a.setAttribute('aria-label',`第 ${q.n} 题${ok?'，已选':''}`);p.append(a)}
+  const c=document.createElement('span');c.className='count';c.textContent=`已选 ${done} / ${QS.length}`;p.append(c);
+  const rem=QS.filter(q=>!st(q.n).pick).map(q=>q.n);
+  document.getElementById('remain').textContent=rem.length?`还有第 ${rem.join('、')} 题没选，没选的也会照实写进结果。`:'8 题都选完了，复制后贴回对话就行。';
+  const lab={A:'A',B:'B',TIE:'平局','':'未选'};
+  document.getElementById('out').value='盲看结果\n'+QS.map(q=>{const s=st(q.n);let l=`第${q.n}题：${lab[s.pick]}`;if(s.why.trim())l+=`｜原因：${s.why.trim()}`;
+    if(s.A.length)l+=`｜A黑话：${s.A.join('、')}`;if(s.B.length)l+=`｜B黑话：${s.B.join('、')}`;return l}).join('\n');
+}
+document.getElementById('copy').onclick=()=>{const o=document.getElementById('out');const st_=document.getElementById('status');
+  const fallback=()=>{o.focus();o.select();st_.textContent='已选中文本，按 Ctrl+C 复制。'};
+  try{navigator.clipboard.writeText(o.value).then(()=>st_.textContent='已复制，贴回对话里就行。',fallback)}catch(e){fallback()}};
+build();update();
+</script>

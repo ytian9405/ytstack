@@ -1,0 +1,24 @@
+{
+  "unblinded_at": "2026-11-02T12:49:22.976370+00:00",
+  "score_lock_sha256": "f6efc8c8f62bfb36f685cea0daab42ae89f2ebde100c3741c7d17c67e92fde05",
+  "scores_verified_before_unblind": true,
+  "assignment_file": "control/assignment.json",
+  "mapping": {
+    "run-17": {
+      "pair": 1,
+      "arm": "without"
+    },
+    "run-28": {
+      "pair": 1,
+      "arm": "with"
+    },
+    "run-65": {
+      "pair": 2,
+      "arm": "without"
+    },
+    "run-43": {
+      "pair": 2,
+      "arm": "with"
+    }
+  }
+}

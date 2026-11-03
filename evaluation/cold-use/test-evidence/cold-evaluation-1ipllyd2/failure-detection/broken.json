@@ -1,0 +1,93 @@
+{
+  "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/tests/test_queue_cli.py --case TQ02 --target /tmp/tiny-queue-negative-v6n_i8ao/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/failure-detection/active.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+  "cases": [
+    {
+      "id": "TQ02",
+      "test": "test_TQ02_add_persistence_order",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/tiny-queue-negative-v6n_i8ao/queue_cli.py --state /tmp/tiny-queue-test-jxiptrqi/nested/queue.json add '  Prepare slides 雪  '",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/tiny-queue-negative-v6n_i8ao/queue_cli.py --state /tmp/tiny-queue-test-jxiptrqi/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[]\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "first add returns ID 1 and exact title",
+          "actual": {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "first mutation creates parent directory",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process sees first persisted task",
+          "actual": [],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            }
+          ],
+          "status": "FAIL"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-jxiptrqi",
+      "status": "FAIL",
+      "detail": "Traceback (most recent call last):\n  File \"/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/tests/test_queue_cli.py\", line 75, in test_TQ02_add_persistence_order\n    self.expect('fresh process sees first persisted task', self.cli('list'), [first])\n  File \"/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/tests/test_queue_cli.py\", line 42, in expect\n    self.assertEqual(actual, expected, label)\nAssertionError: Lists differ: [] != [{'id': 1, 'title': '  Prepare slides 雪  ', 'done': False}]\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n{'id': 1, 'title': '  Prepare slides 雪  ', 'done': False}\n\n- []\n+ [{'done': False, 'id': 1, 'title': '  Prepare slides 雪  '}] : fresh process sees first persisted task\n",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      }
+    }
+  ],
+  "doctor": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/tiny-queue-negative-v6n_i8ao/queue_cli.py",
+    "sha256": "e6b773d7479cf1f3c361175cfa742e30a6c33b953284d59dfca73cf9b6ff2a9e",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "status": "FAIL",
+  "exit_status": 1
+}

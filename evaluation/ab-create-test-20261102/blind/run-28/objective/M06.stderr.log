@@ -1,0 +1,64 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... FAIL
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py", line 49, in test_LL02_add_persistence
+    self.assertEqual(self.add(' 午餐 🍜 ', category=' 餐饮 '), first)
+AssertionError: {'id': 0, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False} != {'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}
+- {'category': ' 餐饮 ', 'cents': 1250, 'id': 0, 'title': ' 午餐 🍜 ', 'voided': False}
+?                                           ^
+
++ {'category': ' 餐饮 ', 'cents': 1250, 'id': 1, 'title': ' 午餐 🍜 ', 'voided': False}
+?                                           ^
+
+
+======================================================================
+FAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py", line 58, in test_LL03_void_and_ids
+    self.assertEqual(self.add(), original)
+AssertionError: {'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False} != {'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False}
+- {'category': 'food', 'cents': 1250, 'id': 0, 'title': '午餐', 'voided': False}
+?                                           ^
+
++ {'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}
+?                                           ^
+
+
+======================================================================
+FAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py", line 75, in test_LL04_summary
+    self.invoke('void', '4')
+  File "/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+======================================================================
+FAIL: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-tx_u778i/project/tests/test_behavior.py", line 87, in test_LL05_invalid_inputs_preserve_data
+    self.assertEqual(self.add(), expected)
+AssertionError: {'id': 0, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False} != {'id': 1, 'title': '午餐', 'cents': 1250, 'category': 'food', 'voided': False}
+- {'category': 'food', 'cents': 1250, 'id': 0, 'title': '午餐', 'voided': False}
+?                                           ^
+
++ {'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}
+?                                           ^
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.684s
+
+FAILED (failures=4)

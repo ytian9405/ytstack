@@ -1,0 +1,251 @@
+{
+  "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --case TQ03 --target /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/completion-restored.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+  "cases": [
+    {
+      "id": "TQ03",
+      "test": "test_TQ03_complete_idempotence",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json add 'Prepare slides'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json add 'Send notes'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 2, \"title\": \"Send notes\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json complete 1",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "[{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}, {\"id\": 2, \"title\": \"Send notes\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json complete 1",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "[{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}, {\"id\": 2, \"title\": \"Send notes\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-0ibr6gqm/nested/queue.json add Archive",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 3, \"title\": \"Archive\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup first task",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup second task",
+          "actual": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "expected": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "completion preserves title and changes done",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "completion persists and preserves other task",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "repeat completion returns same task",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "repeat completion has no duplicate effects",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "IDs increase after completion",
+          "actual": {
+            "id": 3,
+            "title": "Archive",
+            "done": false
+          },
+          "expected": {
+            "id": 3,
+            "title": "Archive",
+            "done": false
+          },
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-0ibr6gqm",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    }
+  ],
+  "doctor": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py",
+    "sha256": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "status": "PASS",
+  "exit_status": 0
+}

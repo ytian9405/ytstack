@@ -1,0 +1,51 @@
+[
+  {
+    "label": "baseline",
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project",
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "baseline.log"
+  },
+  {
+    "label": "negative-control",
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project/evidence/20261102T124312953385Z/negative-control-02i9ym5r",
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_behavior.py",
+      "-k",
+      "LL02",
+      "-v"
+    ],
+    "exit_code": 1,
+    "log": "negative-control.log"
+  },
+  {
+    "label": "restored",
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project",
+    "command": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "restored.log"
+  }
+]

@@ -1,0 +1,32 @@
+{
+ "id": "H2-sol-v02-r1",
+ "prompt": "tools/install.py 的软链接安装和复制安装怎么选？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "followup": "说人话",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 64.9,
+ "usage": {
+  "input_tokens": 50509,
+  "cached_input_tokens": 45056,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 476,
+  "reasoning_output_tokens": 52
+ },
+ "final": "**自己本机使用、希望随源仓库更新，选软链接；要随项目交给别人、希望版本固定，选复制。** 脚本默认是软链接。\n\n| 你关心的事 | 软链接 `symlink` | 复制 `copy` |\n|---|---|---|\n| 源仓库里的 skill 更新 | 项目立即用到新内容 | 项目保留安装时的内容 |\n| 在项目里修改 skill | 会改到源仓库，其他链接它的项目也受影响 | 只改项目里的副本 |\n| 搬走项目、删除源仓库 | 两者相对位置改变或源文件消失后，链接会失效 | 副本仍可使用 |\n| 随项目提交给团队 | Git 只保存链接，不包含它指向的内容 | 可以提交完整内容 |\n\n例如给 Codex 安装：\n\n```bash\npython tools/install.py --project /你的项目路径 --harness codex --method symlink\n```\n\n选复制就把末尾换成 `--method copy`；给 Claude 安装则用 `--harness claude`。\n\n**复制后更新要自己处理：** 重新运行脚本不会覆盖内容不同的旧副本，也不会自动切换安装方式；需要先移走旧目录或链接，保留需要的修改，再安装。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 里两种安装方式分别会做什么，再给你选择建议。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc \"rg -n 'symlink|--method|install.py|复制|软链接' README* docs tools tests ytstack.json\""
+ ],
+ "followup_final": "**自己电脑上用，选软链接；要把项目交给别人，选复制。**\n\n- **软链接**：项目直接用源仓库里的那份。源仓库一改，项目跟着变；从项目里改，也会改到源仓库，影响其他使用它的项目。这是默认选项。\n- **复制**：给项目单独放一份。以后两边各改各的，源仓库更新不会自动带过来。\n- **搬项目时**：软链接可能找不到原文件；复制的那份还能用。提交给团队时，软链接只带上一个“地址”，复制才能带上完整内容。\n- **以后换方式或更新副本**：脚本不会替换已有内容。先把旧的移开，留好自己的修改，再装。\n\n安装命令：\n\n```bash\npython tools/install.py --project /你的项目路径 --harness codex --method symlink\n```\n\n要复制，把 `symlink` 换成 `copy`；给 Claude 用，把 `codex` 换成 `claude`。",
+ "followup_skills": [
+  "bro"
+ ],
+ "followup_exit": 0
+}

@@ -1,0 +1,13 @@
+{
+  "frozen_at": "2026-11-02T12:37:09.629561+00:00",
+  "first_sol_artifact_reviewed": false,
+  "sha256": "a28cd100b7fecd727d5a6cf65b0771f6d3bafe81518ade5d5a8ee7e626f55439",
+  "file": "control/evaluate.py",
+  "revisions_before_artifact_review": [
+    {
+      "at": "2026-11-02T12:37:59.505032+00:00",
+      "reason": "Preserve source symlinks in clean copies; do not accidentally repair external dependencies by dereferencing them",
+      "sha256": "6b4848237fa66ffbc8ae311bfcf8e2f20edd2dadd348f34f82f9008fc47b701f"
+    }
+  ]
+}

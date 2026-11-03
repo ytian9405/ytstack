@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-fcyjvw8a/project",
+  "target_sha256": "0bab915efd92fcff67c2c017fe108e459922604d3cd67c4e44cc88c26cf12f89",
+  "started_at": "2026-11-02T12:42:33.751896+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads_do_not_write (test_behaviors.LedgerBehaviorTests.test_LL01_empty_reads_do_not_write) ... ok\ntest_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... ok\ntest_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase) ... FAIL\ntest_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries) ... ok\ntest_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-fcyjvw8a/project/tests/test_behaviors.py\", line 50, in test_LL03_void_is_persistent_idempotent_and_ids_increase\n    self.assertEqual(self.invoke('void', '1'), voided)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-eval-fcyjvw8a/project/tests/test_behaviors.py\", line 21, in invoke\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : already voided\n\n\n----------------------------------------------------------------------\nRan 6 tests in 1.035s\n\nFAILED (failures=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.098,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-fcyjvw8a",
+  "scratch_removed": true
+}

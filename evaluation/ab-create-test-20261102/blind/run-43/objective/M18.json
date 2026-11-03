@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-2urg_caa/project",
+  "target_sha256": "533a13f3b95819368ba6eaca1183bddf1793d0d38bb15882e8a27782df029752",
+  "started_at": "2026-11-02T12:42:41.126383+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads_do_not_write (test_behaviors.LedgerBehaviorTests.test_LL01_empty_reads_do_not_write) ... ok\ntest_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... ok\ntest_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase) ... ok\ntest_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries) ... ok\ntest_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) ... \n  test_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) (args=('add', 'bad', '--cents', '10', '--category', ' \\t ')) ... FAIL\n  test_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) (args=('void', '999')) ... FAIL\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) (args=('add', 'bad', '--cents', '10', '--category', ' \\t '))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-2urg_caa/project/tests/test_behaviors.py\", line 80, in test_LL05_rejected_changes_preserve_data\n    self.invoke(*args, valid=False)\n  File \"/tmp/ledger-eval-2urg_caa/project/tests/test_behaviors.py\", line 23, in invoke\n    self.assertNotEqual(result.returncode, 0)\nAssertionError: 0 == 0\n\n======================================================================\nFAIL: test_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) (args=('void', '999'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-2urg_caa/project/tests/test_behaviors.py\", line 81, in test_LL05_rejected_changes_preserve_data\n    self.assertEqual(self.state.read_bytes(), before)\nAssertionError: b'[\\n[125 chars]\\n  },\\n  {\\n    \"id\": 2,\\n    \"title\": \"bad\",[71 chars]n]\\n' != b'[\\n[125 chars]\\n  }\\n]\\n'\n\n----------------------------------------------------------------------\nRan 6 tests in 1.115s\n\nFAILED (failures=2)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.195,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-2urg_caa",
+  "scratch_removed": true
+}

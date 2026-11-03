@@ -1,0 +1,25 @@
+{
+ "id": "H2-sol-v02-r2",
+ "prompt": "tools/install.py 的软链接安装和复制安装怎么选？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 98.4,
+ "usage": {
+  "input_tokens": 32936,
+  "cached_input_tokens": 28160,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 367,
+  "reasoning_output_tokens": 82
+ },
+ "final": "**自己本机用、想跟着源文件更新，选软链接；想让项目独立保存一份、方便交给别人，选复制。** 脚本默认是软链接。\n\n- **软链接 `--method symlink`**：项目直接使用这个仓库里的技能。源文件一改，项目立即用上；从项目里编辑技能，也会改到源文件。仓库被删掉，或移动后两边的相对位置变了，链接就会失效。\n- **复制 `--method copy`**：把技能文件复制进项目。之后源文件怎么改、仓库是否还在，都不影响这份副本；但更新需要自己处理。\n\n注意：**这个脚本不会覆盖已有内容，也不会替你升级旧副本。** 再次安装时，内容相同就跳过，内容不同就报冲突；直接换 `--method` 也不保证能切换安装方式。",
+ "commentary": [
+  "我先看一下 `tools/install.py`，确认这两种安装方式会怎样影响文件和后续更新。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"sed -n '1,260p' tools/install.py\""
+ ]
+}

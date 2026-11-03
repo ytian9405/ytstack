@@ -1,0 +1,35 @@
+{
+ "id": "AC3-sol-v02-r1",
+ "prompt": "tools/install.py 现在只能装不能卸，我想加卸载。动手前帮我定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 122.4,
+ "usage": {
+  "input_tokens": 104438,
+  "cached_input_tokens": 92160,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 3306,
+  "reasoning_output_tokens": 1251
+ },
+ "final": "建议：**明确指定删什么，保留用户改过的内容，不自动连带删除其他技能。** 以下按推荐选项拟定。\n\n**待你决定**\n\n- **D1｜怎么发起卸载？** 推荐新增 `--uninstall`，并要求提供 `--skill 名称` 或 `--all`；漏写时提示错误。另一种是省略名称就全部卸载，但容易误删。\n- **D2｜是否连带删除依赖？** 推荐只删指定技能；卸载 `technical-bro` 时保留 `unslop`，但还有 `technical-bro` 时拒绝单独删除 `unslop`。另一种是自动清理不再需要的依赖，删掉的东西会更多。\n- **D3｜哪些副本允许删除？** 当前没有安装记录，无法确定普通目录是不是本工具装的。推荐：允许删除指向本安装包的链接；以后新安装的副本留下记录，只有内容没变才允许删除；旧副本和修改过的副本保留并报错。另一种是允许删除与当前源文件完全相同的旧副本，但手工放入的相同目录也可能被删。\n\n**这次不做**\n\n- 不提供强制删除修改内容的选项，也不自动清理无法确认来源的旧副本。\n- 不删除技能源文件、项目自己的规则文件或全局安装；卸载后可以留下空的 `.agents/skills`、`.claude/skills` 目录。\n\n**验收条件**\n\n以下命令从安装包根目录运行，`/tmp/demo` 是验收专用项目。涉及删除的条件，分别检查 `codex` 和 `claude`。\n\n- **C1 [D1、D2]｜指定卸载。**  \n  **做什么：** 已用默认链接方式安装 `technical-bro`、`unslop`、`bro`，执行 `python3 tools/install.py --project /tmp/demo --harness codex --uninstall --skill technical-bro`。  \n  **应该看到：** 退出码为 `0`，JSON 列出删除的路径；重新运行独立命令检查，只有 `technical-bro` 入口消失，另外两项和源文件仍在。  \n  **防的是：** 只报告成功却没删除，或连带删掉其他内容。\n\n- **C2 [D3]｜卸载新安装的副本。**  \n  **做什么：** 用新版安装命令和 `--method copy --skill bro` 安装，再指定卸载 `bro`。  \n  **应该看到：** 退出码为 `0`，副本消失，源文件内容不变。卸载时无需再指定 `--method`。  \n  **防的是：** 卸载只支持链接，副本依然删不掉。\n\n- **C3 [D3]｜保护不能放心删除的内容。**  \n  **做什么：** 分别准备修改过的副本、没有安装记录的旧副本、指向其他位置的同名链接；每次同时指定它和一个允许删除的技能。  \n  **应该看到：** 非零退出，错误指出具体路径和保留原因；本次指定的所有内容均保持原样。  \n  **防的是：** 误删用户内容，或删到一半才发现冲突。\n\n- **C4 [D2]｜防止留下不能用的技能。**  \n  **做什么：** 保留 `technical-bro`，只指定卸载 `unslop`。  \n  **应该看到：** 非零退出，说明 `technical-bro` 仍需要它，两者都保留；同时指定卸载两者时可以成功。  \n  **防的是：** 卸载后，剩下的技能缺少必需文件。\n\n- **C5 [D1]｜明确全部卸载。**  \n  **做什么：** 安装本包全部技能，另放入一个自建技能，执行 `--uninstall --all`。  \n  **应该看到：** 本包允许删除的技能全部消失，自建技能保留；JSON 列出实际删除路径。  \n  **防的是：** 直接删掉整个 `skills` 目录。\n\n- **C6｜先看计划。**  \n  **做什么：** 对 C5 的项目先执行 `--uninstall --all --dry-run`。  \n  **应该看到：** JSON 列出准备删除的路径；文件、链接和安装记录均不变；随后正式卸载的删除清单一致。  \n  **防的是：** 预览时已经删除内容，或预览漏报。\n\n- **C7｜重复卸载。**  \n  **做什么：** 成功卸载 `bro` 后，再用独立进程执行相同命令；也检查项目中完全没有技能目录的情况。  \n  **应该看到：** 退出码为 `0`，说明该项不存在，删除清单为空，不创建目录或文件。  \n  **防的是：** 重复操作报错，或为卸载反而创建文件。\n\n- **C8 [D1]｜错误输入不删除。**  \n  **做什么：** 分别使用未知名称 `--skill does-not-exist`、不存在的项目路径、漏写 `--skill/--all`、同时提供 `--skill bro --all`。  \n  **应该看到：** 均非零退出，stderr 说明错误；已有内容不变。  \n  **防的是：** 输入有误时仍执行删除。\n\n- **C9｜不沿项目目录入口删到外面。**  \n  **做什么：** 让项目的 `.agents` 或 `.claude` 指向项目外的共享目录，再尝试卸载。  \n  **应该看到：** 非零退出，指出目标位于项目外；共享目录里的内容全部保留。  \n  **防的是：** 卸载一个项目，却删掉其他项目共用的技能。\n\n**不能弄坏**\n\n- 原安装命令不加 `--uninstall` 时仍执行安装；指定 `technical-bro` 仍会安装 `unslop`。\n- 重复安装相同内容仍成功且不重复创建；遇到同名冲突仍保留原内容，并且不先安装一部分。\n- `--method copy` 仍生成可独立使用的副本；默认链接仍使用相对路径；安装的 `--dry-run` 仍不改文件。\n\n当前工作区缺少 `skills/`，现有测试还假定默认安装五项、支持 `--voice`，与当前文件不符。验收时需准备完整安装材料，并按当前 `ytstack.json` 的四项核对数量。\n\n改 D1 会影响 C1、C5、C8；改 D2 会影响 C1、C4；改 D3 会影响 C2、C3、C5。",
+ "commentary": [
+  "我会用 acceptance-criteria 技能，先看 `tools/install.py` 会安装哪些东西，再定卸载的范围和验收标准。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*install*' -g 'SKILL.md' -g 'README*' -g 'pyproject.toml' -g '*test*'\"",
+  "/bin/bash -lc 'cat /tmp/ytev-g0bvnj0c/project/.agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"rg --files -g '\"'!vendor/**'\"' -g '\"'!node_modules/**'\"' -g '\"'!dist/**'\"'\"",
+  "/bin/bash -lc 'cat AGENTS.md && cat tools/install.py'",
+  "/bin/bash -lc 'cat README.md && cat tests/test_package.py && cat tests/test_smoke.py'",
+  "/bin/bash -lc \"rg -n --hidden --glob '\"'!'\"\\\\.git/**' --glob '\"'!'\"\\\\.agents/skills/**' 'install.py|--voice|uninstall|卸载|dependencies|primary_skills' .\"",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!'\"\\\\.git/**' -g '\"'!'\"\\\\.agents/**' -g '\"'!'\"\\\\.claude/**' -g '*SKILL.md' -g '*README*' -g '*json' -g '*md'\"",
+  "/bin/bash -lc 'cat ytstack.json && cat tools/validate.py'",
+  "/bin/bash -lc 'ls -la && ls -ld skills voice .claude-plugin provenance.json LICENSE'"
+ ]
+}

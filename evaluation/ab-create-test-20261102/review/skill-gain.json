@@ -1,0 +1,247 @@
+{
+  "created_at": "2026-11-02T12:51:03.929965+00:00",
+  "score_lock_sha256": "f6efc8c8f62bfb36f685cea0daab42ae89f2ebde100c3741c7d17c67e92fde05",
+  "locked_scores_unchanged": true,
+  "difference_direction": "with minus without",
+  "runs": [
+    {
+      "label": "run-17",
+      "pair": 1,
+      "arm": "without",
+      "quality_score": 100.0,
+      "behavior": 60.0,
+      "reusability": 25.0,
+      "execution_credibility": 15.0,
+      "final_kills": 22,
+      "net_added_kills": 20
+    },
+    {
+      "label": "run-28",
+      "pair": 1,
+      "arm": "with",
+      "quality_score": 97.5,
+      "behavior": 57.5,
+      "reusability": 25.0,
+      "execution_credibility": 15.0,
+      "final_kills": 22,
+      "net_added_kills": 20
+    },
+    {
+      "label": "run-65",
+      "pair": 2,
+      "arm": "without",
+      "quality_score": 95.0,
+      "behavior": 60.0,
+      "reusability": 25.0,
+      "execution_credibility": 10.0,
+      "final_kills": 22,
+      "net_added_kills": 20
+    },
+    {
+      "label": "run-43",
+      "pair": 2,
+      "arm": "with",
+      "quality_score": 97.5,
+      "behavior": 57.5,
+      "reusability": 25.0,
+      "execution_credibility": 15.0,
+      "final_kills": 22,
+      "net_added_kills": 20
+    }
+  ],
+  "groups": {
+    "without": {
+      "n": 2,
+      "metrics": {
+        "quality_score": {
+          "values": [
+            100.0,
+            95.0
+          ],
+          "mean": 97.5,
+          "min": 95.0,
+          "max": 100.0,
+          "range_width": 5.0
+        },
+        "behavior": {
+          "values": [
+            60.0,
+            60.0
+          ],
+          "mean": 60.0,
+          "min": 60.0,
+          "max": 60.0,
+          "range_width": 0.0
+        },
+        "reusability": {
+          "values": [
+            25.0,
+            25.0
+          ],
+          "mean": 25.0,
+          "min": 25.0,
+          "max": 25.0,
+          "range_width": 0.0
+        },
+        "execution_credibility": {
+          "values": [
+            15.0,
+            10.0
+          ],
+          "mean": 12.5,
+          "min": 10.0,
+          "max": 15.0,
+          "range_width": 5.0
+        },
+        "final_kills": {
+          "values": [
+            22,
+            22
+          ],
+          "mean": 22.0,
+          "min": 22,
+          "max": 22,
+          "range_width": 0
+        },
+        "net_added_kills": {
+          "values": [
+            20,
+            20
+          ],
+          "mean": 20.0,
+          "min": 20,
+          "max": 20,
+          "range_width": 0
+        }
+      }
+    },
+    "with": {
+      "n": 2,
+      "metrics": {
+        "quality_score": {
+          "values": [
+            97.5,
+            97.5
+          ],
+          "mean": 97.5,
+          "min": 97.5,
+          "max": 97.5,
+          "range_width": 0.0
+        },
+        "behavior": {
+          "values": [
+            57.5,
+            57.5
+          ],
+          "mean": 57.5,
+          "min": 57.5,
+          "max": 57.5,
+          "range_width": 0.0
+        },
+        "reusability": {
+          "values": [
+            25.0,
+            25.0
+          ],
+          "mean": 25.0,
+          "min": 25.0,
+          "max": 25.0,
+          "range_width": 0.0
+        },
+        "execution_credibility": {
+          "values": [
+            15.0,
+            15.0
+          ],
+          "mean": 15.0,
+          "min": 15.0,
+          "max": 15.0,
+          "range_width": 0.0
+        },
+        "final_kills": {
+          "values": [
+            22,
+            22
+          ],
+          "mean": 22.0,
+          "min": 22,
+          "max": 22,
+          "range_width": 0
+        },
+        "net_added_kills": {
+          "values": [
+            20,
+            20
+          ],
+          "mean": 20.0,
+          "min": 20,
+          "max": 20,
+          "range_width": 0
+        }
+      }
+    }
+  },
+  "paired_differences": [
+    {
+      "pair": 1,
+      "with": "run-28",
+      "without": "run-17",
+      "difference_with_minus_without": {
+        "quality_score": -2.5,
+        "behavior": -2.5,
+        "reusability": 0.0,
+        "execution_credibility": 0.0,
+        "final_kills": 0,
+        "net_added_kills": 0
+      }
+    },
+    {
+      "pair": 2,
+      "with": "run-43",
+      "without": "run-65",
+      "difference_with_minus_without": {
+        "quality_score": 2.5,
+        "behavior": -2.5,
+        "reusability": 0.0,
+        "execution_credibility": 5.0,
+        "final_kills": 0,
+        "net_added_kills": 0
+      }
+    }
+  ],
+  "mean_differences": {
+    "quality_score": 0.0,
+    "behavior": -2.5,
+    "reusability": 0.0,
+    "execution_credibility": 2.5,
+    "final_kills": 0.0,
+    "net_added_kills": 0.0
+  },
+  "conclusion": "本次未观察到总质量均分增益：两组均97.5。加载技能组行为覆盖均少2.5分；执行证据均满分，相对无技能组的平均优势为2.5分，两项抵消。不能据此证明技能无效、等效或稳定提升。",
+  "specific_findings": {
+    "behavior": "加载组两次均未完整比较多记录作废后其他记录原字段，B06各少2.5；无技能组两次有完整列表比较。",
+    "execution": "加载组两次保留目标/命令关联证据；无技能第二次关联不足，E01少5；不等于无技能组未执行。",
+    "reusability": "四份均25/25，当前评分未区分。",
+    "mutation": "四份均22/22；共同旧smoke已检出2个，每份净新增20个，组差0。新增20不能归因加载技能。"
+  },
+  "cost": {
+    "tokens": "UNKNOWN",
+    "exact_model_processing_wall_seconds": "UNKNOWN",
+    "money": "UNKNOWN",
+    "efficiency_conclusion": "不能比较"
+  },
+  "limitations": [
+    "每组两次，范围或样本方差不能证明稳定性；配对差为描述性结果，不是显著性或等效性证据。",
+    "22个固定变异全部检出，存在测量天花板；满检出不能排除未覆盖缺陷，也不能代替完整行为审查。",
+    "两组均可见技能目录元数据；无技能组被禁止读取正文，因此比较的是此背景下加载正文与不加载正文，非完全无技能信息。",
+    "共享目录仅由指令隔离，非容器；操作核对只有各代理事后自报，不能独立排除交叉读取或处理不遵守。",
+    "仅当前简单标准库CLI、明确要求建立可复用测试技能的任务；不能推广到大型项目、依赖故障、服务系统或更含糊任务。",
+    "通用Sol在明确任务下已能完成较完整交付；本次零均值差不证明任何任务下都无增益。"
+  ],
+  "next_direction": {
+    "one_only": true,
+    "proposal": "预注册一个存在可控本地依赖故障的较复杂CLI任务，以隔离的合成组件引入“进程成功但数据丢失/读到陈旧状态”的跨步骤故障；要求干净与故障后的恢复验证。使用正文与元数据均不可见的独立容器对照，固定隐藏故障并增加独立重复次数。",
+    "purpose": "把区分重点放在测试是否真能识别故障并证明恢复，降低本轮22/22天花板，而不是奖励更多文档或文件。",
+    "execution": "仅建议，未启动实验"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "unblinded_at": "2026-11-02T13:21:08.639530+00:00",
+  "score_lock_sha256": "75017584cb7d8b0c5f37ed03bf7ec262af8d9cda542c0aedc3cc9e3197b06618",
+  "verified_before_unblinding": true,
+  "mapping": [
+    {
+      "task": "bro",
+      "label": "sample-66",
+      "arm": "without",
+      "pair": 1
+    },
+    {
+      "task": "bro",
+      "label": "sample-35",
+      "arm": "with",
+      "pair": 1
+    },
+    {
+      "task": "bro",
+      "label": "sample-74",
+      "arm": "without",
+      "pair": 2
+    },
+    {
+      "task": "bro",
+      "label": "sample-48",
+      "arm": "with",
+      "pair": 2
+    },
+    {
+      "task": "technical-bro",
+      "label": "sample-53",
+      "arm": "without",
+      "pair": 1
+    },
+    {
+      "task": "technical-bro",
+      "label": "sample-89",
+      "arm": "with",
+      "pair": 1
+    },
+    {
+      "task": "technical-bro",
+      "label": "sample-27",
+      "arm": "without",
+      "pair": 2
+    },
+    {
+      "task": "technical-bro",
+      "label": "sample-12",
+      "arm": "with",
+      "pair": 2
+    }
+  ]
+}

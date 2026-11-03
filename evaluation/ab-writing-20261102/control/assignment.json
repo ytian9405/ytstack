@@ -1,0 +1,120 @@
+{
+  "model": "gpt-6.1-sol",
+  "judge_model": "gpt-6-astra",
+  "reasoning": "same inherited parent setting, not overridden",
+  "runs_per_arm_per_task": 2,
+  "runs": [
+    {
+      "task": "bro",
+      "pair": 1,
+      "arm": "without",
+      "label": "sample-66",
+      "project": "runs/sample-66/project",
+      "prompt": "runs/sample-66/prompt.txt",
+      "skills": []
+    },
+    {
+      "task": "bro",
+      "pair": 1,
+      "arm": "with",
+      "label": "sample-35",
+      "project": "runs/sample-35/project",
+      "prompt": "runs/sample-35/prompt.txt",
+      "skills": [
+        "bro"
+      ]
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "arm": "without",
+      "label": "sample-74",
+      "project": "runs/sample-74/project",
+      "prompt": "runs/sample-74/prompt.txt",
+      "skills": []
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "arm": "with",
+      "label": "sample-48",
+      "project": "runs/sample-48/project",
+      "prompt": "runs/sample-48/prompt.txt",
+      "skills": [
+        "bro"
+      ]
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "arm": "without",
+      "label": "sample-53",
+      "project": "runs/sample-53/project",
+      "prompt": "runs/sample-53/prompt.txt",
+      "skills": []
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "arm": "with",
+      "label": "sample-89",
+      "project": "runs/sample-89/project",
+      "prompt": "runs/sample-89/prompt.txt",
+      "skills": [
+        "technical-bro",
+        "unslop"
+      ]
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "arm": "without",
+      "label": "sample-27",
+      "project": "runs/sample-27/project",
+      "prompt": "runs/sample-27/prompt.txt",
+      "skills": []
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "arm": "with",
+      "label": "sample-12",
+      "project": "runs/sample-12/project",
+      "prompt": "runs/sample-12/prompt.txt",
+      "skills": [
+        "technical-bro",
+        "unslop"
+      ]
+    }
+  ],
+  "created_at": "2026-11-02T13:08:09.391994+00:00",
+  "bro": {
+    "inputs_sha256": {
+      "source.md": "3115ed87567efca3771a5b99d26f1aa9273538e5f451c01f7f9f99cdad9f4ab3",
+      "task.txt": "eb2d68f32f3a9a1315bbdfa374a2ab8d7c85ed3ef6b0f9d6f169e578f5731356"
+    }
+  },
+  "technical-bro": {
+    "inputs_sha256": {
+      "source.md": "fea06084f62704e3276f2b478a3417382fecf0757c368861afadc0a8b4c31c24",
+      "task.txt": "74b8d2dee34f74ef20aa5bc6ad20f38d6f41e37e3f7b8c4075c45136c79822a0"
+    }
+  },
+  "skills_sha256": {
+    "bro": {
+      "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+      "SKILL.md": "8b822d47b9299627f5e4fe42684a031105792c8531443da1ae3423adfa2de96f",
+      "agents/openai.yaml": "f6b7d19e1a67b1297f8105db017a2392d8fbbf3616ee097f4514da2ff78f98d2"
+    },
+    "technical-bro": {
+      "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+      "SKILL.md": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+      "agents/openai.yaml": "d3ac9b2ba6fadba54a2693c5f06c1791e66970d11b418e3dd6e95b6452510a03"
+    },
+    "unslop": {
+      "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+      "SKILL.md": "0503149a9b85dad02bbc747a3aeb534e2ba07f53c5fd57e491ea3d1e67659aa3",
+      "agents/openai.yaml": "52553af9876f0671a12f5eee742a4211fd02a42c258a30b7115ec5f8a6223cb5"
+    }
+  }
+}

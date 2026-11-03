@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "scope": "Use create-test-skill on ytstack itself; installer CLI, generated instructions, and representative failure detection",
+  "generated_skill": ".agents/skills/test-ytstack/SKILL.md",
+  "test_cases": "8/8 PASS",
+  "reused_existing_test_methods": 7,
+  "strengthened_case": "YT05: copied content survives source removal",
+  "new_case": "YT08: default relative links survive bundle relocation for both host layouts",
+  "generation_suite": "generation/suite.json",
+  "artifact_validation": "artifact-validation.json",
+  "failure_detection": {
+    "status": "PASS",
+    "case": "YT02",
+    "stage_results": [
+      "PASS",
+      "FAIL",
+      "PASS"
+    ],
+    "proof": "generation/failure-detection/proof.json"
+  },
+  "missing_prerequisite": {
+    "status": "BLOCKED",
+    "exit_status": 2,
+    "evidence": "generation/missing-target.json"
+  },
+  "independent_session": {
+    "status": "PASS",
+    "report": "cold-01/COLD-REVIEW.json",
+    "same_artifacts_as_live_workspace": true
+  },
+  "cleanup": {
+    "status": "PASS",
+    "isolated_project_removed": "/tmp/ytstack-cold-khzxev_5",
+    "archive_files_verified": 17,
+    "evidence_survives_cleanup": true,
+    "product_files_unchanged": true
+  },
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "coverage_limits": [
+    "Executed only on this Linux filesystem and Python 3.12.3.",
+    "Checks installer CLI and package-validator behavior; YT01 reuses the product validator.",
+    "Host directory layouts are checked; real Codex/Claude skill discovery and model invocation are not exercised.",
+    "Writing quality of bro and technical-bro is not evaluated.",
+    "Only missing-dependency mutation was demonstrated; no claim of arbitrary defect detection.",
+    "Permission failures, concurrent installation, mid-install disk errors, and other Python versions are not covered.",
+    "Final product hashes cover the runner's recorded product-file set; they do not assert every repository file is unchanged."
+  ]
+}

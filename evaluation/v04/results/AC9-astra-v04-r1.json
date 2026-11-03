@@ -1,0 +1,33 @@
+{
+ "id": "AC9-astra-v04-r1",
+ "prompt": "queue_cli 一条一条加任务太慢了，我想让它能从一个文本文件里一次导入多个任务。写代码之前先把验收标准定下来。",
+ "model": "gpt-6-astra",
+ "package": "v04",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 401.0,
+ "usage": {
+  "input_tokens": 72786,
+  "cached_input_tokens": 63360,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1115,
+  "reasoning_output_tokens": 160
+ },
+ "final": "建议这次做到：**一个文本文件，每行一个任务，一条命令全部加入队列。** [queue_cli.py](/tmp/ytev-cmp5bub6/project/queue_cli.py) 目前支持单条添加、查看和完成任务；现有测试没有覆盖它。下面是待确认的验收标准，尚未运行验证。\n\n1. **使用入口**：在 `/tmp/ytev-cmp5bub6/project` 运行 `python3 queue_cli.py --state /tmp/queue-check.json import /tmp/tasks.txt`。文件含两行任务时，成功退出，输出一个包含两条新任务的 JSON 数组，顺序与文件一致。\n2. **文本怎么读**：支持 UTF-8（含 BOM）、中文、常见的两种换行格式，以及最后一行没有换行。每个非空白行生成一条任务，保留标题首尾空格；空白行跳过，`#` 开头的行也按任务处理。分别导入这些样例，核对输出标题与条数。\n3. **怎样加入队列**：已有任务保持原样；新任务接在末尾，编号从已有最大编号加一开始，全部为未完成。相同标题照常添加，重复导入也会再添加一份。用已有已完成任务和重复标题的样例核对结果。\n4. **空文件与失败**：空文件或只有空白行时，成功返回 `[]`，不改已有数据、不创建新的队列文件。输入文件不存在、无法读取或不是有效 UTF-8 时，非零退出并说明文件及原因；整批不添加，即使文件前半段有效也一样。逐项运行后检查队列文件是否保持原样。\n5. **保存后仍然存在**：导入命令结束后，另起进程运行 `python3 queue_cli.py --state /tmp/queue-check.json list`，结果须包含全部新任务，内容与导入输出一致；首次导入时，自动创建保存队列所需的目录。\n6. **不能弄坏**：实际运行原有 `add`、`list`、`complete`，确认单条添加仍保留标题原文、拒绝全空白标题；完成任务仍保留任务内容；不存在的编号仍报错。每组验收使用独立队列文件，保留命令、退出码、输出和保存内容作为证据。\n\n已按推荐写进上面的条件，你可以改：\n\n- **最要紧：文件格式**。推荐每行一个标题；若要同时指定截止日期、优先级，需要扩大此次范围，现有任务还没有这些信息。\n- **空白行**。推荐跳过；改为报错，则多一个空行也会让整批导入失败。\n- **重复任务**。推荐允许；改为跳过同名任务，可减少重复，但同名的不同任务也可能被漏掉。\n\n确认后可以交给 create-test-skill 变成可运行的测试。",
+ "commentary": [
+  "我会用 acceptance-criteria 技能，先看 `queue_cli` 现在怎么添加任务，再把批量导入的范围和验收标准列出来。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"rg --files -g '*queue*' -g 'AGENTS.md' -g '*README*'\"",
+  "/bin/bash -lc 'cat README.md'",
+  "/bin/bash -lc 'cat queue_cli.py'",
+  "/bin/bash -lc 'rg --files'",
+  "/bin/bash -lc \"rg -n 'queue|task|complete|add|list' tests tools AGENTS.md\"",
+  "/bin/bash -lc 'cat tests/test_smoke.py tests/test_package.py'"
+ ]
+}

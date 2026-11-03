@@ -1,0 +1,91 @@
+{
+  "label": "item-49",
+  "material": "clean",
+  "pair_side": "B",
+  "review_phase": "blind_locked",
+  "fidelity": [
+    {
+      "fact_id": "N01",
+      "requirement": "看板11月3日22:00至22:10维护，期间无法打开",
+      "status": "preserved",
+      "evidence": [
+        "看板将于11月3日22:00至22:10维护，期间无法打开。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "与事实底稿一致，核心条件及安全限制保留。"
+    },
+    {
+      "fact_id": "N02",
+      "requirement": "已提交作业排队且不会丢失",
+      "status": "preserved",
+      "evidence": [
+        "已提交的作业会排队，不会丢失；"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "与事实底稿一致，核心条件及安全限制保留。"
+    },
+    {
+      "fact_id": "N03",
+      "requirement": "维护后排队作业自动继续",
+      "status": "preserved",
+      "evidence": [
+        "维护结束后会自动继续。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "与事实底稿一致，核心条件及安全限制保留。"
+    },
+    {
+      "fact_id": "N04",
+      "requirement": "22:10后仍不能打开时，在#ops-support发送问题发生时间和错误截图",
+      "status": "preserved",
+      "evidence": [
+        "如果22:10后仍无法打开看板，请在#ops-support发送出现问题的时间和错误截图。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "与事实底稿一致，核心条件及安全限制保留。"
+    },
+    {
+      "fact_id": "N05",
+      "requirement": "截图不要包含访问令牌",
+      "status": "preserved",
+      "evidence": [
+        "截图不要包含访问令牌。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "与事实底稿一致，核心条件及安全限制保留。"
+    }
+  ],
+  "source_slop": [],
+  "new_slop": [],
+  "independent_usability_issues": [],
+  "major_damage_gate": false,
+  "metrics": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 0,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "source_slop_N": 0,
+    "source_slop_elimination_rate": "N/A",
+    "new_slop_roots": 0
+  },
+  "characters_description_only": {
+    "unicode_codepoints_including_whitespace": 115,
+    "unicode_codepoints_excluding_whitespace": 112,
+    "used_for_quality_scoring": false
+  },
+  "input_sha256": "94daf7b5f2ddf2d6a858c0835920347d2edefc4dca87d05cf06cf9cfc6eb627a",
+  "same_bytes_as_original_draft": true,
+  "unknown_resources": {
+    "exact_tokens": "UNKNOWN",
+    "exact_cost": "UNKNOWN",
+    "processing_duration": "UNKNOWN"
+  },
+  "summary": "原稿适用且保留，N01-N05全部完整，无新包装或可用性问题。源slop固定为0，不计算消除率。"
+}

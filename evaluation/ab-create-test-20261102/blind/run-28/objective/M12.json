@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-pu44gm1p/project",
+  "target_sha256": "7354317aaee5341d607ead8b8bb87bfde2e494e13d25f4c7f66cdc4ada556b20",
+  "started_at": "2026-11-02T12:39:41.078244+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... ok\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-pu44gm1p/project/tests/test_behavior.py\", line 76, in test_LL04_summary\n    self.assertEqual(self.invoke('summary'),\nAssertionError: {'count': 0, 'total_cents': 0, 'by_category': {}} != {'count': 3, 'total_cents': 2300, 'by_category': {'food': 2000, 'travel': 300}}\n- {'by_category': {}, 'count': 0, 'total_cents': 0}\n?                              ^\n\n+ {'by_category': {'food': 2000, 'travel': 300}, 'count': 3, 'total_cents': 2300}\n?                  +++++++++++++++++++++++++++            ^                 +++\n\n\n----------------------------------------------------------------------\nRan 6 tests in 1.860s\n\nFAILED (failures=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.944,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-pu44gm1p",
+  "scratch_removed": true
+}

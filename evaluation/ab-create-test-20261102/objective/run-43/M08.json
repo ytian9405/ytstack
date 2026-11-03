@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-uud6vp42/project",
+  "target_sha256": "0cc04e5401adbe71545385d5767ea90456b88baefc947e57b2a73089e0a2e8a6",
+  "started_at": "2026-11-02T12:42:25.895054+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads_do_not_write (test_behaviors.LedgerBehaviorTests.test_LL01_empty_reads_do_not_write) ... ok\ntest_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... FAIL\ntest_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase) ... FAIL\ntest_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries) ... FAIL\ntest_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) ... ERROR\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nERROR: test_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-uud6vp42/project/tests/test_behaviors.py\", line 72, in test_LL05_rejected_changes_preserve_data\n    before = self.state.read_bytes()\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1021, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-_mpd5gq0/nested/ledger.json'\n\n======================================================================\nFAIL: test_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-uud6vp42/project/tests/test_behaviors.py\", line 39, in test_LL02_add_preserves_strings_and_persists\n    self.assertEqual(self.invoke('list'), [first])\nAssertionError: Lists differ: [] != [{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 125[35 chars]lse}]\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}\n\n- []\n+ [{'category': ' 餐饮 ',\n+   'cents': 1250,\n+   'id': 1,\n+   'title': ' 午餐 🍜 ',\n+   'voided': False}]\n\n======================================================================\nFAIL: test_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-uud6vp42/project/tests/test_behaviors.py\", line 47, in test_LL03_void_is_persistent_idempotent_and_ids_increase\n    self.assertEqual(self.invoke('void', '1'), voided)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-eval-uud6vp42/project/tests/test_behaviors.py\", line 21, in invoke\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : unknown expense id\n\n\n======================================================================\nFAIL: test_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-uud6vp42/project/tests/test_behaviors.py\", line 60, in test_LL04_summary_groups_only_active_entries\n    self.assertEqual(self.invoke('summary'), {'count': 3, 'total_cents': 1750,\nAssertionError: {'count': 0, 'total_cents': 0, 'by_category': {}} != {'count': 3, 'total_cents': 1750, 'by_category': {'food': 1450, 'travel': 300}}\n- {'by_category': {}, 'count': 0, 'total_cents': 0}\n?                              ^\n\n+ {'by_category': {'food': 1450, 'travel': 300}, 'count': 3, 'total_cents': 1750}\n?                  +++++++++++++++++++++++++++            ^                 +++\n\n\n----------------------------------------------------------------------\nRan 6 tests in 0.668s\n\nFAILED (failures=3, errors=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 0.742,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-uud6vp42",
+  "scratch_removed": true
+}

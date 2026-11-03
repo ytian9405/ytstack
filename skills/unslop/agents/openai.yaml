@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unslop"
+  short_description: "Remove empty phrasing and AI patterns while keeping meaning"
+  default_prompt: "Use $unslop to edit this text while preserving its meaning and tone."

@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-c_djinni/project",
+  "target_sha256": "0f0f555a6fe7d48f216cc90da27699309f9a84965bba98ebfff4b41cd4e5af4f",
+  "started_at": "2026-11-02T12:39:57.460434+00:00",
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... ok\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 2.045s\n\nOK\n",
+  "tests_run": 6,
+  "status": "PASS",
+  "elapsed_seconds": 2.14,
+  "changed_paths": [],
+  "candidate_kill": false,
+  "scratch": "/tmp/ledger-eval-c_djinni",
+  "scratch_removed": true
+}

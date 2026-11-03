@@ -1,0 +1,29 @@
+{
+ "id": "AC7-astra-v01-r1",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 136.8,
+ "usage": {
+  "input_tokens": 77181,
+  "cached_input_tokens": 66944,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 956,
+  "reasoning_output_tokens": 200
+ },
+ "final": "建议按以下标准验收：\n\n1. **入口明确**：支持\n   ```sh\n   python3 tools/install.py --project . --harness codex --list\n   ```\n   `codex` 查 `.agents/skills`，`claude` 查 `.claude/skills`。\n\n2. **识别规则明确**：名称在 `ytstack.json` 的主技能或辅助技能名单内，且目标包含可读取的 `SKILL.md`，就列为已安装。支持普通目录和有效软链接；忽略其他技能、缺少 `SKILL.md` 的目录和断链。这是按名称识别，不验证安装来源。\n\n3. **结果稳定**：输出 JSON，技能名按字母排序。当前项目的 Codex 结果应为：\n   ```json\n   {\n     \"project\": \"/tmp/ytev-tzkw4q89/project\",\n     \"harness\": \"codex\",\n     \"installed\": [\"bro\", \"create-test-skill\", \"technical-bro\", \"unslop\"]\n   }\n   ```\n\n4. **查询没有副作用**：不安装技能、不补依赖、不创建目录、不修改文件；不依赖安装源 `skills/` 存在。技能目录不存在时返回空列表，退出码为 `0`。\n\n5. **错误与兼容性**：项目不存在时非零退出，错误写入 stderr；不带 `--list` 时保留原安装行为；帮助信息包含新参数。\n\n6. **有验证证据**：测试覆盖两个 harness、空项目、部分安装、目录与软链接、无关技能与断链，并验证查询前后文件没有变化。\n\n当前环境是只读，我已检查脚本和目录，**尚未修改代码或完成测试**。",
+ "commentary": [
+  "我先看一下安装脚本和技能的目录结构，再把 `--list` 的行为和完成标准说清楚。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*test*' -g 'README*' -g 'SKILL.md' -g 'pyproject.toml' -g '*manifest*'\"",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat tests/test_package.py tests/test_smoke.py'",
+  "/bin/bash -lc \"cat README.md && rg --files --hidden -g '\"'!'\"\\\\.git/**' -g 'AGENTS.md' -g '*manifest*' -g '*registry*' -g '*lock*'\"",
+  "/bin/bash -lc 'git status --short && ls -la && for p in /tmp/AGENTS.md /tmp/ytev-tzkw4q89/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc 'cat ytstack.json && rg --files --hidden .agents tools && ls -l .agents/skills && python3 tools/install.py --help'"
+ ]
+}

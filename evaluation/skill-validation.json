@@ -1,0 +1,26 @@
+[
+  {
+    "skill": "bro",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "create-test-skill",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "technical-bro",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "unslop",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  }
+]

@@ -1,0 +1,23 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+FAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-kckmtqe0/project/tests/test_behavior.py", line 63, in test_LL03_void_and_ids
+    self.assertEqual(self.invoke('void', '1'), voided)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-kckmtqe0/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : already voided
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.006s
+
+FAILED (failures=1)

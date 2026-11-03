@@ -1,0 +1,28 @@
+{
+ "id": "T2-sol-v02",
+ "prompt": "tools/install.py 遇到已有同名入口时怎么处理？会不会把我的东西弄坏？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 47.9,
+ "usage": {
+  "input_tokens": 73421,
+  "cached_input_tokens": 56448,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 665,
+  "reasoning_output_tokens": 156
+ },
+ "final": "**遇到同名入口，它会保留原来的东西；有冲突就停止，不会自动覆盖或删除。** 具体判断在 [install.py:53](/tmp/ytev-jci5vo00/project/tools/install.py:53)。\n\n- **已有链接指向这份技能的源目录**，且这次用 `--method symlink`：跳过，记为 `unchanged`。\n- **已有普通目录，各文件的相对路径和内容都一致**：也跳过。\n- **其他情况**，包括内容不同的目录、普通文件、指向别处或已经失效的链接：报 `Existing entry preserved…`，退出码为 `1`。所有入口检查完才开始安装，所以发现这类冲突时，其他技能也还没装进去。\n\n有两点会影响你的使用：\n\n- 遇到冲突，先备份并移走或改名原入口，再重跑；脚本不会替你合并。\n- 开始安装后，如果磁盘满了或程序中断，可能留下部分新入口或没复制完整的新目录；它不会自动清理这些。已有内容不会因此被主动替换，但不要让其他程序同时修改安装位置。",
+ "commentary": [
+  "我先看 `tools/install.py` 怎样处理已有的同名入口，再确认哪些情况会改动你的文件。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*install*'\"",
+  "/bin/bash -lc \"cat AGENTS.md && sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc 'rg -n \"install.py|symlink|同名|overwrite|backup|existing\" tests tools README* .agents 2>/dev/null'",
+  "/bin/bash -lc \"nl -ba tools/install.py | sed -n '35,78p'\nsed -n '1,210p' tests/test_package.py\""
+ ]
+}

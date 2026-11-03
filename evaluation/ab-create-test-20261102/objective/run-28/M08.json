@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-8mksar63/project",
+  "target_sha256": "0cc04e5401adbe71545385d5767ea90456b88baefc947e57b2a73089e0a2e8a6",
+  "started_at": "2026-11-02T12:39:34.210868+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ERROR\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nERROR: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py\", line 88, in test_LL05_invalid_inputs_preserve_data\n    snapshot = self.state.read_bytes()\n               ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1021, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-eval-8mksar63/project/ledger-behavior-_1mt_oz6/nested/ledger.json'\n\n======================================================================\nFAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py\", line 50, in test_LL02_add_persistence\n    self.assertTrue(self.state.is_file())\nAssertionError: False is not true\n\n======================================================================\nFAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py\", line 60, in test_LL03_void_and_ids\n    self.assertEqual(self.invoke('void', '1'), voided)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py\", line 28, in invoke\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : unknown expense id\n\n\n======================================================================\nFAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py\", line 75, in test_LL04_summary\n    self.invoke('void', '4')\n  File \"/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py\", line 28, in invoke\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 1 != 0 : unknown expense id\n\n\n----------------------------------------------------------------------\nRan 6 tests in 0.630s\n\nFAILED (failures=3, errors=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 0.698,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-8mksar63",
+  "scratch_removed": true
+}

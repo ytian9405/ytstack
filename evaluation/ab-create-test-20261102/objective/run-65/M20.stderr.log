@@ -1,0 +1,219 @@
+test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... FAIL
+test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... FAIL
+test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... FAIL
+test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... FAIL
+test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... FAIL
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... FAIL
+test_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... ok
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... FAIL
+
+======================================================================
+FAIL: test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 32, in test_C01_missing_state_reads_do_not_write
+    self.assertEqual(self.success('list'), [])
+                     ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-4axerha_/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 41, in test_C02_add_preserves_strings_and_persists_in_order
+    self.assertEqual(self.add(first['title'], '1', first['category']), first)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 29, in add
+    return self.success('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-ie7b9boo/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 47, in test_C03_void_is_persistent_idempotent_and_ids_not_reused
+    first = self.add()
+            ^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 29, in add
+    return self.success('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-3g8sv6yi/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 60, in test_C04_summary_aggregates_only_active_entries
+    self.add('a', '101', 'food')
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 29, in add
+    return self.success('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-or7rk6mq/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 73, in test_C05_summary_sums_repeated_categories
+    self.add('a', '101', 'food')
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 29, in add
+    return self.success('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-hoba3bq9/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 80, in test_C06_invalid_commands_preserve_existing_bytes
+    entry = self.add()
+            ^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 29, in add
+    return self.success('add', title, '--cents', cents, '--category', category)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_behavior.py", line 25, in success
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-test-pw4qbewt/nested/ledger.json'
+
+
+======================================================================
+FAIL: test_empty_summary (test_smoke.SmokeTests.test_empty_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/tests/test_smoke.py", line 16, in test_empty_summary
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8v5yejtg/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp0yaaqb4n/state.json'
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.071s
+
+FAILED (failures=7)

@@ -1,0 +1,9 @@
+{
+  "name": "ytstack",
+  "version": "0.4.0",
+  "description": "Personal portable work skills: runnable behavior tests, plain explanations, and clear technical writing.",
+  "author": {
+    "name": "ytian9405"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,28 @@
+cwd: /home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-43-scratch-d3gqxsci/ledger-negative-04h73kpn
+command: ['/usr/bin/python3', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_behaviors.py', '-k', 'LL02', '-v']
+exit: 1
+test_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... FAIL
+
+======================================================================
+FAIL: test_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-43-scratch-d3gqxsci/ledger-negative-04h73kpn/tests/test_behaviors.py", line 39, in test_LL02_add_preserves_strings_and_persists
+    self.assertEqual(self.invoke('list'), [first])
+AssertionError: Lists differ: [] != [{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 125[35 chars]lse}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 1, 'title': ' 午餐 🍜 ', 'cents': 1250, 'category': ' 餐饮 ', 'voided': False}
+
+- []
++ [{'category': ' 餐饮 ',
++   'cents': 1250,
++   'id': 1,
++   'title': ' 午餐 🍜 ',
++   'voided': False}]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.105s
+
+FAILED (failures=1)

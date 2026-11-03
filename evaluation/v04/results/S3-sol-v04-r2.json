@@ -1,0 +1,32 @@
+{
+ "id": "S3-sol-v04-r2",
+ "prompt": "我用 tools/install.py 只指定装一个技能，装完发现项目里还多出了别的技能目录，这是怎么回事？它对依赖是怎么处理的？",
+ "model": "gpt-6.1-sol",
+ "package": "v04",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 77.5,
+ "usage": {
+  "input_tokens": 98092,
+  "cached_input_tokens": 82432,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 858,
+  "reasoning_output_tokens": 61
+ },
+ "final": "**`--skill` 指定的是“要用哪个技能”，安装时还会自动带上它依赖的技能。** 所以指定一个，也可能新增多个目录。\n\n- 当前 [ytstack.json](/tmp/ytev-pju1xvs1/project/ytstack.json:6) 只声明了一组依赖：`technical-bro` 需要 `unslop`。装 `technical-bro` 会同时装 `unslop`；单独装 `bro` 或 `create-test-skill` 不会带上其他技能。\n- [tools/install.py](/tmp/ytev-pju1xvs1/project/tools/install.py:31) 会沿着依赖继续查：A 需要 B、B 需要 C，就先装 C，再装 B，最后装 A；同一个技能只处理一次。\n- 依赖只认 `ytstack.json` 的 `dependencies`，不会扫描技能正文自动判断。遇到未知名称或相互循环依赖，会报错停止。\n- 已有且符合要求的技能会跳过；同名目录内容不同，会停止并保留原内容。脚本没有提供跳过依赖的参数。\n- 可以在原安装命令末尾加 `--dry-run`，提前查看 `planned`（将新增）和 `unchanged`（已存在且无需改动），不会实际安装。\n\n如果你指定的并非 `technical-bro`，或多出来的并非 `unslop`，当前这份依赖配置就解释不了，需要结合当时的命令和输出判断。",
+ "commentary": [
+  "我先看 `tools/install.py` 怎么选技能、怎么处理依赖，确认额外目录是从哪一步加进来的。"
+ ],
+ "skills_read": [
+  "technical-bro"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*install*' -g '*depend*' -g '*test*' -g 'README*' -g 'SKILL.md'\"",
+  "/bin/bash -lc \"cat AGENTS.md; sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc \"rg -n 'depend|依赖|install.py|requires|dependencies' README.md tests tools; rg --files -g '*.json' -g '*.toml' -g '*.yaml' -g '*.yml' -g 'SKILL.md' -g '*manifest*' -g '*catalog*'\"",
+  "/bin/bash -lc \"rg --files --hidden skills .agents | head -70; rg -n --hidden 'unslop|technical-bro|dependenc|依赖' skills\"",
+  "/bin/bash -lc \"cat ytstack.json; nl -ba tools/install.py | sed -n '20,100p'; sed -n '1,210p' tests/test_package.py\"",
+  "/bin/bash -lc \"rg -n 'unslop|依赖|Read|read' .agents/skills/technical-bro/SKILL.md; ls -ld .agents/skills/*; nl -ba ytstack.json\""
+ ]
+}

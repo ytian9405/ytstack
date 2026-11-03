@@ -1,0 +1,194 @@
+{
+  "command": "/usr/bin/python3 tests/test_queue_cli.py --case TQ02 --evidence test-evidence/initial/TQ02.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+  "cases": [
+    {
+      "id": "TQ02",
+      "test": "test_TQ02_add_persistence_order",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/queue_cli.py --state /tmp/tiny-queue-test-n9mxmoe0/nested/queue.json add '  Prepare slides 雪  '",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/queue_cli.py --state /tmp/tiny-queue-test-n9mxmoe0/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "[{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/queue_cli.py --state /tmp/tiny-queue-test-n9mxmoe0/nested/queue.json add 'Send notes'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 2, \"title\": \"Send notes\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/queue_cli.py --state /tmp/tiny-queue-test-n9mxmoe0/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "[{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}, {\"id\": 2, \"title\": \"Send notes\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "first add returns ID 1 and exact title",
+          "actual": {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "first mutation creates parent directory",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process sees first persisted task",
+          "actual": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "next add returns increasing ID",
+          "actual": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "expected": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process preserves insertion order",
+          "actual": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "disk state contains both exact tasks",
+          "actual": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-n9mxmoe0",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    }
+  ],
+  "doctor": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/ytstack-forward-20261102-4pldj5r3/project/queue_cli.py",
+    "sha256": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "status": "PASS",
+  "exit_status": 0
+}

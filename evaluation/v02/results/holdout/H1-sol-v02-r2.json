@@ -1,0 +1,31 @@
+{
+ "id": "H1-sol-v02-r2",
+ "prompt": "tools/validate.py 到底检查了什么？它通过了能说明技能好用吗？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 98.4,
+ "usage": {
+  "input_tokens": 76187,
+  "cached_input_tokens": 61568,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1099,
+  "reasoning_output_tokens": 233
+ },
+ "final": "**不能。它通过，只能说明技能包符合几条文件检查规则，不能说明 AI 会正确使用技能、结果好用。**\n\n[tools/validate.py](/tmp/ytev-7px37m0s/project/tools/validate.py:14) 具体检查：\n\n- **清单是否对得上**：两个配置里的包名必须是 `ytstack`，版本一致；技能名不重复，与 `skills/*/SKILL.md` 找到的技能完全一致。\n- **技能文件是否有基本内容**：`name` 与目录名一致，`description` 非空；开头配置不能含 `disable-model-invocation`，正文不能含 `TODO`。\n- **配套文件是否存在**：每个技能有 `agents/openai.yaml`；每个技能和整个包的 `LICENSE` 都包含指定版权文字、授权文字。\n- **正文中的本地链接是否能找到文件**：目标必须存在，且不能指向包目录之外。它跳过网址和页内链接，也不检查标题位置是否存在。\n- **依赖名称是否存在**：依赖双方都在技能清单里；另外单独要求 `technical-bro` 包含 `../unslop/SKILL.md`。\n- **记录过的正文是否被改动**：按 `provenance.json` 保存的内容指纹核对；标记为保留上游正文的，还要符合记录里的上游指纹。它不去上游重新核实。\n\n**它没有检查这些决定“好不好用”的事：**\n\n- AI 该用技能时是否会用、不该用时是否会误用。\n- AI 能否理解并执行要求，是否漏步骤、产出错误结果。\n- 使用技能后，是否比不用技能更好。即使正文写得很差，只要符合上述规则，也可能通过。\n\n要证明好用，需要拿真实任务实际试：事先写清楚合格结果，检查技能是否被正确使用、结果是否达标，再比较不用技能的结果。\n\n**当前这份目录连这个检查也没通过**：我实际运行时，因为缺少 `.claude-plugin/plugin.json` 而退出；脚本要求的顶层 `skills/` 和 `provenance.json` 也不存在，现有技能放在 `.agents/skills/`。",
+ "commentary": [
+  "我先看 `tools/validate.py` 的检查内容，再看它和实际使用技能之间差了哪些验证。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'validate.py' -g 'SKILL.md' -g '*test*' -g 'README*'\"",
+  "/bin/bash -lc \"rg --files -g '\"'!*.lock'\"' -g '\"'!package-lock.json'\"' -g '\"'!uv.lock'\"'\"",
+  "/bin/bash -lc \"cat README.md && sed -n '1,280p' tests/test_package.py && sed -n '1,260p' tests/test_smoke.py\"",
+  "/bin/bash -lc \"cat AGENTS.md && sed -n '1,260p' tools/validate.py\"",
+  "/bin/bash -lc 'rg --files --hidden --no-ignore skills .agents | head -60'",
+  "/bin/bash -lc 'nl -ba tools/validate.py && cat ytstack.json && cat provenance.json'",
+  "/bin/bash -lc 'python3 tools/validate.py'"
+ ]
+}

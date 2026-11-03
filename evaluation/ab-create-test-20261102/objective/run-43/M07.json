@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-e_gwq_d1/project",
+  "target_sha256": "e40dfe60310be23682a285680bbd2b3d85bc17fbd06fb21abfbadc60926a71c0",
+  "started_at": "2026-11-02T12:42:23.790010+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads_do_not_write (test_behaviors.LedgerBehaviorTests.test_LL01_empty_reads_do_not_write) ... ok\ntest_LL02_add_preserves_strings_and_persists (test_behaviors.LedgerBehaviorTests.test_LL02_add_preserves_strings_and_persists) ... ok\ntest_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase) ... FAIL\ntest_LL04_summary_groups_only_active_entries (test_behaviors.LedgerBehaviorTests.test_LL04_summary_groups_only_active_entries) ... ok\ntest_LL05_rejected_changes_preserve_data (test_behaviors.LedgerBehaviorTests.test_LL05_rejected_changes_preserve_data) ... ok\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL03_void_is_persistent_idempotent_and_ids_increase (test_behaviors.LedgerBehaviorTests.test_LL03_void_is_persistent_idempotent_and_ids_increase)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-e_gwq_d1/project/tests/test_behaviors.py\", line 53, in test_LL03_void_is_persistent_idempotent_and_ids_increase\n    self.assertEqual(self.add('茶', '200'), second)\nAssertionError: {'id': 1, 'title': '茶', 'cents': 200, 'category': 'food', 'voided': False} != {'id': 2, 'title': '茶', 'cents': 200, 'category': 'food', 'voided': False}\n- {'category': 'food', 'cents': 200, 'id': 1, 'title': '茶', 'voided': False}\n?                                          ^\n\n+ {'category': 'food', 'cents': 200, 'id': 2, 'title': '茶', 'voided': False}\n?                                          ^\n\n\n----------------------------------------------------------------------\nRan 6 tests in 2.003s\n\nFAILED (failures=1)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 2.093,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-e_gwq_d1",
+  "scratch_removed": true
+}

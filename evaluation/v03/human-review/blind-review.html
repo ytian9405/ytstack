@@ -1,0 +1,142 @@
+<title>说人话盲看 第二轮</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one column of questions; each shows the two answers side by side on wide screens, stacked on phones. */
+:root{--bg:#f6f7f9;--panel:#ffffff;--fg:#1d2430;--muted:#5d6878;--line:#dde2ea;--accent:#2d5b8c;--accent-soft:#e3ebf5;--pick:#1f7a5a;--pick-soft:#e2f2ea;--mark:#fbe7b5;
+--display:"Noto Serif SC","Songti SC",serif;--body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13171d;--panel:#1b2129;--fg:#e4e8ee;--muted:#9aa5b4;--line:#2c3440;--accent:#7fa8d6;--accent-soft:#22303f;--pick:#5cc49a;--pick-soft:#1c3329;--mark:#5a4a1e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#13171d;--panel:#1b2129;--fg:#e4e8ee;--muted:#9aa5b4;--line:#2c3440;--accent:#7fa8d6;--accent-soft:#22303f;--pick:#5cc49a;--pick-soft:#1c3329;--mark:#5a4a1e;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.7}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1{font-family:var(--display);font-size:1.75rem;margin:0;text-wrap:balance}
+.intro{display:flex;flex-direction:column;gap:10px;max-width:68ch;color:var(--muted)}
+.intro p{margin:0}
+.intro strong{color:var(--fg)}
+.progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.dot{font:12px/1 var(--mono);min-width:2.2em;padding:6px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none;text-align:center;font-variant-numeric:tabular-nums}
+.dot.done{background:var(--pick-soft);border-color:var(--pick);color:var(--pick)}
+.progress .count{margin-left:auto;font-size:13px;color:var(--muted)}
+section.q{display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px}
+.qhead{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font:12px var(--mono);letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.qhead h2{font-family:var(--display);font-size:1.2rem;margin:0;text-wrap:balance}
+.qhead .hint{color:var(--muted);font-size:13px;margin:0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.ans{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column}
+.ans.chosen{border-color:var(--pick);box-shadow:0 0 0 1px var(--pick)}
+.ans header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.tag{font:600 14px var(--mono);width:28px;height:28px;border-radius:6px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ans header .len{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ans header button{margin-left:auto}
+.md{padding:4px 16px 14px;overflow-wrap:anywhere}
+.md :is(p,ul,ol){margin:.6em 0}
+.md ul,.md ol{padding-left:1.3em}
+.md code{font:13px var(--mono);background:var(--accent-soft);padding:1px 4px;border-radius:4px}
+.md pre{overflow-x:auto;background:var(--accent-soft);padding:10px;border-radius:6px}
+.md pre code{background:none;padding:0}
+.md table{border-collapse:collapse;display:block;overflow-x:auto;font-size:13px}
+.md th,.md td{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+.md mark{background:var(--mark);color:inherit;border-radius:2px}
+.vote{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 14px}
+button:hover{border-color:var(--accent)}
+button:focus-visible,textarea:focus-visible,.dot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.choices button[aria-pressed="true"]{background:var(--pick);border-color:var(--pick);color:var(--panel)}
+.small{font-size:12px;padding:3px 10px;color:var(--muted)}
+.terms{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted);min-height:26px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--mark);color:var(--fg);border-radius:999px;padding:1px 4px 1px 10px}
+.chip button{border:0;background:none;padding:0 6px;color:var(--muted)}
+label{font-size:13px;color:var(--muted)}
+textarea{font:inherit;width:100%;box-sizing:border-box;min-height:56px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);padding:8px 10px;resize:vertical}
+.finish{display:flex;flex-direction:column;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.finish h2{font-family:var(--display);font-size:1.2rem;margin:0}
+.finish p{margin:0;color:var(--muted)}
+.primary{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:500;align-self:flex-start;padding:8px 18px}
+#out{font:13px var(--mono);min-height:120px}
+.status{font-size:13px;color:var(--pick)}
+</style>
+<div class="wrap">
+  <div class="intro">
+    <h1>说人话盲看 · 第二轮</h1>
+    <p>每题是一个问题和两份回答，A、B 的顺序已随机，看不出哪份是新版。都是这一轮新出的题，上一轮没出现过。前 6 题是普通提问的回答，最后 2 题是验收标准。</p>
+    <p><strong>选你更愿意收到的一份</strong>，或者平局，再写一句原因。<strong>看到黑话就选中那个词，点“标为黑话”</strong>，这对下一轮最有用。做完点页面底部的“复制结果”，贴回对话里。</p>
+    <p>你的选择会保存在这个浏览器里，中途关掉也不会丢。</p>
+  </div>
+  <nav class="progress" id="progress" aria-label="题目进度"></nav>
+  <div id="qs"></div>
+  <div class="finish">
+    <h2>复制结果</h2>
+    <p id="remain"></p>
+    <button class="primary" id="copy" type="button">复制结果</button>
+    <span class="status" id="status" role="status"></span>
+    <textarea id="out" readonly aria-label="结果文本"></textarea>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+const QS=[{"n": 1, "kind": "speech", "q": "queue_cli 的 complete 重复执行会怎样？要不要拦着？", "A": "**不用把重复执行当成错误；建议任务已完成时直接返回成功，跳过保存。**\n\n- **现在重复执行：** 对同一个任务，`done` 仍然是 `true`，返回同一条任务，不会新增记录或累计完成次数。代码\n- **但仍会重写整个文件：** 即使任务已经完成，也会重新保存全部任务。多做一次无必要的写入，保存中途程序挂了，原来的内容也可能损坏。代码\n- **建议做法：** 找到任务后，若 `done` 已是 `true`，直接输出该任务并成功退出。这样用户或脚本不确定上次是否成功时，可以放心重试。", "B": "**建议允许重复 `complete`，仍返回成功；但任务已经完成时，直接返回结果，省掉再次写文件。**\n\n目前对同一个 ID 连续执行 `complete`：\n\n- **任务保持完成状态。** 每次都把 `done` 设成 `true`，不会新增或删除任务，也不会执行任务内容。\n- **每次都返回同一条任务，退出码为 `0`。** 没有“已经完成就报错”的检查。\n- **每次都会重写整个状态文件。** 即使数据没变，也会再保存全部任务。对应代码是 queue_cli.py 第 30–36 行。\n- ID 不存在时，返回 `task does not exist`，退出码为 `2`，不写文件。\n\n不建议把重复操作当错误：用户没看到第一次的成功输出，或者脚本重试时，再执行一次就能确认任务已完成。要求用户先查状态，只会增加操作。\n\n推荐的做法是在找到任务后检查 `done`：已经是 `true`，就输出任务并成功退出；否则改成 `true` 后保存。\n\n我用内存模拟文件读写，实际运行了两次相同 ID 和一次不存在的 ID；确认两次成功调用各写文件一次。没有测试真实磁盘故障。"}, {"n": 2, "kind": "speech", "q": "README 里写的“读取空账本不创建状态文件”，现在真的做到了吗？", "A": "**做到了。** 状态文件不存在时，运行 `list` 或 `summary` 都不会创建状态文件，连缺失的父目录也不会创建。\n\n我实际运行了 4 种组合：父目录已存在／不存在，分别执行两个命令。全部正常退出，且：\n\n- `list` 返回 `[]`。\n- `summary` 返回 `{\"count\": 0, \"total_cents\": 0, \"by_category\": {}}`。\n- 执行后，状态文件和缺失的父目录都没有出现。\n\n代码也吻合：expense_cli.py 第 9 行在文件不存在时直接返回空列表；`list` 和 `summary` 都不会调用保存函数。\n\n**不过，现有自动测试还没守住这个承诺。** test_smoke.py 第 10 行只检查空账本 `summary` 的返回结果，没有检查是否创建文件，也没有覆盖 `list`。建议把这次验证的 4 种组合加入自动测试，防止以后改坏。", "B": "**做到了。** 我用不存在的状态文件路径实际运行了两条读取命令：\n\n- `list` 返回 `[]`；`summary` 返回记录数、总金额均为 0，类别为空。\n- 两条命令都成功退出，没有创建状态文件，连缺失的父目录也没有创建。\n- 代码也符合这个行为：读取文件时，文件不存在就返回空列表；只有成功添加或作废记录才保存。\n- 不过，现有测试只检查空账本的汇总结果，没有检查“文件未创建”，也没覆盖空账本的 `list`。以后改坏这点，现有测试可能发现不了。"}, {"n": 3, "kind": "speech", "q": "tools/install.py 的 --dry-run 靠得住吗？", "A": "**可以信它“只预览、不改文件”，但不能把预览成功当成“真正安装一定成功”。另外，当前 `/tmp/ytev-bsy65yb9/project` 的预览就跑不通。**\n\n| 优先级 | 问题 | 对你的影响 |\n|---|---|---|\n| **最要紧：当前无法使用** | 安装脚本要求的 `skills/` 目录不存在 | 我实际运行 `--dry-run`，报错 `Missing source skill: /tmp/ytev-bsy65yb9/project/skills/create-test-skill`。现有文件在 `.agents/skills/`，脚本不会去那里找。 |\n| 高：会漏掉安装障碍 | 预览没有检查父目录是否被普通文件占用，也不会尝试创建目录或复制文件 | 即使输出了 `planned`，真正安装仍可能失败。权限不足、空间不足也只能在写入时发现。 |\n| 中：现有测试不足以证明可靠 | 预览测试断言应有 5 项，当前 `ytstack.json` 默认只选出 4 项 | 这条测试与当前配置不一致，而且只检查空项目中有没有创建 `.agents`。 |\n\n“不改文件”的依据比较扎实：所有创建目录、复制和建立链接的操作都放在 `if not dry_run` 下面。我还在内存测试中借用现有 `.agents/skills/` 作为来源，让任何写入尝试都直接报错；Codex、Claude 各跑复制和链接两种方式，共 **4 种预览全部通过**。\n\n我也模拟了“创建安装目录时报错”：**预览成功，真正安装报 `NotADirectoryError`**。这验证了两者的差别。\n\n建议先修正安装来源目录，再补上父目录被文件占用等检查。之后可以用 `--dry-run` 审阅安装计划；真正安装能否完成，仍要看实际写入结果。", "B": "**可以信它不会改文件，不能信它通过就一定装得上。**\n\n- **不会执行安装写入。** 创建目录、复制文件、建立链接都放在 `if not dry_run` 里面。代码位置\n- **会漏掉导致安装失败的问题。** 例如项目里的 `.agents` 已经是普通文件，预演仍会列出安装计划，真正安装才报“不是目录”。写入权限、剩余空间也没有检查。检查位置\n- **当前这份目录直接预演就会报错。** 我实际调用得到 `Missing source skill: …/skills/create-test-skill`：脚本要求的 `skills/` 不存在，现有技能放在 `.agents/skills/`。来源位置\n- **现有测试不能证明它可靠。** 预演测试只检查空目录没有被创建，并预期安装 5 个技能；当前清单实际只选出 4 个。测试位置\n\n把它当作“查看准备安装哪些技能”即可；返回成功不代表正式安装已经验证通过。"}, {"n": 4, "kind": "speech", "q": "expense 的数据从 JSON 换成 SQLite，值不值得？", "A": "**如果 expense 要长期保存正式账目，我建议换 SQLite；如果只是自己试用、偶尔记几笔，暂时不换也合理。最值得换的原因是保护已有账目，速度排在后面。**\n\n我读了项目里的 expense_cli.py。现在每次命令都先读取整本 JSON，加账或作废后再重写整本文件，主要有三个问题：\n\n| 优先级 | 现在会发生什么 | 换 SQLite 的收益 |\n|---|---|---|\n| **最要紧** | 保存时先清空旧文件；中途退出或写入失败，旧账可能变成残缺文件 | 正确使用 SQLite 的保存方式，可以让一次修改完整保存，或保持修改前的内容 |\n| 高 | 两个命令读到同一份旧账后分别保存，后保存的会盖掉先保存的记录 | 让同一台机器上的写入排队，避免这种整本覆盖 |\n| 次要 | 加一笔、作废一笔，都要读取和重写全部记录 | 只修改涉及的记录，不必重写整本账 |\n\nSQLite 的保存保护和多个程序访问同一文件的处理，是它已有的能力，但改代码时仍需正确使用。保存保护说明、多程序访问说明\n\n我用现有 `load`、`save` 函数在内存中模拟了两个命令交错保存：先后加入 A、B，最终只剩 B。这个问题不需要账目很多才会出现。\n\n**数据量方面，目前没有真实账本可测。** 我按现有字段生成了“午餐、1250 分、food”这样的记录，测了 JSON 处理时间，取三次中间值：\n\n- **1 万条：约 1.11 MB**，读取解析和生成新 JSON 合计约 **27 毫秒**。\n- **10 万条：约 11.2 MB**，同样处理约 **234 毫秒**。\n- 这些时间不含磁盘读写和启动 Python。按当前代码从空账本逐笔加到 1 万条，累计生成并写出的 JSON 约 **5.5 GB**；这是分散在一万次保存里的总量。\n\n因此，几千条个人账目未必需要为了速度换格式；经常通过脚本批量记账，收益会明显一些。\n\n**换成 SQLite 的代价，主要在旧账转换和检查行为是否保持一致。**\n\n- 不需要另起服务器，可以用 Python 标准库的 `sqlite3`，继续保持本地使用。Python 文档\n- 命令输出仍然可以是 JSON，调用 expense 的其他脚本可以照旧使用；磁盘里的账本则不能再直接用文本编辑器修改。\n- 旧 JSON 应导入到新数据库，核对记录、金额和作废状态后再切换，并保留原文件。\n- 需要检查 ID、列表顺序、重复作废、错误输入不改旧账等行为，尤其是 README 要求的“读取不存在的账本时不创建文件”。现有 expense 测试只检查了空账本汇总，覆盖还不够。\n\n按目前四个命令的规模，**改代码、导入旧账并补齐关键检查，粗估 1～2 个工作日**。\n\n如果暂时保留 JSON，我会先改成“写到新文件，写完再替换旧文件”，保护已有账目；如果还需要两个命令同时写入，就直接换 SQLite，更值得。", "B": "**按现在的用途，暂时不值得换；如果要让脚本同时记账，或开始长期存重要账目，就值得。**\n\n- **目前功能简单，JSON 够用。** 只有添加、列表、作废和汇总；没看到数据量或速度已经成为问题。现在每次命令都会读完整本账，添加和作废还会重写整个文件。代码\n- **真正值得考虑的是数据安全。** 当前保存到一半程序挂了，原文件可能损坏；两个命令同时记账，后保存的可能盖掉先保存的。正确使用 SQLite，可以让一次修改完整保存或完全不保存，并安排写入先后顺序。SQLite 官方说明、使用边界\n- **成本主要在旧账迁移和验证。** 要保留 ID、作废记录、金额和汇总结果；命令输出仍可保持 JSON。还得保留“读取不存在的账本不创建文件”等现有行为。现有约定\n- **如果继续用 JSON，建议先改保存方式：** 先写到新文件，写完再替换旧文件，减少保存中断把原账弄坏的风险。\n- **如果需要同时记账，就直接考虑 SQLite。** 上面的保存改法仍挡不住两个命令互相覆盖；继续补这些处理，维护成本会逐渐接近换库。SQLite 也不需要另开服务器。Python 官方说明"}, {"n": 5, "kind": "speech", "q": "这个项目的代码，最该先修的是什么？", "A": "**按 `README.md` 定义的记账用途，最该先修的是自动检查：现在检查的主要是另一套功能，真正涉及账目正确性的检查几乎没有。**\n\n我在 `/tmp/ytev-88yxoof_/project` 确认了：\n\n- tests/test_package.py 有 **10 项检查**，围绕技能文件安装。我实际运行其中的完整性检查，因缺少 `.claude-plugin/plugin.json` 失败；安装预览也因缺少 `skills/create-test-skill` 失败。\n- tests/test_smoke.py 是唯一检查记账功能的测试，但只检查“空账本合计为零”。新增后能否重新读到、作废后合计是否正确、输错参数会不会改掉旧账，都没覆盖。\n\n**后果是：检查失败未必说明记账坏了；记账真的坏了，现有检查也可能发现不了。** 后续改代码时，很难判断能不能放心使用。\n\n建议先完成这两步：\n\n1. 把技能文件安装的检查移出记账项目的默认检查入口。如果安装功能仍要保留，就给它单独的目录和运行入口。\n2. 补上记账的完整操作检查：新增后启动另一个进程读取、作废后核对分类与总额、重复作废、编号不重复，以及错误输入前后账目完全一致。\n\n我另用内存代替账目文件做了 **15 项行为检查，全部通过**，暂未发现这些基本操作的计算错误。但当前环境只允许读取文件，**真实文件保存和跨进程读取还没验证**；这正是第一批应该补上的检查。", "B": "**按 README 当前约定的记账范围，最该先修的是测试：现在账目保存、作废或汇总出了错，现有测试很可能发现不了。**\n\n- **记账只测了空账本汇总。** 新增后重新运行能否读回、作废后金额是否扣除、错误操作是否保留原数据，都没测。现有测试\n- **另一批测试检查的是安装包。** 它们依赖项目里不存在的文件；我实际运行校验，直接报缺少 `.claude-plugin/plugin.json`。相关测试\n- **建议先做：** 把安装包测试与记账测试分开，补齐“新增 → 重新运行读取 → 作废 → 汇总”，以及“非法操作后原数据不变”的检查。这样后续修改才有可靠的判断依据。"}, {"n": 6, "kind": "speech", "q": "queue_cli 和 expense_cli 能合并成一个工具吗？", "A": "**可以。建议合成一个命令入口，任务和账目仍分别保存。** 这样只需要记住一个工具，也能继续使用现有数据文件。\n\n读过项目里的 queue_cli.py 和 expense_cli.py 后，推荐这样安排：\n\n| 功能 | 合并后的用法示例 |\n|---|---|\n| 添加任务 | `python3 cli.py --state tasks.json queue add \"交报销单\"` |\n| 完成任务 | `python3 cli.py --state tasks.json queue complete 1` |\n| 添加支出 | `python3 cli.py --state expenses.json expense add \"午餐\" --cents 1250 --category food` |\n| 汇总支出 | `python3 cli.py --state expenses.json expense summary` |\n\n具体做法：\n\n- **共用读写文件、生成编号和输出 JSON 的代码。** 两个文件目前共 104 行，这些部分明显重复；任务完成、支出作废和金额汇总各自保留。\n- **最要紧的是别直接混用数据文件。** 任务有 `done`，支出有金额、类别和 `voided`。现在直接混在一起，支出汇总会因为任务缺少字段而报错。继续分两个文件，已有数据就不用转换。\n- **保留原来的两个命令作为转入口。** 已经写好的脚本可以照常运行，新用法统一走 `cli.py`。\n- **合并时补上行为检查。** 当前直接检查记账功能的测试只覆盖空账本汇总，还不足以判断添加、完成、作废和旧命令是否都能正常工作。\n\n如果你的目的只是少维护重复代码，只提取共用部分就够了；如果你希望使用时也只面对一个工具，上面的统一入口更合适。", "B": "能。建议**合成一个命令入口，任务和记账各保留一组命令**，例如：\n\n```sh\npython3 cli.py queue --state tasks.json add \"买牛奶\"\npython3 cli.py expense --state expenses.json add \"午餐\" --cents 1250 --category food\n```\n\n- **数据继续分开存**：现有文件可以沿用，不用搬数据。按当前格式混进同一个文件，记账统计会因为任务没有金额、类别而报错。\n- **共用重复代码**：读取文件、保存文件、生成编号可以共用；完成任务、作废支出、金额统计仍分别处理。\n- **保留旧命令入口**：让 `queue_cli.py` 和 `expense_cli.py` 转到新实现，已有调用和测试就不用立即改。\n\n两个文件都很小，合并主要让使用更方便，能省下的代码不多。"}, {"n": 7, "kind": "acceptance", "q": "queue_cli 想加任务截止时间，过期了要能看出来。先定一下验收标准。", "A": "建议第一版做到：**添加任务时可选截止时间，查看任务时能看出是否过期，旧任务仍能正常使用。**\n\n读过 queue_cli.py：现在只有添加、列表、完成三个操作，输出 JSON；现有测试没有覆盖任务截止时间。\n\n**待你决定**（按推荐选项写下方标准）\n\n- D1（最要紧）：完成后还标过期吗？推荐不标；另一种是保留“曾经逾期”，需要额外记录完成时间。\n- D2：截止时间怎么填？推荐完整日期、时间和时区，如 `2026-11-04T18:00:00+08:00`；只填日期则需要另定当天几点截止。\n- D3：每个任务必须有截止时间吗？推荐可选；必填会让原来的添加命令无法直接使用。\n- 其余按推荐处理：达到截止时间即过期；允许填写过去的时间；只显示标记，不自动改变任务的完成状态。\n\n**这次不做**\n\n- 到点主动发通知。\n- 修改或清除已有任务的截止时间。\n- 统计曾经逾期的任务。\n\n**验收条件**\n\n以下操作均在项目目录执行，以 `python3 queue_cli.py --state /tmp/queue-acceptance.json` 为命令前缀；`--due`、输出中的 `due_at` 和 `overdue` 是本次拟新增的用法。\n\n- C1 [D2]：执行 `add \"交报告\" --due \"2026-11-04T18:00:00+08:00\"`，退出后重新执行 `list` → 两次输出的 `due_at` 都表示指定时刻。防：截止时间只在添加时显示，没有保存。\n- C2：对 C1 的未完成任务，分别在北京时间当天 `17:59:59`、`18:00:00`、`18:00:01` 执行 `list` → `overdue` 依次为 `false、true、true`。防：必须再次保存才更新过期提示。\n- C3 [D1]：任务过期后执行 `complete 1`，再执行 `list` → 两次都显示 `done: true`、`overdue: false`，截止时间仍保留。防：完成任务仍被当成待处理的过期任务。\n- C4 [D3]：执行 `add \"买纸\"`，再打开升级前保存的任务文件 → 两类任务都能列出，`due_at: null`、`overdue: false`。防：缺少截止时间就报错或被判过期。\n- C5 [D2]：分别用 `--due \"明天\"`、`--due \"2026-02-30T18:00:00+08:00\"`、不带时区的时间添加 → 非零退出，错误说明原因，已有文件内容不变。防：猜测输入含义后保存错误时间。\n- C6 [D2]：当前已晚于截止时间时添加任务 → 立即显示 `overdue: true`；使用表示同一时刻的 `10:00:00Z` 和 `18:00:00+08:00` → 过期判断一致。防：拒绝补录，或按时间文字直接比较。\n\n**不能弄坏**\n\n- ID 继续递增，列表保留添加顺序，标题原样保留。\n- 重复完成同一任务仍成功；不存在的 ID、全空白标题仍报错。\n- 不存在的任务文件仍按空列表读取，单独执行 `list` 不创建或改写文件。\n\n确认后可以交给 create-test-skill 变成可运行的测试。", "B": "当前 `queue_cli.py` 有 `add`、`list`、`complete`，输出都是 JSON。建议第一版按以下标准验收，截止时间精确到秒。\n\n1. **添加截止时间**  \n   `add \"任务\" --due \"2026-11-03T18:00:00+08:00\"` 创建带截止时间的任务。不传 `--due` 也能正常创建。\n\n2. **明确时间格式**  \n   接受带时区的 `YYYY-MM-DDTHH:MM:SS+08:00` 或 UTC 格式 `YYYY-MM-DDTHH:MM:SSZ`。拒绝纯日期、无时区时间和不存在的日期。\n\n3. **输出能识别过期**  \n   `add`、`list`、`complete` 返回的任务保留 `id`、`title`、`done`，增加：\n   - `due_at`：统一为 UTC、以 `Z` 结尾的截止时间，无截止时间时为 `null`。\n   - `overdue`：布尔值，直接表示是否过期。\n\n4. **过期规则明确**  \n   只有“未完成、有截止时间、当前时间严格晚于截止时间”的任务，`overdue` 才为 `true`。恰好到截止时刻仍为 `false`。允许添加已经过期的任务，立即返回 `overdue: true`。\n\n5. **完成后不再标为过期**  \n   `complete ID` 将 `done` 改为 `true`，保留截止时间，返回 `overdue: false`。重复完成没有额外副作用。\n\n6. **随时间更新，跨进程有效**  \n   截止时间持久保存。每次执行命令重新计算 `overdue`，同一次命令使用同一当前时间。任务无需再次修改，也能在过期后的 `list` 中显示为过期。\n\n7. **兼容旧数据和现有行为**  \n   旧任务缺少截止时间时，按无截止时间处理。`list` 保持添加顺序，读取不改写状态文件。原有 ID 分配、标题校验和空队列行为保持有效。\n\n8. **错误不影响数据**  \n   非法截止时间导致非零退出，错误写入 stderr，stdout 不输出成功结果。已有状态文件内容不变；尚无状态文件时不创建文件。\n\n验收测试固定当前时间，覆盖以下情况，无需等待真实时间流逝：\n\n| 任务情况 | `overdue` |\n|---|---|\n| 未完成，无截止时间 | `false` |\n| 未完成，截止时间在未来 | `false` |\n| 未完成，恰好到截止时刻 | `false` |\n| 未完成，已超过截止时间 | `true` |\n| 已完成，已超过截止时间 | `false` |\n\n另需验证：不同时区表示的同一时刻，判断结果一致。\n\n第一版范围限定为创建时设置截止时间，以及在 JSON 中显示过期状态；修改截止时间、过期筛选和主动提醒留待后续。"}, {"n": 8, "kind": "acceptance", "q": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？", "A": "**做完的标准：`--list` 能查出指定项目已安装的 ytstack 技能，结果可重复核对，而且查询不会安装或改动文件。**\n\n读了 `tools/install.py` 和现有测试：目前支持 Codex、Claude 两个安装位置，以及链接、复制两种安装方式。最要紧的是先确定“什么算已安装”。\n\n**待你决定**\n\n- **D1（最要紧）识别范围**：推荐只确认“指向当前 ytstack 原文件的链接”或“内容与当前原文件完全一致的副本”；同名但内容不同、链接已失效的，提示无法确认，不算已安装。另一种选法是只看名称和 `SKILL.md`，但可能把别人的同名技能算进去。\n- **D2 查询位置**：推荐继续要求 `--harness codex|claude`，每次只查一个位置；另一种选法是一次查两处，需要区分重复名称。\n- **D3 输出形式**：推荐沿用现有 JSON，返回 `project`、`harness`、`skills`，每项包含名称、完整安装路径和安装方式；纯文字更方便直接阅读，但不方便其他程序读取。\n\n以下按推荐选项验收。\n\n**这次不做**\n\n- 不安装、更新、删除或修复技能。\n- 不查用户账户下的全局技能。\n- 不判断其他版本或修改过的副本是否确实来自 ytstack。\n\n**验收条件**\n\n共同准备：用完整的 ytstack 源文件，在 `/tmp/yt-demo` 建立独立样例项目。\n\n- **C1 [D1,D3]**：安装 `technical-bro` 后，运行 `python3 tools/install.py --project /tmp/yt-demo --harness codex --list` → 成功返回 JSON，恰好列出 `technical-bro` 和自动带上的 `unslop`，路径、安装方式与实际一致，名称按字母排序。防：列出所有可安装技能，或漏掉依赖。\n- **C2 [D1,D2]**：分别用链接、复制方式安装到 Codex 和 Claude 的位置，再用对应 `--harness` 查询 → 两种方式都能识别，两个位置互不混入。防：只认链接或查错目录。\n- **C3**：对没有安装目录的空项目查询 → 成功返回 `skills: []`，不创建目录；关闭命令后再次查询，结果相同。防：把空项目当错误，或查询时自动安装。\n- **C4 [D1]**：放入无关技能、修改过的同名副本、失效的同名链接后查询 → 无关技能不显示；后两者不计入已安装，并向 stderr 提示具体路径，其他正常项仍返回。防：把同名当成来源证明。\n- **C5**：查询前后比较项目文件内容、目录和链接目标 → 全部不变。防：查询顺手修复或覆盖已有内容。\n- **C6**：项目不存在，或把 `--list` 与 `--skill`、`--method`、`--dry-run` 混用 → 非零退出，stderr 说明原因，文件不变。防：忽略参数或意外执行安装。\n\n**不能弄坏**\n\n- 不带 `--list` 时，现有安装、自动带上依赖、重复安装和 `--dry-run` 的行为及输出保持不变。\n- 遇到同名冲突仍保留已有文件，不先安装一部分；安装位置指向项目之外时仍拒绝操作。\n- 当前项目缺少 `skills/` 源文件，且 `ytstack.json` 列了 4 项、部分测试却要求 5 项；正式验收前须明确这次采用哪份完整技能清单，不能直接拿现有数量断言判定通过。\n\n确认后可以交给 `create-test-skill` 变成可运行的测试。", "B": "建议按这 6 条验收：\n\n1. **入口可用**：`python3 tools/install.py --project <目录> --harness codex --list`；同样支持 `claude`，`--help` 有说明。\n2. **范围正确**：分别检查 `.agents/skills`、`.claude/skills`，只列出 `ytstack.json` 中已安装的技能，包含依赖技能。\n3. **识别准确**：支持软链接和复制安装；同名但内容不同的自定义技能不算，断链不算，且不会导致崩溃。\n4. **输出稳定**：沿用 JSON，包含 `project`、`harness`、`installed`；`installed` 为按技能名称排序的绝对路径列表。未安装或安装目录不存在时返回 `[]`，退出码为 0。\n5. **查询只读**：不创建目录、不安装、不修复、不修改文件。项目不存在时非零退出，错误写入 stderr。\n6. **有验证证据**：测试覆盖两个 harness、两种安装方式、空项目、依赖、无关技能、同名冲突和断链；原有安装行为不变。\n\n其中“怎样认定属于 ytstack”是关键：建议沿用现有安装器的判断——链接指向对应源技能，或副本内容与源目录一致。\n\n当前工作区为只读，本次未修改代码。"}];
+const KEY='ytstack-blind-v03';
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const st=n=>S[n]||(S[n]={pick:'',why:'',A:[],B:[]});
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const render=md=>window.marked?marked.parse(md,{gfm:true,breaks:false}):'<pre>'+esc(md)+'</pre>';
+function highlight(el,terms){
+  if(!terms.length)return;
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  const re=new RegExp(terms.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).sort((a,b)=>b.length-a.length).join('|'),'g');
+  for(const n of nodes){if(!re.test(n.data))continue;re.lastIndex=0;const f=document.createDocumentFragment();let last=0;
+    n.data.replace(re,(m,i)=>{f.append(n.data.slice(last,i));const k=document.createElement('mark');k.textContent=m;f.append(k);last=i+m.length;return m});
+    f.append(n.data.slice(last));n.replaceWith(f)}
+}
+function build(){
+  const root=document.getElementById('qs');root.innerHTML='';
+  for(const q of QS){
+    const s=st(q.n);const sec=document.createElement('section');sec.className='q';sec.id='q'+q.n;
+    const kind=q.kind==='acceptance'?'验收标准':'普通提问';
+    sec.innerHTML=`<div class="qhead"><span class="eyebrow">第 ${q.n} 题 · ${kind}</span><h2>${esc(q.q)}</h2>${q.kind==='acceptance'?'<p class="hint">想象你要照这份标准拍板，再交给别人去做。</p>':''}</div>
+    <div class="pair">${['A','B'].map(x=>`<article class="ans${s.pick===x?' chosen':''}" data-side="${x}"><header><span class="tag">${x}</span><button type="button" class="small mark-btn" data-side="${x}">标为黑话</button></header><div class="md">${render(q[x])}</div></article>`).join('')}</div>
+    <div class="vote"><div class="choices" role="group" aria-label="第 ${q.n} 题选择">${[['A','选 A'],['TIE','平局'],['B','选 B']].map(([v,t])=>`<button type="button" data-v="${v}" aria-pressed="${s.pick===v}">${t}</button>`).join('')}</div>
+    <div class="terms" data-terms></div>
+    <label for="why${q.n}">一句原因（可不填）</label><textarea id="why${q.n}" placeholder="比如：A 的黑话少，但第二段重复了">${esc(s.why)}</textarea></div>`;
+    root.append(sec);
+    sec.querySelectorAll('.ans').forEach(a=>highlight(a.querySelector('.md'),s[a.dataset.side]));
+    drawTerms(sec,q.n);
+    sec.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{s.pick=b.dataset.v;save();
+      sec.querySelectorAll('.choices button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+      sec.querySelectorAll('.ans').forEach(a=>a.classList.toggle('chosen',a.dataset.side===s.pick));update()});
+    sec.querySelector('textarea').oninput=e=>{s.why=e.target.value;save();update()};
+    sec.querySelectorAll('.mark-btn').forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>{
+      const side=b.dataset.side;const sel=window.getSelection();const md=sec.querySelector(`.ans[data-side="${side}"] .md`);
+      const t=(sel?sel.toString():'').trim();
+      if(!t||!sel.rangeCount||!md.contains(sel.getRangeAt(0).commonAncestorContainer)){flash(sec,`先在 ${side} 里用鼠标选中一个词，再点这里。`);return}
+      if(t.length>40){flash(sec,'选中的内容太长了，选一个词或短语就行。');return}
+      if(!s[side].includes(t))s[side].push(t);save();sel.removeAllRanges();build();update();document.getElementById('q'+q.n).scrollIntoView({block:'nearest'})}});
+  }
+}
+function flash(sec,msg){const t=sec.querySelector('[data-terms]');t.textContent=msg;setTimeout(()=>drawTerms(sec,+sec.id.slice(1)),2200)}
+function drawTerms(sec,n){const s=st(n);const t=sec.querySelector('[data-terms]');t.innerHTML='';
+  const all=[...s.A.map(w=>['A',w]),...s.B.map(w=>['B',w])];
+  if(!all.length){t.textContent='还没标黑话。';return}
+  t.append('已标黑话：');
+  for(const [side,w] of all){const c=document.createElement('span');c.className='chip';c.innerHTML=`${side}：${esc(w)}<button type="button" aria-label="删除 ${esc(w)}">×</button>`;
+    c.querySelector('button').onclick=()=>{s[side]=s[side].filter(x=>x!==w);save();build();update()};t.append(c)}}
+function update(){
+  const p=document.getElementById('progress');p.innerHTML='';let done=0;
+  for(const q of QS){const ok=!!st(q.n).pick;done+=ok;const a=document.createElement('a');a.href='#q'+q.n;a.className='dot'+(ok?' done':'');a.textContent=q.n;a.setAttribute('aria-label',`第 ${q.n} 题${ok?'，已选':''}`);p.append(a)}
+  const c=document.createElement('span');c.className='count';c.textContent=`已选 ${done} / ${QS.length}`;p.append(c);
+  const rem=QS.filter(q=>!st(q.n).pick).map(q=>q.n);
+  document.getElementById('remain').textContent=rem.length?`还有第 ${rem.join('、')} 题没选，没选的也会照实写进结果。`:'8 题都选完了，复制后贴回对话就行。';
+  const lab={A:'A',B:'B',TIE:'平局','':'未选'};
+  document.getElementById('out').value='盲看结果\n'+QS.map(q=>{const s=st(q.n);let l=`第${q.n}题：${lab[s.pick]}`;if(s.why.trim())l+=`｜原因：${s.why.trim()}`;
+    if(s.A.length)l+=`｜A黑话：${s.A.join('、')}`;if(s.B.length)l+=`｜B黑话：${s.B.join('、')}`;return l}).join('\n');
+}
+document.getElementById('copy').onclick=()=>{const o=document.getElementById('out');const st_=document.getElementById('status');
+  const fallback=()=>{o.focus();o.select();st_.textContent='已选中文本，按 Ctrl+C 复制。'};
+  try{navigator.clipboard.writeText(o.value).then(()=>st_.textContent='已复制，贴回对话里就行。',fallback)}catch(e){fallback()}};
+build();update();
+</script>

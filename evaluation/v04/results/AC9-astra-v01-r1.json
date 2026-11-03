@@ -1,0 +1,31 @@
+{
+ "id": "AC9-astra-v01-r1",
+ "prompt": "queue_cli 一条一条加任务太慢了，我想让它能从一个文本文件里一次导入多个任务。写代码之前先把验收标准定下来。",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 174.1,
+ "usage": {
+  "input_tokens": 56008,
+  "cached_input_tokens": 45056,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1199,
+  "reasoning_output_tokens": 78
+ },
+ "final": "建议新增 `import FILE` 子命令，按“一行一个任务”导入。本轮先确定验收标准，未修改代码。\n\n已查看 [queue_cli.py](/tmp/ytev-kss3ng1f/project/queue_cli.py)。现有任务字段为 `id`、`title`、`done`；下面的方案沿用这些字段，以及 `add` 保留标题首尾空格的行为。\n\n拟定命令：\n\n```sh\npython3 queue_cli.py --state queue.json import tasks.txt\n```\n\n| 编号 | 场景 | 验收标准 |\n|---|---|---|\n| 1 | 导入普通文件 | UTF-8 文本每行对应一个任务，按文件顺序追加。支持 LF、CRLF，以及末行没有换行符。支持 UTF-8 BOM，BOM 不进入标题。 |\n| 2 | 标题内容 | 只移除行尾换行符，保留标题首尾空格、中文、表情和标点。`#` 开头的行也视为任务，不解析注释。 |\n| 3 | 空白行 | 跳过空行及全空白行，不占用 ID。空文件或仅含空白行的文件成功返回 `[]`，不创建或改写状态文件。 |\n| 4 | ID 和状态 | 从已有最大 ID 加 1 开始连续分配；空队列从 1 开始。所有新任务的 `done` 为 `false`。已有任务的内容、顺序和完成状态保持不变。 |\n| 5 | 重复标题 | 文件内重复标题、与已有任务同名的标题均正常追加。重复执行同一导入命令会再次添加任务。 |\n| 6 | 成功输出 | 退出码为 `0`；stdout 只输出一个 JSON 数组，包含本次新增任务的完整记录，顺序与文件一致；stderr 为空。 |\n| 7 | 文件读取失败 | 文件不存在、路径为目录、无法读取或不是合法 UTF-8 时，非零退出，stderr 给出包含文件路径和原因的错误，stdout 为空。即使前几行合法，也不导入任何任务；已有状态文件内容不变，原本不存在的状态文件不被创建。 |\n| 8 | 持久化 | 状态文件不存在时按空队列处理；有任务写入时自动创建父目录。导入后用另一个进程执行 `list`，能读取全部新增任务。 |\n| 9 | 兼容性 | 原有 `add`、`list`、`complete` 的输出和行为不变；主命令及 `import --help` 能说明导入用法。 |\n\n例如，已有最大 ID 为 `4`，文件内容为：\n\n```text\n买牛奶\n\n写周报\n买牛奶\n```\n\n导入应返回：\n\n```json\n[\n  {\"id\": 5, \"title\": \"买牛奶\", \"done\": false},\n  {\"id\": 6, \"title\": \"写周报\", \"done\": false},\n  {\"id\": 7, \"title\": \"买牛奶\", \"done\": false}\n]\n```\n\n后续验收通过独立 CLI 进程验证上述场景，并对失败前后的状态文件做字节比较。并发写入、进程中断和磁盘故障下的恢复保证不纳入本次范围。",
+ "commentary": [
+  "我先查看 `queue_cli` 的实现和现有测试，结合当前任务格式整理验收标准，暂不修改代码。",
+  "我会按 `technical-bro` 和 `unslop` 技能把验收标准写成可直接测试的行为，明确文件格式、重复任务和失败时的处理方式。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g 'package.json' -g 'Cargo.toml' -g 'go.mod'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'cat queue_cli.py README.md tests/test_smoke.py tests/test_package.py'",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!'\"\\\\.git/**'; for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-kss3ng1f/AGENTS.md /tmp/ytev-kss3ng1f/project/AGENTS.md; do if [ -f \\\"\"'$p\" ]; then cat \"$p\"; fi; done; cat .agents/ski"
+ ]
+}

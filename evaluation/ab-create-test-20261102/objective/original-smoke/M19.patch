@@ -1,0 +1,13 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -44,8 +44,8 @@
+     elif args.command == 'void':
+         entry = next((item for item in entries if item['id'] == args.id), None)
+         if entry is None:
+-            print('unknown expense id', file=sys.stderr)
+-            return 1
++            print('null')
++            return 0
+         entry['voided'] = True
+         save(args.state, entries)
+         result = entry

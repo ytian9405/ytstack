@@ -1,0 +1,75 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning": "same inherited parent setting, no per-run override",
+  "runs": [
+    {
+      "label": "sample-66",
+      "agent": "bro_pair1_a",
+      "task": "bro",
+      "seed_exactly_matches": true,
+      "seed_sha256": "b8ffcccb090fd35d7f7be85d7592141f427c30bbd76d99b26dbff2592755fc6c",
+      "rewrite_requested_at": "2026-11-02T13:12:21.017304+00:00",
+      "state": "completed",
+      "completion_observed_at": "2026-11-02T13:14:57.618973+00:00"
+    },
+    {
+      "label": "sample-35",
+      "agent": "bro_pair1_b",
+      "task": "bro",
+      "seed_exactly_matches": true,
+      "seed_sha256": "b8ffcccb090fd35d7f7be85d7592141f427c30bbd76d99b26dbff2592755fc6c",
+      "rewrite_requested_at": "2026-11-02T13:12:21.017598+00:00",
+      "state": "completed",
+      "completion_observed_at": "2026-11-02T13:14:57.618989+00:00"
+    },
+    {
+      "label": "sample-74",
+      "agent": "bro_pair2_a",
+      "task": "bro",
+      "seed_exactly_matches": true,
+      "seed_sha256": "b8ffcccb090fd35d7f7be85d7592141f427c30bbd76d99b26dbff2592755fc6c",
+      "rewrite_requested_at": "2026-11-02T13:14:57.620661+00:00",
+      "state": "completed",
+      "completion_observed_at": "2026-11-02T13:16:52.213793+00:00"
+    },
+    {
+      "label": "sample-48",
+      "agent": "bro_pair2_b",
+      "task": "bro",
+      "seed_exactly_matches": true,
+      "seed_sha256": "b8ffcccb090fd35d7f7be85d7592141f427c30bbd76d99b26dbff2592755fc6c",
+      "rewrite_requested_at": "2026-11-02T13:14:57.621215+00:00",
+      "state": "completed",
+      "completion_observed_at": "2026-11-02T13:16:52.213815+00:00"
+    },
+    {
+      "label": "sample-53",
+      "agent": "technical_pair1_a",
+      "task": "technical-bro",
+      "state": "completed",
+      "observed_at": "2026-11-02T13:14:57.621225+00:00"
+    },
+    {
+      "label": "sample-89",
+      "agent": "technical_pair1_b",
+      "task": "technical-bro",
+      "state": "completed",
+      "observed_at": "2026-11-02T13:14:57.621227+00:00"
+    },
+    {
+      "label": "sample-27",
+      "agent": "technical_pair2_a",
+      "task": "technical-bro",
+      "state": "completed",
+      "observed_at": "2026-11-02T13:14:57.621232+00:00",
+      "completion_observed_at": "2026-11-02T13:16:52.213817+00:00"
+    },
+    {
+      "label": "sample-12",
+      "agent": "technical_pair2_b",
+      "task": "technical-bro",
+      "state": "completed",
+      "observed_at": "2026-11-02T13:16:52.213818+00:00"
+    }
+  ]
+}

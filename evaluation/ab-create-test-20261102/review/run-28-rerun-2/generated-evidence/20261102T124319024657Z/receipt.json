@@ -1,0 +1,66 @@
+{
+  "python": "3.12.3",
+  "target": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps/project/expense_cli.py",
+  "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+  "runs": [
+    {
+      "label": "baseline",
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps/project",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "baseline.log"
+    },
+    {
+      "label": "negative-control",
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps/project/evidence/20261102T124319024657Z/negative-control-la0g2krm",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_behavior.py",
+        "-k",
+        "LL02",
+        "-v"
+      ],
+      "exit_code": 1,
+      "log": "negative-control.log"
+    },
+    {
+      "label": "restored",
+      "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps/project",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "restored.log"
+    }
+  ],
+  "product_cases": {
+    "LL01": "PASS",
+    "LL02": "PASS",
+    "LL03": "PASS",
+    "LL04": "PASS",
+    "LL05": "PASS"
+  },
+  "failure_detection": "PASS",
+  "scratch_removed": true,
+  "live_target_unchanged": true
+}

@@ -1,0 +1,28 @@
+{
+ "id": "H1-astra-v01-r1",
+ "prompt": "tools/validate.py 到底检查了什么？它通过了能说明技能好用吗？",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 370.6,
+ "usage": {
+  "input_tokens": 71836,
+  "cached_input_tokens": 62208,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 912,
+  "reasoning_output_tokens": 14
+ },
+ "final": "**不能。`tools/validate.py` 通过，只能说明技能包满足它写死的结构和一致性规则，不能证明技能好用。** 它没有调用模型，也没有让技能完成实际任务。\n\n具体检查如下，见 [validate.py](/tmp/ytev-43bhkckn/project/tools/validate.py:14)：\n\n| 检查项 | 实际检查内容 |\n|---|---|\n| 包信息 | 两份配置的名称都是 `ytstack`，版本一致 |\n| 技能清单 | 名称不重复，与 `skills/*/SKILL.md` 对应 |\n| 技能头部 | `name` 与目录名一致，`description` 非空，不包含 `disable-model-invocation` |\n| 正文及配套文件 | 正文没有 `TODO`，存在 `agents/openai.yaml` |\n| 许可证 | 包和各技能的 LICENSE 包含指定版权声明、授权文字 |\n| 本地链接 | 正文中匹配到的 Markdown 本地链接目标存在，且不越出包目录 |\n| 依赖 | 声明的依赖名称存在；`technical-bro` 包含指定的 `unslop` 引用 |\n| 来源记录 | 已记录正文的 SHA-256 与记录值一致；标记为保留上游正文的，还要匹配记录中的上游哈希 |\n\n这里有几个关键边界：**存在文件不代表内容正确，描述非空不代表触发准确，哈希一致不代表指令有效。** 它也不完整解析 YAML、不验证外部链接、不检查依赖循环，更不会判断模型能否理解和执行技能。\n\n要证明“好用”，需要实际行为评测：\n\n- **触发是否准确**：该用时调用，不该用时不误用。\n- **任务是否完成**：用真实输入运行技能，按可观察的结果验收。\n- **是否带来改善**：同样任务比较启用和未启用技能的结果。\n- **评测是否可信**：故意引入错误，确认评测能发现，而不是始终通过。\n\n另外，我在**当前工作区实际运行了一次，它没有通过**：缺少 `.claude-plugin/plugin.json`。当前技能放在 `.agents/skills/`，脚本检查的是 `skills/`；它针对的是另一套打包目录结构。这个失败说明当前目录不符合它的打包要求，也不能据此判断技能不好用。",
+ "commentary": [
+  "我先看看 `tools/validate.py` 的检查项和调用方式，再判断它通过后能证明什么。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*validate*' -g 'SKILL.md' -g '*test*' -g 'README*'\"",
+  "/bin/bash -lc 'cat tools/validate.py; cat tests/test_package.py; cat tests/test_smoke.py'",
+  "/bin/bash -lc \"cat README.md; rg -n 'validate|smoke|pytest|unittest' . --glob '\"'!*.lock'\"'; rg --files --hidden -g 'AGENTS.md' -g 'SKILL.md' -g '\"'! .git'\"'\"",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'! .git'\"' -g '*eval*' -g '*provenance*' -g '*ytstack*' -g '*fixture*'; ls -ld skills .claude-plugin 2>/dev/null\"",
+  "/bin/bash -lc 'nl -ba tools/validate.py; ls -la; python3 tools/validate.py'"
+ ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Acceptance criteria"
+  short_description: "Define pass/fail criteria and open decisions before building"
+  default_prompt: "Use $acceptance-criteria to define what counts as done before any code is written."

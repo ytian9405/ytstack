@@ -1,0 +1,158 @@
+{
+  "status": "COMPLETE",
+  "completed_at": "2026-11-02T12:51:24.287302+00:00",
+  "model": "gpt-6.1-sol",
+  "judge_model": "gpt-6-astra",
+  "model_reasoning": "Same inherited parent setting; no per-arm override",
+  "task": "Create a reusable project testing skill for Ledger Lite and executable behavior tests",
+  "runs_per_arm": 2,
+  "framework": "design/FRAMEWORK.md",
+  "pre_run_freeze": "design/pre-run-freeze.json",
+  "score_lock": "review/score-lock.json",
+  "unblind_receipt": "review/UNBLIND.json",
+  "runs": [
+    {
+      "label": "run-17",
+      "pair": 1,
+      "arm": "without",
+      "score": 100.0,
+      "behavior": 60.0,
+      "reuse": 25.0,
+      "execution": 15.0,
+      "valid_mutants_detected": 22,
+      "net_new_vs_original_smoke": 20,
+      "major_gates": {
+        "G01": "NOT_TRIGGERED",
+        "G02": "NOT_TRIGGERED",
+        "G03": "NOT_TRIGGERED",
+        "G04": "NOT_TRIGGERED",
+        "G05": "NOT_TRIGGERED"
+      },
+      "score_evidence": "review/run-17.json",
+      "artifact_project": "runs/run-17/project"
+    },
+    {
+      "label": "run-28",
+      "pair": 1,
+      "arm": "with",
+      "score": 97.5,
+      "behavior": 57.5,
+      "reuse": 25.0,
+      "execution": 15.0,
+      "valid_mutants_detected": 22,
+      "net_new_vs_original_smoke": 20,
+      "major_gates": {
+        "G01": "NOT_TRIGGERED",
+        "G02": "NOT_TRIGGERED",
+        "G03": "NOT_TRIGGERED",
+        "G04": "NOT_TRIGGERED",
+        "G05": "NOT_TRIGGERED"
+      },
+      "score_evidence": "review/run-28.json",
+      "artifact_project": "runs/run-28/project"
+    },
+    {
+      "label": "run-65",
+      "pair": 2,
+      "arm": "without",
+      "score": 95.0,
+      "behavior": 60.0,
+      "reuse": 25.0,
+      "execution": 10.0,
+      "valid_mutants_detected": 22,
+      "net_new_vs_original_smoke": 20,
+      "major_gates": {
+        "G01": "NOT_TRIGGERED",
+        "G02": "NOT_TRIGGERED",
+        "G03": "NOT_TRIGGERED",
+        "G04": "NOT_TRIGGERED",
+        "G05": "NOT_TRIGGERED"
+      },
+      "score_evidence": "review/run-65.json",
+      "artifact_project": "runs/run-65/project"
+    },
+    {
+      "label": "run-43",
+      "pair": 2,
+      "arm": "with",
+      "score": 97.5,
+      "behavior": 57.5,
+      "reuse": 25.0,
+      "execution": 15.0,
+      "valid_mutants_detected": 22,
+      "net_new_vs_original_smoke": 20,
+      "major_gates": {
+        "G01": "NOT_TRIGGERED",
+        "G02": "NOT_TRIGGERED",
+        "G03": "NOT_TRIGGERED",
+        "G04": "NOT_TRIGGERED",
+        "G05": "NOT_TRIGGERED"
+      },
+      "score_evidence": "review/run-43.json",
+      "artifact_project": "runs/run-43/project"
+    }
+  ],
+  "groups": {
+    "without": {
+      "scores": [
+        100.0,
+        95.0
+      ],
+      "mean": 97.5,
+      "range": [
+        95.0,
+        100.0
+      ],
+      "mean_behavior": 60.0,
+      "mean_reuse": 25.0,
+      "mean_execution": 12.5,
+      "mean_valid_mutants": 22,
+      "mean_net_new_vs_smoke": 20
+    },
+    "with": {
+      "scores": [
+        97.5,
+        97.5
+      ],
+      "mean": 97.5,
+      "range": [
+        97.5,
+        97.5
+      ],
+      "mean_behavior": 57.5,
+      "mean_reuse": 25.0,
+      "mean_execution": 15.0,
+      "mean_valid_mutants": 22,
+      "mean_net_new_vs_smoke": 20
+    }
+  },
+  "paired_differences": [
+    {
+      "pair": 1,
+      "with_minus_without": -2.5
+    },
+    {
+      "pair": 2,
+      "with_minus_without": 2.5
+    }
+  ],
+  "mean_gain_points": 0.0,
+  "mean_behavior_gain_points": -2.5,
+  "mean_execution_gain_points": 2.5,
+  "conclusion": "No aggregate quality or mutation-detection gain observed in these four runs. Evidence quality improved on average; direct non-target-record preservation coverage was weaker.",
+  "cost": {
+    "tokens": "UNKNOWN",
+    "money": "UNKNOWN",
+    "exact_processing_wall_time": "UNKNOWN"
+  },
+  "independent_review_rerun_commands": 16,
+  "all_independent_review_commands_passed": true,
+  "limitations": [
+    "One small CLI and two independent runs per arm; no statistical or cross-project generalization",
+    "Same host instructions and skill catalog metadata visible to both arms; treatment is explicit skill-body loading",
+    "Shared filesystem isolated by instructions, not containers; manipulation check relies on post-run self-reports",
+    "22 fixed mutants are not complete fault coverage and all results reached the mutation ceiling",
+    "Complete provider tool traces, token usage and fixed backend model snapshot were unavailable",
+    "K_added separately-run mutation matrix is UNKNOWN; final-minus-old net contribution is measured"
+  ]
+}

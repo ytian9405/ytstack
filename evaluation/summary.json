@@ -1,0 +1,110 @@
+{
+  "release": "0.1.0",
+  "date": "2026-11-02",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "package-integrity",
+      "command": [
+        "/usr/bin/python3",
+        "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/tools/validate.py"
+      ],
+      "exit_status": 0,
+      "log": "package-integrity.log"
+    },
+    {
+      "id": "installer-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/ytian9405/projects/rourou-gaochouxiang/ytstack/tests",
+        "-v"
+      ],
+      "exit_status": 0,
+      "log": "installer-tests.log"
+    },
+    {
+      "id": "claude-plugin",
+      "command": [
+        "claude",
+        "plugin",
+        "validate",
+        "/home/ytian9405/projects/rourou-gaochouxiang/ytstack"
+      ],
+      "exit_status": 0,
+      "log": "claude-plugin.log"
+    }
+  ],
+  "host_versions": {
+    "claude": {
+      "exit_status": 0,
+      "output": "2.1.316 (Claude Code)"
+    },
+    "codex": {
+      "exit_status": 0,
+      "output": "codex-cli 0.166.0"
+    }
+  },
+  "behavior": {
+    "create_test_skill": {
+      "status": "PASS",
+      "report": "cli/EVALUATION.json",
+      "cases": 5,
+      "assertions": 49,
+      "evidence": "cli/test-evidence/final/"
+    },
+    "cold_use": {
+      "status": "PASS",
+      "report": "cold-use/COLD-EVALUATION.json",
+      "cases": 5,
+      "assertions": 49
+    },
+    "negative_controls": {
+      "persistence_write_removed": "FAIL as intended, then restored PASS",
+      "completion_state_broken": "FAIL as intended, then restored PASS",
+      "missing_target": "BLOCKED as intended",
+      "parent_review": "cli/test-evidence/parent-review/review.json"
+    },
+    "bro": {
+      "status": "PASS",
+      "output": "writing/bro.txt",
+      "report": "writing/report.json"
+    },
+    "technical_bro": {
+      "status": "PASS",
+      "output": "writing/technical-bro-v2.txt",
+      "report": "writing/report-v2.json"
+    }
+  },
+  "review": {
+    "license_in_standalone_copy": "PASS; verified independently",
+    "conflict_and_scope_preservation": "PASS; verified independently",
+    "known_open_findings": []
+  },
+  "unverified": [
+    "Web UI, API, native application and remote-service generation scenarios",
+    "Actual Claude model invocation of these skills; native plugin structure validation only",
+    "Implicit skill selection quality across hosts",
+    "Python versions other than this local environment"
+  ],
+  "limitations": [
+    "CLI evidence validates one fixture and representative failure modes, not universal correctness.",
+    "Claude validator emits a non-blocking missing marketplace icon warning; this package is local and unpublished.",
+    "Historical receipts retain original temporary paths; archived sources and commands use project-relative paths."
+  ],
+  "project_installation": {
+    "harness": "codex",
+    "discovery": ".agents/skills/",
+    "skills": [
+      "create-test-skill",
+      "bro",
+      "technical-bro",
+      "unslop"
+    ],
+    "method": "relative symlink",
+    "requires_new_session_for_discovery": true
+  }
+}

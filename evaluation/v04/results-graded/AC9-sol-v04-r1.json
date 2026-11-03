@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "导入后另启进程运行 `list`，逐项核对数量、顺序、标题、编号和完成状态。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "忽略空行及全空白行；其他行保留标题首尾空格，按文件顺序追加。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "退出码为 0，stdout 输出新增任务的 JSON 数组；每条包含 `id`、`title`、`done`，`done` 为 `false`。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**最要紧的决定，已按推荐写入**：一行一条、忽略空白行；若空白行算错误，夹着空行的文件将整份拒绝。"
+  },
+  {
+   "i": 1,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**另一项决定，已按推荐写入**：允许同名任务，重复导入会再次添加；若需要防重复，须另定哪些任务算重复。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "退出码为 0，stdout 输出新增任务的 JSON 数组；每条包含 `id`、`title`、`done`，`done` 为 `false`。"
+  }
+ ]
+}

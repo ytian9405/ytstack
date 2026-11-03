@@ -1,0 +1,32 @@
+{
+ "id": "AC9-sol-v01-r2",
+ "prompt": "queue_cli 一条一条加任务太慢了，我想让它能从一个文本文件里一次导入多个任务。写代码之前先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 85.3,
+ "usage": {
+  "input_tokens": 79701,
+  "cached_input_tokens": 68352,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1449,
+  "reasoning_output_tokens": 300
+ },
+ "final": "建议新增命令：\n\n```sh\npython3 queue_cli.py --state queue.json import tasks.txt\n```\n\n按现有 `add` 的行为，验收标准定为以下条目：\n\n| 编号 | 场景 | 通过条件 |\n|---|---|---|\n| AC1 | 一次导入多个任务 | 一个命令读取整个文本文件，每个非空白行生成一个任务，按文件顺序追加到队列。 |\n| AC2 | 文本格式 | 使用 UTF-8，支持 LF、CRLF，以及末行没有换行符。中文、标点正常保留。 |\n| AC3 | 标题和空白行 | 去掉行结束符，保留标题首尾空格，与现有 `add` 一致。空行及仅含空白字符的行跳过。`#` 开头的行也作为任务。 |\n| AC4 | 新任务字段 | 每条记录包含 `id`、`title`、`done`。ID 从现有最大 ID 加一开始连续分配，空队列从 1 开始，`done` 为 `false`。已有记录的内容和顺序不变。 |\n| AC5 | 成功输出和持久化 | 退出码为 0，stdout 只输出一个 JSON 数组，内容为本次新增的完整记录。另起进程执行 `list`，能读到全部新增任务。首次有效导入自动创建状态文件的父目录。 |\n| AC6 | 空文件或全空白文件 | 成功返回 `[]`，退出码为 0。已有状态文件字节不变；状态文件及父目录不存在时不创建。 |\n| AC7 | 输入读取失败 | 文件不存在、路径指向目录、文件不可读或不是有效 UTF-8 时，非零退出，stderr 给出能定位问题的错误，stdout 为空。不得导入部分任务，已有状态文件字节不变，也不创建新状态文件。 |\n| AC8 | 重复任务 | 相同标题的多行分别生成任务。再次导入同一文件会再次追加，分配新的 ID。 |\n| AC9 | 兼容现有命令 | `add`、`list`、`complete` 的参数、JSON 输出、ID 分配和持久化行为保持不变。 |\n\n一个具体的验收样例：已有最大 ID 为 `4`，输入文件为：\n\n```text\n买牛奶\n\n提交报告\n买牛奶\n```\n\n导入后 stdout 解析为：\n\n```json\n[\n  {\"id\": 5, \"title\": \"买牛奶\", \"done\": false},\n  {\"id\": 6, \"title\": \"提交报告\", \"done\": false},\n  {\"id\": 7, \"title\": \"买牛奶\", \"done\": false}\n]\n```\n\n本轮范围是逐行文本导入。CSV、单个任务跨多行、并发写入和写盘中断恢复不纳入验收。以上是实现前的验收合同，本轮未改代码。",
+ "commentary": [
+  "我先看一下 `queue_cli` 的现有用法和测试约定，再把批量导入的验收标准写成可检查的条目。这一步先不改代码。",
+  "我会按 `technical-bro` 和它引用的 `unslop` 写作规范整理验收标准，把命令、输入规则和失败时的行为说清楚。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g '*README*' -g 'pyproject.toml' -g 'package.json' -g '*test*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat /tmp/ytev-j4ceqql4/project/.agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'cat README.md tests/test_smoke.py tests/test_package.py .agents/skills/unslop/SKILL.md'",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-j4ceqql4/AGENTS.md /tmp/ytev-j4ceqql4/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done; rg --files -g '\"'AGENTS.md' -g '\"'!node_modules'\"' -g '\"'!v",
+  "/bin/bash -lc \"rg -n 'queue_cli|批量|import|acceptance' --glob '\"'!provenance.json'\"' --glob '\"'!LICENSE'\"' --glob '\"'!test_package.py'\"' .; rg --files -g '\"'!provenance.json'\"' -g '\"'!LICENSE'\"'\""
+ ]
+}

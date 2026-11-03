@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bro"
+  short_description: "Restate the last answer in plain, concise human language"
+  default_prompt: "Use $bro to restate your last answer simply and clearly."

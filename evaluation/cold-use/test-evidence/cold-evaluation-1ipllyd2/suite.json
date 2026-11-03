@@ -1,0 +1,751 @@
+{
+  "command": "/usr/bin/python3 tests/test_queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/suite.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+  "cases": [
+    {
+      "id": "TQ01",
+      "test": "test_TQ01_empty_queue",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-5xghhnx2/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[]\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "nonexistent queue lists empty",
+          "actual": [],
+          "expected": [],
+          "status": "PASS"
+        },
+        {
+          "label": "listing does not create state",
+          "actual": false,
+          "expected": false,
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-5xghhnx2",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "TQ02",
+      "test": "test_TQ02_add_persistence_order",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-l2wczpvr/nested/queue.json add '  Prepare slides 雪  '",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-l2wczpvr/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-l2wczpvr/nested/queue.json add 'Send notes'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 2, \"title\": \"Send notes\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-l2wczpvr/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[{\"id\": 1, \"title\": \"  Prepare slides 雪  \", \"done\": false}, {\"id\": 2, \"title\": \"Send notes\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "first add returns ID 1 and exact title",
+          "actual": {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "  Prepare slides 雪  ",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "first mutation creates parent directory",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process sees first persisted task",
+          "actual": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "next add returns increasing ID",
+          "actual": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "expected": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process preserves insertion order",
+          "actual": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "disk state contains both exact tasks",
+          "actual": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "  Prepare slides 雪  ",
+              "done": false
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-l2wczpvr",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "TQ03",
+      "test": "test_TQ03_complete_idempotence",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json add 'Prepare slides'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json add 'Send notes'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 2, \"title\": \"Send notes\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json complete 1",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}, {\"id\": 2, \"title\": \"Send notes\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json complete 1",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[{\"id\": 1, \"title\": \"Prepare slides\", \"done\": true}, {\"id\": 2, \"title\": \"Send notes\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ften8b_l/nested/queue.json add Archive",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 3, \"title\": \"Archive\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup first task",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup second task",
+          "actual": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "expected": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "completion preserves title and changes done",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "completion persists and preserves other task",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "repeat completion returns same task",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "repeat completion has no duplicate effects",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Prepare slides",
+              "done": true
+            },
+            {
+              "id": 2,
+              "title": "Send notes",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "IDs increase after completion",
+          "actual": {
+            "id": 3,
+            "title": "Archive",
+            "done": false
+          },
+          "expected": {
+            "id": 3,
+            "title": "Archive",
+            "done": false
+          },
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-ften8b_l",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "TQ04",
+      "test": "test_TQ04_blank_title_rejected",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ezy8x25m/nested/queue.json add ' \t '",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "",
+          "stderr": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\nqueue_cli.py: error: title must contain text\n",
+          "exit_status": 2
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ezy8x25m/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[]\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ezy8x25m/nested/queue.json add 'Keep me'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"Keep me\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ezy8x25m/nested/queue.json add '\n\t'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "",
+          "stderr": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\nqueue_cli.py: error: title must contain text\n",
+          "exit_status": 2
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-ezy8x25m/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[{\"id\": 1, \"title\": \"Keep me\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "invalid input exits nonzero",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "invalid input reports an error on stderr",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "rejected first write leaves state absent",
+          "actual": false,
+          "expected": false,
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "rejected first write leaves queue empty",
+          "actual": [],
+          "expected": [],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup existing task",
+          "actual": {
+            "id": 1,
+            "title": "Keep me",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "Keep me",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "invalid input exits nonzero",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "invalid input reports an error on stderr",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "blank title does not change stored tasks",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process sees unchanged tasks",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-ezy8x25m",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "TQ05",
+      "test": "test_TQ05_unknown_id_rejected",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-mfaok4rq/nested/queue.json complete 42",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "",
+          "stderr": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\nqueue_cli.py: error: task does not exist\n",
+          "exit_status": 2
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-mfaok4rq/nested/queue.json add 'Keep me'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "{\"id\": 1, \"title\": \"Keep me\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-mfaok4rq/nested/queue.json complete 42",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "",
+          "stderr": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\nqueue_cli.py: error: task does not exist\n",
+          "exit_status": 2
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py --state /tmp/tiny-queue-test-mfaok4rq/nested/queue.json list",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project",
+          "stdout": "[{\"id\": 1, \"title\": \"Keep me\", \"done\": false}]\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "invalid input exits nonzero",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "invalid input reports an error on stderr",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "unknown ID leaves missing state absent",
+          "actual": false,
+          "expected": false,
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup existing task",
+          "actual": {
+            "id": 1,
+            "title": "Keep me",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "Keep me",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "invalid input exits nonzero",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "invalid input reports an error on stderr",
+          "actual": true,
+          "expected": true,
+          "status": "PASS"
+        },
+        {
+          "label": "unknown ID does not change stored tasks",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "fresh process sees unchanged tasks",
+          "actual": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "expected": [
+            {
+              "id": 1,
+              "title": "Keep me",
+              "done": false
+            }
+          ],
+          "status": "PASS"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-mfaok4rq",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      },
+      "status": "PASS"
+    }
+  ],
+  "doctor": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/queue_cli.py",
+    "sha256": "c7b0ecd656500329683d7c144cfd5ca5e453be45d48603802e1999d1ecaa5bfb",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "status": "PASS",
+  "exit_status": 0
+}

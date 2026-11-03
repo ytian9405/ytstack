@@ -1,0 +1,361 @@
+reuse_voided_id: DETECTED (case C03, exit 1)
+test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... FAIL
+
+======================================================================
+FAIL: test_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 56, in test_C03_void_is_persistent_idempotent_and_ids_not_reused
+    self.assertEqual(third, {'id': 3, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False})
+AssertionError: {'id': 2, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False} != {'id': 3, 'title': '晚餐', 'cents': 500, 'category': 'food', 'voided': False}
+- {'category': 'food', 'cents': 500, 'id': 2, 'title': '晚餐', 'voided': False}
+?                                          ^
+
++ {'category': 'food', 'cents': 500, 'id': 3, 'title': '晚餐', 'voided': False}
+?                                          ^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.338s
+
+FAILED (failures=1)
+
+count_voided_in_summary: DETECTED (case C04, exit 1)
+test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... FAIL
+
+======================================================================
+FAIL: test_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 66, in test_C04_summary_aggregates_only_active_entries
+    self.assertEqual(self.success('summary'), {'count': 2, 'total_cents': 118,
+AssertionError: {'count': 4, 'total_cents': 1319, 'by_category': {'[37 chars]999}} != {'count': 2, 'total_cents': 118, 'by_category': {'f[20 chars] 17}}
++ {'by_category': {'food': 101, 'travel': 17}, 'count': 2, 'total_cents': 118}
+- {'by_category': {'food': 303, 'removed': 999, 'travel': 17},
+-  'count': 4,
+-  'total_cents': 1319}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.313s
+
+FAILED (failures=1)
+
+strip_title: DETECTED (case C02, exit 1)
+test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... FAIL
+
+======================================================================
+FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 41, in test_C02_add_preserves_strings_and_persists_in_order
+    self.assertEqual(self.add(first['title'], '1', first['category']), first)
+AssertionError: {'id': 1, 'title': '午餐 🍜', 'cents': 1, 'category': ' 食物 🥢 ', 'voided': False} != {'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'category': ' 食物 🥢[15 chars]alse}
+- {'category': ' 食物 🥢 ', 'cents': 1, 'id': 1, 'title': '午餐 🍜', 'voided': False}
++ {'category': ' 食物 🥢 ',
++  'cents': 1,
++  'id': 1,
++  'title': '  午餐 🍜  ',
++  'voided': False}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.031s
+
+FAILED (failures=1)
+
+accept_zero: DETECTED (case C06, exit 1)
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... 
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '0', '--category', 'food')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '-1', '--category', 'food')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', 'abc', '--category', 'food')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', '', '--cents', '1', '--category', 'food')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', ' \t\n', '--cents', '1', '--category', 'food')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', '')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ' \t\n')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0')) ... FAIL
+  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1')) ... FAIL
+test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... FAIL
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '0', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 92, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertNotEqual(result.returncode, 0)
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '-1', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1.5', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', 'abc', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', '', '--cents', '1', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', ' \t\n', '--cents', '1', '--category', 'food'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ''))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('add', 'a', '--cents', '1', '--category', ' \t\n'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 95, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.success('list'), [entry])
+AssertionError: Lists differ: [{'id[67 chars]alse}, {'id': 2, 'title': 'a', 'cents': 0, 'ca[29 chars]lse}] != [{'id[67 chars]alse}]
+
+First list contains 1 additional elements.
+First extra element 1:
+{'id': 2, 'title': 'a', 'cents': 0, 'category': 'food', 'voided': False}
+
+- [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False},
+?                                                                              ^
+
++ [{'category': 'food', 'cents': 1250, 'id': 1, 'title': '午餐', 'voided': False}]
+?                                                                              ^
+
+-  {'category': 'food', 'cents': 0, 'id': 2, 'title': 'a', 'voided': False}]
+
+======================================================================
+FAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 96, in test_C06_invalid_commands_preserve_existing_bytes
+    self.assertEqual(self.add('next')['id'], 2)
+AssertionError: 3 != 2
+
+----------------------------------------------------------------------
+Ran 1 test in 1.178s
+
+FAILED (failures=12)
+
+reverse_list: DETECTED (case C02, exit 1)
+test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... FAIL
+
+======================================================================
+FAIL: test_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 44, in test_C02_add_preserves_strings_and_persists_in_order
+    self.assertEqual(self.success('list'), [first, second])
+AssertionError: Lists differ: [{'id': 2, 'title': '交通', 'cents': 250, 'category[108 chars]lse}] != [{'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[108 chars]lse}]
+
+First differing element 0:
+{'id': 2, 'title': '交通', 'cents': 250, 'category[24 chars]alse}
+{'id': 1, 'title': '  午餐 🍜  ', 'cents': 1, 'cate[28 chars]alse}
+
+- [{'category': 'travel', 'cents': 250, 'id': 2, 'title': '交通', 'voided': False},
+-  {'category': ' 食物 🥢 ',
+? ^
+
++ [{'category': ' 食物 🥢 ',
+? ^
+
+    'cents': 1,
+    'id': 1,
+    'title': '  午餐 🍜  ',
+-   'voided': False}]
+?                   ^
+
++   'voided': False},
+?                   ^
+
++  {'category': 'travel', 'cents': 250, 'id': 2, 'title': '交通', 'voided': False}]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.163s
+
+FAILED (failures=1)
+
+overwrite_category_sum: DETECTED (case C05, exit 1)
+test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... FAIL
+
+======================================================================
+FAIL: test_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-65/project/tests/test_behavior.py", line 76, in test_C05_summary_sums_repeated_categories
+    self.assertEqual(self.success('summary'), {'count': 3, 'total_cents': 320,
+AssertionError: {'count': 3, 'total_cents': 320, 'by_category': {'food': 202, ' Food ': 17}} != {'count': 3, 'total_cents': 320, 'by_category': {'food': 303, ' Food ': 17}}
+- {'by_category': {' Food ': 17, 'food': 202}, 'count': 3, 'total_cents': 320}
+?                                        ^ ^
+
++ {'by_category': {' Food ': 17, 'food': 303}, 'count': 3, 'total_cents': 320}
+?                                        ^ ^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.229s
+
+FAILED (failures=1)
+
+Temporary mutation directory removed: True

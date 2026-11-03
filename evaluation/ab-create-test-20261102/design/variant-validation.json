@@ -1,0 +1,4142 @@
+{
+  "original": {
+    "status": "PASS",
+    "actions": [
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "  午餐 雪  ",
+          "--cents",
+          "1250",
+          "--category",
+          "food"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "coffee",
+          "--cents",
+          "350",
+          "--category",
+          "food"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "book",
+          "--cents",
+          "900",
+          "--category",
+          "books"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "summary"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "void",
+          "2"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "void",
+          "2"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "summary"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "bad",
+          "--cents",
+          "0",
+          "--category",
+          "food"
+        ],
+        "exit_status": 1,
+        "stdout": "",
+        "stderr": "title and category must be nonblank; cents must be positive\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "  ",
+          "--cents",
+          "10",
+          "--category",
+          "food"
+        ],
+        "exit_status": 1,
+        "stdout": "",
+        "stderr": "title and category must be nonblank; cents must be positive\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "bad",
+          "--cents",
+          "-1",
+          "--category",
+          "food"
+        ],
+        "exit_status": 1,
+        "stdout": "",
+        "stderr": "title and category must be nonblank; cents must be positive\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "bad",
+          "--cents",
+          "1.5",
+          "--category",
+          "food"
+        ],
+        "exit_status": 2,
+        "stdout": "",
+        "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: '1.5'\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "bad",
+          "--cents",
+          "x",
+          "--category",
+          "food"
+        ],
+        "exit_status": 2,
+        "stdout": "",
+        "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: 'x'\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "bad",
+          "--cents",
+          "10",
+          "--category",
+          "  "
+        ],
+        "exit_status": 1,
+        "stdout": "",
+        "stderr": "title and category must be nonblank; cents must be positive\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "void",
+          "999"
+        ],
+        "exit_status": 1,
+        "stdout": "",
+        "stderr": "unknown expense id\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "list"
+        ],
+        "exit_status": 0,
+        "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "add",
+          "taxi",
+          "--cents",
+          "200",
+          "--category",
+          " travel 雪 "
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 4, \"title\": \"taxi\", \"cents\": 200, \"category\": \" travel 雪 \", \"voided\": false}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "void",
+          "1"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": true}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "void",
+          "3"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": true}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "void",
+          "4"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"id\": 4, \"title\": \"taxi\", \"cents\": 200, \"category\": \" travel 雪 \", \"voided\": true}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/fixture/expense_cli.py",
+          "--state",
+          "/tmp/ledger-oracle-7orgpafd/nested/state.json",
+          "summary"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"count\": 0, \"total_cents\": 0, \"by_category\": {}}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "variants": {
+    "M01": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-x2n505go/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-x2n505go/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"午餐 雪\", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M02": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "1.5",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: '1.5'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "x",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: 'x'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "10",
+            "--category",
+            "  "
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "void",
+            "999"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "unknown expense id\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-onjhzi5x/nested/state.json",
+            "add",
+            "taxi",
+            "--cents",
+            "200",
+            "--category",
+            " travel 雪 "
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"taxi\", \"cents\": 200, \"category\": \"travel 雪\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M03": {
+      "status": "FAIL",
+      "reason": "Invalid input was accepted",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-p2hcu2ug/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"bad\", \"cents\": 0, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M04": {
+      "status": "FAIL",
+      "reason": "Invalid input was accepted",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-m7dcs5qu/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"bad\", \"cents\": -1, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M05": {
+      "status": "FAIL",
+      "reason": "Invalid input was accepted",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-v5euysgf/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "1.5",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"bad\", \"cents\": 1, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M06": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4q0jshuv/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4q0jshuv/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 0, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M07": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "1.5",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: '1.5'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "x",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: 'x'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "10",
+            "--category",
+            "  "
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "void",
+            "999"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "unknown expense id\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-0j0epi18/nested/state.json",
+            "add",
+            "taxi",
+            "--cents",
+            "200",
+            "--category",
+            " travel 雪 "
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"taxi\", \"cents\": 200, \"category\": \" travel 雪 \", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M08": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ok8vq8l8/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ok8vq8l8/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ok8vq8l8/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M09": {
+      "status": "FAIL",
+      "reason": "Persisted records differ",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-nqp8g0la/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-nqp8g0la/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-nqp8g0la/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-nqp8g0la/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-nqp8g0la/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M10": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-an89zu1s/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M11": {
+      "status": "FAIL",
+      "reason": "unknown expense id\n",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-2j4c2etb/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "unknown expense id\n"
+        }
+      ]
+    },
+    "M12": {
+      "status": "FAIL",
+      "reason": "",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-pnmt00a6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": true}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": true}]\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M13": {
+      "status": "FAIL",
+      "reason": "already voided\n",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5gh3w09a/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "already voided\n"
+        }
+      ]
+    },
+    "M14": {
+      "status": "FAIL",
+      "reason": "Voided records included",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-ocbm286b/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2500, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M15": {
+      "status": "FAIL",
+      "reason": "Voided records included",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zflp94qe/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M16": {
+      "status": "FAIL",
+      "reason": "Category accumulation differs",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4ctjq1bn/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4ctjq1bn/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4ctjq1bn/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4ctjq1bn/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4ctjq1bn/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-4ctjq1bn/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 2500}}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M17": {
+      "status": "FAIL",
+      "reason": "Invalid input was accepted",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-we79q5mm/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"  \", \"cents\": 10, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M18": {
+      "status": "FAIL",
+      "reason": "Invalid input was accepted",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "1.5",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: '1.5'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "x",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: 'x'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-fl768y4l/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "10",
+            "--category",
+            "  "
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"bad\", \"cents\": 10, \"category\": \"  \", \"voided\": false}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M19": {
+      "status": "FAIL",
+      "reason": "Invalid input was accepted",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "1.5",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: '1.5'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "x",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: 'x'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "10",
+            "--category",
+            "  "
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-gnhxnq4t/nested/state.json",
+            "void",
+            "999"
+          ],
+          "exit_status": 0,
+          "stdout": "null\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "M20": {
+      "status": "FAIL",
+      "reason": "Traceback (most recent call last):\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 64, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 31, in main\n    entries = load(args.state)\n              ^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 10, in load\n    return json.loads(state.read_text())\n                      ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1029, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-oracle-5jsrpw6v/nested/state.json'\n",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-5jsrpw6v/nested/state.json",
+            "list"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 64, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 31, in main\n    entries = load(args.state)\n              ^^^^^^^^^^^^^^^^\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 10, in load\n    return json.loads(state.read_text())\n                      ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1029, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-oracle-5jsrpw6v/nested/state.json'\n"
+        }
+      ]
+    },
+    "M21": {
+      "status": "FAIL",
+      "reason": "Traceback (most recent call last):\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 64, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 40, in main\n    save(args.state, entries)\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 15, in save\n    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\\n')\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-oracle-bakgi7lb/nested/state.json'\n",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-bakgi7lb/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-bakgi7lb/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 64, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 40, in main\n    save(args.state, entries)\n  File \"/tmp/ledger-variant-check-ftvbi36n/expense_cli.py\", line 15, in save\n    state.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + '\\n')\n  File \"/usr/lib/python3.12/pathlib.py\", line 1049, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-oracle-bakgi7lb/nested/state.json'\n"
+        }
+      ]
+    },
+    "M22": {
+      "status": "FAIL",
+      "reason": "Expecting value: line 1 column 1 (char 0)",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-zxnoh7hm/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "INFO: command completed\n[]\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "equivalent": {
+      "status": "PASS",
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "  午餐 雪  ",
+            "--cents",
+            "1250",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "coffee",
+            "--cents",
+            "350",
+            "--category",
+            "food"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "book",
+            "--cents",
+            "900",
+            "--category",
+            "books"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": false}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 3, \"total_cents\": 2500, \"by_category\": {\"food\": 1600, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "void",
+            "2"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 2, \"total_cents\": 2150, \"by_category\": {\"food\": 1250, \"books\": 900}}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "0",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "  ",
+            "--cents",
+            "10",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "-1",
+            "--category",
+            "food"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "1.5",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: '1.5'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "x",
+            "--category",
+            "food"
+          ],
+          "exit_status": 2,
+          "stdout": "",
+          "stderr": "usage: expense_cli.py add [-h] --cents CENTS --category CATEGORY title\nexpense_cli.py add: error: argument --cents: invalid int value: 'x'\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "bad",
+            "--cents",
+            "10",
+            "--category",
+            "  "
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "title and category must be nonblank; cents must be positive\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "void",
+            "999"
+          ],
+          "exit_status": 1,
+          "stdout": "",
+          "stderr": "unknown expense id\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "list"
+          ],
+          "exit_status": 0,
+          "stdout": "[{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": false}, {\"id\": 2, \"title\": \"coffee\", \"cents\": 350, \"category\": \"food\", \"voided\": true}, {\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": false}]\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "add",
+            "taxi",
+            "--cents",
+            "200",
+            "--category",
+            " travel 雪 "
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"taxi\", \"cents\": 200, \"category\": \" travel 雪 \", \"voided\": false}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "void",
+            "1"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 1, \"title\": \"  午餐 雪  \", \"cents\": 1250, \"category\": \"food\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "void",
+            "3"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 3, \"title\": \"book\", \"cents\": 900, \"category\": \"books\", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "void",
+            "4"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"id\": 4, \"title\": \"taxi\", \"cents\": 200, \"category\": \" travel 雪 \", \"voided\": true}\n",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ledger-variant-check-ftvbi36n/expense_cli.py",
+            "--state",
+            "/tmp/ledger-oracle-3hzat1b6/nested/state.json",
+            "summary"
+          ],
+          "exit_status": 0,
+          "stdout": "{\"count\": 0, \"total_cents\": 0, \"by_category\": {}}\n",
+          "stderr": ""
+        }
+      ]
+    }
+  }
+}

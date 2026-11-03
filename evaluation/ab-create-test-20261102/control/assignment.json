@@ -1,0 +1,47 @@
+{
+  "experiment": "create-test-skill paired A/B",
+  "model": "gpt-6.1-sol",
+  "reasoning": "inherited same parent setting; no per-arm override",
+  "replicates_per_arm": 2,
+  "fixture_sha256": {
+    "README.md": "005c055344d9145e84979c17604fba2c4819c9ee0facb8c9a6dcbf4d016e72bd",
+    "expense_cli.py": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "tests/test_smoke.py": "c23b9f1f7d027e6d5ecd6eb3cf238f6235973d7b2bf7fbd315816dc3408e7b5e"
+  },
+  "skill_sha256": {
+    "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "SKILL.md": "2db5e2a7f740637d4006992a93467d453c061666199a144fffad190924807871",
+    "agents/openai.yaml": "39079efef806b2b6c0e207e0af14feb863fca1d997de494d305258a876e29ab1",
+    "references/output-contract.md": "f84b4fce810a2de650edcaaa4bb2dbd00c2179ea5e64a939f56a7cf22b41efdb"
+  },
+  "runs": [
+    {
+      "label": "run-17",
+      "pair": 1,
+      "arm": "without",
+      "project": "runs/run-17/project",
+      "prompt": "runs/run-17/prompt.txt"
+    },
+    {
+      "label": "run-28",
+      "pair": 1,
+      "arm": "with",
+      "project": "runs/run-28/project",
+      "prompt": "runs/run-28/prompt.txt"
+    },
+    {
+      "label": "run-65",
+      "pair": 2,
+      "arm": "without",
+      "project": "runs/run-65/project",
+      "prompt": "runs/run-65/prompt.txt"
+    },
+    {
+      "label": "run-43",
+      "pair": 2,
+      "arm": "with",
+      "project": "runs/run-43/project",
+      "prompt": "runs/run-43/prompt.txt"
+    }
+  ]
+}

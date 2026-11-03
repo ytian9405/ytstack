@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "不创建目录、不安装、不修复、不修改文件。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "同名但内容不同的自定义技能不算"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "断链不算，且不会导致崩溃。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "未安装或安装目录不存在时返回 `[]`，退出码为 0。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "分别检查 `.agents/skills`、`.claude/skills`，只列出 `ytstack.json` 中已安装的技能，包含依赖技能。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "同名但内容不同的自定义技能不算"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "建议沿用现有安装器的判断——链接指向对应源技能，或副本内容与源目录一致。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "断链不算，且不会导致崩溃。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "沿用 JSON，包含 `project`、`harness`、`installed`"
+  }
+ ]
+}

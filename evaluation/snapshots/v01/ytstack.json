@@ -1,0 +1,9 @@
+{
+  "name": "ytstack",
+  "version": "0.1.0",
+  "primary_skills": ["create-test-skill", "bro", "technical-bro"],
+  "support_skills": ["unslop"],
+  "dependencies": {
+    "technical-bro": ["unslop"]
+  }
+}

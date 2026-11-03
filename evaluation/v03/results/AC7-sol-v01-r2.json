@@ -1,0 +1,28 @@
+{
+ "id": "AC7-sol-v01-r2",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 72.9,
+ "usage": {
+  "input_tokens": 72375,
+  "cached_input_tokens": 59904,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 980,
+  "reasoning_output_tokens": 298
+ },
+ "final": "建议按下面这些标准验收：\n\n```sh\npython3 tools/install.py --project /path/to/project --harness codex --list\n```\n\n1. **列出实际安装项**：Codex 查 `.agents/skills`，Claude 查 `.claude/skills`，只列 `ytstack.json` 声明且存在有效 `SKILL.md` 的技能，包括依赖技能。\n2. **兼容两种安装方式**：复制目录和有效软链接都能识别；断链、缺少 `SKILL.md`、其他技能不计入。\n3. **输出稳定**：沿用 JSON，包含 `project`、`harness`、`installed`；`installed` 是按名称排序的技能名称数组。\n4. **空项目正常返回**：技能目录不存在或未安装时，返回 `installed: []`，退出码为 0。\n5. **查询不写入**：不创建目录、不安装技能、不修改文件；项目不存在时报错，非零退出。\n6. **参数明确**：`--help` 说明用途；`--list` 与显式传入的 `--skill`、`--method`、`--dry-run` 混用时报参数错误。\n7. **有验证证据**：测试覆盖以上场景，并确认原有安装行为不受影响。\n\n当前环境只有读取权限，所以这次尚未修改代码。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 和技能安装目录的约定，再给出明确的验收标准。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*test*' -g 'README*' -g 'SKILL.md' -g 'pyproject.toml' -g 'package.json' -g '*install*'\"",
+  "/bin/bash -lc 'cat tools/install.py && cat tests/test_package.py && cat tests/test_smoke.py'",
+  "/bin/bash -lc \"cat README.md && rg --files --hidden -g '\"'!.git'\"' -g '\"'!node_modules'\"'\"",
+  "/bin/bash -lc \"ls -la && rg --files --hidden -g 'AGENTS.md' -g '\"'!'\"\\\\.git' -g '\"'!node_modules'\"' /tmp/ytev-ead3ed8c /home/ytian9405/.agents 2>/dev/null\"",
+  "/bin/bash -lc \"cat ytstack.json && sed -n '1,140p' tools/validate.py && git status --short && ls -ld /AGENTS.md /tmp/AGENTS.md /tmp/ytev-ead3ed8c/AGENTS.md /tmp/ytev-ead3ed8c/project/AGENTS.md 2>/dev/null\""
+ ]
+}

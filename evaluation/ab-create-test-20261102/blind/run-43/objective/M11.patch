@@ -1,0 +1,10 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -47,6 +47,7 @@
+             print('unknown expense id', file=sys.stderr)
+             return 1
+         entry['voided'] = True
++        entries.remove(entry)
+         save(args.state, entries)
+         result = entry
+     else:

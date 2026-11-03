@@ -1,0 +1,31 @@
+{
+ "id": "TR-pos5-sol-v02",
+ "prompt": "帮我想想：queue_cli 加删除任务，哪些情况测过了才算通过？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "exit": 0,
+ "seconds": 77.9,
+ "usage": {
+  "input_tokens": 71723,
+  "cached_input_tokens": 56448,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2152,
+  "reasoning_output_tokens": 365
+ },
+ "final": "建议以“删对任务、重启后仍生效、失败不改数据、旧命令不退步”作为通过标准。\n\n我读了 [queue_cli.py](/tmp/ytev-l06jzx3b/project/queue_cli.py)：目前只有 `add`、`list`、`complete`；现有测试没有覆盖它。下面是**待确认的验收草案，尚未运行验证**。\n\n**待你决定**\n\n- **D1 删除含义**：推荐永久删除，成功返回被删任务的完整 JSON；若选软删除，还要决定列表是否显示、能否恢复。\n- **D2 可删范围**：推荐未完成、已完成任务都能删；另一种选择是只允许删除未完成任务。\n- **D3 重复删除**：推荐删除不存在的 ID 报错，非零退出；另一种选择是重复删除也算成功。\n- **D4 ID 是否复用**：推荐删除后永不复用 ID，避免旧 ID 指向新任务。当前代码按“现存最大 ID + 1”分配，删掉最大 ID 或清空后会复用，需要专门覆盖。\n\n以下按推荐选项写。\n\n**这次不做**\n\n- 批量删除、清空队列、撤销或恢复。\n- 删除确认提示、交互式选择。\n- 并发写入、损坏 JSON 和文件权限故障处理。\n\n**验收条件**\n\n每例使用独立状态路径。成功时退出码为 `0`，stdout 是一个 JSON 值，stderr 为空；失败时非零退出，stderr 有错误说明，stdout 不输出成功结果，已有文件内容不变。\n\n**C1 [D1、D2] 删除指定任务，不误删邻居**\n\n- **做什么**：创建 ID 为 `1、2、3` 的任务，将 `2` 标为完成，执行 `python3 queue_cli.py --state /tmp/q-c1.json delete 2`，再用独立进程执行 `list`。\n- **应该看到**：删除返回任务 `2` 的原始 `id、title、done`；列表和保存的数据只剩 `1、3`，顺序及内容不变。对未完成的任务重复此场景，也能成功。\n- **防的是**：把 ID 当作列表下标，或删除时修改其他任务。\n\n**C2 [D1、D2] 删除最后一个任务**\n\n- **做什么**：状态文件只有任务 `1`，执行 `python3 queue_cli.py --state /tmp/q-c2.json delete 1`，再启动新进程执行 `list`。\n- **应该看到**：删除成功，文件保存为空数组 `[]`，新进程返回 `[]`。\n- **防的是**：只改内存，或最后一条删不掉。\n\n**C3 [D3] 不存在、重复删除和空队列**\n\n- **做什么**：分别删除非空队列中不存在的 `999`、已删过的 ID，以及空队列中的 `1`；空队列分别覆盖文件内容为 `[]` 和文件不存在。\n- **应该看到**：全部失败并说明任务不存在；已有文件不变，原本不存在的状态文件及父目录不被创建。\n- **防的是**：静默成功、重复删除误伤其他任务，或失败时产生文件。\n\n**C4 无效参数**\n\n- **做什么**：分别执行 `delete`、`delete abc`、`delete 1.5`、`delete 0`、`delete -1`。\n- **应该看到**：全部非零退出，有缺少参数、格式错误或任务不存在的说明，已有状态文件不变。\n- **防的是**：错误输入被转换成合法 ID，意外删除任务。\n\n**C5 [D1、D3] 已删任务不能再完成**\n\n- **做什么**：删除任务 `2`，新进程执行 `python3 queue_cli.py --state /tmp/q-c5.json complete 2`。\n- **应该看到**：非零退出，说明任务不存在；任务 `2` 不重新出现，其余数据不变。\n- **防的是**：删除只影响列表展示，其他入口仍能操作它。\n\n**C6 [D4] 删除后继续添加，ID 不倒退**\n\n- **做什么**：创建任务 `1、2、3`，删掉 `3`，新进程添加任务；再删除全部任务，新进程再次添加。\n- **应该看到**：两次新增 ID 分别为 `4、5`。\n- **防的是**：只根据剩余任务计算 ID，导致最大 ID 或整个队列删除后复用旧 ID。\n\n**C7 状态文件互不影响**\n\n- **做什么**：在 `/tmp/q-a.json` 和 `/tmp/q-b.json` 各创建任务 `1`，只对前者执行 `delete 1`。\n- **应该看到**：前者为空，后者的任务和文件内容不变。\n- **防的是**：删除忽略 `--state`，写错队列。\n\n**不能弄坏**\n\n这些行为来自当前 `queue_cli.py`，不是 README 中记账工具的约定：\n\n- `add` 仍保留标题中的中文和首尾空格，新任务 `done` 为 `false`；全空白标题报错且不改数据。\n- `complete ID` 仍保留 ID 和标题、将 `done` 设为 `true`；重复完成成功，不新增记录。\n- `list` 仍按添加顺序返回任务，包含已完成任务；读取不存在的状态文件返回 `[]`，不创建文件。\n- 首次成功添加仍能自动创建父目录；添加、完成和删除的结果均能被独立进程读到。\n\n改 D1 会影响 C1、C2、C5，改 D2 会影响 C1、C2，改 D3 会影响 C3、C5，改 D4 会影响 C6；决定确认后，这份标准可以交给 `create-test-skill` 转成可运行测试。",
+ "commentary": [
+  "我先按 acceptance-criteria 技能梳理验收范围，再看看项目里 queue_cli 的任务状态和现有命令，让标准贴合实际行为。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g 'SKILL.md' -g 'README*' -g 'pyproject.toml' -g 'package.json'\"",
+  "/bin/bash -lc 'cat /tmp/ytev-l06jzx3b/project/.agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc 'cat README.md'",
+  "/bin/bash -lc 'cat queue_cli.py'",
+  "/bin/bash -lc \"rg --files -g '\"'!'\"\\\\.git' -g '\"'!__pycache__'\"' && rg --files /tmp/ytev-l06jzx3b /tmp /home/ytian9405/.agents -g AGENTS.md 2>/dev/null\"",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-l06jzx3b/AGENTS.md /tmp/ytev-l06jzx3b/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc 'cat tests/test_smoke.py tests/test_package.py'"
+ ]
+}

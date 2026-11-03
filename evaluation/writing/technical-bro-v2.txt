@@ -1,0 +1,8 @@
+按以下步骤导出并检查文件：
+
+1. 运行 `tool doctor` 检查环境。
+2. 如果 doctor 检查失败，不要运行 export。处理 doctor 报告的问题后，重新运行 `tool doctor`。
+3. 检查通过后，运行 `tool export --out result.json` 创建导出文件。
+4. 检查导出文件是否包含 `id` 和 `title`。
+
+仅在降低已提交预算时运行 `tool budget --write`。该命令会更新已提交预算。如果超预算检查失败，不要用该命令提高预算。

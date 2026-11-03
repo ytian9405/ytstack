@@ -1,0 +1,78 @@
+{
+ "recorded_at": "2026-11-03T00:50:27.278442+00:00",
+ "rater": "user",
+ "records": [
+  {
+   "question": 1,
+   "source": "N1",
+   "preferred_alias": "B",
+   "preferred_arm": "v03",
+   "A": "v02",
+   "B": "v03",
+   "reason_verbatim": "A虽然简单，但是看不懂"
+  },
+  {
+   "question": 2,
+   "source": "N2",
+   "preferred_alias": "B",
+   "preferred_arm": "v02",
+   "A": "v03",
+   "B": "v02",
+   "reason_verbatim": ""
+  },
+  {
+   "question": 3,
+   "source": "N3",
+   "preferred_alias": "A",
+   "preferred_arm": "v03",
+   "A": "v03",
+   "B": "v02",
+   "reason_verbatim": "但其实实际的感受比较接近"
+  },
+  {
+   "question": 4,
+   "source": "N4",
+   "preferred_alias": "B",
+   "preferred_arm": "v02",
+   "A": "v03",
+   "B": "v02",
+   "reason_verbatim": "A太长了"
+  },
+  {
+   "question": 5,
+   "source": "N5",
+   "preferred_alias": "B",
+   "preferred_arm": "v02",
+   "A": "v03",
+   "B": "v02",
+   "reason_verbatim": ""
+  },
+  {
+   "question": 6,
+   "source": "N6",
+   "preferred_alias": "A",
+   "preferred_arm": "v03",
+   "A": "v03",
+   "B": "v02",
+   "reason_verbatim": ""
+  },
+  {
+   "question": 7,
+   "source": "AC6",
+   "preferred_alias": "B",
+   "preferred_arm": "v01",
+   "A": "v03",
+   "B": "v01",
+   "reason_verbatim": ""
+  },
+  {
+   "question": 8,
+   "source": "AC7",
+   "preferred_alias": "TIE",
+   "preferred_arm": "TIE",
+   "A": "v03",
+   "B": "v01",
+   "reason_verbatim": ""
+  }
+ ]
+}

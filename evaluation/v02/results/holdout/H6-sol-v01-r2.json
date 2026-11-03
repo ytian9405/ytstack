@@ -1,0 +1,31 @@
+{
+ "id": "H6-sol-v01-r2",
+ "prompt": "帮我评估一下这个仓库的测试够不够。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 85.5,
+ "usage": {
+  "input_tokens": 131329,
+  "cached_input_tokens": 110080,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2351,
+  "reasoning_output_tokens": 684
+ },
+ "final": "**不够。按 README 定义的记账功能，当前测试只能确认“空账本汇总正常”，还不足以作为发布或重构的保障。**\n\n最主要的三个问题：\n\n1. **核心功能基本没有测试。** [test_smoke.py](/tmp/ytev-5y_oxyh2/project/tests/test_smoke.py:10) 只有一个空账本汇总用例。新增、列表、作废、实际金额统计和持久化都没有被验证。即使这些功能发生严重回归，这个用例也可能照常通过。\n\n2. **大部分测试与当前产品错位，且已经失配。** 另外 10 个测试在测技能包安装器。[test_package.py](/tmp/ytev-5y_oxyh2/project/tests/test_package.py:14) 依赖仓库缺失的 `skills/`、`voice/` 等目录；部分用例要求安装器支持 `--voice`，但当前实现没有这个参数；还存在预期 5 个技能、清单只有 4 个的差异。\n\n3. **当前没有可用的全绿基线。** 我运行了 README 的测试入口：包完整性测试因缺少 `.claude-plugin/plugin.json` 失败；其他测试受当前只读环境限制，无法创建临时目录，因此不能据此判断其业务结果。\n\n建议优先补齐以下测试，全部通过真实 CLI、独立状态路径运行：\n\n| 优先级 | 场景 | 必须验证的行为 |\n|---|---|---|\n| 高 | 新增 → 列表 → 作废 → 汇总 | 完整返回字段、记录顺序、跨独立进程保存 |\n| 高 | 多条记录、多类别汇总 | 同类金额累加、总金额和数量正确、排除作废记录 |\n| 高 | 非法输入，账本已有数据 | 非零退出、stderr 有错误、原数据不变 |\n| 高 | 重复作废、作废后继续新增 | 作废无额外副作用、ID 递增且不复用 |\n| 中 | Unicode、首尾空格 | 标题和类别完整保留 |\n| 中 | 不存在的状态路径 | 读取不创建文件，首次写入自动创建父目录 |\n\n现有测试采用独立临时目录、子进程和 JSON 结果断言，这个方向是对的。我另外执行了 8 个无需写盘的检查，空账本读取和非法输入拒绝均通过；这些临时检查尚未加入仓库，也不能替代持久化测试。\n\n**建议先处理失配的包测试，建立可重复通过的基线，再补上表中的高优先级场景。** README 已明确排除损坏 JSON、并发写入和权限异常，当前不必先在这些方面投入测试。",
+ "commentary": [
+  "我先看仓库结构、测试配置和关键逻辑，再判断现有测试覆盖了哪些风险、还缺哪些场景。",
+  "目前最明显的问题是测试和产品错位：README 描述的是记账 CLI，但 11 个测试里只有 1 个测记账，而且只检查空账本汇总；其余 10 个测技能包安装器。\n\n我也尝试运行了全套测试。当前只读环境导致临时目录相关测试无法执行；另有一个独立失败：包完整性检查所需的文件在仓库中缺失。我会把环境限制和仓库本身的问题分开说明。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'package.json' -g 'pyproject.toml' -g 'Cargo.toml' -g 'go.mod' -g '*test*' -g '*spec*' -g '*config*' -g 'README*' -g 'Makefile' -g '.github/**' -g '\"'!package-lock.json'",
+  "/bin/bash -lc \"ls -la && rg --files -g '\"'!node_modules'\"' -g '\"'!.git'\"' && for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-5y_oxyh2/AGENTS.md /tmp/ytev-5y_oxyh2/project/AGENTS.md; do if [ -f \\\"\"'$p\" ]; then cat \"$p\"; fi; ",
+  "/bin/bash -lc 'cat README.md expense_cli.py queue_cli.py'",
+  "/bin/bash -lc 'cat tests/test_package.py tests/test_smoke.py tools/install.py tools/validate.py ytstack.json && git status --short && rg --files --hidden .agents tests tools'",
+  "/bin/bash -lc 'PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tests -v'",
+  "/bin/bash -lc 'nl -ba tests/test_smoke.py && nl -ba README.md && nl -ba expense_cli.py && nl -ba tests/test_package.py'",
+  "/bin/bash -lc \"python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nroot = Path.cwd()\nstate = root / '__assessment_missing_state__' / 'ledger.json'\nassert not state.parent.exists()\ncases"
+ ]
+}

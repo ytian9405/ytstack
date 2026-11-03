@@ -1,0 +1,158 @@
+[
+  {
+    "label": "run-28",
+    "trial": 1,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project",
+    "exit_code": 0,
+    "elapsed_seconds": 2.0582406520843506,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-rerun-1",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-28",
+    "trial": 1,
+    "command": [
+      "python3",
+      ".agents/skills/test-ledger-lite/scripts/verify.py"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk/project",
+    "exit_code": 0,
+    "elapsed_seconds": 3.8222663402557373,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-rerun-1",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-kv2ptvvk",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-28",
+    "trial": 2,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps/project",
+    "exit_code": 0,
+    "elapsed_seconds": 2.2199981212615967,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-rerun-2",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-28",
+    "trial": 2,
+    "command": [
+      "python3",
+      ".agents/skills/test-ledger-lite/scripts/verify.py"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps/project",
+    "exit_code": 0,
+    "elapsed_seconds": 3.110011577606201,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-rerun-2",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-28-scratch-0ff4uyps",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-17",
+    "trial": 1,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-x93nm598/project",
+    "exit_code": 0,
+    "elapsed_seconds": 2.4092905521392822,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-rerun-1",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-x93nm598",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-17",
+    "trial": 1,
+    "command": [
+      "python3",
+      "scripts/verify_tests.py"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-x93nm598/project",
+    "exit_code": 0,
+    "elapsed_seconds": 18.34699821472168,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-rerun-1",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-x93nm598",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-17",
+    "trial": 2,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-1h4o12cl/project",
+    "exit_code": 0,
+    "elapsed_seconds": 2.9122397899627686,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-rerun-2",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-1h4o12cl",
+    "scratch_removed": true
+  },
+  {
+    "label": "run-17",
+    "trial": 2,
+    "command": [
+      "python3",
+      "scripts/verify_tests.py"
+    ],
+    "cwd": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-1h4o12cl/project",
+    "exit_code": 0,
+    "elapsed_seconds": 16.635013818740845,
+    "python": "3.12.3",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "target_sha256": "e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa",
+    "log_directory": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-rerun-2",
+    "scratch": "/home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/review/run-17-scratch-1h4o12cl",
+    "scratch_removed": true
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning": "same inherited setting, no per-arm override",
+  "tokens": "UNKNOWN",
+  "money": "UNKNOWN",
+  "exact_model_processing_wall_seconds": "UNKNOWN",
+  "note": "Coordinator has dispatch-request and completion-observation timestamps only; not used to rank efficiency."
+}

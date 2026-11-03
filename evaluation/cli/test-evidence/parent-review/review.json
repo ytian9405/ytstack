@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "blocked_target_verified": true,
+  "additional_completion_mutation_detected": true,
+  "restoration_verified": true,
+  "owned_variant_scratch_removed": true,
+  "product_unchanged": true,
+  "commands": [
+    {
+      "label": "unavailable target is BLOCKED",
+      "command": [
+        "/usr/bin/python3",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py",
+        "--target",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/not-present.py",
+        "--evidence",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/missing-target.json"
+      ],
+      "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+      "exit_status": 2,
+      "stdout": "Evidence: /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/missing-target.json\n",
+      "stderr": ""
+    },
+    {
+      "label": "holdout completion mutation fails",
+      "command": [
+        "/usr/bin/python3",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py",
+        "--case",
+        "TQ03",
+        "--target",
+        "/tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py",
+        "--evidence",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/completion-broken.json"
+      ],
+      "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+      "exit_status": 1,
+      "stdout": "Evidence: /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/completion-broken.json\n",
+      "stderr": "test_TQ03_complete_idempotence (__main__.QueueCases.test_TQ03_complete_idempotence) ... FAIL\n\n======================================================================\nFAIL: test_TQ03_complete_idempotence (__main__.QueueCases.test_TQ03_complete_idempotence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py\", line 88, in test_TQ03_complete_idempotence\n    self.expect('completion preserves title and changes done', self.cli('complete', '1'), completed)\n  File \"/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py\", line 42, in expect\n    self.assertEqual(actual, expected, label)\nAssertionError: {'id': 1, 'title': 'Prepare slides', 'done': False} != {'id': 1, 'title': 'Prepare slides', 'done': True}\n- {'done': False, 'id': 1, 'title': 'Prepare slides'}\n?          ^^^^\n\n+ {'done': True, 'id': 1, 'title': 'Prepare slides'}\n?          ^^^\n : completion preserves title and changes done\n\n----------------------------------------------------------------------\nRan 1 test in 0.067s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "label": "restored completion passes",
+      "command": [
+        "/usr/bin/python3",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py",
+        "--case",
+        "TQ03",
+        "--target",
+        "/tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py",
+        "--evidence",
+        "/tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/completion-restored.json"
+      ],
+      "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+      "exit_status": 0,
+      "stdout": "Evidence: /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/completion-restored.json\n",
+      "stderr": "test_TQ03_complete_idempotence (__main__.QueueCases.test_TQ03_complete_idempotence) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.154s\n\nOK\n"
+    }
+  ]
+}

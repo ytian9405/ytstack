@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-ilky6isr/project",
+  "target_sha256": "41ac890665b63cea3826d198f1c364dc359ad72d9c3d22a76262b74319faf0b0",
+  "started_at": "2026-11-02T12:39:50.641558+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok\ntest_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... ok\ntest_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... ok\ntest_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... ok\ntest_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... \n  test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) (args=('add', ' \\t', '--cents', '100', '--category', 'food')) ... FAIL\n  test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) (args=('add', 'x', '--cents', '100', '--category', ' \\t')) ... FAIL\n  test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) (args=('void', '999')) ... FAIL\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) (args=('add', ' \\t', '--cents', '100', '--category', 'food'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-ilky6isr/project/tests/test_behavior.py\", line 97, in test_LL05_invalid_inputs_preserve_data\n    self.invoke(*args, success=False)\n  File \"/tmp/ledger-eval-ilky6isr/project/tests/test_behavior.py\", line 31, in invoke\n    self.assertNotEqual(result.returncode, 0)\nAssertionError: 0 == 0\n\n======================================================================\nFAIL: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) (args=('add', 'x', '--cents', '100', '--category', ' \\t'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-ilky6isr/project/tests/test_behavior.py\", line 98, in test_LL05_invalid_inputs_preserve_data\n    self.assertEqual(self.state.read_bytes(), snapshot)\nAssertionError: b'[\\n[125 chars]\\n  },\\n  {\\n    \"id\": 2,\\n    \"title\": \" \\\\t\"[72 chars]n]\\n' != b'[\\n[125 chars]\\n  }\\n]\\n'\n\n======================================================================\nFAIL: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) (args=('void', '999'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-ilky6isr/project/tests/test_behavior.py\", line 98, in test_LL05_invalid_inputs_preserve_data\n    self.assertEqual(self.state.read_bytes(), snapshot)\nAssertionError: b'[\\n[125 chars]\\n  },\\n  {\\n    \"id\": 2,\\n    \"title\": \" \\\\t\"[72 chars]n]\\n' != b'[\\n[125 chars]\\n  }\\n]\\n'\n\n----------------------------------------------------------------------\nRan 6 tests in 1.741s\n\nFAILED (failures=3)\n",
+  "tests_run": 6,
+  "status": "FAIL",
+  "elapsed_seconds": 1.806,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-ilky6isr",
+  "scratch_removed": true
+}

@@ -1,0 +1,28 @@
+{
+ "id": "T3-sol-v01",
+ "prompt": "expense_cli 的金额是怎么存和算的，可能有什么坑？",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "exit": 0,
+ "seconds": 58.1,
+ "usage": {
+  "input_tokens": 72393,
+  "cached_input_tokens": 62720,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1967,
+  "reasoning_output_tokens": 333
+ },
+ "final": "`expense_cli` 用的是**整数分存储、整数相加**。正常通过 CLI 录入时，没有浮点金额常见的精度误差。\n\n**怎么存和算**\n\n- 输入 `--cents 1250` 表示 **12.50 元**；参数必须是正整数，`12.50`、零和负数都会被拒绝。[输入校验](/tmp/ytev-cf8j5kje/project/expense_cli.py:24)\n- 账本是 `--state` 指定的 JSON 文件，内容为记录数组；金额存成数字，例如 `\"cents\": 1250`。每次修改都会重写整个文件。[读写实现](/tmp/ytev-cf8j5kje/project/expense_cli.py:9)\n- `summary` 先排除作废记录，再按类别累加 `cents`，并计算 `total_cents`。这些输出也都是**分**；代码没有元分转换、除法或舍入。`void` 只标记作废，保留原金额。[汇总实现](/tmp/ytev-cf8j5kje/project/expense_cli.py:44)\n\n**主要的坑**\n\n1. **单位容易用错。** `--cents 12` 是 0.12 元；返回的 `total_cents: 1449` 是 14.49 元。调用方要自己处理展示和元分转换。\n\n2. **读取文件时不校验数据。** CLI 限制了输入，但 `load()` 直接接受 JSON。手改文件或外部程序写入小数，就可能重新引入浮点误差。我用内存数据验证了：`cents` 为 `0.1` 和 `0.2` 时，汇总返回 `0.30000000000000004`；写成字符串 `\"1250\"` 则会报 `TypeError`。负数也不会在读取时被拦截。\n\n3. **并发和中断可能影响账本。** 两个进程都先读后写，后写入的可能覆盖另一个的更新；文件直接覆盖写入，没有锁或原子替换，中途失败可能留下不完整 JSON。[保存实现](/tmp/ytev-cf8j5kje/project/expense_cli.py:13) README 明确将并发写入和损坏 JSON 排除在当前支持范围之外。\n\n4. **没有金额上限，也没有币种字段。** Python 整数加法不会发生固定宽度整数溢出，但超大数字交给 JavaScript `Number` 等消费者可能丢精度；不同币种的记录也会被直接相加。\n\n5. **分类按原字符串区分。** `\"food\"`、`\"food \"`、`\"Food\"` 会分别汇总，看起来可能像分类金额漏算。零和负数不允许，因此也不能直接记退款或冲销。\n\n当前与记账有关的测试只覆盖了空账本汇总，金额相加、作废排除和输入边界还缺少测试保护。[现有测试](/tmp/ytev-cf8j5kje/project/tests/test_smoke.py:10)\n\n整体上，整数分这个选择合理；最值得补的是**读取时的数据校验**和**写入可靠性**。本次只做了代码检查和内存验证，没有修改文件。",
+ "commentary": [
+  "我先看一下 `expense_cli` 的金额存储、计算和相关测试，重点检查精度、舍入和输入边界。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*expense*' -g '*test*' -g 'pyproject.toml' -g 'README*' -g 'package.json'\"",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-cf8j5kje/AGENTS.md /tmp/ytev-cf8j5kje/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc 'cat expense_cli.py && cat tests/test_smoke.py && cat tests/test_package.py && cat README.md'",
+  "/bin/bash -lc 'ls -la && rg --files'",
+  "/bin/bash -lc 'nl -ba expense_cli.py && nl -ba tests/test_smoke.py && nl -ba README.md'",
+  "/bin/bash -lc \"python3 -B - <<'PY'\nimport contextlib\nimport copy\nimport io\nimport json\nimport runpy\nimport sys\nfrom unittest.mock import patch\n\nmain = runpy.run_path('expense_cli.py')['main']\n\ndef run(label, command, ent"
+ ]
+}

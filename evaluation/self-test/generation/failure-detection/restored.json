@@ -1,0 +1,124 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/home/ytian9405/projects/ytstack/tests/ytstack_skill/run.py",
+    "--target",
+    "/tmp/ytstack-negative-a_0orjk7/package",
+    "--case",
+    "YT02",
+    "--evidence",
+    "/home/ytian9405/projects/ytstack/evaluation/self-test/generation/failure-detection/active.json"
+  ],
+  "cwd": "/home/ytian9405/projects/ytstack",
+  "target": "/tmp/ytstack-negative-a_0orjk7/package",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "started_at": "2026-11-02T12:18:35.916817+00:00",
+  "cases": [
+    {
+      "id": "YT02",
+      "test": "ytstack_package_tests.PackageTests.test_dependency_is_installed_and_repeat_is_harmless",
+      "status": "PASS",
+      "failures": [],
+      "actions": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ytstack-negative-a_0orjk7/package/tools/install.py",
+            "--project",
+            "/tmp/ytstack-test-ux50bxei",
+            "--harness",
+            "codex",
+            "--skill",
+            "technical-bro"
+          ],
+          "cwd": "/tmp/ytstack-negative-a_0orjk7/package",
+          "stdout": "{\n  \"project\": \"/tmp/ytstack-test-ux50bxei\",\n  \"harness\": \"codex\",\n  \"method\": \"symlink\",\n  \"installed\": [\n    \"/tmp/ytstack-test-ux50bxei/.agents/skills/unslop\",\n    \"/tmp/ytstack-test-ux50bxei/.agents/skills/technical-bro\"\n  ],\n  \"unchanged\": []\n}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "/tmp/ytstack-negative-a_0orjk7/package/tools/install.py",
+            "--project",
+            "/tmp/ytstack-test-ux50bxei",
+            "--harness",
+            "codex",
+            "--skill",
+            "technical-bro"
+          ],
+          "cwd": "/tmp/ytstack-negative-a_0orjk7/package",
+          "stdout": "{\n  \"project\": \"/tmp/ytstack-test-ux50bxei\",\n  \"harness\": \"codex\",\n  \"method\": \"symlink\",\n  \"installed\": [],\n  \"unchanged\": [\n    \"/tmp/ytstack-test-ux50bxei/.agents/skills/unslop\",\n    \"/tmp/ytstack-test-ux50bxei/.agents/skills/technical-bro\"\n  ]\n}\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "elapsed_seconds": 0.129,
+      "scratch": [
+        {
+          "path": "/tmp/ytstack-test-ux50bxei",
+          "removed": true
+        }
+      ]
+    }
+  ],
+  "doctor": {
+    "status": "PASS",
+    "name": "ytstack",
+    "version": "0.1.0",
+    "command": [
+      "/usr/bin/python3",
+      "/tmp/ytstack-negative-a_0orjk7/package/tools/install.py",
+      "--help"
+    ],
+    "cwd": "/tmp/ytstack-negative-a_0orjk7/package",
+    "stdout": "usage: install.py [-h] --project PROJECT --harness {codex,claude}\n                  [--skill SKILL] [--method {symlink,copy}] [--dry-run]\n\nExpose ytstack skills in one project without replacing existing entries.\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT\n  --harness {codex,claude}\n  --skill SKILL         Repeat to select skills; defaults to all primary\n                        skills plus dependencies.\n  --method {symlink,copy}\n  --dry-run\n",
+    "stderr": "",
+    "exit_status": 0
+  },
+  "target_before": {
+    ".claude-plugin/plugin.json": "ad7a1cabe2d031624c7398a0ec7f970e54a7827282d8b73db63b030e2c764806",
+    "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "provenance.json": "98bcac3d7078aed783a4c2f86bdd2b8ffd68c4f3694d78038a3ca1c2a78936d4",
+    "skills/bro/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/bro/SKILL.md": "8b822d47b9299627f5e4fe42684a031105792c8531443da1ae3423adfa2de96f",
+    "skills/bro/agents/openai.yaml": "f6b7d19e1a67b1297f8105db017a2392d8fbbf3616ee097f4514da2ff78f98d2",
+    "skills/create-test-skill/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/create-test-skill/SKILL.md": "2db5e2a7f740637d4006992a93467d453c061666199a144fffad190924807871",
+    "skills/create-test-skill/agents/openai.yaml": "39079efef806b2b6c0e207e0af14feb863fca1d997de494d305258a876e29ab1",
+    "skills/create-test-skill/references/output-contract.md": "f84b4fce810a2de650edcaaa4bb2dbd00c2179ea5e64a939f56a7cf22b41efdb",
+    "skills/technical-bro/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/technical-bro/SKILL.md": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+    "skills/technical-bro/agents/openai.yaml": "d3ac9b2ba6fadba54a2693c5f06c1791e66970d11b418e3dd6e95b6452510a03",
+    "skills/unslop/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/unslop/SKILL.md": "0503149a9b85dad02bbc747a3aeb534e2ba07f53c5fd57e491ea3d1e67659aa3",
+    "skills/unslop/agents/openai.yaml": "52553af9876f0671a12f5eee742a4211fd02a42c258a30b7115ec5f8a6223cb5",
+    "tools/install.py": "62425e623669a828bbef98d54d3a2fd06b666288247f76e5d56c319ae633db57",
+    "tools/validate.py": "59fcbdba5b272b912c06c8bcda987030a4f16c23113fb5d0928f8fca1a628d6c",
+    "ytstack.json": "193f42807e97c41d300e1d0857083daff3eab3dcd9b42e3f8315507bd54b13fa"
+  },
+  "status": "PASS",
+  "target_after": {
+    ".claude-plugin/plugin.json": "ad7a1cabe2d031624c7398a0ec7f970e54a7827282d8b73db63b030e2c764806",
+    "LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "provenance.json": "98bcac3d7078aed783a4c2f86bdd2b8ffd68c4f3694d78038a3ca1c2a78936d4",
+    "skills/bro/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/bro/SKILL.md": "8b822d47b9299627f5e4fe42684a031105792c8531443da1ae3423adfa2de96f",
+    "skills/bro/agents/openai.yaml": "f6b7d19e1a67b1297f8105db017a2392d8fbbf3616ee097f4514da2ff78f98d2",
+    "skills/create-test-skill/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/create-test-skill/SKILL.md": "2db5e2a7f740637d4006992a93467d453c061666199a144fffad190924807871",
+    "skills/create-test-skill/agents/openai.yaml": "39079efef806b2b6c0e207e0af14feb863fca1d997de494d305258a876e29ab1",
+    "skills/create-test-skill/references/output-contract.md": "f84b4fce810a2de650edcaaa4bb2dbd00c2179ea5e64a939f56a7cf22b41efdb",
+    "skills/technical-bro/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/technical-bro/SKILL.md": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+    "skills/technical-bro/agents/openai.yaml": "d3ac9b2ba6fadba54a2693c5f06c1791e66970d11b418e3dd6e95b6452510a03",
+    "skills/unslop/LICENSE": "7fe7172f46e1331fbbd2ebd5ef3244f2f46a9ef99e0f724fcd765af88d8273ef",
+    "skills/unslop/SKILL.md": "0503149a9b85dad02bbc747a3aeb534e2ba07f53c5fd57e491ea3d1e67659aa3",
+    "skills/unslop/agents/openai.yaml": "52553af9876f0671a12f5eee742a4211fd02a42c258a30b7115ec5f8a6223cb5",
+    "tools/install.py": "62425e623669a828bbef98d54d3a2fd06b666288247f76e5d56c319ae633db57",
+    "tools/validate.py": "59fcbdba5b272b912c06c8bcda987030a4f16c23113fb5d0928f8fca1a628d6c",
+    "ytstack.json": "193f42807e97c41d300e1d0857083daff3eab3dcd9b42e3f8315507bd54b13fa"
+  },
+  "target_unchanged": true,
+  "cleanup_passed": true
+}

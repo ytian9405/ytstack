@@ -1,0 +1,34 @@
+{
+ "id": "H2-sol-v01-r1",
+ "prompt": "tools/install.py 的软链接安装和复制安装怎么选？",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "followup": "说人话",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 34.6,
+ "usage": {
+  "input_tokens": 47757,
+  "cached_input_tokens": 39680,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 674,
+  "reasoning_output_tokens": 71
+ },
+ "final": "**本机使用、希望技能随源码更新，选软链接；项目需要独立保存或交给别人，选复制。** 脚本默认使用软链接。\n\n| | 软链接 `symlink` | 复制 `copy` |\n|---|---|---|\n| 安装内容 | 指向本仓库技能目录的相对链接 | 一份独立的技能文件 |\n| 本仓库技能更新后 | 项目立即使用更新后的内容 | 项目中的副本不变 |\n| 从项目里修改技能 | 会修改本仓库的源文件 | 只修改项目内的副本 |\n| 搬动或删除本仓库 | 相对位置改变时，链接可能失效 | 不受影响 |\n| 适合场景 | 本机多个项目共享、开发调试技能 | 团队分发、独立保存、固定版本 |\n\n例如，给 Codex 安装：\n\n```bash\n# 软链接安装（默认）\npython3 tools/install.py --project /你的项目路径 --harness codex\n\n# 复制安装\npython3 tools/install.py --project /你的项目路径 --harness codex --method copy\n```\n\n**注意：这个脚本不会覆盖已有内容。** 复制安装后，如果源文件更新，再运行安装会报冲突，不会自动升级；切换安装方式也不能当作覆盖操作使用。需要先处理已有目录或链接。可以加 `--dry-run` 预览并检查冲突。\n\n实现见 [tools/install.py](/tmp/ytev-tww960pp/project/tools/install.py)。",
+ "commentary": [
+  "我先看看 `tools/install.py` 的实现，确认两种安装方式的具体区别和适用场景。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc pwd",
+  "/bin/bash -lc \"rg --files -g AGENTS.md -g install.py -g '*README*' -g '*install*'\"",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-tww960pp/AGENTS.md /tmp/ytev-tww960pp/project/AGENTS.md; do if [ -f \"$p\" ]; then printf '\"'\\\\n%s\\\\n' \\\"\"'$p\"; cat \"$p\"; fi; done'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat README.md'"
+ ],
+ "followup_final": "**软链接**：项目直接用原来的那份文件。原文件改了，项目也跟着变；原文件搬走或删了，项目就可能找不到。\n\n**复制**：给项目另存一份。以后各改各的，互不影响。\n\n**自己电脑上用，选软链接，默认就行。要把项目发给别人，选复制。**\n\n另外，这脚本不会覆盖旧文件，复制后想更新，需要先处理旧的那份。",
+ "followup_skills": [
+  "bro"
+ ],
+ "followup_exit": 0
+}

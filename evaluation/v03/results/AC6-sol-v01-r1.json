@@ -1,0 +1,31 @@
+{
+ "id": "AC6-sol-v01-r1",
+ "prompt": "queue_cli 想加任务截止时间，过期了要能看出来。先定一下验收标准。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 96.5,
+ "usage": {
+  "input_tokens": 56312,
+  "cached_input_tokens": 45312,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1433,
+  "reasoning_output_tokens": 365
+ },
+ "final": "当前 `queue_cli.py` 有 `add`、`list`、`complete`，输出都是 JSON。建议第一版按以下标准验收，截止时间精确到秒。\n\n1. **添加截止时间**  \n   `add \"任务\" --due \"2026-11-03T18:00:00+08:00\"` 创建带截止时间的任务。不传 `--due` 也能正常创建。\n\n2. **明确时间格式**  \n   接受带时区的 `YYYY-MM-DDTHH:MM:SS+08:00` 或 UTC 格式 `YYYY-MM-DDTHH:MM:SSZ`。拒绝纯日期、无时区时间和不存在的日期。\n\n3. **输出能识别过期**  \n   `add`、`list`、`complete` 返回的任务保留 `id`、`title`、`done`，增加：\n   - `due_at`：统一为 UTC、以 `Z` 结尾的截止时间，无截止时间时为 `null`。\n   - `overdue`：布尔值，直接表示是否过期。\n\n4. **过期规则明确**  \n   只有“未完成、有截止时间、当前时间严格晚于截止时间”的任务，`overdue` 才为 `true`。恰好到截止时刻仍为 `false`。允许添加已经过期的任务，立即返回 `overdue: true`。\n\n5. **完成后不再标为过期**  \n   `complete ID` 将 `done` 改为 `true`，保留截止时间，返回 `overdue: false`。重复完成没有额外副作用。\n\n6. **随时间更新，跨进程有效**  \n   截止时间持久保存。每次执行命令重新计算 `overdue`，同一次命令使用同一当前时间。任务无需再次修改，也能在过期后的 `list` 中显示为过期。\n\n7. **兼容旧数据和现有行为**  \n   旧任务缺少截止时间时，按无截止时间处理。`list` 保持添加顺序，读取不改写状态文件。原有 ID 分配、标题校验和空队列行为保持有效。\n\n8. **错误不影响数据**  \n   非法截止时间导致非零退出，错误写入 stderr，stdout 不输出成功结果。已有状态文件内容不变；尚无状态文件时不创建文件。\n\n验收测试固定当前时间，覆盖以下情况，无需等待真实时间流逝：\n\n| 任务情况 | `overdue` |\n|---|---|\n| 未完成，无截止时间 | `false` |\n| 未完成，截止时间在未来 | `false` |\n| 未完成，恰好到截止时刻 | `false` |\n| 未完成，已超过截止时间 | `true` |\n| 已完成，已超过截止时间 | `false` |\n\n另需验证：不同时区表示的同一时刻，判断结果一致。\n\n第一版范围限定为创建时设置截止时间，以及在 JSON 中显示过期状态；修改截止时间、过期筛选和主动提醒留待后续。",
+ "commentary": [
+  "我先看一下 `queue_cli` 的任务结构、现有命令和测试，再拟验收标准。",
+  "我会按 `technical-bro` 技能把标准写成可逐条验证的行为，明确时间边界和异常输入。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g '*README*' -g 'pyproject.toml' -g 'package.json' -g 'Cargo.toml' -g '*test*' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-_q2a9a3v/AGENTS.md /tmp/ytev-_q2a9a3v/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done\nrg --files --hidden -g '\"'AGENTS.md' -g '\"'!.git'\"' -g '\"'!n",
+  "/bin/bash -lc 'cat tests/test_smoke.py tests/test_package.py\ncat .agents/skills/unslop/SKILL.md\nls -la'"
+ ]
+}

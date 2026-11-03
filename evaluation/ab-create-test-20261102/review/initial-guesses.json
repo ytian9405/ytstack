@@ -1,0 +1,14 @@
+{
+  "before_reading": true,
+  "guesses": {
+    "run-28": {
+      "group": "UNKNOWN",
+      "confidence": 0
+    },
+    "run-17": {
+      "group": "UNKNOWN",
+      "confidence": 0
+    }
+  },
+  "limitation": "产物结构可能泄露处理条件，无法保证完全盲评"
+}

@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-11-02T13:26:16.801210+00:00",
+  "mapping": [
+    {
+      "task": "bro",
+      "pair": 1,
+      "alias": "A",
+      "file": "human-review/bro-1-A.md",
+      "original_label": "sample-35",
+      "arm": "with",
+      "sha256": "09fb30b0556cdc5d01f9d86c5a301d630f4c883b2f892a91755703cd565fa3f5"
+    },
+    {
+      "task": "bro",
+      "pair": 1,
+      "alias": "B",
+      "file": "human-review/bro-1-B.md",
+      "original_label": "sample-66",
+      "arm": "without",
+      "sha256": "f6fe9cfda157a9b06745bc62a14f39fe2584f0ce08a55d2c8121ab6020b71d29"
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "alias": "A",
+      "file": "human-review/bro-2-A.md",
+      "original_label": "sample-74",
+      "arm": "without",
+      "sha256": "fbe3f7de98257627d3187ee5dfc055f06bf6ab77e10167b0a50d21e21a4c5281"
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "alias": "B",
+      "file": "human-review/bro-2-B.md",
+      "original_label": "sample-48",
+      "arm": "with",
+      "sha256": "19204d68c61b582359325771befa682532957aaf9f0bae7c229a7daa827d21fa"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "alias": "A",
+      "file": "human-review/technical-1-A.md",
+      "original_label": "sample-89",
+      "arm": "with",
+      "sha256": "3bfe89f4cb3f80e643f5f9aec4c39d1379f1016d4df1222eb4530bda6b9a74a0"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "alias": "B",
+      "file": "human-review/technical-1-B.md",
+      "original_label": "sample-53",
+      "arm": "without",
+      "sha256": "369440c7b1602c8fbc66c3095f34877e2282d043fb6ece1e60a6d8e3bcdc60f9"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "alias": "A",
+      "file": "human-review/technical-2-A.md",
+      "original_label": "sample-27",
+      "arm": "without",
+      "sha256": "1f5f058284400cbfe6efcd312e2bf8cda35489bc857b3bc98f645a5462ac97ea"
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "alias": "B",
+      "file": "human-review/technical-2-B.md",
+      "original_label": "sample-12",
+      "arm": "with",
+      "sha256": "0712de0e03105d8f88c731c3099fd86b79caec9336666f8985cd6d5ba5213715"
+    }
+  ]
+}

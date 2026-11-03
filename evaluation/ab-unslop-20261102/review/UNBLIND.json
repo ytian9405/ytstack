@@ -1,0 +1,47 @@
+{
+  "unblinded_at": "2026-11-02T14:20:05.550571+00:00",
+  "verified_before_mapping_shared": true,
+  "score_lock_sha256": "5a18e62820403076ce70623198d9f4011b2acb061b16c2ee5bd8068557249909",
+  "mapping": [
+    {
+      "material": "update",
+      "label": "item-63",
+      "arm": "without"
+    },
+    {
+      "material": "update",
+      "label": "item-14",
+      "arm": "with"
+    },
+    {
+      "material": "change",
+      "label": "item-58",
+      "arm": "without"
+    },
+    {
+      "material": "change",
+      "label": "item-85",
+      "arm": "with"
+    },
+    {
+      "material": "progress",
+      "label": "item-72",
+      "arm": "without"
+    },
+    {
+      "material": "progress",
+      "label": "item-26",
+      "arm": "with"
+    },
+    {
+      "material": "clean",
+      "label": "item-49",
+      "arm": "without"
+    },
+    {
+      "material": "clean",
+      "label": "item-37",
+      "arm": "with"
+    }
+  ]
+}

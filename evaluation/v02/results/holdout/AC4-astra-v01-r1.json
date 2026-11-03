@@ -1,0 +1,31 @@
+{
+ "id": "AC4-astra-v01-r1",
+ "prompt": "给 expense 工具加个月度预算超支提醒，验收标准帮我写一下。",
+ "model": "gpt-6-astra",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 1855.6,
+ "usage": {
+  "input_tokens": 53681,
+  "cached_input_tokens": 39424,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1338,
+  "reasoning_output_tokens": 223
+ },
+ "final": "现有 expense 是本地 CLI，支持记账、作废和汇总，但还没有日期和预算。下面按首版方案写验收标准：**按自然月设置总预算，执行命令时提示超支**。\n\n以下命令和规则是新增功能的建议约定，可直接放进需求单。\n\n| 编号 | 场景 | 验收标准 |\n|---|---|---|\n| AC-01 | 设置预算 | 支持 `budget --month YYYY-MM --cents N`。预算以正整数分保存，同一月份重复设置覆盖原值，重启进程后仍有效。各月份独立，未设置的月份不自动继承预算。 |\n| AC-02 | 确定支出月份 | `add` 支持 `--date YYYY-MM-DD`，省略时使用系统本地日期。按支出日期归属自然月，月初和月末记录不得计入相邻月份。 |\n| AC-03 | 计算月支出 | 月支出为该月所有未作废记录的金额总和，包含所有类别。其他月份及已作废记录不计入，全部使用整数分计算。 |\n| AC-04 | 判断超支 | 仅当月支出 **大于** 月预算时提醒。预算为 `10000` 分时，支出 `9999` 分和 `10000` 分不提醒，`10001` 分提醒超支 `1` 分。 |\n| AC-05 | 触发提醒 | 成功新增支出、设置预算或作废记录后，检查受影响月份；执行 `summary --month YYYY-MM` 时检查指定月份。检查时仍超支，就输出一次提醒；后续命令再次检查时仍可提醒。 |\n| AC-06 | 提醒内容和输出 | 提醒包含月份、预算、已支出及超支金额，金额单位明确。提醒写入 stderr；stdout 仍只输出一个合法 JSON 值。超支不阻止记账，成功命令仍以 `0` 退出。 |\n| AC-07 | 月度查询 | `summary --month YYYY-MM` 返回该月的记录数、支出总额、分类汇总，以及 `budget_cents`、`over_budget`、`over_by_cents`。未设置预算时，三者分别为 `null`、`false`、`0`，且不输出超支提醒。 |\n| AC-08 | 作废或调整预算 | 作废支出、提高或降低预算后，使用最新数据重新计算。支出回落至预算以内或恰好等于预算时，停止提醒；再次超出时恢复提醒。重复作废不得重复扣减金额。 |\n| AC-09 | 非法输入 | 无效月份、无效日期、非整数预算及零或负数预算，均以非零退出并向 stderr 输出错误。原有记录和预算不变。 |\n| AC-10 | 旧数据和兼容性 | 旧状态文件仍可读取，原有命令及返回字段保持兼容。旧记录没有日期，不推断其月份；保留在原有全量汇总中。月度查询排除这些记录，并提示未纳入统计的记录数。 |\n\n验收时使用独立状态文件，覆盖跨进程持久化、跨月边界、恰好达到预算、超出一分钱，以及作废后解除超支。原有测试也必须全部通过。",
+ "commentary": [
+  "我先看一下 expense 工具现有的功能和数据结构，再写成可逐项验证的验收标准。",
+  "我会按 technical-bro 和 unslop 的写作规范，把触发条件、金额边界和预期输出写清楚，方便开发和测试直接使用。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*expense*' -g '*Expense*' -g 'README*' -g 'package.json' -g 'pyproject.toml'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'cat .agents/skills/unslop/SKILL.md; for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-zv_45nt_/AGENTS.md /tmp/ytev-zv_45nt_/project/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'! .git'\"' -g '\"'!**/.git/**'\"'; cat README.md; cat expense_cli.py\""
+ ]
+}

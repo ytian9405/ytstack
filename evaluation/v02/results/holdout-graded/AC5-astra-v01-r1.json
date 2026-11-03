@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "第一次接触项目的人，在 README 声明支持的环境里，只按文档操作，就能完成记账、查看、汇总和作废，并判断结果是否正确。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "命令后给出预期 JSON，并解释关键字段。例如 `1250` 表示 12.50 元；作废前合计为 `1250`，作废后为 `0`，记录仍能查到。"
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "验收时，找一位没接触过项目、会打开终端和复制命令的人，用新的练习账本照着做，作者不口头补充。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "按“添加午餐 → 查看记录 → 汇总 → 作废 → 再次汇总”的顺序给出可复制命令。必需步骤没有省略。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "快速上手放在前面，完整字段规则和开发测试放在后面，读者不必先读完才能开始。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "验收时，找一位没接触过项目、会打开终端和复制命令的人，用新的练习账本照着做，作者不口头补充。记录完成时间、卡住的位置和求助次数。"
+  }
+ ]
+}

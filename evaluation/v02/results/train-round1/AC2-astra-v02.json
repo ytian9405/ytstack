@@ -1,0 +1,13 @@
+{
+ "id": "AC2-astra-v02",
+ "prompt": "我想给 expense 工具加撤销功能。先别写代码，把什么算做完列一下。",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "exit": "timeout",
+ "seconds": 420.1,
+ "usage": null,
+ "final": "",
+ "commentary": [],
+ "skills_read": [],
+ "commands": []
+}

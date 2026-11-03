@@ -1,0 +1,15 @@
+{
+  "label": "item-26",
+  "material": "progress",
+  "source_inputs_unchanged": true,
+  "skill_inputs_match_if_present": true,
+  "only_new_file": "output.md",
+  "output_sha256": "4d81748815898c665e7f65057e672cb88bb55567260327c0486cb50725b400c8",
+  "anonymous_bytes_match": true,
+  "characters": 155,
+  "non_whitespace_characters": 150,
+  "draft_characters": 338,
+  "exactly_matches_draft": false,
+  "collected_at": "2026-11-02T14:14:42.537881+00:00",
+  "note": "Character and unchanged-text measures are descriptive only, not quality scores."
+}

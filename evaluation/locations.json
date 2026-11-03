@@ -1,0 +1,6 @@
+{
+  "cli": "cli/",
+  "cold_use": "cold-use/",
+  "writing": "writing/",
+  "note": "Archived files are relative to this directory. Absolute /tmp paths inside original receipts are historical observations, not execution requirements."
+}

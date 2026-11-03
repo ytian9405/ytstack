@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "protocol": "冻结FRAMEWORK.md中的两项片段校准；correct→damaged→correct",
+  "freeze_integrity": [
+    {
+      "file": "FRAMEWORK.md",
+      "expected_sha256": "97b5e1d50c882e7f19e5ac9d14e8dc832f06bcdff9688fa9f8101587a1839f04",
+      "actual_sha256": "97b5e1d50c882e7f19e5ac9d14e8dc832f06bcdff9688fa9f8101587a1839f04",
+      "match": true
+    },
+    {
+      "file": "framework-bro.json",
+      "expected_sha256": "41fee047fbdbae3fbc592e253d13df8dab9d3d6aa751c8cd480107ba9fc40885",
+      "actual_sha256": "41fee047fbdbae3fbc592e253d13df8dab9d3d6aa751c8cd480107ba9fc40885",
+      "match": true
+    },
+    {
+      "file": "framework-technical-bro.json",
+      "expected_sha256": "01a8781a205ba997d0504f2fc5cee89008ec3137bbfdfd5adcba44fc0dc9f145",
+      "actual_sha256": "01a8781a205ba997d0504f2fc5cee89008ec3137bbfdfd5adcba44fc0dc9f145",
+      "match": true
+    }
+  ],
+  "results": [
+    {
+      "task": "bro",
+      "primary_atom": "B06",
+      "stages": [
+        {
+          "stage": "correct",
+          "fragment": "总尝试次数上限为 3，第一次也计入这 3 次",
+          "atom_scores": {
+            "B06": 1
+          },
+          "major_error_count": 0,
+          "major_gate": "PASS",
+          "defects": [],
+          "U": "NOT_ASSESSED",
+          "O": "NOT_ASSESSED",
+          "D": "NOT_ASSESSED",
+          "overall_score": "NOT_ASSESSED"
+        },
+        {
+          "stage": "damaged",
+          "fragment": "第一次失败后还会自动重试 3 次，合计最多尝试 4 次",
+          "atom_scores": {
+            "B06": 0
+          },
+          "major_error_count": 1,
+          "major_gate": "FAIL",
+          "defects": [
+            {
+              "id": "bro-CAL-01",
+              "dimension": "F",
+              "primary_atom": "B06",
+              "reason": "把包含首试在内的最多3次改为首试之后再重试3次、总共4次，明确改变关键尝试次数。",
+              "evidence": "第一次失败后还会自动重试 3 次，合计最多尝试 4 次"
+            }
+          ],
+          "U": "NOT_ASSESSED",
+          "O": "NOT_ASSESSED",
+          "D": "NOT_ASSESSED",
+          "overall_score": "NOT_ASSESSED"
+        },
+        {
+          "stage": "restored_correct",
+          "fragment": "总尝试次数上限为 3，第一次也计入这 3 次",
+          "atom_scores": {
+            "B06": 1
+          },
+          "major_error_count": 0,
+          "major_gate": "PASS",
+          "defects": [],
+          "U": "NOT_ASSESSED",
+          "O": "NOT_ASSESSED",
+          "D": "NOT_ASSESSED",
+          "overall_score": "NOT_ASSESSED"
+        }
+      ],
+      "expected_atom_sequence": [
+        1,
+        0,
+        1
+      ],
+      "actual_atom_sequence": [
+        1,
+        0,
+        1
+      ],
+      "unique_assignment_check": "PASS",
+      "no_duplicate_penalty_check": "PASS",
+      "recovery_check": "PASS",
+      "result": "PASS",
+      "unassessed_atoms": "片段以外的原子不计遗漏、不评分；technical-bro中的T24在三阶段均为1。"
+    },
+    {
+      "task": "technical-bro",
+      "primary_atom": "T25",
+      "stages": [
+        {
+          "stage": "correct",
+          "fragment": "这个 dry-run 会校验发布参数并显示目标位置，但不上传文件，也不创建远程记录",
+          "atom_scores": {
+            "T25": 1,
+            "T24": 1
+          },
+          "major_error_count": 0,
+          "major_gate": "PASS",
+          "defects": [],
+          "U": "NOT_ASSESSED",
+          "O": "NOT_ASSESSED",
+          "D": "NOT_ASSESSED",
+          "overall_score": "NOT_ASSESSED"
+        },
+        {
+          "stage": "damaged",
+          "fragment": "这个 dry-run 会校验发布参数并显示目标位置，同时上传文件并创建远程记录",
+          "atom_scores": {
+            "T25": 0,
+            "T24": 1
+          },
+          "major_error_count": 1,
+          "major_gate": "FAIL",
+          "defects": [
+            {
+              "id": "technical-bro-CAL-01",
+              "dimension": "F",
+              "primary_atom": "T25",
+              "reason": "把不上传且不创建远程记录反转为会上传并创建远程记录，明确改变dry-run副作用。",
+              "evidence": "这个 dry-run 会校验发布参数并显示目标位置，同时上传文件并创建远程记录"
+            }
+          ],
+          "U": "NOT_ASSESSED",
+          "O": "NOT_ASSESSED",
+          "D": "NOT_ASSESSED",
+          "overall_score": "NOT_ASSESSED"
+        },
+        {
+          "stage": "restored_correct",
+          "fragment": "这个 dry-run 会校验发布参数并显示目标位置，但不上传文件，也不创建远程记录",
+          "atom_scores": {
+            "T25": 1,
+            "T24": 1
+          },
+          "major_error_count": 0,
+          "major_gate": "PASS",
+          "defects": [],
+          "U": "NOT_ASSESSED",
+          "O": "NOT_ASSESSED",
+          "D": "NOT_ASSESSED",
+          "overall_score": "NOT_ASSESSED"
+        }
+      ],
+      "expected_atom_sequence": [
+        1,
+        0,
+        1
+      ],
+      "actual_atom_sequence": [
+        1,
+        0,
+        1
+      ],
+      "unique_assignment_check": "PASS",
+      "no_duplicate_penalty_check": "PASS",
+      "recovery_check": "PASS",
+      "result": "PASS",
+      "unassessed_atoms": "片段以外的原子不计遗漏、不评分；technical-bro中的T24在三阶段均为1。"
+    }
+  ],
+  "scope": "本结果只确认关键数字错误和副作用反转的识别、唯一F归属与恢复。不评分完整稿件，不证明已覆盖所有错误类型。",
+  "read_boundary": "仅读取本次calibration片段及index，并核验design冻结文件；未读取control/assignment.json、runs、任何技能或正式产物。"
+}

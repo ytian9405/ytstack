@@ -1,0 +1,210 @@
+{
+  "conclusion": "本次未测出unslop对gpt-6.1-sol的附加清理收益；不证明普遍等效或技能无用。",
+  "comparison_direction": "with minus without",
+  "materials": [
+    {
+      "material": "update",
+      "labels": {
+        "without": "item-63",
+        "with": "item-14"
+      },
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 5,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 5,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 5,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 5,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "delta_with_minus_without": {
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "new_slop_roots": 0
+      },
+      "natural_usability": "tie",
+      "clean_draft_preservation": null
+    },
+    {
+      "material": "change",
+      "labels": {
+        "without": "item-58",
+        "with": "item-85"
+      },
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 4,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 4,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 4,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 4,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "delta_with_minus_without": {
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "new_slop_roots": 0
+      },
+      "natural_usability": "tie",
+      "clean_draft_preservation": null
+    },
+    {
+      "material": "progress",
+      "labels": {
+        "without": "item-72",
+        "with": "item-26"
+      },
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 3,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 3,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 3,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 3,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "delta_with_minus_without": {
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "new_slop_roots": 0
+      },
+      "natural_usability": "tie",
+      "clean_draft_preservation": null
+    },
+    {
+      "material": "clean",
+      "labels": {
+        "without": "item-49",
+        "with": "item-37"
+      },
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 0,
+        "source_slop_elimination_rate": "N/A",
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 0,
+        "source_slop_elimination_rate": "N/A",
+        "new_slop_roots": 0
+      },
+      "delta_with_minus_without": {
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "new_slop_roots": 0
+      },
+      "natural_usability": "tie",
+      "clean_draft_preservation": {
+        "without": true,
+        "with": true
+      }
+    }
+  ],
+  "aggregate": {
+    "without": {
+      "E": 12,
+      "P": 0,
+      "R": 0,
+      "U": 0,
+      "N": 12
+    },
+    "with": {
+      "E": 12,
+      "P": 0,
+      "R": 0,
+      "U": 0,
+      "N": 12
+    },
+    "micro_elimination_rate_delta": 0,
+    "equal_task_macro_elimination_rate_delta": 0,
+    "clean_elimination_rate": "N/A",
+    "natural_usability_ties": 4
+  },
+  "limitations": [
+    "共同任务已要求保留事实与限制、避免无依据新增，事实底稿提供明确校正依据。",
+    "同宿主默认写作规范可能已经覆盖部分去包装规则；本次测的是该环境下附加收益。",
+    "原稿套路明显，三份包装材料的未加载条件已清除12/12，固定主指标出现天花板。",
+    "每题每条件仅1次，四题均为中文合成材料；没有重复抽样、真人阅读实验或用户偏好验证。",
+    "上下文隔离与技能遵循证据依赖软隔离及执行自报，并非可审计的严格沙箱因果隔离；本评审没有读取技能或运行日志来独立验证这些执行细节。",
+    "精确token、费用和处理时长UNKNOWN，不能推断加载技能的成本收益。",
+    "模型判平局不等于用户必然无偏好；人工对比稿已另备，可供用户自行阅读。"
+  ],
+  "evaluation_interruption": {
+    "stage": "evaluation",
+    "recovery": "同模型重试，仅补clean及总锁；前三对既有判断保持不变。",
+    "generation_reruns": 0,
+    "generation_sample_count": 8,
+    "provenance": "协调者提供的执行事实，未读取runs独立审计；恢复评价不构成生成样本。"
+  },
+  "exact_tokens": "UNKNOWN",
+  "exact_cost": "UNKNOWN",
+  "processing_duration": "UNKNOWN",
+  "locked_artifacts_unchanged": true,
+  "score_lock_sha256": "5a18e62820403076ce70623198d9f4011b2acb061b16c2ee5bd8068557249909"
+}

@@ -1,0 +1,11 @@
+--- a/expense_cli.py
++++ b/expense_cli.py
+@@ -34,7 +34,7 @@
+             print('title and category must be nonblank; cents must be positive', file=sys.stderr)
+             return 1
+         entry = {'id': max((item['id'] for item in entries), default=0) + 1,
+-                 'title': args.title, 'cents': args.cents,
++                 'title': args.title.strip(), 'cents': args.cents,
+                  'category': args.category, 'voided': False}
+         entries.append(entry)
+         save(args.state, entries)

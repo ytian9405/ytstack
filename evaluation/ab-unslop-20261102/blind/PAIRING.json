@@ -1,0 +1,22 @@
+[
+  {
+    "material": "update",
+    "A": "item-14",
+    "B": "item-63"
+  },
+  {
+    "material": "change",
+    "A": "item-58",
+    "B": "item-85"
+  },
+  {
+    "material": "progress",
+    "A": "item-26",
+    "B": "item-72"
+  },
+  {
+    "material": "clean",
+    "A": "item-37",
+    "B": "item-49"
+  }
+]

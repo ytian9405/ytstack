@@ -1,0 +1,65 @@
+[
+  {
+    "name": "doctor",
+    "command": [
+      "timeout",
+      "15s",
+      "python3",
+      "tests/test_queue_cli.py",
+      "--doctor",
+      "--evidence",
+      "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/doctor.json"
+    ],
+    "exit_status": 0,
+    "elapsed_seconds": 0.0676,
+    "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/doctor.stdout.log",
+    "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/doctor.stderr.log"
+  },
+  {
+    "name": "suite",
+    "command": [
+      "timeout",
+      "45s",
+      "python3",
+      "tests/test_queue_cli.py",
+      "--evidence",
+      "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/suite.json"
+    ],
+    "exit_status": 0,
+    "elapsed_seconds": 0.4888,
+    "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/suite.stdout.log",
+    "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/suite.stderr.log"
+  },
+  {
+    "name": "TQ02",
+    "command": [
+      "timeout",
+      "30s",
+      "python3",
+      "tests/test_queue_cli.py",
+      "--case",
+      "TQ02",
+      "--evidence",
+      "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/TQ02.json"
+    ],
+    "exit_status": 0,
+    "elapsed_seconds": 0.1438,
+    "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/TQ02.stdout.log",
+    "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/TQ02.stderr.log"
+  },
+  {
+    "name": "failure-detection",
+    "command": [
+      "timeout",
+      "60s",
+      "python3",
+      ".agents/skills/test-tiny-queue/scripts/prove_failure_detection.py",
+      "--evidence-dir",
+      "/tmp/ytstack-forward-20261102-4pldj5r3/cold-project/test-evidence/cold-evaluation-1ipllyd2/failure-detection"
+    ],
+    "exit_status": 0,
+    "elapsed_seconds": 0.2671,
+    "stdout_log": "test-evidence/cold-evaluation-1ipllyd2/failure-detection.stdout.log",
+    "stderr_log": "test-evidence/cold-evaluation-1ipllyd2/failure-detection.stderr.log"
+  }
+]

@@ -1,0 +1,116 @@
+{
+  "command": "/usr/bin/python3 /tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py --case TQ03 --target /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --evidence /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/parent-review/completion-broken.json",
+  "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+  "cases": [
+    {
+      "id": "TQ03",
+      "test": "test_TQ03_complete_idempotence",
+      "actions": [
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-6i5u2e7p/nested/queue.json add 'Prepare slides'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-6i5u2e7p/nested/queue.json add 'Send notes'",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 2, \"title\": \"Send notes\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        },
+        {
+          "command": "/usr/bin/python3 /tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py --state /tmp/tiny-queue-test-6i5u2e7p/nested/queue.json complete 1",
+          "cwd": "/tmp/ytstack-forward-20261102-4pldj5r3/project",
+          "stdout": "{\"id\": 1, \"title\": \"Prepare slides\", \"done\": false}\n",
+          "stderr": "",
+          "exit_status": 0
+        }
+      ],
+      "assertions": [
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup first task",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "setup second task",
+          "actual": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "expected": {
+            "id": 2,
+            "title": "Send notes",
+            "done": false
+          },
+          "status": "PASS"
+        },
+        {
+          "label": "CLI command exits zero",
+          "actual": 0,
+          "expected": 0,
+          "status": "PASS"
+        },
+        {
+          "label": "completion preserves title and changes done",
+          "actual": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": false
+          },
+          "expected": {
+            "id": 1,
+            "title": "Prepare slides",
+            "done": true
+          },
+          "status": "FAIL"
+        }
+      ],
+      "scratch": "/tmp/tiny-queue-test-6i5u2e7p",
+      "status": "FAIL",
+      "detail": "Traceback (most recent call last):\n  File \"/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py\", line 88, in test_TQ03_complete_idempotence\n    self.expect('completion preserves title and changes done', self.cli('complete', '1'), completed)\n  File \"/tmp/ytstack-forward-20261102-4pldj5r3/project/tests/test_queue_cli.py\", line 42, in expect\n    self.assertEqual(actual, expected, label)\nAssertionError: {'id': 1, 'title': 'Prepare slides', 'done': False} != {'id': 1, 'title': 'Prepare slides', 'done': True}\n- {'done': False, 'id': 1, 'title': 'Prepare slides'}\n?          ^^^^\n\n+ {'done': True, 'id': 1, 'title': 'Prepare slides'}\n?          ^^^\n : completion preserves title and changes done\n",
+      "cleanup": {
+        "scratch_removed": true,
+        "background_processes_started": []
+      }
+    }
+  ],
+  "doctor": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "target": "/tmp/ytstack-parent-mutant-jzjwk5s1/queue_cli.py",
+    "sha256": "a073d96a8ffb3e4e0a5b290e20ff7b562025b3720a90c7e71db7292c8be460a8",
+    "help_exit_status": 0,
+    "help_stdout": "usage: queue_cli.py [-h] --state STATE {add,list,complete} ...\n\npositional arguments:\n  {add,list,complete}\n\noptions:\n  -h, --help           show this help message and exit\n  --state STATE\n",
+    "help_stderr": "",
+    "network": "unused",
+    "credentials": "not required",
+    "server": "none"
+  },
+  "status": "FAIL",
+  "exit_status": 1
+}

@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "两次结果都是 `done: true`、`overdue: false`，原截止时间保留。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "同一任务和截止时间仍在，`overdue: true`，`done: false`。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "原有三个值不变，并显示 `due_at: null`、`overdue: false`。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "`overdue` 分别为 `false`、`true`。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "均失败，退出码非零，stderr 说明时间无效或缺少时区；已有文件内容不变。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**D2：时间怎么填写？** 推荐写完整日期、时间和时区，如 `2026-11-03T18:00:00+08:00`（北京时间）；若允许只写日期，还需决定当天几点截止。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "以下按推荐选项拟定。拟新增 `--due` 参数；JSON 输出增加 `due_at`（截止时间，无则为 `null`）和 `overdue`（是否过期）。"
+  },
+  {
+   "i": 2,
+   "state": "ASKED",
+   "quote": "**D4：完成后还显示过期吗？** 推荐完成后不再显示过期，保留截止时间；若要显示“曾经逾期”，还需记录完成时间。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "**这次不做**\n\n- 修改或清除已有任务的截止时间。"
+  }
+ ]
+}

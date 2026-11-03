@@ -1,0 +1,142 @@
+<title>说人话盲看 第三轮</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one column of questions; each shows the two answers side by side on wide screens, stacked on phones. */
+:root{--bg:#f6f7f9;--panel:#ffffff;--fg:#1d2430;--muted:#5d6878;--line:#dde2ea;--accent:#2d5b8c;--accent-soft:#e3ebf5;--pick:#1f7a5a;--pick-soft:#e2f2ea;--mark:#fbe7b5;
+--display:"Noto Serif SC","Songti SC",serif;--body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13171d;--panel:#1b2129;--fg:#e4e8ee;--muted:#9aa5b4;--line:#2c3440;--accent:#7fa8d6;--accent-soft:#22303f;--pick:#5cc49a;--pick-soft:#1c3329;--mark:#5a4a1e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#13171d;--panel:#1b2129;--fg:#e4e8ee;--muted:#9aa5b4;--line:#2c3440;--accent:#7fa8d6;--accent-soft:#22303f;--pick:#5cc49a;--pick-soft:#1c3329;--mark:#5a4a1e;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.7}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1{font-family:var(--display);font-size:1.75rem;margin:0;text-wrap:balance}
+.intro{display:flex;flex-direction:column;gap:10px;max-width:68ch;color:var(--muted)}
+.intro p{margin:0}
+.intro strong{color:var(--fg)}
+.progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.dot{font:12px/1 var(--mono);min-width:2.2em;padding:6px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none;text-align:center;font-variant-numeric:tabular-nums}
+.dot.done{background:var(--pick-soft);border-color:var(--pick);color:var(--pick)}
+.progress .count{margin-left:auto;font-size:13px;color:var(--muted)}
+section.q{display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px}
+.qhead{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font:12px var(--mono);letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.qhead h2{font-family:var(--display);font-size:1.2rem;margin:0;text-wrap:balance}
+.qhead .hint{color:var(--muted);font-size:13px;margin:0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.ans{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column}
+.ans.chosen{border-color:var(--pick);box-shadow:0 0 0 1px var(--pick)}
+.ans header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.tag{font:600 14px var(--mono);width:28px;height:28px;border-radius:6px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ans header .len{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ans header button{margin-left:auto}
+.md{padding:4px 16px 14px;overflow-wrap:anywhere}
+.md :is(p,ul,ol){margin:.6em 0}
+.md ul,.md ol{padding-left:1.3em}
+.md code{font:13px var(--mono);background:var(--accent-soft);padding:1px 4px;border-radius:4px}
+.md pre{overflow-x:auto;background:var(--accent-soft);padding:10px;border-radius:6px}
+.md pre code{background:none;padding:0}
+.md table{border-collapse:collapse;display:block;overflow-x:auto;font-size:13px}
+.md th,.md td{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+.md mark{background:var(--mark);color:inherit;border-radius:2px}
+.vote{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 14px}
+button:hover{border-color:var(--accent)}
+button:focus-visible,textarea:focus-visible,.dot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.choices button[aria-pressed="true"]{background:var(--pick);border-color:var(--pick);color:var(--panel)}
+.small{font-size:12px;padding:3px 10px;color:var(--muted)}
+.terms{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted);min-height:26px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--mark);color:var(--fg);border-radius:999px;padding:1px 4px 1px 10px}
+.chip button{border:0;background:none;padding:0 6px;color:var(--muted)}
+label{font-size:13px;color:var(--muted)}
+textarea{font:inherit;width:100%;box-sizing:border-box;min-height:56px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);padding:8px 10px;resize:vertical}
+.finish{display:flex;flex-direction:column;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.finish h2{font-family:var(--display);font-size:1.2rem;margin:0}
+.finish p{margin:0;color:var(--muted)}
+.primary{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:500;align-self:flex-start;padding:8px 18px}
+#out{font:13px var(--mono);min-height:120px}
+.status{font-size:13px;color:var(--pick)}
+</style>
+<div class="wrap">
+  <div class="intro">
+    <h1>说人话盲看 · 第三轮</h1>
+    <p>每题是一个问题和两份回答，A、B 的顺序已随机，看不出哪份是新版。都是这一轮新出的题，上一轮没出现过。前 4 题是普通提问的回答，最后 2 题是验收标准。</p>
+    <p><strong>选你更愿意收到的一份</strong>，或者平局，再写一句原因。<strong>看到黑话就选中那个词，点“标为黑话”</strong>，这对下一轮最有用。做完点页面底部的“复制结果”，贴回对话里。</p>
+    <p>你的选择会保存在这个浏览器里，中途关掉也不会丢。</p>
+  </div>
+  <nav class="progress" id="progress" aria-label="题目进度"></nav>
+  <div id="qs"></div>
+  <div class="finish">
+    <h2>复制结果</h2>
+    <p id="remain"></p>
+    <button class="primary" id="copy" type="button">复制结果</button>
+    <span class="status" id="status" role="status"></span>
+    <textarea id="out" readonly aria-label="结果文本"></textarea>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+const QS=[{"n": 1, "kind": "speech", "q": "queue_cli 只能把任务标成完成，删是删不掉的。我在想到底要不要给它加个删除命令，你觉得有必要吗？", "A": "**我倾向于加，主要用来处理误建、重复和取消的任务。** 这些任务没做完，硬标成“完成”会让记录失真。\n\n- 如果只是嫌列表太长，优先让 `list` 默认只显示未完成任务，完成记录还能留着查。\n- 删除先做成按 ID 删一条，显示任务标题并要求确认，减少误删。\n- 当前代码用“现有最大 ID + 1”分配编号。删掉编号最大的任务后，新任务会复用它，旧命令可能误操作新任务。加删除时，要一起保证编号不重复使用。\n\n如果误建、取消很少发生，这个功能可以晚点做；如果经常需要手改保存文件清理，就值得加。", "B": "我倾向于加，但前提是你确实会遇到“录错了、重复了、决定不做了”的任务；如果只是觉得列表太长，先加筛选更合适。\n\n看了 `queue_cli.py`，有三个影响决定的点：\n\n- **最要紧的是区分“做完了”和“不做了”。** 现在只能标完成，取消的任务也会混进完成记录，以后回看会分不清。\n- `list` 会显示所有任务。如果只是已完成任务碍眼，让它支持“只看未完成”就能解决，历史也能留下。\n- 新任务的编号是按现有最大编号加一。直接删除编号最大的任务后，编号可能被再次使用；旧命令再拿这个编号操作，可能改到新任务。加删除时要一起解决。\n\n我的建议：个人使用、主要想清理误建任务，就加按编号删除；如果任务记录还要用于回顾或统计，先加“取消”，保留记录。只为列表清爽，则先做筛选。"}, {"n": 2, "kind": "speech", "q": "queue_cli 的任务编号到底是怎么排出来的？如果哪天我把状态文件清空从头再来，编号是接着旧的往下走，还是又从 1 开始？", "A": "**会从 1 重新开始，前提是把状态文件删掉，或把内容改成 `[]`。**\n\n`queue_cli` 每次新增任务，都取**状态文件里现有的最大编号，加 1**，没有另外保存历史编号。代码位置\n\n- 文件里最大编号是 8，下一个就是 9。\n- 标记完成的任务仍保留在文件里，所以完成任务不会让编号重用。\n- 删除文件或改成 `[]` 后，没有现有编号，下一个就是 1。\n- **如果只是把文件清成空白，程序会报错**，因为空白不是有效的 JSON。读取位置", "B": "**重新开始后会从 1 编号，不会接着旧编号走。**\n\n- 每次添加任务，都取**状态文件里现有的最大编号，加 1**。已完成的任务也算；没有另外保存历史编号。代码\n- 删除状态文件，或把内容改成 `[]`，下一个任务就是 **1**，所以旧编号会被重复使用。\n- 如果把文件清成空白，程序会报错；要保留文件重新开始，应写入 `[]`。读取位置"}, {"n": 3, "kind": "speech", "q": "我用 tools/install.py 只指定装一个技能，装完发现项目里还多出了别的技能目录，这是怎么回事？它对依赖是怎么处理的？", "A": "这是脚本的预期行为：**指定一个技能，会把它声明的依赖也一起装上。**\n\n当前 ytstack.json 里：\n\n- 装 `technical-bro`，会同时装 `unslop`。\n- 装 `bro` 或 `create-test-skill`，没有额外依赖。\n- 不传 `--skill`，会装全部 `primary_skills`，再补齐它们的依赖。`support_skills` 不会仅仅因为列在那里就全部安装。\n\n依赖处理代码 的规则是：\n\n- **只认配置里的 `dependencies`**，不会读取技能正文来猜依赖。\n- 依赖还有依赖，就继续往下找；先装依赖，再装你选的技能。同一个技能只处理一次。\n- 依赖名称不在清单里，或出现“A 依赖 B、B 又依赖 A”，会报错停止。\n- 已有内容符合检查条件就跳过；同名内容有冲突就报错，保留原内容。这些检查都在开始安装前完成。\n\n另外，默认创建的是**指向源技能目录的链接**；加 `--method copy` 才会复制文件。可以加 `--dry-run`，提前查看将新增的目录；目前没有跳过依赖的参数。", "B": "**`--skill` 的意思是“安装这个技能及其依赖”，所以只选一个技能，也可能新增多个目录。**\n\n- 当前 ytstack.json 只声明了一组依赖：`technical-bro` 需要 `unslop`。因此选 `technical-bro` 会装两个；单选 `bro` 或 `create-test-skill` 不会额外带入其他技能。\n- tools/install.py 会继续查“依赖还需要什么”，先安装依赖，再安装你选的技能；同一个技能只处理一次。它只认 `ytstack.json` 的声明，不会从技能正文里自动推断依赖。\n- 不传 `--skill`，才会安装全部 `primary_skills` 及其依赖。当前没有“跳过依赖”的参数。\n- 所选技能和依赖都放进项目的 `.agents/skills/`（Codex）或 `.claude/skills/`（Claude）；默认创建指向源文件的链接，传 `--method copy` 才复制文件。\n- 已有且符合预期的目录会跳过；同名但内容不同会报错、保留原文件。未知依赖、循环依赖或缺少源文件也会在开始写入前报错。\n- 下次可在原命令后加 `--dry-run`，查看返回的 `planned`，提前确认会新增哪些目录。"}, {"n": 4, "kind": "speech", "q": "expense_cli 的 category 是随便填的字符串，全靠手打。我怕时间一长同一个类别冒出好几种写法，汇总就乱了。要不要干脆限制成固定的几类？", "A": "**建议限制新增记录只能用已有类别，但允许你明确添加新类别，别把几类永久写死。** 这样能防止手误，也能应付以后新增的用途。\n\n- **你的担心确实存在。** 现在按原样汇总，`food`、`Food`、`food ` 会算成三个类别。\n- **录入时检查类别。** 不在清单里就拒绝保存，并列出可选项；需要新类别时，单独添加，避免一次拼错就多出一个类别。\n- **旧记录要另外整理。** 限制新增不会合并已有写法。先列出现有类别，由你确认哪些应合并，再统一改名。\n- **已有调用可能要调整。** README 目前承诺接受并保留任意非空类别；加限制后，使用清单外类别的脚本会报错。\n\n如果你确定这个账本永远只用固定几类，直接写死也可以；否则我更推荐可维护的类别清单。", "B": "建议把新增记账的类别限制为一份统一名单；至于名单是否永远固定，要看你的用途。\n- **最要紧的是旧账怎么处理。** `expense_cli.py` 现在按类别原文汇总，`food`、`Food`、`food ` 会分成三类。只限制以后输入，旧账里的不同写法仍然会分开。\n- 新增记录时，类别不在名单里就拒绝保存，并列出允许的名称，方便改正。\n- 旧账先列出已有类别，由你确认哪些属于同一类，再统一名称，避免把含义不同的类别误合并。\n- `README.md` 目前明确承诺保留类别原文，包括首尾空格。采用统一类别后，也要更新这条说明，已有调用脚本可能需要调整。\n\n如果只是你自己记账、类别长期稳定，固定几类就够了；如果以后经常出现新用途，就允许单独维护类别名单，但每次记账仍只能填名单里的名称。这样既能防止写法越来越多，也不用把不合适的支出硬塞进某一类。"}, {"n": 5, "kind": "acceptance", "q": "我想给 expense 工具加个导出功能，把账单存成 CSV 文件，我要用表格软件打开看。动手之前，先把验收标准定下来。", "A": "基于现有的 `expense_cli.py`，建议首版按以下标准验收。当前只确定标准，不改代码。\n\n1. **能指定导出文件。** 支持以下命令，将 `--state` 指定账本导出到 CSV：\n   ```sh\n   python3 expense_cli.py --state ledger.json export --output bills.csv\n   ```\n\n2. **记录完整且顺序固定。** 导出全部账单，包括已作废记录，顺序与 `list` 一致。每条账单对应一条 CSV 记录。\n\n3. **列名和数据明确。** 第一行为 `id,title,cents,category,voided`。金额沿用整数分，例如 `1250` 表示 12.50 元；作废状态为 `true` 或 `false`。\n\n4. **表格软件能正确读取。** 文件使用带 BOM 的 UTF-8 编码、英文逗号分隔。用 Excel 或 WPS 打开验收样例时，中文无乱码，各字段落在正确的列中。\n\n5. **特殊字符不破坏内容。** 标题和类别中的中文、首尾空格、逗号、双引号和换行均保留。含这些字符的样例导出后，用 CSV 解析器读取，字段值与原账单一致。\n\n6. **空账本也能导出。** 没有记录或状态文件不存在时，生成仅含表头的 CSV，成功退出；不创建账本状态文件。\n\n7. **文件写入行为可预期。** 输出目录不存在时自动创建。目标文件已存在时拒绝覆盖；缺少 `--output`、目标是目录或无法写入时，非零退出并向 stderr 输出明确错误，已有文件保持不变。\n\n8. **成功结果可核对。** 成功时退出码为 `0`，stdout 输出一个 JSON 值，例如 `{\"output\":\"bills.csv\",\"count\":2}`。`count` 只统计账单记录，不含表头。\n\n9. **导出不改变账本。** 成功或失败均不修改原始账本；现有 `add`、`list`、`void`、`summary` 行为及测试继续通过。\n\n首版范围为全量导出；日期筛选、类别筛选、汇总行和金额单位转换暂不纳入。", "B": "建议把目标定为：**expense 新增导出命令，生成能用表格软件查看的 CSV，原账单不变。** 根据 expense_cli.py 的现有记录，验收标准如下，待实现后逐条验证。\n\n1. **能指定文件导出。** 运行 `python3 expense_cli.py --state ledger.json export --output expenses.csv`，成功退出，生成指定文件，并输出包含文件路径、导出条数的 JSON。\n2. **内容完整。** 默认按添加顺序导出全部账单，包括作废记录；每条占一行，列为编号、标题、金额、类别、已作废。金额 `1250` 分显示为 `12.50`，`1` 分显示为 `0.01`；作废状态显示“是／否”。\n3. **文字不串列。** 用含中文、逗号、双引号、换行和首尾空格的标题及类别导出，重新读取 CSV 后，文字完整、列数一致；以 `=` 开头的标题在表格软件中显示为文字，不执行公式。\n4. **空账本与失败情况明确。** 空账本生成只有表头的文件；缺失账本仍按空账本处理，不创建账本文件。缺少输出路径、目标目录不存在或无法写入时，非零退出并说明原因。\n5. **已有文件不被误盖。** 输出文件已经存在，或输出路径指向账本文件时，拒绝导出并保留原内容。导出成功后，结束进程再打开 CSV，内容仍完整；账本内容不变。\n6. **你亲自打开确认。** 用你实际使用的表格软件打开验收文件，检查中文、分列、金额及作废状态，并关闭后重新打开。自动检查不能代替这一步。\n7. **不能弄坏现有功能。** 实跑新增、列表、作废、汇总：记录跨进程保留，编号不复用，列表仍含作废记录，汇总仍排除作废记录；非法输入仍报错且不改账本。\n\n已按推荐写进上面的条件，你可以改：\n\n- **最要紧：导出范围。** 推荐包含作废记录，方便核对；若只导出有效记录，文件中看不到作废历史。\n- **覆盖规则。** 推荐遇到同名文件就报错；若允许覆盖，再次导出会替换旧文件。\n- **验收软件。** 请指定 Excel、WPS 或其他软件；以你指定的软件实际打开结果为准。\n\n确认后可以交给 create-test-skill 变成可运行的测试。"}, {"n": 6, "kind": "acceptance", "q": "queue_cli 一条一条加任务太慢了，我想让它能从一个文本文件里一次导入多个任务。写代码之前先把验收标准定下来。", "A": "建议新增 `import 文件路径`，一次导入多条任务。以下是待实现的验收标准，尚未运行验证。\n1. **入口**：运行 `python3 queue_cli.py --state state.json import tasks.txt`，从 UTF-8 文本读取任务；一行一条，支持中文、Windows 换行和末行没有换行符。\n2. **内容**：忽略空行及全空白行；其他行保留标题首尾空格，按文件顺序追加。同名任务照常添加，原有任务内容和完成状态不变。\n3. **成功结果**：退出码为 0，stdout 输出新增任务的 JSON 数组；每条包含 `id`、`title`、`done`，`done` 为 `false`。编号接着已有最大编号递增，空队列从 1 开始。\n4. **边界与失败**：空文件或全空白文件返回 `[]`，不创建或改动状态文件；输入文件不存在、是目录或不是有效 UTF-8 时，非零退出，stderr 说明原因，队列不变。\n5. **保存与证据**：分别用空队列、已有任务的队列验收；导入后另启进程运行 `list`，逐项核对数量、顺序、标题、编号和完成状态。状态目录不存在时也能首次保存；失败前后对比状态文件内容。\n6. **不能弄坏**：现有 `add` 仍保留标题原文并拒绝全空白标题；`list` 返回全部任务；`complete` 保留其他内容，重复完成无额外变化，不存在的编号报错。各自运行命令核对输出及重新读取后的结果。\n- **最要紧的决定，已按推荐写入**：一行一条、忽略空白行；若空白行算错误，夹着空行的文件将整份拒绝。\n- **另一项决定，已按推荐写入**：允许同名任务，重复导入会再次添加；若需要防重复，须另定哪些任务算重复。\n确认后可以交给 create-test-skill 变成可运行的测试。", "B": "建议新增 `import FILE` 子命令，一行一个任务。现有 `queue_cli.py` 使用 JSON 输出，批量导入沿用这个约定。先按下面这版验收标准评审，本轮不写代码。\n\n```sh\npython3 queue_cli.py --state queue.json import tasks.txt\n```\n\n| 场景 | 验收标准 |\n|---|---|\n| 批量添加 | 一次命令导入文件内所有非空白行，无需交互；每行生成一个任务，顺序与文件一致。 |\n| 文本格式 | 支持 UTF-8、UTF-8 BOM、LF 和 CRLF；文件末尾没有换行也能导入最后一条。 |\n| 标题处理 | 去除行尾换行符，保留标题首尾空格及中文、引号、`#` 等字符；不解析注释或执行文本内容。 |\n| 空白行 | 跳过空行和仅含空白字符的行。空文件或全空白文件成功退出，输出 `[]`，不改写或创建状态文件。 |\n| 任务字段 | 每条任务包含 `id`、`title`、`done`；`done` 为 `false`。ID 从现有最大 ID 加 1 开始连续分配，空队列从 1 开始。 |\n| 已有数据与重复项 | 保留已有任务及完成状态。重复标题分别添加；重复导入同一文件会再次添加。 |\n| 成功输出与持久化 | 退出码为 0，stdout 输出一个 JSON 数组，仅包含本次新增的完整任务。另起进程执行 `list` 能读到结果。 |\n| 导入失败 | 文件不存在、不可读或 UTF-8 解码失败时，非零退出，stderr 给出明确原因，stdout 不输出成功结果；已有状态文件字节不变，缺失的状态文件不被创建。 |\n| 现有命令 | `add`、`list`、`complete` 的参数、输出和行为保持兼容；状态文件不存在时，首次有效导入自动创建父目录。 |\n| 批量验证 | 用一个含 1,000 条有效任务的文件执行一次导入，验证数量、顺序、连续 ID 及持久化结果全部正确。 |\n\n例如，已有任务最大 ID 为 `7`，文件内容为：\n\n```text\n买牛奶\n\n准备周报\n```\n\n导入后的 stdout 应为：\n\n```json\n[{\"id\":8,\"title\":\"买牛奶\",\"done\":false},{\"id\":9,\"title\":\"准备周报\",\"done\":false}]\n```\n\n其中需要先确定的产品选择已明确为：**空白行跳过、标题空格保留、重复项照常添加、文件读取失败整批不写入**。后续测试就按这些可观察行为逐项验证。"}];
+const KEY='ytstack-blind-v04';
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const st=n=>S[n]||(S[n]={pick:'',why:'',A:[],B:[]});
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const render=md=>window.marked?marked.parse(md,{gfm:true,breaks:false}):'<pre>'+esc(md)+'</pre>';
+function highlight(el,terms){
+  if(!terms.length)return;
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  const re=new RegExp(terms.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).sort((a,b)=>b.length-a.length).join('|'),'g');
+  for(const n of nodes){if(!re.test(n.data))continue;re.lastIndex=0;const f=document.createDocumentFragment();let last=0;
+    n.data.replace(re,(m,i)=>{f.append(n.data.slice(last,i));const k=document.createElement('mark');k.textContent=m;f.append(k);last=i+m.length;return m});
+    f.append(n.data.slice(last));n.replaceWith(f)}
+}
+function build(){
+  const root=document.getElementById('qs');root.innerHTML='';
+  for(const q of QS){
+    const s=st(q.n);const sec=document.createElement('section');sec.className='q';sec.id='q'+q.n;
+    const kind=q.kind==='acceptance'?'验收标准':'普通提问';
+    sec.innerHTML=`<div class="qhead"><span class="eyebrow">第 ${q.n} 题 · ${kind}</span><h2>${esc(q.q)}</h2>${q.kind==='acceptance'?'<p class="hint">想象你要照这份标准拍板，再交给别人去做。</p>':''}</div>
+    <div class="pair">${['A','B'].map(x=>`<article class="ans${s.pick===x?' chosen':''}" data-side="${x}"><header><span class="tag">${x}</span><button type="button" class="small mark-btn" data-side="${x}">标为黑话</button></header><div class="md">${render(q[x])}</div></article>`).join('')}</div>
+    <div class="vote"><div class="choices" role="group" aria-label="第 ${q.n} 题选择">${[['A','选 A'],['TIE','平局'],['B','选 B']].map(([v,t])=>`<button type="button" data-v="${v}" aria-pressed="${s.pick===v}">${t}</button>`).join('')}</div>
+    <div class="terms" data-terms></div>
+    <label for="why${q.n}">一句原因（可不填）</label><textarea id="why${q.n}" placeholder="比如：A 的黑话少，但第二段重复了">${esc(s.why)}</textarea></div>`;
+    root.append(sec);
+    sec.querySelectorAll('.ans').forEach(a=>highlight(a.querySelector('.md'),s[a.dataset.side]));
+    drawTerms(sec,q.n);
+    sec.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{s.pick=b.dataset.v;save();
+      sec.querySelectorAll('.choices button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+      sec.querySelectorAll('.ans').forEach(a=>a.classList.toggle('chosen',a.dataset.side===s.pick));update()});
+    sec.querySelector('textarea').oninput=e=>{s.why=e.target.value;save();update()};
+    sec.querySelectorAll('.mark-btn').forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>{
+      const side=b.dataset.side;const sel=window.getSelection();const md=sec.querySelector(`.ans[data-side="${side}"] .md`);
+      const t=(sel?sel.toString():'').trim();
+      if(!t||!sel.rangeCount||!md.contains(sel.getRangeAt(0).commonAncestorContainer)){flash(sec,`先在 ${side} 里用鼠标选中一个词，再点这里。`);return}
+      if(t.length>40){flash(sec,'选中的内容太长了，选一个词或短语就行。');return}
+      if(!s[side].includes(t))s[side].push(t);save();sel.removeAllRanges();build();update();document.getElementById('q'+q.n).scrollIntoView({block:'nearest'})}});
+  }
+}
+function flash(sec,msg){const t=sec.querySelector('[data-terms]');t.textContent=msg;setTimeout(()=>drawTerms(sec,+sec.id.slice(1)),2200)}
+function drawTerms(sec,n){const s=st(n);const t=sec.querySelector('[data-terms]');t.innerHTML='';
+  const all=[...s.A.map(w=>['A',w]),...s.B.map(w=>['B',w])];
+  if(!all.length){t.textContent='还没标黑话。';return}
+  t.append('已标黑话：');
+  for(const [side,w] of all){const c=document.createElement('span');c.className='chip';c.innerHTML=`${side}：${esc(w)}<button type="button" aria-label="删除 ${esc(w)}">×</button>`;
+    c.querySelector('button').onclick=()=>{s[side]=s[side].filter(x=>x!==w);save();build();update()};t.append(c)}}
+function update(){
+  const p=document.getElementById('progress');p.innerHTML='';let done=0;
+  for(const q of QS){const ok=!!st(q.n).pick;done+=ok;const a=document.createElement('a');a.href='#q'+q.n;a.className='dot'+(ok?' done':'');a.textContent=q.n;a.setAttribute('aria-label',`第 ${q.n} 题${ok?'，已选':''}`);p.append(a)}
+  const c=document.createElement('span');c.className='count';c.textContent=`已选 ${done} / ${QS.length}`;p.append(c);
+  const rem=QS.filter(q=>!st(q.n).pick).map(q=>q.n);
+  document.getElementById('remain').textContent=rem.length?`还有第 ${rem.join('、')} 题没选，没选的也会照实写进结果。`:'6 题都选完了，复制后贴回对话就行。';
+  const lab={A:'A',B:'B',TIE:'平局','':'未选'};
+  document.getElementById('out').value='盲看结果\n'+QS.map(q=>{const s=st(q.n);let l=`第${q.n}题：${lab[s.pick]}`;if(s.why.trim())l+=`｜原因：${s.why.trim()}`;
+    if(s.A.length)l+=`｜A黑话：${s.A.join('、')}`;if(s.B.length)l+=`｜B黑话：${s.B.join('、')}`;return l}).join('\n');
+}
+document.getElementById('copy').onclick=()=>{const o=document.getElementById('out');const st_=document.getElementById('status');
+  const fallback=()=>{o.focus();o.select();st_.textContent='已选中文本，按 Ctrl+C 复制。'};
+  try{navigator.clipboard.writeText(o.value).then(()=>st_.textContent='已复制，贴回对话里就行。',fallback)}catch(e){fallback()}};
+build();update();
+</script>

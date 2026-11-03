@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "新手按顺序复制即可运行。"
+  },
+  {
+   "i": 1,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "每条命令旁有预期输出。"
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "在声明支持的环境中实跑全部示例，记录环境和结果。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "第一次接触 Ledger Lite、会打开终端的人"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "使用全新的示例账本，依次添加“午餐”、查看记录、查看汇总、作废、再次查看汇总。"
+  },
+  {
+   "i": 2,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "1. 找两位没用过这个项目、会打开终端的人。\n2. 从“尚未获取项目”的状态开始，只提供 README，作者不口头提示。"
+  }
+ ]
+}

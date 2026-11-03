@@ -1,0 +1,1 @@
+When you restart, the system checks its saved completion records against the plan. With 24 audio segments done and 6 left, it should generate only those 6. If a WAV file is missing, its segment no longer counts as complete. Someone still needs to listen to the audio and approve it.

@@ -1,0 +1,153 @@
+{
+  "label": "item-72",
+  "material": "progress",
+  "pair_side": "B",
+  "review_phase": "blind_locked_first_three_pairs",
+  "fidelity": [
+    {
+      "fact_id": "P01",
+      "requirement": "统计截至2026年11月2日",
+      "status": "preserved",
+      "evidence": [
+        "截至2026年11月2日，12家试用客户中，7家已成功导入，3家因字段映射问题尚未完成，2家尚未开始。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "P02",
+      "requirement": "12家试用客户：7家成功导入、3家因字段映射未完成、2家未开始",
+      "status": "preserved",
+      "evidence": [
+        "截至2026年11月2日，12家试用客户中，7家已成功导入，3家因字段映射问题尚未完成，2家尚未开始。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "P03",
+      "requirement": "林工负责字段映射修复，计划11月6日前完成",
+      "status": "preserved",
+      "evidence": [
+        "字段映射修复由林工负责，计划在11月6日前完成，修复效果尚未验证。还需3家受阻客户确认字段定义；如果确认延迟，修复计划可能顺延。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "P04",
+      "requirement": "修复效果尚未验证；计划不能表述为已完成或保证交付",
+      "status": "preserved",
+      "evidence": [
+        "字段映射修复由林工负责，计划在11月6日前完成，修复效果尚未验证。还需3家受阻客户确认字段定义；如果确认延迟，修复计划可能顺延。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "计划、尚未验证和可能顺延共同表达非确定交付；无需逐字增加“不是承诺”。"
+    },
+    {
+      "fact_id": "P05",
+      "requirement": "仍需3家受阻客户确认字段定义，延迟确认可能导致修复计划顺延",
+      "status": "preserved",
+      "evidence": [
+        "字段映射修复由林工负责，计划在11月6日前完成，修复效果尚未验证。还需3家受阻客户确认字段定义；如果确认延迟，修复计划可能顺延。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "P06",
+      "requirement": "下一次更新11月4日",
+      "status": "preserved",
+      "evidence": [
+        "下一次进展更新在11月4日。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "P07",
+      "requirement": "不得新增客户满意度、收入、最终全部上线日期或成功率提升比较数据",
+      "status": "preserved",
+      "evidence": [
+        "通篇核查：没有客户满意度、收入、全部上线日期或成功率提升比较断言。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "未出现无依据断言。负向约束不要求将未提供数据逐项写入正文。"
+    }
+  ],
+  "source_slop": [
+    {
+      "unit_id": "PS01",
+      "status": "eliminated",
+      "source_quotes": [
+        "本周我们在协同、执行、交付三个维度取得了可喜进展，充分彰显了团队的韧性与潜力。",
+        "这些数字不仅呈现了阶段成果，更映射出团队持续成长的鲜活图景。"
+      ],
+      "output_quotes_or_absence": [
+        "截至2026年11月2日，12家试用客户中，7家已成功导入，3家因字段映射问题尚未完成，2家尚未开始。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "团队品质和成长图景评语消失，保留客户数量和状态。"
+    },
+    {
+      "unit_id": "PS02",
+      "status": "eliminated",
+      "source_quotes": [
+        "项目正在稳中求进，为后续规模化落地奠定坚实基础。",
+        "从问题定位到未来增长，每一次对齐都在为成功蓄势。",
+        "相信只要我们持续凝心聚力，就一定能共创更加辉煌的明天！"
+      ],
+      "output_quotes_or_absence": [
+        "字段映射修复由林工负责，计划在11月6日前完成，修复效果尚未验证。还需3家受阻客户确认字段定义；如果确认延迟，修复计划可能顺延。",
+        "下一次进展更新在11月4日。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "规模化、未来增长及辉煌愿景均消失，改为具体阻塞、计划和更新时间。"
+    },
+    {
+      "unit_id": "PS03",
+      "status": "eliminated",
+      "source_quotes": [
+        "这里需要一个小小的提醒：我们可能也许还需要保持一定程度的审慎，不宜将这一计划视为已经完成或确定交付。"
+      ],
+      "output_quotes_or_absence": [
+        "字段映射修复由林工负责，计划在11月6日前完成，修复效果尚未验证。还需3家受阻客户确认字段定义；如果确认延迟，修复计划可能顺延。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "小小提醒、可能也许、一定程度等多层缓冲消失；计划、未验证和可能顺延保留，必要不确定性未被当作空话删除。"
+    }
+  ],
+  "new_slop": [],
+  "independent_usability_issues": [],
+  "major_damage_gate": false,
+  "metrics": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 3,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "source_slop_N": 3,
+    "source_slop_elimination_rate": 1,
+    "new_slop_roots": 0
+  },
+  "characters_description_only": {
+    "unicode_codepoints_including_whitespace": 134,
+    "unicode_codepoints_excluding_whitespace": 129,
+    "used_for_quality_scoring": false
+  },
+  "input_sha256": "8744692c4aaa2f99d680db5a53f03abccbbdbccea8eb95fc977a899a2ff5d598",
+  "unknown_resources": {
+    "exact_tokens": "UNKNOWN",
+    "exact_cost": "UNKNOWN",
+    "processing_duration": "UNKNOWN"
+  },
+  "summary": "事实保留，预注册源slop均消除，未见新增slop或独立可用性障碍。"
+}

@@ -1,0 +1,33 @@
+{
+ "id": "AC7-sol-v02-r1",
+ "prompt": "给 tools/install.py 加一个 --list，显示项目里已经装了哪些 ytstack 技能。怎么算做完？",
+ "model": "gpt-6.1-sol",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/v02snap/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 103.4,
+ "usage": {
+  "input_tokens": 79202,
+  "cached_input_tokens": 62848,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2122,
+  "reasoning_output_tokens": 526
+ },
+ "final": "建议把“做完”定为：**能查出指定项目、指定工具下已有的 ytstack 技能；查询不安装、不修改任何文件。**\n\n有个现状会影响验收：`ytstack.json` 目前列了 4 个技能，项目里的 `acceptance-criteria` 不在其中。另外，安装脚本需要的 `skills/` 目录当前缺失，现有测试也有期待 5 个技能的旧内容，不能直接作为全部通过的依据。\n\n**待你决定**\n\n- **D1：什么算“已安装”？** 推荐：名称在 `ytstack.json` 中，且项目对应目录里能读到 `SKILL.md`。修改过的副本也算；同名的自建技能可能被算进去。另一种是要求内容与原包完全一致，会漏掉修改过的技能，而且当前缺少原包文件。\n- **D2：查哪一处？** 推荐：继续要求 `--harness codex` 或 `--harness claude`，分别查询 `.agents/skills`、`.claude/skills`。另一种是一次查两处，需要区分重复安装。\n- **D3：显示什么？** 推荐：沿用现有 JSON 输出，包含项目绝对路径、`harness` 和按名称排序的 `skills` 名称数组。另一种是每行一个名称，更适合直接阅读。\n- **D4：与安装参数一起使用怎么办？** 推荐：`--list` 与显式传入的 `--skill`、`--method`、`--dry-run` 一起使用时报错。另一种是忽略这些参数，容易让人误以为它们生效了。\n\n以下按推荐选项写。\n\n**这次不做**\n\n- 不查询账户里的全局技能，也不列出包里可安装但项目尚未安装的技能。\n- 不检查技能版本、内容是否改动、依赖是否齐全。\n- 不修复缺失的安装源文件，也不补装或删除技能。\n\n**验收条件**\n\n下面的命令从仓库根目录运行，`/tmp/demo` 表示准备好的验收项目。\n\n| 编号 | 做什么 | 应该看到 | 防的是 |\n|---|---|---|---|\n| C1 [D1、D3] | 项目已装 `technical-bro` 和它依赖的 `unslop`，运行 `python3 tools/install.py --project /tmp/demo --harness codex --list`。 | 退出码为 0；输出一个 JSON 对象，`project` 为项目绝对路径，`harness` 为 `codex`，`skills` 为 `[\"technical-bro\", \"unslop\"]`。 | 把可安装清单当成已安装清单，或漏掉随依赖装入的技能。 |\n| C2 [D2] | Codex 只装 `bro`，Claude 只装 `unslop`，分别用两个 `--harness` 查询。 | 各自只返回对应目录里的技能。 | 混入另一处的安装结果。 |\n| C3 [D1] | 分别准备指向有效技能目录的链接、完整复制的技能、修改过正文的复制技能，再查询。 | 三种都能列出。 | 只认一种安装方式，或把修改过的副本漏掉。 |\n| C4 [D1] | 放入不在清单里的技能、缺少 `SKILL.md` 的同名目录，以及指向不存在位置的链接，再查询。 | 这些条目均不列入，查询仍成功。 | 只看目录名称就声称已安装。 |\n| C5 [D3] | 对没有安装目录的空项目查询。 | 退出码为 0，`skills` 为 `[]`，不创建安装目录。 | 把“没装过”当成错误，或查询时顺手安装。 |\n| C6 | 把 `--project` 指向不存在的目录或普通文件。 | 非零退出，错误写到 stderr，stdout 不输出成功结果。 | 把无效项目误报为空项目。 |\n| C7 | 让项目的 `.agents` 指向项目外的目录，再查询 Codex。 | 非零退出并说明查询目录指向项目外。 | 把其他位置的技能算进这个项目。 |\n| C8 [D4] | 分别把 `--list` 与 `--skill bro`、`--method copy`、`--dry-run` 一起使用。 | 每种都非零退出，并指出参数不能一起使用。 | 静默忽略用户传入的参数。 |\n| C9 | 记录项目文件内容及链接去向，连续启动两次查询。 | 两次结果一致；文件、目录和链接均无新增、删除或改动。 | 查询改变安装状态，或只能在同一次运行里找到结果。 |\n\n**不能弄坏**\n\n- 不带 `--list` 时，仍执行原来的安装操作；`technical-bro` 仍会带上 `unslop`。\n- 重复安装仍不新增内容；遇到已有冲突仍保留原文件，不出现只装了一部分的结果。\n- `--dry-run` 仍只报告计划，不写文件。\n- 原有安装成功结果的 JSON 字段和退出码保持不变。\n\n改 D1 会影响 C1、C3、C4；改 D2 会影响 C2；改 D3 会影响 C1、C5；改 D4 会影响 C8。",
+ "commentary": [
+  "我会按 acceptance-criteria 技能，先看安装脚本怎么认定“已安装”，再把 `--list` 的完成标准列出来。"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*test*' -g 'SKILL.md' -g 'README*' -g 'pyproject.toml' -g 'package.json' -g 'requirements*' -g '*manifest*' -g '*lock*'\"",
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc 'cat tests/test_package.py tests/test_smoke.py AGENTS.md'",
+  "/bin/bash -lc 'cat README.md'",
+  "/bin/bash -lc \"rg --files -uu -g '\"'!'\"\\\\.git/**' -g '\"'!__pycache__/**'\"' -g '\"'!'\"\\\\.pytest_cache/**'\"",
+  "/bin/bash -lc 'cat ytstack.json tools/validate.py && ls -ld skills voice .claude-plugin .agents/skills/*'"
+ ]
+}

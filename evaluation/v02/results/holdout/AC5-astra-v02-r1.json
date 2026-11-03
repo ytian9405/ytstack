@@ -1,0 +1,32 @@
+{
+ "id": "AC5-astra-v02-r1",
+ "prompt": "我想把这个 README 改到新手能照着跑通，什么样算改好了？帮我定标准。",
+ "model": "gpt-6-astra",
+ "package": "v02",
+ "agents_md": "/tmp/ytev/frozen-voice.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 1808.3,
+ "usage": {
+  "input_tokens": 74248,
+  "cached_input_tokens": 59008,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1980,
+  "reasoning_output_tokens": 270
+ },
+ "final": "**算改好了：一个没读过代码的新手，只看 README、不靠你补充解释，就能记一笔账、查看合计、作废记录，关掉终端后还能找到原来的账。** 每一步都知道成功时会看到什么，失败后该怎么继续。\n\n现在的 README 已有命令，但缺少进入项目目录的说明、输出示例和出错后的做法。建议按下面这份标准验收。\n\n**待你决定**\n\n- **D1：覆盖哪些系统？** 推荐先覆盖 macOS、Linux；如果也面向 Windows，就要补齐 Windows 的命令和实际试跑记录。\n- **D2：从哪里开始教？** 推荐从“已经下载并解压项目，但可能没装 Python”开始；如果从下载开始，还要提供真实可用的下载入口和解压步骤。\n\n以下按推荐选项制定。\n\n**这次不做**\n\n- 不增加或修改记账功能。\n- 不扩展成完整的 Python、终端使用教程。\n- 不承诺解决损坏账本、多人同时保存、文件没有写入权限的问题。\n\n**验收条件**\n\n后面的记账步骤使用专门的练习文件，例如 `./demo-ledger.json`；首次练习前，这个文件不存在。\n\n- **C1 [D1、D2]：能走到第一条命令。**  \n  做什么：从已解压的项目开始，按 README 检查 Python、进入包含 `expense_cli.py` 的目录。  \n  应该看到：确认 Python 为 3.9 或以上；找不到 Python 时有安装指引；运行 `python3 expense_cli.py --help` 能显示帮助。  \n  防的是：一句“在项目根目录运行”就跳过新手不会的步骤。\n\n- **C2：能记账并核对金额。**  \n  做什么：复制 README 的完整命令，添加“午餐”，金额为 `--cents 1250`，类别为 `food`，然后运行 `summary`。  \n  应该看到：新记录的 `id` 为 `1`、`voided` 为 `false`；合计为 `count: 1`、`total_cents: 1250`，`food` 合计为 `1250`。文字解释清楚：1250 分就是 12.50 元。  \n  防的是：命令能跑，但用户不知道是否记对了。\n\n- **C3：重新打开还能找到账。**  \n  做什么：添加后关闭终端，重新打开，按说明回到同一目录，用同一个 `--state` 路径运行 `list`。  \n  应该看到：仍有刚才的午餐记录；README 说明账存在哪个文件、换文件路径会查看另一份账本。  \n  防的是：换了目录或路径，误以为数据消失了。\n\n- **C4：理解并完成作废。**  \n  做什么：对午餐记录运行 `void 1`，再查看列表和合计。  \n  应该看到：列表仍保留午餐，`voided` 变成 `true`；合计变为 `{\"count\": 0, \"total_cents\": 0, \"by_category\": {}}`。  \n  防的是：把作废写成删除，或让用户以为它仍计入总额。\n\n- **C5：输错金额后知道怎么继续。**  \n  做什么：将添加命令中的金额改成 `--cents 0`。  \n  应该看到：程序报错，没有增加记录；README 解释金额必须是正整数分，并给出可复制的正确示例。  \n  防的是：只展示顺利情况，遇到英文报错就无从下手。\n\n- **C6：最小金额说明准确。**  \n  做什么：添加一笔 `--cents 1` 的记录。  \n  应该看到：成功保存；README 明确它代表 0.01 元。  \n  防的是：把最低金额误写成 1 元。\n\n- **C7：重复练习不会动到正式账本。**  \n  做什么：完成一轮后，按 README 的重做说明再练一次。  \n  应该看到：能使用另一个新的练习文件，从 ID `1` 开始；不会要求删除或覆盖正式账本。  \n  防的是：第二次照抄 `void 1` 时操作了旧记录，或为了重来误删真实数据。\n\n- **C8：自检说明与项目一致。**  \n  做什么：执行 README 中给出的测试命令。  \n  应该看到：实际结果与文档写的成功结果一致；检查记账功能和检查其他内容的命令用途分清楚。  \n  防的是：把无关测试的失败当成用户安装失败。当前的 `unittest discover` 会包含技能安装测试，其中引用了当前目录里缺失的文件，不能直接承诺它会全部通过。\n\n- **C9 [D1、D2]：新手独立完成。**  \n  做什么：找一位没读过代码的人，在覆盖的系统上，从约定起点照 README 完成 C1–C4，全程不口头补步骤。  \n  应该看到：所有步骤完成，输出与示例相符；记录系统、Python 版本和实际结果。需要别人解释的地方，补进 README 后重新验证。  \n  防的是：作者自己看得懂，就宣布新手也能跑通。\n\n**不能弄坏**\n\n- 保留四个命令及其完整参数说明：`add`、`list`、`void`、`summary`。\n- 保留现有规则：作废后 ID 不复用，重复作废不再改变结果，错误输入不改变已有数据。\n- 保留“运行记账程序无需额外依赖、网络、账号或服务器”的说明，并与下载项目、安装 Python 的准备步骤分开。\n\n改 D1 会影响 C1、C9 的系统覆盖；改 D2 会影响 C1、C9 的起点和准备步骤。",
+ "commentary": [
+  "我会用 acceptance-criteria 技能，先看 README 和项目实际的启动方式，再定出能逐项检查的完成标准。\n"
+ ],
+ "skills_read": [
+  "acceptance-criteria"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*README*' -g 'package.json' -g 'pyproject.toml' -g 'Makefile' -g 'Cargo.toml' -g '*lock*' -g '.env*' -g 'docker-compose*' -g 'compose.y*' -g 'requirements*' -g '.nvmrc'",
+  "/bin/bash -lc 'cat .agents/skills/acceptance-criteria/SKILL.md'",
+  "/bin/bash -lc \"rg --files --hidden -g '\"'!.git/**'\"'\"",
+  "/bin/bash -lc 'cat README.md && cat AGENTS.md'",
+  "/bin/bash -lc 'cat expense_cli.py'",
+  "/bin/bash -lc 'cat tests/test_smoke.py && cat tests/test_package.py'"
+ ]
+}

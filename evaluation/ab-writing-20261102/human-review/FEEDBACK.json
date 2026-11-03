@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-11-02T13:57:07.273608+00:00",
+  "rater": "user",
+  "verbatim_feedback": "bro通俗改写：第一组A胜出，b的黑话太多；第二组b，这边和第一题一样呀。technical-bro：第一组b，a黑话太多；第二组出题重复了不看；",
+  "records": [
+    {
+      "task": "bro",
+      "pair": 1,
+      "status": "PREFERENCE_RECORDED",
+      "preferred_alias": "A",
+      "preferred_arm": "with",
+      "preferred_original_label": "sample-35",
+      "reason": "另一稿黑话太多",
+      "numeric_score": null,
+      "same_source_as_other_pair": true
+    },
+    {
+      "task": "bro",
+      "pair": 2,
+      "status": "PREFERENCE_RECORDED",
+      "preferred_alias": "B",
+      "preferred_arm": "with",
+      "preferred_original_label": "sample-48",
+      "reason": null,
+      "numeric_score": null,
+      "same_source_as_other_pair": true
+    },
+    {
+      "task": "technical-bro",
+      "pair": 1,
+      "status": "PREFERENCE_RECORDED",
+      "preferred_alias": "B",
+      "preferred_arm": "without",
+      "preferred_original_label": "sample-53",
+      "reason": "另一稿黑话太多",
+      "numeric_score": null,
+      "same_source_as_other_pair": true
+    },
+    {
+      "task": "technical-bro",
+      "pair": 2,
+      "status": "SKIPPED",
+      "preferred_alias": null,
+      "preferred_arm": null,
+      "preferred_original_label": null,
+      "reason": "出题重复，未阅读评价",
+      "numeric_score": null,
+      "same_source_as_other_pair": true
+    }
+  ],
+  "interpretation": {
+    "bro": "Both preferred outputs used bro, but both pairs repeat the same source text; not two distinct tasks.",
+    "technical-bro": "One preference favors without skill; second pair skipped, not a tie or loss.",
+    "model_review_gap": "The user distinguishes jargon and reading preference while Astra assigned full readability scores to all outputs.",
+    "scope": "One human rater, one source material per skill, no numeric human scores or specific jargon spans supplied."
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "label": "item-14",
+  "material": "update",
+  "pair_side": "A",
+  "review_phase": "blind_locked_first_three_pairs",
+  "fidelity": [
+    {
+      "fact_id": "U01",
+      "requirement": "导出中心1.3于2026年11月2日开放",
+      "status": "preserved",
+      "evidence": [
+        "导出中心1.3版于2026年11月2日开放，新增按项目和日期筛选记录的功能。日期范围包含开始日，不包含结束日。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U02",
+      "requirement": "支持按项目和日期筛选",
+      "status": "preserved",
+      "evidence": [
+        "导出中心1.3版于2026年11月2日开放，新增按项目和日期筛选记录的功能。日期范围包含开始日，不包含结束日。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U03",
+      "requirement": "日期包含开始日、不包含结束日",
+      "status": "preserved",
+      "evidence": [
+        "导出中心1.3版于2026年11月2日开放，新增按项目和日期筛选记录的功能。日期范围包含开始日，不包含结束日。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U04",
+      "requirement": "单次最多5000条，格式只有CSV",
+      "status": "preserved",
+      "evidence": [
+        "- 单次最多导出5000条记录，仅支持CSV格式。超过5000条时，请缩小筛选范围，系统不会自动拆成多个文件。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U05",
+      "requirement": "超过5000条需缩小筛选范围，不会自动拆文件",
+      "status": "preserved",
+      "evidence": [
+        "- 单次最多导出5000条记录，仅支持CSV格式。超过5000条时，请缩小筛选范围，系统不会自动拆成多个文件。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U06",
+      "requirement": "文件保留7天，到期需重新导出",
+      "status": "preserved",
+      "evidence": [
+        "- 导出文件保留7天，超过7天后需重新导出。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U07",
+      "requirement": "没有新增定时导出，没有下一版日期",
+      "status": "preserved",
+      "evidence": [
+        "本版未增加定时导出功能，下一版上线日期尚未公布。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "事实、数字和限制与底稿一致；允许同义改写。"
+    },
+    {
+      "fact_id": "U08",
+      "requirement": "不得新增或保留无依据的性能比较、客户满意度、行业排名、专家评价",
+      "status": "preserved",
+      "evidence": [
+        "通篇核查：没有性能比较、客户满意度、排名或专家背书断言。"
+      ],
+      "defect_root_id": null,
+      "severity": "none",
+      "reason": "未出现无依据断言。负向约束不要求将未提供数据逐项写入正文。"
+    }
+  ],
+  "source_slop": [
+    {
+      "unit_id": "US01",
+      "status": "eliminated",
+      "source_quotes": [
+        "好问题！",
+        "希望这能帮助到你！"
+      ],
+      "output_quotes_or_absence": [
+        "# 导出中心1.3版更新公告",
+        "本版未增加定时导出功能，下一版上线日期尚未公布。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "全文不再模拟问答或助手交付回应；开头为公告标题，结尾为版本能力边界。"
+    },
+    {
+      "unit_id": "US02",
+      "status": "eliminated",
+      "source_quotes": [
+        "赋能每一次数据决策",
+        "它不仅是一次功能迭代，更是迈向高效数据协作的重要里程碑。",
+        "这个能力边界将成为我们持续深耕、不断突破的坚实底座。"
+      ],
+      "output_quotes_or_absence": [
+        "导出中心1.3版于2026年11月2日开放，新增按项目和日期筛选记录的功能。日期范围包含开始日，不包含结束日。",
+        "本版未增加定时导出功能，下一版上线日期尚未公布。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "宏大成就、赋能和底座定位均消失；内容仅陈述功能与版本限制，无同根因换词复现。"
+    },
+    {
+      "unit_id": "US03",
+      "status": "eliminated",
+      "source_quotes": [
+        "**灵活性：** 灵活性获得了进一步提升。"
+      ],
+      "output_quotes_or_absence": [
+        "导出中心1.3版于2026年11月2日开放，新增按项目和日期筛选记录的功能。日期范围包含开始日，不包含结束日。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "重复灵活性标签及同义评价均消失，直接陈述项目与日期筛选。"
+    },
+    {
+      "unit_id": "US04",
+      "status": "eliminated",
+      "source_quotes": [
+        "从项目到日期，从筛选到决策，导出中心、数据助手、协作伙伴将帮助你轻松驾驭复杂的数据全景。"
+      ],
+      "output_quotes_or_absence": [
+        "导出中心1.3版于2026年11月2日开放，新增按项目和日期筛选记录的功能。日期范围包含开始日，不包含结束日。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "抽象排比、模糊别名和数据全景许诺消失，功能范围有明确指向。"
+    },
+    {
+      "unit_id": "US05",
+      "status": "eliminated",
+      "source_quotes": [
+        "确保用户始终拥有充满信心的数据旅程。",
+        "让我们携手拥抱更加美好的数据未来！"
+      ],
+      "output_quotes_or_absence": [
+        "- 导出文件保留7天，超过7天后需重新导出。",
+        "本版未增加定时导出功能，下一版上线日期尚未公布。"
+      ],
+      "scope": "已通读全文，所列原句及同根因包装均不再出现；输出引句说明对应信息功能。",
+      "reason": "情绪旅程及未来号召均消失，保留期限与版本边界供读者使用。"
+    }
+  ],
+  "new_slop": [],
+  "independent_usability_issues": [],
+  "major_damage_gate": false,
+  "metrics": {
+    "major_fidelity_roots": 0,
+    "minor_fidelity_roots": 0,
+    "source_slop_E": 5,
+    "source_slop_P": 0,
+    "source_slop_R": 0,
+    "source_slop_U": 0,
+    "source_slop_N": 5,
+    "source_slop_elimination_rate": 1,
+    "new_slop_roots": 0
+  },
+  "characters_description_only": {
+    "unicode_codepoints_including_whitespace": 191,
+    "unicode_codepoints_excluding_whitespace": 178,
+    "used_for_quality_scoring": false
+  },
+  "input_sha256": "540bb3ce8ae05cae54fc9cd62e9a8919572ff0a066283542426c511d7a18fdf2",
+  "unknown_resources": {
+    "exact_tokens": "UNKNOWN",
+    "exact_cost": "UNKNOWN",
+    "processing_duration": "UNKNOWN"
+  },
+  "summary": "事实保留，预注册源slop均消除，未见新增slop或独立可用性障碍。"
+}

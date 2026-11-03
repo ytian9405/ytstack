@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-_6xl1z3r/project",
+  "target_sha256": "4c9c942139b988133933fcabd2130d5313b6ff3e2b4891c8686855b238829760",
+  "started_at": "2026-11-02T12:41:45.966038+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_C01_missing_state_reads_do_not_write (test_behavior.LedgerBehaviorTests.test_C01_missing_state_reads_do_not_write) ... ok\ntest_C02_add_preserves_strings_and_persists_in_order (test_behavior.LedgerBehaviorTests.test_C02_add_preserves_strings_and_persists_in_order) ... ok\ntest_C03_void_is_persistent_idempotent_and_ids_not_reused (test_behavior.LedgerBehaviorTests.test_C03_void_is_persistent_idempotent_and_ids_not_reused) ... ok\ntest_C04_summary_aggregates_only_active_entries (test_behavior.LedgerBehaviorTests.test_C04_summary_aggregates_only_active_entries) ... ok\ntest_C05_summary_sums_repeated_categories (test_behavior.LedgerBehaviorTests.test_C05_summary_sums_repeated_categories) ... ok\ntest_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) ... \n  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999')) ... FAIL\n  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0')) ... FAIL\n  test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1')) ... FAIL\ntest_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) ... \n  test_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) (args=('void', '1')) ... FAIL\ntest_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok\n\n======================================================================\nFAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '999'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-_6xl1z3r/project/tests/test_behavior.py\", line 92, in test_C06_invalid_commands_preserve_existing_bytes\n    self.assertNotEqual(result.returncode, 0)\nAssertionError: 0 == 0\n\n======================================================================\nFAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '0'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-_6xl1z3r/project/tests/test_behavior.py\", line 92, in test_C06_invalid_commands_preserve_existing_bytes\n    self.assertNotEqual(result.returncode, 0)\nAssertionError: 0 == 0\n\n======================================================================\nFAIL: test_C06_invalid_commands_preserve_existing_bytes (test_behavior.LedgerBehaviorTests.test_C06_invalid_commands_preserve_existing_bytes) (args=('void', '-1'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-_6xl1z3r/project/tests/test_behavior.py\", line 92, in test_C06_invalid_commands_preserve_existing_bytes\n    self.assertNotEqual(result.returncode, 0)\nAssertionError: 0 == 0\n\n======================================================================\nFAIL: test_C07_invalid_commands_do_not_create_missing_state (test_behavior.LedgerBehaviorTests.test_C07_invalid_commands_do_not_create_missing_state) (args=('void', '1'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-_6xl1z3r/project/tests/test_behavior.py\", line 102, in test_C07_invalid_commands_do_not_create_missing_state\n    self.assertNotEqual(result.returncode, 0)\nAssertionError: 0 == 0\n\n----------------------------------------------------------------------\nRan 8 tests in 2.365s\n\nFAILED (failures=4)\n",
+  "tests_run": 8,
+  "status": "FAIL",
+  "elapsed_seconds": 2.463,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-_6xl1z3r",
+  "scratch_removed": true
+}

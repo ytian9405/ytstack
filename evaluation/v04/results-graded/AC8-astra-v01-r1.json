@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "导出成功或失败都不修改账本；输出路径与账本路径相同时拒绝执行。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "输出父目录不存在时自动创建。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "中文、首尾空格、逗号、双引号和换行均能完整保留；字段内的特殊字符不造成错列或额外记录。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "`voided` 使用 `true` 或 `false`。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "表头固定为 `id,title,cents,category,voided`。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "按添加顺序导出所有记录，包括已作废记录，与 `list` 的内容一致。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "按添加顺序导出所有记录，包括已作废记录，与 `list` 的内容一致。\n`voided` 使用 `true` 或 `false`。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "python3 expense_cli.py --state ledger.json export --output bills.csv\n执行命令后，在指定路径生成 CSV；退出码为 `0`，stdout 返回 JSON，包含文件路径 `path` 和导出记录数 `count`。\n目标文件已存在时拒绝覆盖；路径不可写时非零退出，stderr 给出明确错误，不报告成功。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "表头固定为 `id,title,cents,category,voided`。每条账单对应一条 CSV 记录；`cents` 保留整数分，例如 `1250`；`voided` 使用 `true` 或 `false`。\n使用带 BOM 的 UTF-8 编码、逗号分隔。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "空账本或状态文件不存在时，生成只有表头的 CSV，返回 `count: 0`，不创建状态文件。"
+  }
+ ]
+}

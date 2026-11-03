@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "成功或失败均不修改原始账本；现有 `add`、`list`、`void`、`summary` 行为及测试继续通过。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "输出目录不存在时自动创建。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "标题和类别中的中文、首尾空格、逗号、双引号和换行均保留。含这些字符的样例导出后，用 CSV 解析器读取，字段值与原账单一致。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "金额沿用整数分，例如 `1250` 表示 12.50 元；作废状态为 `true` 或 `false`。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "第一行为 `id,title,cents,category,voided`。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "导出全部账单，包括已作废记录，顺序与 `list` 一致。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "导出全部账单，包括已作废记录，顺序与 `list` 一致。\n第一行为 `id,title,cents,category,voided`。金额沿用整数分，例如 `1250` 表示 12.50 元；作废状态为 `true` 或 `false`。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "支持以下命令，将 `--state` 指定账本导出到 CSV：\n   ```sh\n   python3 expense_cli.py --state ledger.json export --output bills.csv\n   ```\n目标文件已存在时拒绝覆盖；缺少 `--output`、目标是目录或无法写入时，非零退出并向 stderr 输出明确错误，已有文件保持不变。"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "第一行为 `id,title,cents,category,voided`。金额沿用整数分，例如 `1250` 表示 12.50 元；作废状态为 `true` 或 `false`。\n文件使用带 BOM 的 UTF-8 编码、英文逗号分隔。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "没有记录或状态文件不存在时，生成仅含表头的 CSV，成功退出；不创建账本状态文件。"
+  }
+ ]
+}

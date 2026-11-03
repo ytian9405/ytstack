@@ -1,0 +1,7 @@
+Evidence: /tmp/ytstack-forward-20261102-4pldj5r3/project/test-evidence/initial/failure-detection/active.json
+test_TQ02_add_persistence_order (__main__.QueueCases.test_TQ02_add_persistence_order) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.084s
+
+OK

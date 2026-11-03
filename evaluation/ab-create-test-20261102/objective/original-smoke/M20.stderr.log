@@ -1,0 +1,31 @@
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... FAIL
+
+======================================================================
+FAIL: test_empty_summary (test_smoke.SmokeTests.test_empty_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-s6ffleh3/project/tests/test_smoke.py", line 16, in test_empty_summary
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/tmp/ledger-eval-s6ffleh3/project/expense_cli.py", line 64, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/tmp/ledger-eval-s6ffleh3/project/expense_cli.py", line 31, in main
+    entries = load(args.state)
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-s6ffleh3/project/expense_cli.py", line 10, in load
+    return json.loads(state.read_text())
+                      ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpi3ng0ta3/state.json'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.101s
+
+FAILED (failures=1)

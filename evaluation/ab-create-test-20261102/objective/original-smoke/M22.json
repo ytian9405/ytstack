@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_smoke.py",
+    "-v"
+  ],
+  "cwd": "/tmp/ledger-eval-brdl8xey/project",
+  "target_sha256": "934de8db894748be5de101f333059e8853d14ac6aaddbb6ebcd0652768e970fe",
+  "started_at": "2026-11-02T12:36:43.914648+00:00",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ERROR\n\n======================================================================\nERROR: test_empty_summary (test_smoke.SmokeTests.test_empty_summary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/ledger-eval-brdl8xey/project/tests/test_smoke.py\", line 17, in test_empty_summary\n    self.assertEqual(json.loads(result.stdout),\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\n----------------------------------------------------------------------\nRan 1 test in 0.052s\n\nFAILED (errors=1)\n",
+  "tests_run": 1,
+  "status": "FAIL",
+  "elapsed_seconds": 0.122,
+  "changed_paths": [],
+  "candidate_kill": true,
+  "scratch": "/tmp/ledger-eval-brdl8xey",
+  "scratch_removed": true
+}

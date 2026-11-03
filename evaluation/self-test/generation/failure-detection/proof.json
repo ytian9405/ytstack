@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "case": "YT02",
+  "runs": [
+    {
+      "stage": "baseline",
+      "exit_status": 0,
+      "status": "PASS",
+      "receipt": "baseline.json"
+    },
+    {
+      "stage": "broken",
+      "exit_status": 1,
+      "status": "FAIL",
+      "receipt": "broken.json"
+    },
+    {
+      "stage": "restored",
+      "exit_status": 0,
+      "status": "PASS",
+      "receipt": "restored.json"
+    }
+  ],
+  "mutation": "Omit dependency inclusion while still installing the requested skill.",
+  "command": [
+    "/usr/bin/python3",
+    "/home/ytian9405/projects/ytstack/tests/ytstack_skill/run.py",
+    "--target",
+    "/tmp/ytstack-negative-a_0orjk7/package",
+    "--case",
+    "YT02",
+    "--evidence",
+    "/home/ytian9405/projects/ytstack/evaluation/self-test/generation/failure-detection/active.json"
+  ],
+  "intended_assertion_detected": true,
+  "scratch": "/tmp/ytstack-negative-a_0orjk7",
+  "isolated_source_restored": true,
+  "scratch_removed": true,
+  "live_target_unchanged": true
+}

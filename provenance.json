@@ -1,0 +1,101 @@
+{
+  "checked_on": "2026-11-02",
+  "records": [
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/LICENSE",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/LICENSE",
+      "sha256": "bc957ca6bee02792566a1a028d105e02e247c6e77cf057061674273da77b200e"
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/bro/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/bro/SKILL.md",
+      "sha256": "aa329d0ceeeecb6822a7174ad76bb07a7826a3c52ceb6a588dec4138815084bb",
+      "adoption": {
+        "local_path": "skills/bro/SKILL.md",
+        "mode": "extended",
+        "changes": [
+          "Remove upstream explicit-only metadata for normal discovery.",
+          "Add Chinese triggers and rules that keep conclusions, numbers, and alternatives; upstream sentence kept first."
+        ],
+        "upstream_body_sha256": "9ca6958e680755dba7dc7220f9c919b8ac640dcf663d917548aadc3d7c118e2d",
+        "local_body_sha256": "563f5c11b529d29439dc0fed77020bf8d109b998299e675fd01c827fd4861bed"
+      }
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/technical-writing/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/technical-writing/SKILL.md",
+      "sha256": "61fe9c424a798ebf36ad94941f87be049cb8827bdf86d21474a0dde37b513c43",
+      "adoption": {
+        "local_path": "skills/technical-bro/SKILL.md",
+        "mode": "renamed-and-relative-dependency",
+        "changes": [
+          "Remove upstream explicit-only metadata for normal discovery.",
+          "Rename name, heading, and invocation description; read bundled unslop via relative link.",
+          "Honor the requested language and output format; apply English-specific guidance only where relevant.",
+          "Limit unslop rule proposals to explicit rule-maintenance requests and patterns present in the source material."
+        ],
+        "upstream_body_sha256": "3fcaf23d2bd5b3b9365f3b1599df53eede993491701e074a456ea8ad37263fc0",
+        "local_body_sha256": "0302a77503cdf49848c7a75ad4dd7e203378ec8a7c26c1e3741acec398ad288f"
+      }
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/unslop/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/unslop/SKILL.md",
+      "sha256": "ccab208e315ce05e2fab8eeee2f7879f1289b5c6844840b2d307adf31c79144f",
+      "adoption": {
+        "local_path": "skills/unslop/SKILL.md",
+        "mode": "extended",
+        "changes": [
+          "Remove upstream explicit-only metadata for normal discovery.",
+          "Append Chinese rules 34-40; upstream rules unchanged."
+        ],
+        "upstream_body_sha256": "a8b6be3e0a0d56db6f258d0a4a35e190978b33f6706b3582a0c498654976407f",
+        "local_body_sha256": "cbc3096f81bac2fd4fb51565effa18089678dc69e87907fc9deb77a102391d8b"
+      }
+    },
+    {
+      "repository": "cursor/plugins",
+      "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/create-verification-skill/SKILL.md",
+      "url": "https://raw.githubusercontent.com/cursor/plugins/ae5650febf4320793844c12c4adaa937f417f8da/pstack/skills/create-verification-skill/SKILL.md",
+      "sha256": "d353973547bf8ad8977eca645f4cd4feaed0d32f4b43d1448f906b0a76c4d694"
+    },
+    {
+      "repository": "michael-denyer/pstack-claude",
+      "commit": "8ecae6893912d2bbb3b841c09a8d76e61a4d708b",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/michael-denyer/pstack-claude/8ecae6893912d2bbb3b841c09a8d76e61a4d708b/LICENSE",
+      "sha256": "5b1faca8cef6b7433b49c812c5e9e04bb1eb73b67171d67729983e0b46b9bb78"
+    },
+    {
+      "repository": "michael-denyer/pstack-claude",
+      "commit": "8ecae6893912d2bbb3b841c09a8d76e61a4d708b",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/michael-denyer/pstack-claude/8ecae6893912d2bbb3b841c09a8d76e61a4d708b/README.md",
+      "sha256": "348d6999803a7aa5c9aedbefd684618ea2c82646a66de7eb2a047d063bb1674e"
+    },
+    {
+      "repository": "michael-denyer/pstack-claude",
+      "commit": "8ecae6893912d2bbb3b841c09a8d76e61a4d708b",
+      "path": "plugins/pstack/.claude-plugin/plugin.json",
+      "url": "https://raw.githubusercontent.com/michael-denyer/pstack-claude/8ecae6893912d2bbb3b841c09a8d76e61a4d708b/plugins/pstack/.claude-plugin/plugin.json",
+      "sha256": "92d4f38b583a7b6a0c755cc952ae12f9c22821f6f5e3b7f5b0b07114e118173c"
+    },
+    {
+      "repository": "michael-denyer/pstack-claude",
+      "commit": "8ecae6893912d2bbb3b841c09a8d76e61a4d708b",
+      "path": ".claude-plugin/marketplace.json",
+      "url": "https://raw.githubusercontent.com/michael-denyer/pstack-claude/8ecae6893912d2bbb3b841c09a8d76e61a4d708b/.claude-plugin/marketplace.json",
+      "sha256": "beba54bfd5977fa1debc70e59df9969f7d6d1d7a801652ae4af2c6965e9db054"
+    }
+  ],
+  "design_reference_note": "pstack-claude informs shared source layout and host-independent instructions; no port-specific implementation copied."
+}

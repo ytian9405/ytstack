@@ -1,0 +1,13 @@
+{"_note":"Frozen before any v0.2 rule was written. Prompts carry no plain-language hint. Rules may be tuned on train only.",
+"train":{
+"T1":"这个 queue_cli 的持久化设计有什么问题？要不要改？给我结论。",
+"T2":"tools/install.py 遇到已有同名入口时怎么处理？会不会把我的东西弄坏？",
+"T3":"expense_cli 的金额是怎么存和算的，可能有什么坑？",
+"T4":"如果两个人同时用这个 expense 工具会怎么样？"},
+"holdout":{
+"H1":"tools/validate.py 到底检查了什么？它通过了能说明技能好用吗？",
+"H2":"tools/install.py 的软链接安装和复制安装怎么选？",
+"H3":"queue_cli 要支持一万条任务，现在的做法撑得住吗？",
+"H4":"我想给 expense 工具加撤销功能，大概要改哪些地方，难不难？",
+"H5":"tests 跑绿了，我能放心发布这个 expense 工具吗？",
+"H6":"帮我评估一下这个仓库的测试够不够。"}}

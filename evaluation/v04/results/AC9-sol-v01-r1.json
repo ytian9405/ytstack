@@ -1,0 +1,32 @@
+{
+ "id": "AC9-sol-v01-r1",
+ "prompt": "queue_cli 一条一条加任务太慢了，我想让它能从一个文本文件里一次导入多个任务。写代码之前先把验收标准定下来。",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 97.8,
+ "usage": {
+  "input_tokens": 56089,
+  "cached_input_tokens": 45312,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1432,
+  "reasoning_output_tokens": 382
+ },
+ "final": "建议新增 `import FILE` 子命令，一行一个任务。现有 `queue_cli.py` 使用 JSON 输出，批量导入沿用这个约定。先按下面这版验收标准评审，本轮不写代码。\n\n```sh\npython3 queue_cli.py --state queue.json import tasks.txt\n```\n\n| 场景 | 验收标准 |\n|---|---|\n| 批量添加 | 一次命令导入文件内所有非空白行，无需交互；每行生成一个任务，顺序与文件一致。 |\n| 文本格式 | 支持 UTF-8、UTF-8 BOM、LF 和 CRLF；文件末尾没有换行也能导入最后一条。 |\n| 标题处理 | 去除行尾换行符，保留标题首尾空格及中文、引号、`#` 等字符；不解析注释或执行文本内容。 |\n| 空白行 | 跳过空行和仅含空白字符的行。空文件或全空白文件成功退出，输出 `[]`，不改写或创建状态文件。 |\n| 任务字段 | 每条任务包含 `id`、`title`、`done`；`done` 为 `false`。ID 从现有最大 ID 加 1 开始连续分配，空队列从 1 开始。 |\n| 已有数据与重复项 | 保留已有任务及完成状态。重复标题分别添加；重复导入同一文件会再次添加。 |\n| 成功输出与持久化 | 退出码为 0，stdout 输出一个 JSON 数组，仅包含本次新增的完整任务。另起进程执行 `list` 能读到结果。 |\n| 导入失败 | 文件不存在、不可读或 UTF-8 解码失败时，非零退出，stderr 给出明确原因，stdout 不输出成功结果；已有状态文件字节不变，缺失的状态文件不被创建。 |\n| 现有命令 | `add`、`list`、`complete` 的参数、输出和行为保持兼容；状态文件不存在时，首次有效导入自动创建父目录。 |\n| 批量验证 | 用一个含 1,000 条有效任务的文件执行一次导入，验证数量、顺序、连续 ID 及持久化结果全部正确。 |\n\n例如，已有任务最大 ID 为 `7`，文件内容为：\n\n```text\n买牛奶\n\n准备周报\n```\n\n导入后的 stdout 应为：\n\n```json\n[{\"id\":8,\"title\":\"买牛奶\",\"done\":false},{\"id\":9,\"title\":\"准备周报\",\"done\":false}]\n```\n\n其中需要先确定的产品选择已明确为：**空白行跳过、标题空格保留、重复项照常添加、文件读取失败整批不写入**。后续测试就按这些可观察行为逐项验证。",
+ "commentary": [
+  "我先看一下 `queue_cli` 现有的加任务方式和测试约定，再把批量导入的验收标准列出来；这一步先不改代码。",
+  "我会按 `technical-bro` 技能把标准写成可逐项验证的行为，明确文件格式、失败处理和对现有命令的影响。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g '*test*' -g 'README*' -g 'pyproject.toml' -g 'package.json' -g 'Cargo.toml' -g 'go.mod' -g 'SKILL.md'\"",
+  "/bin/bash -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/bash -lc 'for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-a60_oryy/AGENTS.md /tmp/ytev-a60_oryy/project/AGENTS.md; do if [ -f \"$p\" ]; then printf '\"'\\\\n%s\\\\n' \\\"\"'$p\"; cat \"$p\"; fi; done'",
+  "/bin/bash -lc 'cat queue_cli.py README.md tests/test_smoke.py tests/test_package.py'",
+  "/bin/bash -lc \"cat .agents/skills/unslop/SKILL.md && rg --files -g '\"'!'\"\\\\.git' -g '\"'!'\"\\\\.agents/**'\""
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "id": "S3-astra-v04-r1",
+ "prompt": "我用 tools/install.py 只指定装一个技能，装完发现项目里还多出了别的技能目录，这是怎么回事？它对依赖是怎么处理的？",
+ "model": "gpt-6-astra",
+ "package": "v04",
+ "agents_md": "/home/ytian9405/projects/ytstack/voice/plain-talk.md",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 41.0,
+ "usage": {
+  "input_tokens": 73482,
+  "cached_input_tokens": 62976,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 744,
+  "reasoning_output_tokens": 71
+ },
+ "final": "**`--skill` 的意思是“安装这个技能及其依赖”，不是“只新增一个目录”。** 这是 `tools/install.py` 的既定行为。\n\n- 当前 [ytstack.json](/tmp/ytev-w0mu_p53/project/ytstack.json:6) 只声明了 `technical-bro` 依赖 `unslop`。所以指定 `--skill technical-bro` 会一起安装这两个技能；指定 `bro` 或 `create-test-skill` 不会因此多装其他技能。\n- 依赖完全按 `ytstack.json` 的 `dependencies` 读取。依赖还有依赖时，会继续往下找，先装依赖，再装你指定的技能；同一个技能只处理一次。\n- 不指定 `--skill` 时，才会安装 `primary_skills` 中的全部技能及其依赖。没有跳过依赖的选项。\n- 遇到未知技能、互相循环依赖、缺少源文件，都会报错。已有目录内容相同会跳过，内容不同会停止，不覆盖原文件。\n- 默认新增的是指向源技能目录的链接；使用 `--method copy` 才会复制文件。\n- 安装前可在原命令末尾加 `--dry-run` 查看计划。不过我在 `/tmp/ytev-w0mu_p53/project` 实际预览时，因缺少 `skills/unslop/SKILL.md` 报错，未能完成预览。\n\n如果你指定的不是 `technical-bro`，或多出来的不止 `unslop`，当前这份依赖声明就不能解释那些目录。",
+ "commentary": [
+  "我先查看 `tools/install.py` 怎么选择技能、处理依赖，确认多出来的目录是怎么安装进去的。\n"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*install*' -g '*depend*' -g '*manifest*' -g '*test*' -g 'SKILL.md'\"",
+  "/bin/bash -lc \"rg -n 'depend|requires|install.py|依赖' . --glob '\"'!*.lock'\"'\"",
+  "/bin/bash -lc \"cat AGENTS.md; sed -n '1,260p' tools/install.py\"",
+  "/bin/bash -lc \"nl -ba ytstack.json; nl -ba tools/install.py | sed -n '20,92p'; sed -n '1,210p' tests/test_package.py\"",
+  "/bin/bash -lc 'python3 tools/install.py --project /tmp/ytev-w0mu_p53/project --harness codex --skill technical-bro --dry-run'"
+ ]
+}

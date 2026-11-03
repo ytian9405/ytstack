@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "README 提供完整可复制的命令和对应输出；记录 ID 为 `1`，汇总为一笔、`1250` 分；明确解释 `1250` 表示 12.50 元。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "文档解释“作废保留记录，但不再计入合计”。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "README 提供完整可复制的命令和对应输出；记录 ID 为 `1`，汇总为一笔、`1250` 分；明确解释 `1250` 表示 12.50 元。"
+  },
+  {
+   "i": 3,
+   "verdict": "PASS_THROUGH",
+   "quote": ""
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "找一位没读过代码的人，在 D1 选定的每种系统上，只靠 README 完成 C1—C6，并执行文档列出的测试命令。"
+  }
+ ],
+ "ok": {
+  "verdict": "ACCEPT",
+  "quote": ""
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "ASKED",
+   "quote": "**D2：新手从哪里开始？** 推荐从“已拿到项目文件，但可能没装 Python”开始。若从零开始，还需提供获取项目的入口和下载步骤。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "**改好的标准：一个没读过代码的新手，只看 README，就能记一笔账、查到账、作废它，并知道数据存在哪里、报错后怎么继续。**"
+  },
+  {
+   "i": 2,
+   "state": "ABSENT",
+   "quote": ""
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "找一位没读过代码的人，在 D1 选定的每种系统上，只靠 README 完成 C1—C6，并执行文档列出的测试命令。"
+  }
+ ]
+}

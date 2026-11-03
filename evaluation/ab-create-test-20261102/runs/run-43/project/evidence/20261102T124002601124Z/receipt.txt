@@ -1,0 +1,9 @@
+target: /home/ytian9405/projects/ytstack/evaluation/ab-create-test-20261102/runs/run-43/project/expense_cli.py
+sha256: e1088290ba7142c871c3398cecf30cb40d341f90eb4827d66a52eca13187ddfa
+LL01–LL05 and original smoke: PASS
+negative control assertion detected: True
+follow-up suite exit: 0
+live target unchanged: True
+negative-control scratch removed: True
+Test TemporaryDirectory state removed by unittest addCleanup on success and failure.
+No server, port, credentials, or background process required.

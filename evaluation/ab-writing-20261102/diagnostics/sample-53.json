@@ -1,0 +1,43 @@
+{
+  "label": "sample-53",
+  "task": "technical-bro",
+  "output_sha256": "369440c7b1602c8fbc66c3095f34877e2282d043fb6ece1e60a6d8e3bcdc60f9",
+  "characters": 1709,
+  "non_whitespace_characters": 1499,
+  "description": "Counts and literal matches are diagnostics, not quality or comprehension scores",
+  "source_unchanged": true,
+  "task_unchanged": true,
+  "source_commands": [
+    "briefctl inspect --profile review --json",
+    "briefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv",
+    "briefctl verify --input exports/october.csv --json",
+    "briefctl publish --profile review --input exports/october.csv --dry-run",
+    "briefctl publish --profile review --input exports/october.csv"
+  ],
+  "literal_commands_present": {
+    "briefctl inspect --profile review --json": true,
+    "briefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv": true,
+    "briefctl verify --input exports/october.csv --json": true,
+    "briefctl publish --profile review --input exports/october.csv --dry-run": true,
+    "briefctl publish --profile review --input exports/october.csv": true
+  },
+  "line_continuation_normalized_commands": {
+    "briefctl inspect --profile review --json": true,
+    "briefctl export --profile review --since 2026-10-01 --until 2026-11-01 --output exports/october.csv": true,
+    "briefctl verify --input exports/october.csv --json": true,
+    "briefctl publish --profile review --input exports/october.csv --dry-run": true,
+    "briefctl publish --profile review --input exports/october.csv": true
+  },
+  "literal_markers": {
+    "Python 3.11": true,
+    "/srv/briefcase": true,
+    "REPORT_TOKEN": true,
+    "profiles/review.toml": true,
+    "healthy": true,
+    "pending_count": true,
+    "valid": true,
+    "row_count": true,
+    "publish_id": true
+  },
+  "marker_note": "Presence cannot establish correct negation, order or conditions; scoring requires the frozen semantic fact matrix"
+}

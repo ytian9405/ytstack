@@ -1,0 +1,57 @@
+test_LL01_empty_reads (test_behavior.LedgerBehaviorTests.test_LL01_empty_reads) ... ok
+test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence) ... FAIL
+test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids) ... FAIL
+test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary) ... FAIL
+test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data) ... ERROR
+test_empty_summary (test_smoke.SmokeTests.test_empty_summary) ... ok
+
+======================================================================
+ERROR: test_LL05_invalid_inputs_preserve_data (test_behavior.LedgerBehaviorTests.test_LL05_invalid_inputs_preserve_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py", line 88, in test_LL05_invalid_inputs_preserve_data
+    snapshot = self.state.read_bytes()
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/ledger-eval-8mksar63/project/ledger-behavior-_1mt_oz6/nested/ledger.json'
+
+======================================================================
+FAIL: test_LL02_add_persistence (test_behavior.LedgerBehaviorTests.test_LL02_add_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py", line 50, in test_LL02_add_persistence
+    self.assertTrue(self.state.is_file())
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_LL03_void_and_ids (test_behavior.LedgerBehaviorTests.test_LL03_void_and_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py", line 60, in test_LL03_void_and_ids
+    self.assertEqual(self.invoke('void', '1'), voided)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+======================================================================
+FAIL: test_LL04_summary (test_behavior.LedgerBehaviorTests.test_LL04_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py", line 75, in test_LL04_summary
+    self.invoke('void', '4')
+  File "/tmp/ledger-eval-8mksar63/project/tests/test_behavior.py", line 28, in invoke
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : unknown expense id
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.630s
+
+FAILED (failures=3, errors=1)

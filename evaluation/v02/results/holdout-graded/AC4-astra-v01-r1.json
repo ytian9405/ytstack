@@ -1,0 +1,55 @@
+{
+ "wrong": [
+  {
+   "i": 0,
+   "verdict": "REJECT",
+   "quote": "月支出为该月所有未作废记录的金额总和，包含所有类别。其他月份及已作废记录不计入，全部使用整数分计算。"
+  },
+  {
+   "i": 1,
+   "verdict": "REJECT",
+   "quote": "其他月份及已作废记录不计入，全部使用整数分计算。"
+  },
+  {
+   "i": 2,
+   "verdict": "REJECT",
+   "quote": "提醒写入 stderr；stdout 仍只输出一个合法 JSON 值。"
+  },
+  {
+   "i": 3,
+   "verdict": "REJECT",
+   "quote": "预算以正整数分保存，同一月份重复设置覆盖原值，重启进程后仍有效。"
+  },
+  {
+   "i": 4,
+   "verdict": "REJECT",
+   "quote": "仅当月支出 **大于** 月预算时提醒。预算为 `10000` 分时，支出 `9999` 分和 `10000` 分不提醒，`10001` 分提醒超支 `1` 分。"
+  }
+ ],
+ "ok": {
+  "verdict": "REJECT",
+  "quote": "提醒写入 stderr；stdout 仍只输出一个合法 JSON 值。"
+ },
+ "decisions": [
+  {
+   "i": 0,
+   "state": "DECIDED_SILENTLY",
+   "quote": "`add` 支持 `--date YYYY-MM-DD`，省略时使用系统本地日期。按支出日期归属自然月，月初和月末记录不得计入相邻月份。\n旧记录没有日期，不推断其月份；保留在原有全量汇总中。月度查询排除这些记录，并提示未纳入统计的记录数。"
+  },
+  {
+   "i": 1,
+   "state": "DECIDED_SILENTLY",
+   "quote": "按自然月设置总预算，执行命令时提示超支"
+  },
+  {
+   "i": 2,
+   "state": "DECIDED_SILENTLY",
+   "quote": "成功新增支出、设置预算或作废记录后，检查受影响月份；执行 `summary --month YYYY-MM` 时检查指定月份。检查时仍超支，就输出一次提醒；后续命令再次检查时仍可提醒。\n超支不阻止记账，成功命令仍以 `0` 退出。"
+  },
+  {
+   "i": 3,
+   "state": "DECIDED_SILENTLY",
+   "quote": "支持 `budget --month YYYY-MM --cents N`。预算以正整数分保存，同一月份重复设置覆盖原值，重启进程后仍有效。各月份独立，未设置的月份不自动继承预算。"
+  }
+ ]
+}

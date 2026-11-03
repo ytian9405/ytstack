@@ -1,0 +1,374 @@
+{
+  "status": "COMPLETE",
+  "completed_at": "2026-11-02T14:21:57.700941+00:00",
+  "generator_model": "gpt-6.1-sol",
+  "judge_model": "gpt-6-astra",
+  "reasoning": "same inherited configuration, no per-run override",
+  "source_materials": 4,
+  "samples_per_condition_per_material": 1,
+  "generation_runs": 8,
+  "generation_reruns": 0,
+  "review_capacity_interruptions": 1,
+  "same_judge_resume_completed": true,
+  "runs": [
+    {
+      "material": "update",
+      "label": "item-63",
+      "arm": "without",
+      "fidelity_preserved": 8,
+      "fidelity_ids": 8,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 5,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 5,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 193,
+      "exactly_matches_draft": false,
+      "output": "runs/item-63/project/output.md",
+      "review": "review/item-63.json"
+    },
+    {
+      "material": "update",
+      "label": "item-14",
+      "arm": "with",
+      "fidelity_preserved": 8,
+      "fidelity_ids": 8,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 5,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 5,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 191,
+      "exactly_matches_draft": false,
+      "output": "runs/item-14/project/output.md",
+      "review": "review/item-14.json"
+    },
+    {
+      "material": "change",
+      "label": "item-58",
+      "arm": "without",
+      "fidelity_preserved": 7,
+      "fidelity_ids": 7,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 4,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 4,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 314,
+      "exactly_matches_draft": false,
+      "output": "runs/item-58/project/output.md",
+      "review": "review/item-58.json"
+    },
+    {
+      "material": "change",
+      "label": "item-85",
+      "arm": "with",
+      "fidelity_preserved": 7,
+      "fidelity_ids": 7,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 4,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 4,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 315,
+      "exactly_matches_draft": false,
+      "output": "runs/item-85/project/output.md",
+      "review": "review/item-85.json"
+    },
+    {
+      "material": "progress",
+      "label": "item-72",
+      "arm": "without",
+      "fidelity_preserved": 7,
+      "fidelity_ids": 7,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 3,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 3,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 134,
+      "exactly_matches_draft": false,
+      "output": "runs/item-72/project/output.md",
+      "review": "review/item-72.json"
+    },
+    {
+      "material": "progress",
+      "label": "item-26",
+      "arm": "with",
+      "fidelity_preserved": 7,
+      "fidelity_ids": 7,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 3,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 3,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 155,
+      "exactly_matches_draft": false,
+      "output": "runs/item-26/project/output.md",
+      "review": "review/item-26.json"
+    },
+    {
+      "material": "clean",
+      "label": "item-49",
+      "arm": "without",
+      "fidelity_preserved": 5,
+      "fidelity_ids": 5,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 0,
+        "source_slop_elimination_rate": "N/A",
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 115,
+      "exactly_matches_draft": true,
+      "output": "runs/item-49/project/output.md",
+      "review": "review/item-49.json"
+    },
+    {
+      "material": "clean",
+      "label": "item-37",
+      "arm": "with",
+      "fidelity_preserved": 5,
+      "fidelity_ids": 5,
+      "major_damage": false,
+      "metrics": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 0,
+        "source_slop_elimination_rate": "N/A",
+        "new_slop_roots": 0
+      },
+      "characters_description_only": 115,
+      "exactly_matches_draft": true,
+      "output": "runs/item-37/project/output.md",
+      "review": "review/item-37.json"
+    }
+  ],
+  "groups": {
+    "without": {
+      "source_slop_eliminated": 12,
+      "source_slop_total": 12,
+      "partial": 0,
+      "retained": 0,
+      "unknown": 0,
+      "new_slop_roots": 0,
+      "major_fidelity_roots": 0,
+      "minor_fidelity_roots": 0,
+      "fact_and_constraint_ids_preserved": 27,
+      "fact_and_constraint_ids_total": 27,
+      "clean_control_unchanged": true
+    },
+    "with": {
+      "source_slop_eliminated": 12,
+      "source_slop_total": 12,
+      "partial": 0,
+      "retained": 0,
+      "unknown": 0,
+      "new_slop_roots": 0,
+      "major_fidelity_roots": 0,
+      "minor_fidelity_roots": 0,
+      "fact_and_constraint_ids_preserved": 27,
+      "fact_and_constraint_ids_total": 27,
+      "clean_control_unchanged": true
+    }
+  },
+  "per_material": [
+    {
+      "material": "update",
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 5,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 5,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 5,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 5,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "delta_eliminated_with_minus_without": 0,
+      "delta_new_slop_with_minus_without": 0,
+      "natural_usability": "tie",
+      "pair_evidence": "review/pair-update.json"
+    },
+    {
+      "material": "change",
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 4,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 4,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 4,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 4,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "delta_eliminated_with_minus_without": 0,
+      "delta_new_slop_with_minus_without": 0,
+      "natural_usability": "tie",
+      "pair_evidence": "review/pair-change.json"
+    },
+    {
+      "material": "progress",
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 3,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 3,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 3,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 3,
+        "source_slop_elimination_rate": 1,
+        "new_slop_roots": 0
+      },
+      "delta_eliminated_with_minus_without": 0,
+      "delta_new_slop_with_minus_without": 0,
+      "natural_usability": "tie",
+      "pair_evidence": "review/pair-progress.json"
+    },
+    {
+      "material": "clean",
+      "without": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 0,
+        "source_slop_elimination_rate": "N/A",
+        "new_slop_roots": 0
+      },
+      "with": {
+        "major_fidelity_roots": 0,
+        "minor_fidelity_roots": 0,
+        "source_slop_E": 0,
+        "source_slop_P": 0,
+        "source_slop_R": 0,
+        "source_slop_U": 0,
+        "source_slop_N": 0,
+        "source_slop_elimination_rate": "N/A",
+        "new_slop_roots": 0
+      },
+      "delta_eliminated_with_minus_without": 0,
+      "delta_new_slop_with_minus_without": 0,
+      "natural_usability": "tie",
+      "pair_evidence": "review/pair-clean.json"
+    }
+  ],
+  "additional_source_slop_eliminations": 0,
+  "natural_usability_ties": 4,
+  "core_result": "Frozen model review found no additional source-slop cleanup. Subsequent human review preferred without skill on the announcement and progress update, with skill on the interface description for explicit retry scope, and tied the identical clean notice. No consistent human preference gain observed in these four pairs.",
+  "human_review": "human-review/REVIEW.md",
+  "design": "design/FRAMEWORK.md",
+  "blind_lock": "review/score-lock.json",
+  "unblind_receipt": "review/UNBLIND.json",
+  "cost": {
+    "tokens": "UNKNOWN",
+    "money": "UNKNOWN",
+    "precise_processing_duration": "UNKNOWN"
+  },
+  "limitations": [
+    "One run per condition on each of four synthetic Chinese materials; no repeated-sampling uncertainty estimate",
+    "Explicit facts and reader briefs make the editing task clear; obvious source slop can cause a ceiling effect",
+    "Both arms share host writing instructions and skill-catalog metadata; effect is incremental skill-body loading in this environment",
+    "Soft filesystem boundaries, post-run self-reports and no independently exported complete tool traces",
+    "Astra assessment is not a user preference or human reader study",
+    "No ranking inferred from character count or formatting"
+  ],
+  "model_only_core_result": "No additional cleanup gain observed under the current host instructions. Both arms eliminated all 12 preregistered source-slop units with no recorded fidelity or new-slop defects.",
+  "human_evaluation": {
+    "feedback": "human-review/FEEDBACK.json",
+    "report": "human-review/FEEDBACK.md",
+    "with_preferred": 1,
+    "without_preferred": 2,
+    "ties": 1,
+    "numeric_scores_provided": false
+  }
+}

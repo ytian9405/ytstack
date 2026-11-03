@@ -1,0 +1,26 @@
+{
+ "id": "H2-sol-v01-r2",
+ "prompt": "tools/install.py 的软链接安装和复制安装怎么选？",
+ "model": "gpt-6.1-sol",
+ "package": "v01",
+ "status": "ok",
+ "exit": 0,
+ "seconds": 32.2,
+ "usage": {
+  "input_tokens": 47085,
+  "cached_input_tokens": 39808,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 606,
+  "reasoning_output_tokens": 68
+ },
+ "final": "**本机使用、希望随技能仓库更新，就选软链接；希望项目自带一份固定版本、方便提交和迁移，就选复制。** 脚本默认使用软链接。\n\n| | `symlink` 软链接 | `copy` 复制 |\n|---|---|---|\n| 安装内容 | 指向源技能目录的相对链接 | 独立的技能文件副本 |\n| 源技能更新后 | 项目立即用到更新 | 项目里的副本不变 |\n| 在项目中修改技能 | 会修改源文件，影响其他引用它的项目 | 只影响当前副本 |\n| 移动、删除源仓库 | 链接可能失效 | 不受影响 |\n| 提交项目给别人使用 | 对方也需要对应的源目录布局 | 技能文件可随项目一起提交 |\n\n例如：\n\n```bash\n# 本机开发，跟随源仓库更新\npython tools/install.py --project /path/to/project --harness codex\n\n# 将技能固定在项目中\npython tools/install.py --project /path/to/project --harness codex --method copy\n```\n\n注意：[安装脚本](tools/install.py) **不会覆盖已有内容，也不会自动把一种方式转换成另一种**。复制安装后，如果源技能有更新，再运行安装会报冲突，需要手动处理已有副本。可以先加 `--dry-run` 预览。",
+ "commentary": [
+  "我先看一下 `tools/install.py` 的实现，确认这两种安装方式的具体区别。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'install.py' -g '*install*' -g 'README*'\"",
+  "/bin/bash -lc 'cat tools/install.py'",
+  "/bin/bash -lc \"rg -n 'install|symlink|软链|复制|copy' README.md; for p in /AGENTS.md /tmp/AGENTS.md /tmp/ytev-fky5r7uh/AGENTS.md; do if [ -f \\\"\"'$p\" ]; then cat \"$p\"; fi; done'"
+ ]
+}
