@@ -2,26 +2,24 @@
 
 ## 现在到哪了
 
-v0.4 已经过三轮你的盲看，详见 [evaluation/v04/REPORT.md](evaluation/v04/REPORT.md)。
+v0.5 已经过你的盲看，详见 [evaluation/v05/REPORT.md](evaluation/v05/REPORT.md)。
 
-- **验收标准：** 新版第一次赢了改动前的写法，2 比 0。
-- **说人话：** v0.2 比改动前好（4 比 2）。之后两版都只和 v0.2 打平，v0.4 把长度控制回了约 425 字。
-- **规则依据：** 全部来自 [voice/PREFERENCES.md](voice/PREFERENCES.md)。2026-11-03 用 Mac 上 4 到 11 月的 9260 条消息更新过，规则文件还没跟着改。
+- **验收标准：** v0.5 对 v0.4 是 1 胜 1 平，保留。模型评分里，Sol 拒绝错误实现从 16/20 升到 20/20。
+- **说人话：** v0.5 输给 v0.4，1 胜 3 负，因为写短时把理由删了。现在的 `voice/plain-talk.md` 以 v0.4 为底，加了 4 条新偏好：用中文、职业视角只在点名时用、你复述理解时只判对错、写短时不删理由。这一版**还没盲看过**。
+- **规则依据：** 全部来自 [voice/PREFERENCES.md](voice/PREFERENCES.md)，最近一次在 2026-11-03 用 Mac 上的 9260 条消息更新过。
 
 ## 下一步，按要紧程度
 
-1. ~~用那台电脑的记录更新偏好。~~ 2026-11-03 已完成：9260 条本人消息，分 4 个时间段核对，4 处矛盾由你用选择题定下，见 `voice/PREFERENCES.md`。
-2. **改规则。** 说人话的改动写进 `voice/plain-talk.md`，验收的改动写进 `skills/acceptance-criteria/SKILL.md`。每条规则都要能在 `PREFERENCES.md` 里找到依据。
-3. **验收标准抓错误的能力要补。** 模型评分里，新版拒绝错误实现的比例比改动前略低：Sol 是 13/20 对 15/20。补的时候注意别把篇幅写回去。
-4. **用新题盲看。** 先在 `evaluation/v05/prompts.json` 冻结新题，再改规则，然后照 [evaluation/v04/run.py](evaluation/v04/run.py) 跑，最后用 `human-review/blind-review.html` 盲看。旧题不能再用。
-5. **装进 1 到 2 个真实项目试用。** 装法见 [README.md](README.md)，加 `--voice` 才会写入常驻规则。
+1. **给现在的说人话规则做盲看。** 对照组用 `evaluation/snapshots/v04`。先在 `evaluation/v06/prompts.json` 冻结新题，照 [evaluation/v05/run.py](evaluation/v05/run.py) 跑。旧题不能再用，每轮 4 到 8 题。
+2. **装进 1 到 2 个真实项目试用。** 装法见 [README.md](README.md)，加 `--voice` 才会写入常驻规则。
+3. **自主程度的偏好还没有地方放。** 比如“按风险决定停不停”“别一直轮询”，这些不归说人话规则管，可以考虑做成单独的常驻规则。
 
 ## 评测需要的环境
 
 - **Codex CLI：** 能用 `gpt-6.1-sol` 和 `gpt-6-astra`。Astra 在并发高时容易超时，所以 `evaluation/v02/harness.py` 限制它同时只跑 2 个。
 - **pi：** 带 `zai-coding-cn/glm-5.3-flash`，用来分析对话记录。
 - **Python 3.9 以上**，只用标准库。解压 `.jsonl.zst` 需要 `zstandard` 包，或 Node 22.15 以上的版本。
-- **基线快照：** v0.1 和 v0.2 的完整快照在 `evaluation/snapshots/`，评测的对照组从这里安装。
+- **基线快照：** v0.1、v0.2、v0.4 的完整快照在 `evaluation/snapshots/`，评测的对照组从这里安装。
 
 ## 注意
 
