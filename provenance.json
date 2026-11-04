@@ -111,7 +111,7 @@
           "The confirmed goal is the full restatement after the user's corrections. Acceptance-criteria openings use one sentence. Worker briefs and handoff purpose use the full version."
         ],
         "upstream_body_sha256": "ae8e8f04b4c245919f15d8cec1a1acc31f60dcbfc9af50a836b4dc635ac3054a",
-        "local_body_sha256": "e0f9064d0f61231f8548e6a4d8756513c31b808b7caa9266ee5facc6b4eabe9f"
+        "local_body_sha256": "fd22c7a57058f28adbb1dd570ea0d962131c260982414f0d9d82817ae42b7ddc"
       }
     },
     {
@@ -130,7 +130,7 @@
           "Pickup reads the note, checks claimed completions, reports, then continues only listed next steps."
         ],
         "upstream_body_sha256": "bb5db97b0caf7dd8938e7591e5169acbc7ce8abfbc5ffd1082e5fa9cad47c999",
-        "local_body_sha256": "7e7649ce22c38b764f37340d8f1de238dfa19d7d279389a9ae73f5f56a4a5af9"
+        "local_body_sha256": "f98174c7de2d4f163be700230e2bb2e7975cf838272f3cf56943e59b41f68d7f"
       }
     },
     {
@@ -149,7 +149,7 @@
           "Reduce confidence tiers to cited source, inference, and not found. Read bundled unslop."
         ],
         "upstream_body_sha256": "a5ec79390430a3bb7dd9f3820216dbbc5f543a921fb73138429370b6c68410f9",
-        "local_body_sha256": "32ee709bc492fb3c7879138cf854dac97d08c3883604343179a2cf23ea7a4d68"
+        "local_body_sha256": "a6f8a7eb1cf15533b39f3387b07692c95572325f95bd93561d51880892c19067"
       }
     },
     {

@@ -1,6 +1,6 @@
 ---
 name: teach
-description: "Explain how something in this project works, and why it is built that way, after reading the code yourself. Use when the user names a thing: 讲讲 X 是怎么工作的, 为什么 X 要这样, 带我弄懂 X, 把我当小白讲讲 X, teach me X, or explain this change or subsystem. A bare 讲讲 only counts when they name the thing. 听不懂, 看不懂, 说人话, 什么意思, 我没太明白, or 我不太理解 about the previous reply, with no mechanism named, use bro. 听不懂，X 是怎么……的 asks how the mechanism works, so use teach. Do not spawn subagents."
+description: "Explain how something in this project works, and why it is built that way, after reading the code yourself. Use when the user names a thing: 讲讲 X 是怎么工作的, 为什么 X 要这样, 带我弄懂 X, 把我当小白讲讲 X, teach me X, or explain this change or subsystem. 为什么要这样设计 also counts without naming the thing. A bare 讲讲 only counts when they name the thing. 听不懂, 看不懂, 说人话, 什么意思, 我没太明白, or 我不太理解 about the previous reply, with no mechanism named, use bro. 听不懂，X 是怎么……的 asks how the mechanism works, so use teach. Do not spawn subagents."
 ---
 
 # Teach
@@ -32,14 +32,15 @@ description: "Explain how something in this project works, and why it is built t
 ## 怎么讲
 
 1. 先给最小的完整答案，两三句。先用一般说法讲它是什么，有通用名字就放在括号里。再落到这个项目：“在这里，它用来……”。
-2. 紧接着走一遍眼前这次真实操作：用户做某个操作时，依次发生什么。这就是怎么运作。例子用项目里真实的一次操作，不用生活里的比方。只列函数名和常量是查阅资料，不是讲解。
-3. 然后停。边界情况、历史原因、更深的层次，等用户再要才写。用户这次问的就是原因时，两三句里用上面的三档把原因说清，不另开一长段。
-4. 讲具体机制。不预告接下来要讲什么。不写“关键是”“核心在于”“这里是难点”这类标签。不出测验，不要求用户复述。
-5. 三个以上部件时，不要一张图画全。有画图工具就分步加：先画前两个，再重画并加上下一个。代码里真有回流，再把返回的那条线加上。没有画图工具，就用文字按同样的顺序写。只有一个简单点时不画。
-6. 用户回过来说自己的理解时，只判对错、补漏，不从头再讲。
+2. 紧接着走一遍眼前这次真实操作：用户做某个操作时，依次发生什么。这就是怎么运作。例子用项目里真实的一次操作。比方最多一句，帮新手抓住大意，紧接着回到项目里真实的一次操作。比方不能代替真实例子。只列函数名和常量是查阅资料，不是讲解。
+3. 有容易误解的地方，用户多半会以为是一回事，实际是另一回事，就单独点出来，并说它会带来什么后果。没有这种地方就不写。
+4. 然后停。边界情况、历史原因、更深的层次，等用户再要才写。用户这次问的就是原因时，两三句里用上面的三档把原因说清，不另开一长段。
+5. 讲具体机制。不预告接下来要讲什么。不写“关键是”“核心在于”“这里是难点”这类标签。不出测验，不要求用户复述。
+6. 三个以上部件时，不要一张图画全。有画图工具就分步加：先画前两个，再重画并加上下一个。代码里真有回流，再把返回的那条线加上。没有画图工具，就用文字按同样的顺序写。只有一个简单点时不画。
+7. 用户回过来说自己的理解时，只判对错、补漏，不从头再讲。
 
 写完按 [unslop](../unslop/SKILL.md) 的中文规则自查一遍。
 
 ## 回复
 
-回复就是讲解本身，不汇报你查了什么、做了什么。开头是那两三句，紧接着是眼前这次真实操作，然后停。
+回复就是讲解本身，不汇报你查了什么、做了什么。开头是那两三句。用了比方就只有一句，紧接着是眼前这次真实操作。有容易误解的地方就单独点出，并说后果。然后停。

@@ -1,6 +1,6 @@
 ---
 name: ketchup
-description: "Catch the user up, or write a 交接说明 for a later session or another computer. Catch-up (我回来了, 现在什么情况, 跟上进度) only reads and writes no file. Writing the note (写交接, 写交接说明, 换电脑接着弄, 换会话接着弄) writes one file. 换会话接着弄 means writing that file, not opening a new session. Pickup (接着上次的工作, 看看交接说明) reads the note, checks claimed completions, reports, then continues only listed next steps. 看看交接说明 alone stops after the report. 现在就把活交给另一个 agent、新工作区或 Orca worker，是 orca-cli 的事。那时如果需要交接内容，仍按本技能的交接栏目写这份说明。"
+description: "把活交给或派给另一个 agent、Codex、worker 去做，归 orca-cli，不要读本技能。Catch the user up, or write a 交接说明 for a later session or another computer. Catch-up (我回来了, 现在什么情况, 跟上进度, 有什么要我定的) only reads and writes no file. Writing the note (写交接, 写交接说明, 换电脑接着弄, 换会话接着弄) writes one file. 换会话接着弄 means writing that file, not opening a new session. Pickup (接着上次的工作, 看看交接说明) reads the note, checks claimed completions, reports, then continues only listed next steps. 看看交接说明 alone stops after the report."
 ---
 
 # Ketchup
@@ -21,7 +21,7 @@ description: "Catch the user up, or write a 交接说明 for a later session or 
 
 三种用法只做命中的那一种。一句话里又要写说明、又要现在交给另一个 agent，说明文件仍然要写。派发是 orca-cli 的事。
 
-- **回来汇报。** 触发说法是“我回来了”“现在什么情况”“跟上进度”。只说这些时，只做回来汇报这一种用法：按“回复怎么写”回，不写文件，不做交接，不接手。
+- **回来汇报。** 触发说法是“我回来了”“现在什么情况”“跟上进度”“有什么要我定的”。只说这些时，只做回来汇报这一种用法：按“回复怎么写”回，不写文件，不做交接，不接手。
 - **交接。** 触发说法是“写交接”“写交接说明”“换电脑接着弄”“换会话接着弄”。换会话接着弄是写说明文件，不是开新会话。只写一份交接文件。
 - **接手。** 触发说法是“接着上次的工作”“看看交接说明”。顺序见下面“接手”。
 
@@ -58,16 +58,19 @@ description: "Catch the user up, or write a 交接说明 for a later session or 
 
 ## 交接
 
-用户要一份给以后的会话或另一台电脑用的说明，或者说“写交接”“写交接说明”“换电脑接着弄”“换会话接着弄”时，写交接文件。换会话接着弄是写这份文件，不是开新会话。默认是项目根目录的 `HANDOFF.md`。已有就整份按栏目改写成最新状态，不在文件末尾追加流水。用户指定了别的位置就照办。只写事实和基本指引，要能直接复制给下一个对话，不写过程叙述，不写密钥。
+用户要一份给以后的会话或另一台电脑用的说明，或者说“写交接”“写交接说明”“换电脑接着弄”“换会话接着弄”时，写交接文件。换会话接着弄是写这份文件，不是开新会话。默认是项目根目录的 `HANDOFF.md`。已有就整份按栏目改写成最新状态，不在文件末尾追加流水。用户指定了别的位置就照办。只写事实和基本指引，要能直接复制给下一个对话，不写过程叙述，不写密钥。同一件事只写一次，不在每节里再讲一遍。
 
-- **目的。** 有确认过的目标复述，整段搬过来，不收成一两句。没有确认过的复述，就用用户最早那条需求。
-- **现在到哪了。** 已经做完并核对过的，写出在哪能看到证据。没核对的，标明没核对。
+主体是能照着做的编号步骤，每步一两句。
+
+- **目的。** 有用户确认过的目标复述，就整段用。没有时用一两句概括用户要什么，不要整段贴用户原话。
+- **现在到哪了。** 已经做完并核对过的，写出在哪能看到证据。没核对的，标明没核对。这里不重写下面的步骤。
 - **卡点和等你拍板的事。** 写法同上面“等你拍板”。这一栏不受 300 字限制，有几件写几件。
-- **下一步。** 按要紧程度编号，每步说清怎么算做完。
+- **下一步。** 这是主体。按要紧程度编号，每步一两句，说清怎么做、怎么算做完。新机器上的第一步放在最前。
+- **换机器带不走的。** 写清不在仓库里、换机器带不走或要另外处理的东西：没提交的改动，git 外的数据文件，正在跑的后台任务。后台任务要写怎么查它现在的状态，产出在哪。没有就写没有。
 - **接着干需要什么。** 环境、账号类型、要装的工具，只写名字，不写密钥。
-- **注意。** 容易踩的坑，最多三条。
+- **注意。** 容易踩的坑，最多三条。不把已经写过的步骤再讲一遍。
 
-写完后，回复里只说三件事：文件在哪，最要紧的下一步，有几件等用户定。不把文件再贴进回复。
+写完后，回复用几行说清：文件在哪；要带走或另外处理什么；最要紧的下一步；几件等用户定。不把文件再贴进回复。
 
 ## 接手
 
