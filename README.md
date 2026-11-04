@@ -1,82 +1,182 @@
+<div align="center">
+
 # ytstack
 
-七个个人工作技能、一个随包依赖和一份常驻说话规则。主要为 Codex 的 Sol 和 Astra 调试，同一份源码也可用于 Claude Code。
+**让 GPT 说人话，先定好什么算做完再动手。**
 
-| 技能 | 用途 |
+一套个人技能包，专为 Codex 的 GPT 模型（`gpt-6.1-sol`、`gpt-6-astra`）调试，同一份源码也能给 Claude Code 用。
+
+![version](https://img.shields.io/badge/version-0.5.0-2f6feb)
+![license](https://img.shields.io/badge/license-MIT-green)
+![Codex](https://img.shields.io/badge/Codex-supported-black)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-d97757)
+![python](https://img.shields.io/badge/python-3.9%2B%20%C2%B7%20stdlib%20only-3776ab)
+
+</div>
+
+---
+
+## 为什么做这个
+
+GPT 写代码很强，但回答经常读不懂：
+
+- 满屏机制名，比如“写入不是原子的”“有丢更新风险”“收敛”“链路”；
+- 写得很长，真正要你拍板的事藏在中间；
+- 说“本仓库”“该工具”，让你猜指的是哪个；
+- 单测一过就说“已完成”，没有真跑过。
+
+每次都要追一句“说人话”。ytstack 的做法是让它第一遍就写对。
+
+| GPT 默认会写 | 装了 ytstack 之后 |
 | --- | --- |
-| `in-your-own-words` | 用户点名后，用 3 到 5 句复述目标和要解决的问题，然后停下来等确认。确认过的原文留给验收标准开头、worker 任务卡开头和交接说明的“目的”。 |
-| `acceptance-criteria` | 动手前定验收标准：一份连贯的短标准，每条写清靠什么证据算通过，最后列出你可以改的决定。 |
-| `create-test-skill` | 为项目生成 `test-<app>` 技能、可运行的行为测试和用例索引，实际运行并证明测试能抓住错误。 |
-| `bro` | 把上一条回答说得自然、简明、容易理解。上一条没看懂、我没太明白、我不太理解，用它。问的是某个机制怎么工作，用 `teach`。 |
-| `technical-bro` | 按 technical-writing 的四层规范编写或修改技术文档、PR 和提交说明。 |
-| `ketchup` | 回来时只汇报、不写文件；要交接说明时写给以后的会话或另一台电脑；接手时先核对写成已完成的，再决定是否继续。 |
-| `teach` | 把一个机制讲明白：自己读代码和 git 记录，先给两三句，再用眼前的例子走一遍。 |
-| `unslop` | `technical-bro` 和 `teach` 的随包依赖，清理空话和套路表达。 |
+| 写入不是原子的 | 保存到一半程序挂了，原来的内容也可能坏掉 |
+| 用原子替换 | 先写到新文件，写完再替换旧文件 |
+| 有丢更新风险 | 两个人同时保存，后保存的会盖掉先保存的 |
+| 校验哈希 | 用文件内容的指纹，判断它有没有被改过 |
+| 已完成 ✅ | 实际跑了哪条命令、看到了什么结果，证据在哪个文件 |
 
-`create-test-skill` 用于创建可复用的项目测试能力。普通的一次性测试补充直接使用项目既有 runner。生成测试不会自动授权修改产品代码或共享环境。
+## 规则从哪来
 
-## 在项目中使用
+规则不是凭感觉写的。每条都能追溯到 [voice/PREFERENCES.md](voice/PREFERENCES.md)，那里记着我真实说过的话，以及它在哪几个时间段出现过。
 
-在包含 `ytstack/` 的工作区执行以下命令，将技能逐个链接到目标项目。目标项目必须已经存在。
-
-```sh
-python3 ytstack/tools/install.py --project /path/to/project --harness codex
+```mermaid
+flowchart LR
+    A["9260 条我自己发的消息<br/>Codex · Claude Code · Cursor · pi"] --> B["分时间段整理偏好<br/>引文逐字核对原文"]
+    B --> C["PREFERENCES.md<br/>两个时间段都出现过才进规则"]
+    C --> D["改规则"]
+    E["先冻结新题"] --> D
+    D --> F["两组对照跑 Codex"]
+    F --> G["我盲看选更好的那个"]
+    G -->|输了| C
+    G -->|赢了| H["发布"]
 ```
 
-这会创建项目 `.agents/skills/` 下的八个入口。重新开始会话以刷新技能发现。使用 `$in-your-own-words`、`$create-test-skill`、`$bro`、`$technical-bro`、`$ketchup` 或 `$teach`，也可用自然语言提出对应请求。`in-your-own-words` 只在用户点名时使用。当前会话的技能清单可能不会即时更新。
+- **先冻结题目再改规则。** 题目文件的指纹单独提交，旧题不能再用。
+- **好不好由我的盲看说了算。** 模型评委多次和我的判断不一致，只作参考。
+- **每轮 4 到 8 题。** 两组随机标成甲、乙，揭盲之前我不知道哪个是新版。
 
-只安装一个主技能时，可以指定名称；依赖会一起安装。`ketchup` 单独安装，不带其他技能。`teach` 和 `technical-bro` 会带上 `unslop`。
+## 里面有什么
 
-```sh
-python3 ytstack/tools/install.py --project /path/to/project --harness codex --skill technical-bro
+### 🗣 常驻规则：每轮都生效
+
+[`voice/plain-talk.md`](voice/plain-talk.md) 写进项目的 `AGENTS.md`（Claude Code 是 `CLAUDE.md`），管 AI 每一轮怎么跟你说话：
+
+- 汇报先给不超过 10 行的人话摘要；决策类问题约 400 字。
+- 说后果和做法，不说机制的名字。
+- 写短时删罗列，不删理由。
+- 说清指的是哪个文件、哪个目录。
+
+### 🧩 技能：说到相关的事才加载
+
+| | 技能 | 什么时候用 | 做什么 |
+| --- | --- | --- | --- |
+| 💬 | `in-your-own-words` | 点名 `$in-your-own-words` | 分条复述你的目标和要解决的问题，猜测单独标出来，然后停下等你确认 |
+| 💬 | `bro` | “说人话”“我没太明白” | 把上一条回答改写成人话，结论、数字、前提一个不丢 |
+| 💬 | `ketchup` | “我回来了”“写交接说明”“接着上次的工作” | 回来时只汇报、不写文件；写一份能照着做的交接说明；接手时先核对写成“已完成”的事 |
+| 💬 | `teach` | “把我当小白讲讲 X” | 自己读代码和提交记录来讲；讲原因时分清有原文、推断还是查不到 |
+| ✅ | `acceptance-criteria` | “先定验收标准” | 动手前写一份连贯的短标准：每条靠什么证据算通过，最后列出要你拍板的决定 |
+| ✅ | `create-test-skill` | “给这个项目生成测试技能” | 生成可重复运行的行为测试，并实际证明它能抓住一次错误 |
+| 📝 | `technical-bro` | 写文档、PR、提交说明 | 按 technical-writing 的四层规范写 |
+| 📝 | `unslop` | 随包依赖 | 清理空话和套路表达，`teach` 和 `technical-bro` 会用到 |
+
+它们在一次任务里的位置：
+
+```mermaid
+flowchart LR
+    A[下任务] --> B["in-your-own-words<br/>先对齐目标"]
+    B --> C["acceptance-criteria<br/>什么算做完"]
+    C --> D[AI 干活]
+    D --> E["create-test-skill<br/>测试能抓住错误"]
+    D --> F["ketchup<br/>回来汇报 / 交接 / 接手"]
+    D -.看不懂.-> G["bro 改写上一条<br/>teach 讲清机制"]
 ```
 
-Claude Code 可以直接加载包：
+## 快速开始
+
+把仓库克隆到工作区，再装到目标项目里（目标项目要已经存在）。
+
+**Codex**
 
 ```sh
-claude --plugin-dir ./ytstack
-```
-
-插件调用名为 `/ytstack:in-your-own-words`、`/ytstack:bro`、`/ytstack:technical-bro`、`/ytstack:create-test-skill`、`/ytstack:ketchup` 和 `/ytstack:teach`。也可以用安装工具暴露为项目技能：
-
-```sh
-python3 ytstack/tools/install.py --project /path/to/project --harness claude
-```
-
-项目技能位于 `.claude/skills/`，按该宿主的普通技能方式调用。安装器默认使用相对软链接；移动源码包后需要重新连接。需要独立副本时加 `--method copy`。已有不同内容的同名入口会被保留，并返回冲突；不会覆盖。`--dry-run` 只展示计划。
-
-## 让 AI 默认说人话
-
-技能只有被调用时才生效，改变不了第一轮回答。要让每次回答都按读者能懂的方式写，安装时加 `--voice`：
-
-```sh
+git clone https://github.com/ytian9405/ytstack.git
 python3 ytstack/tools/install.py --project /path/to/project --harness codex --voice
 ```
 
-这会把 [voice/plain-talk.md](voice/plain-talk.md) 写进项目的 `AGENTS.md`（Claude Code 是 `CLAUDE.md`），放在一对标记之间。标记外的内容不变，重复运行不会写第二遍，再次运行会更新标记内的内容。`bro` 继续用于事后补救。
+- `--voice` 会把常驻规则写进项目的 `AGENTS.md`，放在一对标记之间。标记外的内容不动，再次运行只更新标记内的内容。
+- 技能装在项目的 `.agents/skills/` 下。装完重新开一个会话，就能用 `$ketchup`、`$teach` 等调用，也可以直接用自然语言说。
 
-## 请求示例
-
-- “用你的话说说我要干嘛，先别动手。”
-- “给 expense 工具加撤销功能，开发前先把验收标准定下来。”
-- “用 create-test-skill 给这个 CLI 生成可重复运行的测试技能，验证实际输出和持久化。先证明测试能抓住一次错误，再给我证据。”
-- “bro，把上一条解释说成人话，保留数字和必要条件。”
-- “technical-bro，把这份文档整理成操作指南，保留真实命令、前置条件和预期结果。”
-- “我回来了，现在什么情况？”
-- “把我当小白，讲讲这段是怎么工作的。”
-
-`technical-bro` 保留上游英文正文，`unslop` 和 `bro` 在上游内容后增加了中文规则。用户指定的语言、结构和术语优先。
-
-## 检查与来源
-
-包内检查和安装器回归测试只需 Python 3.9+ 标准库：
+**Claude Code**
 
 ```sh
-python3 ytstack/tools/validate.py
-python3 -m unittest discover -s ytstack/tests -v
-claude plugin validate ./ytstack
+claude --plugin-dir ./ytstack          # 直接当插件加载，调用名如 /ytstack:teach
+python3 ytstack/tools/install.py --project /path/to/project --harness claude --voice
 ```
 
-第三条需要本机已有 Claude CLI。它验证插件结构，不能代替真实模型行为检查。技能另经过 skill-creator 的元数据检查及独立代理前向试用；结果与未覆盖范围见 `evaluation/`，v0.2 的效果见 [evaluation/v02/REPORT.md](evaluation/v02/REPORT.md)，第二轮盲看见 [evaluation/v03/REPORT.md](evaluation/v03/REPORT.md)，第三轮见 [evaluation/v04/REPORT.md](evaluation/v04/REPORT.md)，三个沟通技能见 [evaluation/v07/REPORT.md](evaluation/v07/REPORT.md) 和 [evaluation/v08/REPORT.md](evaluation/v08/REPORT.md)。规则依据的用户偏好见 [voice/PREFERENCES.md](voice/PREFERENCES.md)。验收标准见 [ACCEPTANCE.md](ACCEPTANCE.md)。
+**常用选项**
 
-来源、许可证和改动边界见 [NOTICE.md](NOTICE.md) 与 `provenance.json`。本包不安装全局技能，不包含总路由器、模型配置或自动启动 hooks。
+| 选项 | 作用 |
+| --- | --- |
+| `--skill teach` | 只装一个技能，它的依赖会一起装上 |
+| `--method copy` | 复制文件，不建软链接；源码移动后不受影响 |
+| `--dry-run` | 只显示会做什么，不真的装 |
+
+项目里已有同名但内容不同的技能时，安装器保留原文件并报冲突，不会覆盖。
+
+## 你可以这样说
+
+```text
+$in-your-own-words 我想把队列和账本对上，你先用你的话说说我要干嘛。
+给 expense 工具加撤销功能，开发前先把验收标准定下来。
+我回来了，现在什么情况？有什么要我定的？
+我要换到另一台电脑接着弄，帮我写交接说明。
+把我当小白，讲讲下一条任务是怎么挑出来的。
+bro，上一条没看懂，说人话。
+```
+
+## 评测记录
+
+每一轮都是：先冻结题目，再改规则，跑两组对照，最后我盲看。完整题目、原始输出和报告都在 [`evaluation/`](evaluation/)。
+
+| 轮次 | 比了什么 | 盲看结果 |
+| --- | --- | --- |
+| [v0.3](evaluation/v03/REPORT.md) | 说人话 v0.3 对 v0.2 | 3 : 3 平 |
+| [v0.4](evaluation/v04/REPORT.md) | 按偏好重写说人话和验收标准 | 验收标准 2 题都选新版；说人话 2 : 2 平 |
+| [v0.5](evaluation/v05/REPORT.md) | 验收标准 v0.5、说人话 v0.5 | 验收标准 1 胜 1 平，保留；说人话 1 胜 3 负，退回 v0.4 再补 4 条 |
+| [v07](evaluation/v07/REPORT.md) | 装与不装三个沟通技能 | 4 胜 3 负 |
+| [v08](evaluation/v08/REPORT.md) | 修好 v07 输掉的三处 | **6 : 0** |
+
+> [!NOTE]
+> 现在的说人话规则是 v0.4 加 4 条新偏好，这一版还没单独盲看过。每轮只看 4 到 8 题，样本小，结论供参考。
+
+## 检查
+
+只需要 Python 3.9+ 标准库：
+
+```sh
+python3 ytstack/tools/validate.py                   # 包结构、依赖、上游原文指纹
+python3 -m unittest discover -s ytstack/tests -v    # 安装器回归测试
+claude plugin validate ./ytstack                    # 需要本机装了 Claude CLI
+```
+
+这些只检查文件和安装是否正确，模型行为好不好看上面的评测记录。
+
+## 目录
+
+```text
+skills/        八个技能，每个一个目录
+voice/         常驻说话规则 plain-talk.md，以及规则依据 PREFERENCES.md
+tools/         安装器 install.py、检查器 validate.py
+evaluation/    每一轮评测的题目、原始输出、盲看页和报告
+tests/         安装器和包结构的回归测试
+```
+
+## 来源与许可
+
+ytstack 借鉴了 Cursor 的 [pstack](https://github.com/cursor/plugins/tree/main/pstack)（作者 Lauren Tan，MIT 许可）：
+
+- `bro`、`unslop`、`technical-bro` 保留上游原文，后面加了中文规则。
+- `ketchup`、`teach`、`in-your-own-words`、`create-test-skill` 借用上游的做法，用中文重写。
+
+每个文件的来源、上游指纹和改动范围记录在 [NOTICE.md](NOTICE.md) 和 [`provenance.json`](provenance.json)。本包不装全局技能，不带总路由器、模型配置或自动启动的 hooks。
+
+MIT License · 见 [LICENSE](LICENSE)
