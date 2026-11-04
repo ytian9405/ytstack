@@ -1,0 +1,64 @@
+{
+ "id": "T2-sol-control-r2",
+ "kind": "blind",
+ "case": "T2",
+ "arm": "control",
+ "model": "gpt-6.1-sol",
+ "rep": 2,
+ "prompt": "为什么 queue 加任务时要拒绝空标题？还有为什么 expense 汇总时要跳过已经作废的记录？我猜这两处都是为了性能。别改文件，讲讲原因就行。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 34.9,
+ "usage": {
+  "input_tokens": 63655,
+  "cached_input_tokens": 53888,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 513,
+  "reasoning_output_tokens": 125
+ },
+ "final": "你的猜测不对：从代码和说明看，这两处是为了保证数据有意义、汇总算得对，主要不是为了性能。\n\n- **`queue` 拒绝空标题**：避免保存一条看不出要做什么的待办。空字符串、只有空格或换行的标题都会被拒绝；有文字的标题会原样保存，首尾空格也会保留。见 [queue_cli.py:24](queue_cli.py:24)。\n- **`expense` 汇总跳过作废记录**：作废表示这笔支出不再计入账目，但记录仍保留供查看。如果继续统计，记录数、总金额和分类金额都会把已取消的支出算进去。例如两笔支出分别是 100 元、50 元，第二笔作废后，应汇总为 1 笔、100 元。这个要求写在 [README.md:19](README.md:19)。\n- 汇总时仍会检查每条记录是否作废，所以“跳过”也不意味着不用读取或检查它。",
+ "commentary": [
+  "我先看 `queue` 和 `expense` 的代码及相关测试，确认这两处判断的实际用途，再解释原因。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc 'rg -n \"queue|expense|空标题|作废|void|cancelled|canceled\" .'",
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*.py' -g 'README*'; cat queue_cli.py expense_cli.py README.md tests/test_smoke.py\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a223-98ab-7d50-9e68-b589f263925b",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "d016068fac2e06ea4c69991f39da6c5d5b8d76b214fc96e8add674420dfcae2f",
+  "digest_after": "d016068fac2e06ea4c69991f39da6c5d5b8d76b214fc96e8add674420dfcae2f",
+  "head_before": "8346f918f4069cd014a7d621e2a446ed92f0b016",
+  "head_after": "8346f918f4069cd014a7d621e2a446ed92f0b016",
+  "commits_before": "2",
+  "commits_after": "2",
+  "unchanged": true
+ },
+ "status": "ok"
+}

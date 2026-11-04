@@ -2,17 +2,24 @@
 
 ## 现在到哪了
 
-v0.5 已经过你的盲看，详见 [evaluation/v05/REPORT.md](evaluation/v05/REPORT.md)。
-
-- **验收标准：** v0.5 对 v0.4 是 1 胜 1 平，保留。模型评分里，Sol 拒绝错误实现从 16/20 升到 20/20。
-- **说人话：** v0.5 输给 v0.4，1 胜 3 负，因为写短时把理由删了。现在的 `voice/plain-talk.md` 以 v0.4 为底，加了 4 条新偏好：用中文、职业视角只在点名时用、你复述理解时只判对错、写短时不删理由。这一版**还没盲看过**。
-- **规则依据：** 全部来自 [voice/PREFERENCES.md](voice/PREFERENCES.md)，最近一次在 2026-11-03 用 Mac 上的 9260 条消息更新过。
+- **新技能（0.5.0）：** 新增 `in-your-own-words`、`ketchup`、`teach`，改编自 pstack，设计按“工作流优先”方案。v07 盲看新技能组 4 胜 3 负，详见 [evaluation/v07/REPORT.md](evaluation/v07/REPORT.md)：
+  - `ketchup` 3 胜 1 负：回来汇报和接手赢了，写交接输了。
+  - `teach` 1 胜 1 负：讲原因赢，讲机制输。
+  - `in-your-own-words` 输了 1 题：它规定写成 3 到 5 句，对照组分条列出、更好扫读。
+- **验收标准：** v0.5 保留，详见 [evaluation/v05/REPORT.md](evaluation/v05/REPORT.md)。
+- **说人话：** `voice/plain-talk.md` 是 v0.4 加 4 条新偏好，**还没盲看过**。
+- **规则依据：** 全部来自 [voice/PREFERENCES.md](voice/PREFERENCES.md)。
 
 ## 下一步，按要紧程度
 
-1. **给现在的说人话规则做盲看。** 对照组用 `evaluation/snapshots/v04`。先在 `evaluation/v06/prompts.json` 冻结新题，照 [evaluation/v05/run.py](evaluation/v05/run.py) 跑。旧题不能再用，每轮 4 到 8 题。
-2. **装进 1 到 2 个真实项目试用。** 装法见 [README.md](README.md)，加 `--voice` 才会写入常驻规则。
-3. **自主程度的偏好还没有地方放。** 比如“按风险决定停不停”“别一直轮询”，这些不归说人话规则管，可以考虑做成单独的常驻规则。
+1. **改 v07 输掉的地方，做 v08 盲看。** 先在 `evaluation/v08/prompts.json` 冻结新题，再改规则。要改的有 4 处：
+   - 交接文件写成能照着做的编号步骤；写完的回复要说清换电脑要带走什么。
+   - `teach` 允许一句比方，并单独点出容易误解的后果。
+   - `in-your-own-words` 允许分条写。
+   - `ketchup` 被“交给另一个代理”误触发，这类说法应归 `orca-cli`。
+2. **给现在的说人话规则做盲看。** 对照组用 `evaluation/snapshots/v04`，旧题不能再用，每轮 4 到 8 题。
+3. **装进 1 到 2 个真实项目试用。** 装法见 [README.md](README.md)，加 `--voice` 才会写入常驻规则。
+4. **自主程度的偏好还没有地方放。** 比如“按风险决定停不停”“别一直轮询”。
 
 ## 评测需要的环境
 

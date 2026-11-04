@@ -1,0 +1,40 @@
+{
+ "sentence": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "agents_skills": [
+  "acceptance-criteria",
+  "bro",
+  "computer-use",
+  "create-test-skill",
+  "grill-me",
+  "grilling",
+  "orca-cli",
+  "orchestration",
+  "reverse-engineer-anything",
+  "technical-bro",
+  "unslop"
+ ],
+ "codex_skills": [
+  ".system",
+  "baoyu-design",
+  "frontend-design",
+  "grill-me",
+  "grilling",
+  "hatch-pet",
+  "ui-ux-pro-max",
+  "xhs-data-diagnosis",
+  "xhs-data-extractor",
+  "xhs-opportunity-scout",
+  "xhs-topic-planner",
+  ".system/.codex-system-skills.marker",
+  ".system/imagegen",
+  ".system/openai-docs",
+  ".system/review-agent",
+  ".system/skill-creator",
+  ".system/skill-installer"
+ ],
+ "new_skills_in_global_dirs": [],
+ "codex_agents_md_exists": true,
+ "codex_agents_md_mentions_new_skills": [],
+ "user_config_sandbox_mode": "danger-full-access",
+ "sandbox_override": "新会话传 --sandbox，覆盖用户配置里的 danger-full-access。codex exec resume 没有 --sandbox，第二轮改传 -c sandbox_mode。"
+}

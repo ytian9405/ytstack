@@ -1,0 +1,76 @@
+{
+ "id": "T1-astra-treatment-r1",
+ "kind": "blind",
+ "case": "T1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "把我当小白，讲讲队列里下一条要做的是怎么挑出来的。data 目录里有一份现成的例子。我就想听懂。先别改文件。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 125.3,
+ "usage": {
+  "input_tokens": 151430,
+  "cached_input_tokens": 136320,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1023,
+  "reasoning_output_tokens": 31
+ },
+ "final": "**按 `data` 目录里的现成例子，下一条会选中“取快递”。** 程序先筛掉暂时不参与的任务，再按编号从小到大，接着上次选中的位置往后找；后面没有了，就从头找。\n\n用这份例子走一遍：\n\n1. `data/tasks.json` 里有四条任务：1 买电池、2 回邮件、3 倒垃圾、4 取快递。“倒垃圾”已经完成，所以先排除。\n2. “回邮件”带有 `pin: true`。**当前代码会先跳过带这个标记的任务**，只剩“买电池”和“取快递”参与挑选。只有未完成任务全都带这个标记时，才从它们中选编号最小的。\n3. `data/focus.json` 里记着 `cursor: 1`，意思是上次选中了编号 1。剩下的候选里，编号大于 1 的第一条就是编号 4，所以选中“取快递”。\n4. 真正执行 `next` 时，程序会把上次选中的编号记成 4，**但不会把“取快递”标成完成**。如果任务都不变，再执行一次就会绕回“买电池”，之后又是“取快递”。\n\n挑选规则写在 [focus.py](<project>/focus.py:1)；记住上次选中哪条的动作写在 [queue_cli.py](<project>/queue_cli.py:37)。",
+ "commentary": [
+  "我会按 teach 技能，先读挑选下一条任务的代码和 `data` 目录里的例子，再用例子讲清楚；先不改文件。\n"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*queue*' -g '*Queue*' -g 'data/**' -g 'package.json' -g 'README*'\"",
+  "/bin/zsh -lc 'cat AGENTS.md; cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'cat queue_cli.py; cat data/tasks.json; cat data/focus.json; cat README.md'",
+  "/bin/zsh -lc \"rg --files; nl -ba focus.py; nl -ba queue_cli.py; rg -n 'pick_next|cursor|pin|next' tests\"",
+  "/bin/zsh -lc \"python3 -B -c 'import json; from pathlib import Path; from focus import pick_next; rows=json.loads(Path(\\\"data/tasks.json\\\").read_text()); cursor=json.loads(Path(\\\"data/focus.json\\\").read_text())[\\\"cursor\\\"]\nfor _ in range(3):\n chosen=pick_next(rows,cursor); print(json.dumps({\\\"上次编号\\\":cursor,\\\"这次选中\\\":chosen},ensure_ascii=False)); cursor=chosen[\\\"id\\\"]'\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_6\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc \\\"python3 -B -c 'import json; from pathlib import Path; from focus import pick_next; rows=json.loads(Path(\\\\\\\"data/tasks.json\\\\\\\").read_text()); cursor=json.loads(Path(\\\\\\\"data/focus.json\\\\\\\").read_text())[\\\\\\\"cursor\\\\\\\"]\\nfor _ in range(3):\\n chosen=pick_next(rows,cursor); print(json.dum"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a224-9e06-7882-9f6e-38cca72f853f",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "0a74b76cdde367d5e7d00cb6c44c2e6afe8f997f4d70130b6c61deef99dff467",
+  "digest_after": "0a74b76cdde367d5e7d00cb6c44c2e6afe8f997f4d70130b6c61deef99dff467",
+  "head_before": "764492702f34ad178e4bde5c8731c47b360ca11a",
+  "head_after": "764492702f34ad178e4bde5c8731c47b360ca11a",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

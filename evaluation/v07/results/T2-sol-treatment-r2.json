@@ -1,0 +1,78 @@
+{
+ "id": "T2-sol-treatment-r2",
+ "kind": "blind",
+ "case": "T2",
+ "arm": "treatment",
+ "model": "gpt-6.1-sol",
+ "rep": 2,
+ "prompt": "为什么 queue 加任务时要拒绝空标题？还有为什么 expense 汇总时要跳过已经作废的记录？我猜这两处都是为了性能。别改文件，讲讲原因就行。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 44.7,
+ "usage": {
+  "input_tokens": 97490,
+  "cached_input_tokens": 72576,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 826,
+  "reasoning_output_tokens": 125
+ },
+ "final": "你猜的“为了性能”不符合现有证据。这两处分别是在防止存入认不出来的任务，以及防止把已作废的支出算进总额。\n\n- **queue 拒绝空标题，作者明确写过原因。** 提交 `8346f91` 说：“因为会存进一条空白任务，自己对不上是哪一件。不是为了更快，也不是为了省地方。”例如添加标题 `\"   \"`，[queue_cli.py 第 24 行](<project>/queue_cli.py:24) 会发现里面没有文字，报错退出，不保存这条任务。\n\n- **expense 跳过作废记录，是文档规定的统计规则。** [README.md 第 18 行](<project>/README.md:18) 规定作废后仍保留记录，但汇总只统计未作废的。例如只记了一笔午餐 1250 分，再将它作废，`list` 仍能看到这笔，`summary` 的记录数和总额都应为 0。否则作废了还算支出，总额就错了。提交记录没有进一步解释设计动机；从文档和代码看，这是为了算对账，没有证据表明是为了性能。",
+ "commentary": [
+  "我会用 teach 技能，查看 queue 和 expense 的相关代码，确认这两处判断的原因；不改文件。"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*queue*' -g '*expense*' -g 'package.json' -g 'README*'\"",
+  "/bin/zsh -lc 'cat queue_cli.py expense_cli.py README.md'",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md; rg --files'",
+  "/bin/zsh -lc 'git log -8 --oneline; git log --all --oneline -- queue_cli.py expense_cli.py'",
+  "/bin/zsh -lc 'nl -ba queue_cli.py; nl -ba expense_cli.py; nl -ba README.md; cat tests/test_smoke.py'",
+  "/bin/zsh -lc 'git show 8346f91 -- queue_cli.py; git show b97eeae --format=fuller --stat; git log --format=fuller -- expense_cli.py README.md'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_5\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'git log -8 --oneline; git log --all --oneline -- queue_cli.py expense_cli.py'\", \"aggregated_output\": \"git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\\ngit: error: couldn't create cache file '/tmp/xcrun_db-EA97IHP5' (errno=Operatio",
+  "{\"id\": \"item_7\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'git show 8346f91 -- queue_cli.py; git show b97eeae --format=fuller --stat; git log --format=fuller -- expense_cli.py README.md'\", \"aggregated_output\": \"git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\\ngit: error: couldn't create c"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a223-be49-7e02-abc9-faa4efb6bd6c",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "digest_after": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "head_before": "8346f918f4069cd014a7d621e2a446ed92f0b016",
+  "head_after": "8346f918f4069cd014a7d621e2a446ed92f0b016",
+  "commits_before": "2",
+  "commits_after": "2",
+  "unchanged": true
+ },
+ "status": "ok"
+}

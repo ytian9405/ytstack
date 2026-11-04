@@ -1,0 +1,870 @@
+{
+ "count": 108,
+ "refuse_at": 290,
+ "calls": [
+  {
+   "n": 1,
+   "job": "K1-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:50:34+0800"
+  },
+  {
+   "n": 2,
+   "job": "K1-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:50:34+0800"
+  },
+  {
+   "n": 3,
+   "job": "T2-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:50:34+0800"
+  },
+  {
+   "n": 4,
+   "job": "T2-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:50:34+0800"
+  },
+  {
+   "n": 5,
+   "job": "K1-sol-treatment-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:51:52+0800"
+  },
+  {
+   "n": 6,
+   "job": "K1-sol-control-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:51:59+0800"
+  },
+  {
+   "n": 7,
+   "job": "H1-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:53:29+0800"
+  },
+  {
+   "n": 8,
+   "job": "H1-sol-treatment-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:54:17+0800"
+  },
+  {
+   "n": 9,
+   "job": "K1-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:55:55+0800"
+  },
+  {
+   "n": 10,
+   "job": "K1-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 11,
+   "job": "K1-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 12,
+   "job": "K1-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 13,
+   "job": "K2-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 14,
+   "job": "K2-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 15,
+   "job": "K2-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 16,
+   "job": "K2-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:55:56+0800"
+  },
+  {
+   "n": 17,
+   "job": "K2-sol-control-r2",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:56:41+0800"
+  },
+  {
+   "n": 18,
+   "job": "K2-sol-treatment-r2",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:56:45+0800"
+  },
+  {
+   "n": 19,
+   "job": "K2-sol-control-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:56:46+0800"
+  },
+  {
+   "n": 20,
+   "job": "K2-sol-treatment-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:56:46+0800"
+  },
+  {
+   "n": 21,
+   "job": "K1-astra-treatment-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:57:10+0800"
+  },
+  {
+   "n": 22,
+   "job": "K1-astra-control-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:57:10+0800"
+  },
+  {
+   "n": 23,
+   "job": "K2-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:57:13+0800"
+  },
+  {
+   "n": 24,
+   "job": "K1-sol-control-r2",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:57:13+0800"
+  },
+  {
+   "n": 25,
+   "job": "K1-sol-treatment-r2",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:57:14+0800"
+  },
+  {
+   "n": 26,
+   "job": "K2-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:57:19+0800"
+  },
+  {
+   "n": 27,
+   "job": "H1-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:57:33+0800"
+  },
+  {
+   "n": 28,
+   "job": "H1-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:57:37+0800"
+  },
+  {
+   "n": 29,
+   "job": "H1-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:57:39+0800"
+  },
+  {
+   "n": 30,
+   "job": "H1-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:57:40+0800"
+  },
+  {
+   "n": 31,
+   "job": "H1-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:57:47+0800"
+  },
+  {
+   "n": 32,
+   "job": "T1-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:57:53+0800"
+  },
+  {
+   "n": 33,
+   "job": "K2-astra-control-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:58:19+0800"
+  },
+  {
+   "n": 34,
+   "job": "H1-sol-control-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:58:19+0800"
+  },
+  {
+   "n": 35,
+   "job": "H1-sol-treatment-r2",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:58:24+0800"
+  },
+  {
+   "n": 36,
+   "job": "K2-astra-treatment-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:58:38+0800"
+  },
+  {
+   "n": 37,
+   "job": "T1-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:58:51+0800"
+  },
+  {
+   "n": 38,
+   "job": "H1-astra-control-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:59:05+0800"
+  },
+  {
+   "n": 39,
+   "job": "H1-astra-treatment-r1",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:59:19+0800"
+  },
+  {
+   "n": 40,
+   "job": "T1-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:59:22+0800"
+  },
+  {
+   "n": 41,
+   "job": "T1-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:59:26+0800"
+  },
+  {
+   "n": 42,
+   "job": "H1-sol-control-r2",
+   "phase": "resume",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-03T23:59:32+0800"
+  },
+  {
+   "n": 43,
+   "job": "T1-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:59:40+0800"
+  },
+  {
+   "n": 44,
+   "job": "T1-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-03T23:59:58+0800"
+  },
+  {
+   "n": 45,
+   "job": "T2-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:00:04+0800"
+  },
+  {
+   "n": 46,
+   "job": "T2-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:00:13+0800"
+  },
+  {
+   "n": 47,
+   "job": "T2-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:00:18+0800"
+  },
+  {
+   "n": 48,
+   "job": "T2-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:00:28+0800"
+  },
+  {
+   "n": 49,
+   "job": "I1-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:00:39+0800"
+  },
+  {
+   "n": 50,
+   "job": "I1-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:00:56+0800"
+  },
+  {
+   "n": 51,
+   "job": "I1-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:00:58+0800"
+  },
+  {
+   "n": 52,
+   "job": "I1-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:01:11+0800"
+  },
+  {
+   "n": 53,
+   "job": "I1-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:01:18+0800"
+  },
+  {
+   "n": 54,
+   "job": "I1-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:01:26+0800"
+  },
+  {
+   "n": 55,
+   "job": "J1-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:01:30+0800"
+  },
+  {
+   "n": 56,
+   "job": "J1-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:01:42+0800"
+  },
+  {
+   "n": 57,
+   "job": "J1-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:01:46+0800"
+  },
+  {
+   "n": 58,
+   "job": "J1-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:02:03+0800"
+  },
+  {
+   "n": 59,
+   "job": "J1-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:02:04+0800"
+  },
+  {
+   "n": 60,
+   "job": "J1-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:02:40+0800"
+  },
+  {
+   "n": 61,
+   "job": "trig-ketchup-y1-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 62,
+   "job": "trig-ketchup-y4-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 63,
+   "job": "trig-ketchup-y4-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 64,
+   "job": "trig-ketchup-y3-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 65,
+   "job": "trig-ketchup-y2-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 66,
+   "job": "trig-ketchup-y3-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 67,
+   "job": "trig-ketchup-y2-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 68,
+   "job": "trig-ketchup-y1-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:04:33+0800"
+  },
+  {
+   "n": 69,
+   "job": "trig-ketchup-n1-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:05:07+0800"
+  },
+  {
+   "n": 70,
+   "job": "trig-ketchup-n1-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:05:12+0800"
+  },
+  {
+   "n": 71,
+   "job": "trig-ketchup-n2-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:05:13+0800"
+  },
+  {
+   "n": 72,
+   "job": "trig-ketchup-n2-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:05:22+0800"
+  },
+  {
+   "n": 73,
+   "job": "trig-ketchup-n3-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:05:26+0800"
+  },
+  {
+   "n": 74,
+   "job": "trig-ketchup-n3-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:05:43+0800"
+  },
+  {
+   "n": 75,
+   "job": "trig-ketchup-n4-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:05:47+0800"
+  },
+  {
+   "n": 76,
+   "job": "trig-ketchup-n4-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:05:51+0800"
+  },
+  {
+   "n": 77,
+   "job": "trig-teach-y1-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:06:00+0800"
+  },
+  {
+   "n": 78,
+   "job": "trig-teach-y1-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:06:02+0800"
+  },
+  {
+   "n": 79,
+   "job": "trig-teach-y2-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:06:09+0800"
+  },
+  {
+   "n": 80,
+   "job": "trig-teach-y2-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:06:24+0800"
+  },
+  {
+   "n": 81,
+   "job": "trig-teach-y3-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:06:29+0800"
+  },
+  {
+   "n": 82,
+   "job": "trig-teach-y3-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:06:48+0800"
+  },
+  {
+   "n": 83,
+   "job": "trig-teach-y4-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:06:50+0800"
+  },
+  {
+   "n": 84,
+   "job": "trig-teach-y4-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:06:55+0800"
+  },
+  {
+   "n": 85,
+   "job": "trig-teach-n1-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:06:57+0800"
+  },
+  {
+   "n": 86,
+   "job": "trig-teach-n1-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:07:01+0800"
+  },
+  {
+   "n": 87,
+   "job": "trig-teach-n2-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:07:23+0800"
+  },
+  {
+   "n": 88,
+   "job": "trig-teach-n2-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:07:36+0800"
+  },
+  {
+   "n": 89,
+   "job": "trig-teach-n3-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:07:37+0800"
+  },
+  {
+   "n": 90,
+   "job": "trig-teach-n3-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:07:41+0800"
+  },
+  {
+   "n": 91,
+   "job": "trig-teach-n4-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:07:46+0800"
+  },
+  {
+   "n": 92,
+   "job": "trig-teach-n4-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:08:01+0800"
+  },
+  {
+   "n": 93,
+   "job": "trig-in-your-own-words-y1-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:08:11+0800"
+  },
+  {
+   "n": 94,
+   "job": "trig-in-your-own-words-y1-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:08:17+0800"
+  },
+  {
+   "n": 95,
+   "job": "trig-in-your-own-words-y2-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:08:31+0800"
+  },
+  {
+   "n": 96,
+   "job": "trig-in-your-own-words-y2-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:08:35+0800"
+  },
+  {
+   "n": 97,
+   "job": "trig-in-your-own-words-y3-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:08:39+0800"
+  },
+  {
+   "n": 98,
+   "job": "trig-in-your-own-words-y3-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:08:40+0800"
+  },
+  {
+   "n": 99,
+   "job": "trig-in-your-own-words-y4-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:09:03+0800"
+  },
+  {
+   "n": 100,
+   "job": "trig-in-your-own-words-y4-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:09:05+0800"
+  },
+  {
+   "n": 101,
+   "job": "trig-in-your-own-words-n1-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:09:05+0800"
+  },
+  {
+   "n": 102,
+   "job": "trig-in-your-own-words-n1-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:09:15+0800"
+  },
+  {
+   "n": 103,
+   "job": "trig-in-your-own-words-n2-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:09:26+0800"
+  },
+  {
+   "n": 104,
+   "job": "trig-in-your-own-words-n2-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:09:32+0800"
+  },
+  {
+   "n": 105,
+   "job": "trig-in-your-own-words-n3-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:09:38+0800"
+  },
+  {
+   "n": 106,
+   "job": "trig-in-your-own-words-n3-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:09:41+0800"
+  },
+  {
+   "n": 107,
+   "job": "trig-in-your-own-words-n4-sol",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-04T00:09:52+0800"
+  },
+  {
+   "n": 108,
+   "job": "trig-in-your-own-words-n4-astra",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-04T00:10:04+0800"
+  }
+ ]
+}

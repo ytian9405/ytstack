@@ -1,0 +1,62 @@
+{
+ "id": "trig-teach-y3-astra",
+ "kind": "trigger",
+ "case": "I1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "为什么要这样设计",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "expect_skill": "teach",
+ "should_trigger": true,
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 73.0,
+ "usage": {
+  "input_tokens": 20340,
+  "cached_input_tokens": 13184,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 66,
+  "reasoning_output_tokens": 24
+ },
+ "final": "你指的是哪一处设计？把相关代码、截图或那段说明贴过来，我再讲为什么这样做、解决了什么问题，以及有什么代价。",
+ "commentary": [],
+ "skills_read": [],
+ "commands": [],
+ "event_types": [
+  "item.completed",
+  "item:agent_message",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a22a-9358-7cf2-9a83-3df8e4801f94",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "digest_after": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "head_before": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "head_after": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

@@ -1,0 +1,76 @@
+{
+ "id": "trig-teach-y1-astra",
+ "kind": "trigger",
+ "case": "I1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "把我当小白，讲讲这个是怎么工作的",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "expect_skill": "teach",
+ "should_trigger": true,
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 99.3,
+ "usage": {
+  "input_tokens": 69317,
+  "cached_input_tokens": 46720,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 922,
+  "reasoning_output_tokens": 88
+ },
+ "final": "我先按你说的“这个”是当前项目来讲。它有两个小程序：[expense_cli.py](<project>/expense_cli.py) 记支出，`queue_cli.py` 记待办；都是在终端里输入命令，把数据保存在电脑上的文件里，不需要账号或联网。\n\n先看记账。假设你要记一笔“午餐花了 12.50 元”，输入：\n\n```sh\npython3 expense_cli.py --state /tmp/my-ledger.json add \"午餐\" --cents 1250 --category food\n```\n\n这句话就是：运行记账程序，把账本放在 `/tmp/my-ledger.json`，添加一笔午餐，金额 1250 分，类别是餐饮。程序依次做这些事：\n\n1. **打开账本。** 读取指定文件里的旧记录；文件还不存在，就从空账本开始。\n2. **检查输入。** 金额必须是正整数，标题和类别不能全是空格。检查不通过就报错，不保存这笔支出。\n3. **加入新记录。** 给午餐分配一个编号；空账本的第一笔是 `1`，并标记为“未作废”。\n4. **保存并显示结果。** 把包含新记录的整本账写回文件，再显示刚添加的记录。程序随后退出，下次运行时重新读这个文件，所以旧账还在。\n\n以后对同一个账本执行 `list`，就能看到所有记录；执行 `summary`，就会重新计算有效支出的总额和各类别金额。执行 `void 1` 会把第 1 笔标记为作废，记录仍然能查到，但不再计入总额。\n\n待办程序 [queue_cli.py](<project>/queue_cli.py) 也是“读文件、修改记录、保存”的过程，只是保存任务标题和完成状态，用 `complete` 标记完成。待办和账本要用不同的文件，因为两种记录包含的内容不同。",
+ "commentary": [
+  "我会按 `teach` 技能先看看当前项目的文件，再用不需要编程基础的话解释它怎么工作。"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g 'README*' -g 'package.json' -g 'pyproject.toml' -g 'Cargo.toml' -g 'go.mod' -g '\"'!node_modules'\"' -g '\"'!vendor'\"' -g '\"'!package-lock.json'\"' -g '\"'!pnpm-lock.yaml'\"' && ls -la\"",
+  "/bin/zsh -lc 'cat README.md && nl -ba expense_cli.py && nl -ba queue_cli.py && rg --files tests && cat tests/*'",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md && git log -5 --oneline && git status --short'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_4\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md && git log -5 --oneline && git status --short'\", \"aggregated_output\": \"---\\nname: unslop\\ndescription: Cut AI tells from any writing.\\n---\\n\\n# Unslop\\n\\nEdit text to remove AI patterns. Scan for the patterns below, then rewrite. Preserve meaning and ma"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a229-e58b-7ed1-8bd5-f7b54aeb9fb7",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "digest_after": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "head_before": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "head_after": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

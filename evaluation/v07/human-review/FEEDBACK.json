@@ -1,0 +1,97 @@
+{
+ "recorded_at": "2026-11-04T01:28:49.651Z",
+ "rater": "user",
+ "records": [
+  {
+   "question": 1,
+   "source": "K1",
+   "preferred_alias": "乙",
+   "preferred_arm": "treatment",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "control",
+   "arm_B": "treatment",
+   "chars_A": 229,
+   "chars_B": 379,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 2,
+   "source": "K2",
+   "preferred_alias": "甲",
+   "preferred_arm": "treatment",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "treatment",
+   "arm_B": "control",
+   "chars_A": 557,
+   "chars_B": 386,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 3,
+   "source": "H1",
+   "preferred_alias": "甲",
+   "preferred_arm": "control",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "control",
+   "arm_B": "treatment",
+   "chars_A": 232,
+   "chars_B": 118,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 4,
+   "source": "J1",
+   "preferred_alias": "甲",
+   "preferred_arm": "treatment",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "treatment",
+   "arm_B": "control",
+   "chars_A": 304,
+   "chars_B": 182,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 5,
+   "source": "T1",
+   "preferred_alias": "甲",
+   "preferred_arm": "control",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "control",
+   "arm_B": "treatment",
+   "chars_A": 527,
+   "chars_B": 576,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 6,
+   "source": "T2",
+   "preferred_alias": "甲",
+   "preferred_arm": "treatment",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "treatment",
+   "arm_B": "control",
+   "chars_A": 381,
+   "chars_B": 310,
+   "reason_verbatim": ""
+  },
+  {
+   "question": 7,
+   "source": "I1",
+   "preferred_alias": "乙",
+   "preferred_arm": "control",
+   "A": "甲",
+   "B": "乙",
+   "arm_A": "treatment",
+   "arm_B": "control",
+   "chars_A": 260,
+   "chars_B": 306,
+   "reason_verbatim": ""
+  }
+ ]
+}

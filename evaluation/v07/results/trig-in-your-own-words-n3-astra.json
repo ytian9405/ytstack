@@ -1,0 +1,62 @@
+{
+ "id": "trig-in-your-own-words-n3-astra",
+ "kind": "trigger",
+ "case": "I1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "先复述一下我的目标",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "expect_skill": "in-your-own-words",
+ "should_trigger": false,
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 68.6,
+ "usage": {
+  "input_tokens": 20338,
+  "cached_input_tokens": 13184,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 76,
+  "reasoning_output_tokens": 18
+ },
+ "final": "你目前还没说具体要完成什么任务，只明确了沟通要求：**用中文、说人话、简短清楚，让你不用读代码也能理解结果、做决定。**\n\n具体的项目目标，我现在还不知道。",
+ "commentary": [],
+ "skills_read": [],
+ "commands": [],
+ "event_types": [
+  "item.completed",
+  "item:agent_message",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a22d-2925-7cd3-b394-a01e427da480",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "digest_after": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "head_before": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "head_after": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

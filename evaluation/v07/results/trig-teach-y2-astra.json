@@ -1,0 +1,74 @@
+{
+ "id": "trig-teach-y2-astra",
+ "kind": "trigger",
+ "case": "I1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "带我弄懂这块代码",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "expect_skill": "teach",
+ "should_trigger": true,
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 107.1,
+ "usage": {
+  "input_tokens": 68024,
+  "cached_input_tokens": 48256,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 517,
+  "reasoning_output_tokens": 53
+ },
+ "final": "当前目录里有两个独立的小程序，你指的是哪一个？\n\n- [expense_cli.py](<project>/expense_cli.py)：记账，能添加支出、查看账单、作废记录和汇总金额。\n- [queue_cli.py](<project>/queue_cli.py)：记待办，能添加任务、查看列表和标记完成。\n\n也可以直接贴出你想弄懂的几行，我会顺着一次实际操作，讲清数据怎么读进来、怎么处理、最后存到哪里。",
+ "commentary": [
+  "我会按 teach 技能先查看当前目录的代码结构，确认你指的是哪一块，再结合代码讲清它做了什么。"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g '\"'!node_modules'\"' -g '\"'!.git'\"' -g '\"'!vendor'\"' | head -80\"",
+  "/bin/zsh -lc 'cat README.md; cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc \"wc -l expense_cli.py queue_cli.py tests/test_smoke.py; sed -n '1,220p' expense_cli.py; sed -n '1,240p' queue_cli.py; cat tests/test_smoke.py\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a22a-8143-7422-9efd-eaef1b8e9159",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "digest_after": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "head_before": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "head_after": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

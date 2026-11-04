@@ -1,0 +1,64 @@
+{
+ "id": "T2-astra-control-r1",
+ "kind": "blind",
+ "case": "T2",
+ "arm": "control",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "为什么 queue 加任务时要拒绝空标题？还有为什么 expense 汇总时要跳过已经作废的记录？我猜这两处都是为了性能。别改文件，讲讲原因就行。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 105.0,
+ "usage": {
+  "input_tokens": 63113,
+  "cached_input_tokens": 53504,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 461,
+  "reasoning_output_tokens": 0
+ },
+ "final": "你的猜测不对，这两处主要是为了**任务有内容、账目算得对**。\n\n- **`queue` 拒绝空标题**：避免保存一条看不出要做什么的待办。[queue_cli.py 第 24 行](<project>/queue_cli.py:24) 会检查标题，空字符串和全是空格的标题都会报错，不会新增任务。\n- **`expense` 汇总跳过作废记录**：作废表示这笔支出不再算数，但记录仍保留，方便回看。如果汇总继续计入，支出总额、记录数和分类金额都会算错。[expense_cli.py 第 53 行](<project>/expense_cli.py:53) 因此只统计未作废记录；例如两笔支出分别是 20 元和 30 元，30 元那笔作废后，应汇总为 1 笔、20 元。\n\n即使只有一两条数据，这两条规则也有必要，所以关键是结果正确，不是运行速度。",
+ "commentary": [
+  "我先看一下 `queue` 和 `expense` 的代码及相关测试，确认这两处判断的实际用途。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"pwd; rg -n \\\"queue|expense\\\" --glob '\"'!package-lock.json'\"' --glob '\"'!yarn.lock'\"' --glob '\"'!pnpm-lock.yaml'\"' .\"",
+  "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*.py' -g 'README.md'; nl -ba queue_cli.py; nl -ba expense_cli.py; cat README.md; cat tests/test_smoke.py\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a224-da15-7e53-962c-ee71c0c74cc1",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "d016068fac2e06ea4c69991f39da6c5d5b8d76b214fc96e8add674420dfcae2f",
+  "digest_after": "d016068fac2e06ea4c69991f39da6c5d5b8d76b214fc96e8add674420dfcae2f",
+  "head_before": "8346f918f4069cd014a7d621e2a446ed92f0b016",
+  "head_after": "8346f918f4069cd014a7d621e2a446ed92f0b016",
+  "commits_before": "2",
+  "commits_after": "2",
+  "unchanged": true
+ },
+ "status": "ok"
+}

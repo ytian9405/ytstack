@@ -1,0 +1,62 @@
+{
+ "id": "trig-in-your-own-words-n2-astra",
+ "kind": "trigger",
+ "case": "I1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "用你的话说说我要干嘛",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "expect_skill": "in-your-own-words",
+ "should_trigger": false,
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 78.2,
+ "usage": {
+  "input_tokens": 20336,
+  "cached_input_tokens": 13184,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 89,
+  "reasoning_output_tokens": 0
+ },
+ "final": "你要我用自己的话复述你的意图，确认我有没有理解你。\n\n目前你只给了沟通要求，还没交代具体任务：**用中文、说人话、简短但讲清理由；先说结果和影响，需要你决定时，把选项和后果说清楚。** 默认你负责做决定，但没读过代码，也不一定懂相关领域。",
+ "commentary": [],
+ "skills_read": [],
+ "commands": [],
+ "event_types": [
+  "item.completed",
+  "item:agent_message",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a22d-2036-7463-9a83-f37ff8993c28",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "digest_after": "358d44e53e1b23412991ef09389f52ab79aca32f846ecb953e088f0812f84cc4",
+  "head_before": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "head_after": "b2036689b8403a7a45d5532ea8f3020f1b5a8d35",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

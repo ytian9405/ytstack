@@ -1,0 +1,72 @@
+{
+ "id": "T1-sol-control-r1",
+ "kind": "blind",
+ "case": "T1",
+ "arm": "control",
+ "model": "gpt-6.1-sol",
+ "rep": 1,
+ "prompt": "把我当小白，讲讲队列里下一条要做的是怎么挑出来的。data 目录里有一份现成的例子。我就想听懂。先别改文件。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "两组共用本机全局技能和 ~/.codex/AGENTS.md，评测没有改它们；全局发现路径里没有 in-your-own-words、ketchup、teach。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "technical-bro",
+  "unslop"
+ ],
+ "control_new_skill_paths": [],
+ "exit": 0,
+ "seconds": 58.3,
+ "usage": {
+  "input_tokens": 133903,
+  "cached_input_tokens": 121984,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1354,
+  "reasoning_output_tokens": 243
+ },
+ "final": "**按 `data` 目录里的现成例子，下一条会选「取快递」，编号 4。**\n\n可以把它想成“轮流点名”：记住上次点到谁，再往后找。对照 [tasks.json](<project>/data/tasks.json)，具体是这样挑的：\n\n1. **先排除做完的。**「倒垃圾」标了 `done: true`，不再参与。\n2. **再看 `pin` 标记。**「回邮件」标了 `pin: true`。当前代码会先跳过它，所以剩下「买电池」1 和「取快递」4。这个地方容易误会：`pin` 在当前代码里并不表示优先做。\n3. **从上次的位置往后找。** [focus.json](<project>/data/focus.json) 记着上次选到编号 1；剩下的任务里，比 1 大的最小编号是 4，所以选「取快递」。\n\n选出 4 后，程序会把“上次选到谁”更新成 4。再找下一条时，后面没有了，就回到编号 1。\n\n**选中不等于做完。** 如果一直不标完成，就会在「取快递 → 买电池 → 取快递」之间循环，「回邮件」会一直被跳过。\n\n等没有未完成的普通任务时，才会选带 `pin` 的任务，选其中编号最小的；所有任务都做完了，就提示“没有还没做的任务”。",
+ "commentary": [
+  "我先找出挑选“下一条”的代码，再对照 `data` 目录里的例子，用具体数据讲清楚。不会改文件。"
+ ],
+ "skills_read": [],
+ "commands": [
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '\"'!node_modules'\"' -g '\"'!vendor'\"' -g '\"'!dist'\"' -g '\"'!build'\"' -g '\"'!package-lock.json'\"' -g '\"'!yarn.lock'\"' -g '\"'!pnpm-lock.yaml'\"' | head -160\"",
+  "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"' -g '\"'!node_modules'\"' -g '\"'!vendor'\"' -g '\"'!dist'\"' -g '\"'!build'\"' -g '\"'!package-lock.json'\"' -g '\"'!yarn.lock'\"' -g '\"'!pnpm-lock.yaml'\"'\"",
+  "/bin/zsh -lc \"cat README.md && sed -n '1,280p' tests/test_smoke.py\"",
+  "/bin/zsh -lc \"cat AGENTS.md && sed -n '1,260p' queue_cli.py\"",
+  "/bin/zsh -lc \"cat data/tasks.json && cat data/focus.json && sed -n '1,260p' focus.py\"",
+  "/bin/zsh -lc \"python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nfrom focus import pick_next\nrows = json.loads(Path('data/tasks.json').read_text())\ncursor = json.loads(Path('data/focus.json').read_text())['cursor']\nfor i in range(4):\n    chosen = pick_next(rows, cursor)\n    print({'cursor_before': cursor, 'chosen': chosen})\n    cursor = chosen['id']\nremaining_pinned = [dict(row, done=True) i",
+  "/bin/zsh -lc \"python3 -B -c 'import json; from pathlib import Path; from focus import pick_next; rows=json.loads(Path(\\\"data/tasks.json\\\").read_text()); cursor=json.loads(Path(\\\"data/focus.json\\\").read_text())[\\\"cursor\\\"]; print(\\\"当前下一条：\\\",pick_next(rows,cursor)); print(\\\"下一次：\\\",pick_next(rows,4)); print(\\\"没有上次记录：\\\",pick_next(rows,None)); remaining=[dict(r,done=True) if r[\\\"id\\\"] in (1,4) else r f"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_6\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc \\\"python3 -B - <<'PY'\\nimport json\\nfrom pathlib import Path\\nfrom focus import pick_next\\nrows = json.loads(Path('data/tasks.json').read_text())\\ncursor = json.loads(Path('data/focus.json').read_text())['cursor']\\nfor i in range(4):\\n    chosen = pick_next(rows, cursor)\\n    print({'curs",
+  "{\"id\": \"item_7\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc \\\"python3 -B -c 'import json; from pathlib import Path; from focus import pick_next; rows=json.loads(Path(\\\\\\\"data/tasks.json\\\\\\\").read_text()); cursor=json.loads(Path(\\\\\\\"data/focus.json\\\\\\\").read_text())[\\\\\\\"cursor\\\\\\\"]; print(\\\\\\\"当前下一条：\\\\\\\",pick_next(rows,cursor)); print(\\\\\\\"下一次：\\\\\\\",p"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a221-9840-79b2-a27e-ab223cc58779",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "5ba784fc6093dc65dcb242dd54b2fdaaab7e419510c2f4316ff9da9e9d4c4011",
+  "digest_after": "5ba784fc6093dc65dcb242dd54b2fdaaab7e419510c2f4316ff9da9e9d4c4011",
+  "head_before": "764492702f34ad178e4bde5c8731c47b360ca11a",
+  "head_after": "764492702f34ad178e4bde5c8731c47b360ca11a",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "status": "ok"
+}

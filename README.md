@@ -77,6 +77,6 @@ python3 -m unittest discover -s ytstack/tests -v
 claude plugin validate ./ytstack
 ```
 
-第三条需要本机已有 Claude CLI。它验证插件结构，不能代替真实模型行为检查。技能另经过 skill-creator 的元数据检查及独立代理前向试用；结果与未覆盖范围见 `evaluation/`，v0.2 的效果见 [evaluation/v02/REPORT.md](evaluation/v02/REPORT.md)，第二轮盲看见 [evaluation/v03/REPORT.md](evaluation/v03/REPORT.md)，第三轮见 [evaluation/v04/REPORT.md](evaluation/v04/REPORT.md)。规则依据的用户偏好见 [voice/PREFERENCES.md](voice/PREFERENCES.md)。验收标准见 [ACCEPTANCE.md](ACCEPTANCE.md)。
+第三条需要本机已有 Claude CLI。它验证插件结构，不能代替真实模型行为检查。技能另经过 skill-creator 的元数据检查及独立代理前向试用；结果与未覆盖范围见 `evaluation/`，v0.2 的效果见 [evaluation/v02/REPORT.md](evaluation/v02/REPORT.md)，第二轮盲看见 [evaluation/v03/REPORT.md](evaluation/v03/REPORT.md)，第三轮见 [evaluation/v04/REPORT.md](evaluation/v04/REPORT.md)，三个沟通技能见 [evaluation/v07/REPORT.md](evaluation/v07/REPORT.md)。规则依据的用户偏好见 [voice/PREFERENCES.md](voice/PREFERENCES.md)。验收标准见 [ACCEPTANCE.md](ACCEPTANCE.md)。
 
 来源、许可证和改动边界见 [NOTICE.md](NOTICE.md) 与 `provenance.json`。本包不安装全局技能，不包含总路由器、模型配置或自动启动 hooks。
