@@ -1,0 +1,111 @@
+{
+ "id": "T1-astra-treatment-r1",
+ "kind": "blind",
+ "case": "T1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "把我当小白讲讲 void-title 这条命令。你就着 data/ledger.json 里的账，说它碰到这些记录时会怎么走。文件保持原样。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 55.3,
+ "usage": {
+  "input_tokens": 77352,
+  "cached_input_tokens": 66688,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1022,
+  "reasoning_output_tokens": 94
+ },
+ "final": "`void-title` 用来按标题把账目标成“作废”：记录仍然保留，但以后算合计时会排除它。**同名的账会一起作废，不只处理第一笔。**\n\n拿你现在的 [data/ledger.json](<path>/data/ledger.json) 来说，假设执行下面这条命令。下面是按代码推演，没有实际执行：\n\n```sh\npython3 expense_cli.py --state data/ledger.json void-title 电池\n```\n\n1. `--state` 指定要处理的账本，程序先把三条记录全部读进来。\n2. 程序按文件里的顺序找标题等于“电池”的记录：\n\n   | 记录 | 金额 | 会怎么处理 |\n   |---|---:|---|\n   | `id: 1`，电池 | 100 分 | 选中 |\n   | `id: 2`，牙膏 | 250 分 | 跳过 |\n   | `id: 3`，电池 | 400 分 | 也选中，金额不同不影响 |\n\n3. 找完后，把两笔电池的 `voided` 从 `false` 改成 `true`，也就是标成已作废。牙膏保持原样。随后把整本账保存回 `data/ledger.json`，屏幕上输出两笔已作废的电池记录。\n\n这样一来，`list` 仍会列出三笔账；`summary` 只算牙膏，笔数从 3 变成 1，总额从 750 分变成 250 分。对应处理在 [expense_cli.py 第 54 行](<path>/expense_cli.py:54)。\n\n容易弄错的地方：\n\n- 标题必须完全相同。传入“电”或带空格的 `\"电池 \"` 都找不到，程序会报 `unknown expense title`，意思是“找不到这个账目标题”，不会保存。\n- 再执行一次“作废电池”，它仍会选中这两笔，保存并输出；不会恢复它们，也不会提示“已经作废”。\n- 如果只想作废 400 分的那笔电池，应按编号用 `void 3`；用 `void-title 电池` 会把 100 分的那笔也作废。",
+ "commentary": [
+  "我会按 teach 技能的要求，先读 `void-title` 的代码和 `data/ledger.json`，再用账里的实际记录讲它会怎么处理，文件保持原样。\n"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat <path>/.agents/skills/teach/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*void*' -g '*ledger*' -g 'SKILL.md' -g 'package.json' -g 'pyproject.toml' -g 'README*'\"",
+  "/bin/zsh -lc 'cat <path>/.agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc 'cat data/ledger.json && cat README.md && cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'cat AGENTS.md && rg -n \"void-title|void_title|voidTitle\" . && rg --files'",
+  "/bin/zsh -lc 'nl -ba expense_cli.py && nl -ba tests/test_smoke.py && git log -4 --oneline -- expense_cli.py'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_5\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'nl -ba expense_cli.py && nl -ba tests/test_smoke.py && git log -4 --oneline -- expense_cli.py'\", \"aggregated_output\": \"     1\\t#!/usr/bin/env python3\\n     2\\t\\\"\\\"\\\"A small persistent expense ledger with a public JSON CLI.\\\"\\\"\\\"\\n     3\\timport argparse\\n     4\\timport json\\n     5\\tfrom"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a45b-4197-75c3-b771-f008cacb9bd5",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "f56393f158839e7622353124b0ad56be898e70a1a9288146049e027254b034ee",
+  "digest_after": "f56393f158839e7622353124b0ad56be898e70a1a9288146049e027254b034ee",
+  "head_before": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "head_after": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "march_tracked": false,
+  "march_ignored": false,
+  "worktree_has_note": false,
+  "head_has_note": false
+ },
+ "status": "ok"
+}

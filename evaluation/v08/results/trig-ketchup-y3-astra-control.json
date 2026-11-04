@@ -1,0 +1,119 @@
+{
+ "id": "trig-ketchup-y3-astra-control",
+ "kind": "trigger",
+ "case": "I1",
+ "arm": "control",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "以后的会话用得上。请写交接说明，只要现在的状态，不要写我们刚才怎么讨论的。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "expect_skill": "ketchup",
+ "should_trigger": true,
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 60.1,
+ "usage": {
+  "input_tokens": 110227,
+  "cached_input_tokens": 91904,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1010,
+  "reasoning_output_tokens": 62
+ },
+ "final": "当前环境只读，无法保存 `HANDOFF.md`。以下正文可供后续会话使用。\n\n```markdown\n# 交接说明\n\n## 目的\n保存项目当前状态，供后续会话继续工作。目前没有已确认的功能修改任务。\n\n## 现在到哪了\n项目目录：<path>\n当前分支：main。\n\n- queue_cli.py 提供待办新增、列表和完成操作，已核对代码，未运行验证。\n- expense_cli.py 提供记账、列表、作废和汇总操作。金额单位为分，汇总排除已作废记录。\n- 已运行 python3 -B expense_cli.py --state data/ledger.json summary，成功返回有效记录 2 笔、合计 47800 分，其中办公 45000 分、吃 2800 分。\n- tests/test_smoke.py 只检查空账本汇总，本次未运行；测试需要创建临时目录，当前环境不允许写入。\n- Git 未显示已跟踪文件有修改；AGENTS.md 和 .agents/ 尚未加入版本记录。\n\n## 卡点和等用户拍板的事\n当前会话只有读取权限，交接正文尚未保存为 HANDOFF.md。\n没有已知的方案选择等待决定。\n\n## 下一步\n1. 在允许写入的会话中，将本说明保存到项目根目录 HANDOFF.md，重新读取确认内容完整。\n2. 当前没有已确认的开发待办。后续修改范围需由用户指定。\n\n## 接着干需要什么\nPython 3。两个脚本仅使用标准库。\n运行命令时通过 --state 指定数据文件。\n项目说明见 README.md；对话要求见 AGENTS.md。\n\n## 注意\n- data/ledger.json 已有账目，验证新增和作废功能时使用独立临时文件。\n- 已验证现有账本汇总，不代表新增、作废和待办功能都已验证。\n- 当前目录位于系统临时目录；换电脑或目录被清理后，需要另行提供项目文件和交接说明。\n```",
+ "commentary": [
+  "我会按 ketchup 技能整理交接说明，先检查项目当前状态，只写已确认的结果和待办。\n",
+  "当前环境只允许读取文件，无法保存 `HANDOFF.md`。我会把可直接保存的正文放在回复里，并按 technical-bro 和 unslop 的写作要求整理。\n"
+ ],
+ "skills_read": [
+  "ketchup",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/ketchup/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/ketchup/SKILL.md'",
+  "/bin/zsh -lc \"pwd; git status --short; rg --files -g 'AGENTS.md' -g '*handoff*' -g '*HANDOFF*' -g '*交接*' -g 'README*' -g 'package.json' -g 'pyproject.toml' -g 'Cargo.toml'\"",
+  "/bin/zsh -lc 'cat .agents/skills/technical-bro/SKILL.md; cat AGENTS.md'",
+  "/bin/zsh -lc \"cat README.md; rg --files -g '\"'!.git'\"' -g '\"'!node_modules'\"'; git log -3 --oneline; git branch --show-current\"",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'cat queue_cli.py expense_cli.py tests/test_smoke.py data/ledger.json'",
+  "/bin/zsh -lc 'python3 -B expense_cli.py --state data/ledger.json summary'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_2\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc \\\"pwd; git status --short; rg --files -g 'AGENTS.md' -g '*handoff*' -g '*HANDOFF*' -g '*交接*' -g 'README*' -g 'package.json' -g 'pyproject.toml' -g 'Cargo.toml'\\\"\", \"aggregated_output\": \"<path>\\ngit: warning: confstr() fa",
+  "{\"id\": \"item_4\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc \\\"cat README.md; rg --files -g '\\\"'!.git'\\\"' -g '\\\"'!node_modules'\\\"'; git log -3 --oneline; git branch --show-current\\\"\", \"aggregated_output\": \"# 两个小工具\\n\\n`queue_cli.py` 记本地待办。`expense_cli.py` 记本地账，金额用分。从本目录运行，状态文件由 `--state` 指定。\\n\\n- 待办：`add`、`list`、`complete`\\n- 账本：`add`、`list`、`void`、",
+  "{\"id\": \"item_8\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'python3 -B expense_cli.py --state data/ledger.json summary'\", \"aggregated_output\": \"python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\\npython3: error: couldn't create cache file '/tmp/xcrun_db-zUuMfxiF' (errno=Operation not perm"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a460-9eb7-7d63-9ff8-2aa9f4e2b00a",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "7c82d038792071425535309d772c6044a5f9930047b17a4f78aeaa90a58565cc",
+  "digest_after": "7c82d038792071425535309d772c6044a5f9930047b17a4f78aeaa90a58565cc",
+  "head_before": "e7eb558dff3f386d499a9b5bca41be12a45f6c8a",
+  "head_after": "e7eb558dff3f386d499a9b5bca41be12a45f6c8a",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "e7eb558dff3f386d499a9b5bca41be12a45f6c8a",
+  "march_tracked": false,
+  "march_ignored": false,
+  "worktree_has_note": false,
+  "head_has_note": false
+ },
+ "status": "ok"
+}

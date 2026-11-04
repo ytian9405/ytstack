@@ -1,0 +1,24 @@
+{
+ "run_id": "H1-astra-control-r1",
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "followup_skills": [
+  "ketchup"
+ ],
+ "varied_skills_read": [
+  "ketchup"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/ketchup/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "matches_7fb9483": true,
+ "sentence": "H1-astra-control-r1 的 skills_read 读了项目里的 ketchup，命令路径不是全局 ~/.agents/skills，三个 SKILL.md 的 sha256 等于提交 7fb9483。"
+}

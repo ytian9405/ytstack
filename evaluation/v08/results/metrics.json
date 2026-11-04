@@ -1,0 +1,439 @@
+{
+ "codex_calls": 80,
+ "status": [
+  {
+   "id": "H1-sol-control-r1",
+   "case": "H1",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H1-sol-control-r2",
+   "case": "H1",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H1-astra-control-r1",
+   "case": "H1",
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H1-sol-treatment-r1",
+   "case": "H1",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H1-sol-treatment-r2",
+   "case": "H1",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H1-astra-treatment-r1",
+   "case": "H1",
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H2-sol-control-r1",
+   "case": "H2",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H2-sol-control-r2",
+   "case": "H2",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H2-astra-control-r1",
+   "case": "H2",
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H2-sol-treatment-r1",
+   "case": "H2",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H2-sol-treatment-r2",
+   "case": "H2",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "H2-astra-treatment-r1",
+   "case": "H2",
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": 0
+  },
+  {
+   "id": "T1-sol-control-r1",
+   "case": "T1",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T1-sol-control-r2",
+   "case": "T1",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T1-astra-control-r1",
+   "case": "T1",
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T1-sol-treatment-r1",
+   "case": "T1",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T1-sol-treatment-r2",
+   "case": "T1",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T1-astra-treatment-r1",
+   "case": "T1",
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T2-sol-control-r1",
+   "case": "T2",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T2-sol-control-r2",
+   "case": "T2",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T2-astra-control-r1",
+   "case": "T2",
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T2-sol-treatment-r1",
+   "case": "T2",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T2-sol-treatment-r2",
+   "case": "T2",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "T2-astra-treatment-r1",
+   "case": "T2",
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I1-sol-control-r1",
+   "case": "I1",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I1-sol-control-r2",
+   "case": "I1",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I1-astra-control-r1",
+   "case": "I1",
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I1-sol-treatment-r1",
+   "case": "I1",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I1-sol-treatment-r2",
+   "case": "I1",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I1-astra-treatment-r1",
+   "case": "I1",
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I2-sol-control-r1",
+   "case": "I2",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I2-sol-control-r2",
+   "case": "I2",
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I2-astra-control-r1",
+   "case": "I2",
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I2-sol-treatment-r1",
+   "case": "I2",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I2-sol-treatment-r2",
+   "case": "I2",
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "rep": 2,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  },
+  {
+   "id": "I2-astra-treatment-r1",
+   "case": "I2",
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "rep": 1,
+   "status": "ok",
+   "error": "",
+   "exit": 0,
+   "followup_exit": null
+  }
+ ],
+ "triggers": [
+  {
+   "arm": "control",
+   "model": "gpt-6.1-sol",
+   "should_hit": 4,
+   "should_n": 4,
+   "false_hit": 2,
+   "false_n": 4,
+   "missing": []
+  },
+  {
+   "arm": "control",
+   "model": "gpt-6-astra",
+   "should_hit": 4,
+   "should_n": 4,
+   "false_hit": 2,
+   "false_n": 4,
+   "missing": []
+  },
+  {
+   "arm": "treatment",
+   "model": "gpt-6.1-sol",
+   "should_hit": 4,
+   "should_n": 4,
+   "false_hit": 0,
+   "false_n": 4,
+   "missing": []
+  },
+  {
+   "arm": "treatment",
+   "model": "gpt-6-astra",
+   "should_hit": 4,
+   "should_n": 4,
+   "false_hit": 0,
+   "false_n": 4,
+   "missing": []
+  }
+ ]
+}

@@ -1,0 +1,104 @@
+{
+ "id": "I2-astra-treatment-r1",
+ "kind": "blind",
+ "case": "I2",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "$in-your-own-words 我想把我自己的支出和家里人的支出分开看，你先别改。一起花的那笔，先整笔记在我名下，不要拆成两半。别人先垫的，我想标一下是谁垫的，但不要从我的合计里拿掉。导出一份给对方看的时候，不要带上我自己随手写的备注。我怀疑现在分不开人，是因为所有账都堆在同一个文件里，不过也可能是我想多了。人的名字是写进类别，还是另开一栏，你先别选。你先用你的话说说，我到底要干嘛。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 28.2,
+ "usage": {
+  "input_tokens": 34045,
+  "cached_input_tokens": 24320,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 329,
+  "reasoning_output_tokens": 59
+ },
+ "final": "我的理解：你想把自己的支出和家里人的支出分开查看，让各自的合计看得清楚。\n\n- 目前按你的描述，账还分不清属于谁，这是你想解决的问题。\n- 一起花的那笔，先全额算在你名下，不拆成两半。\n- 别人先垫的钱，要记清是谁垫的，但这笔仍计入你的支出合计。\n- 导出给对方看的那份账，不带你自己随手写的备注；原来的备注仍保留。\n- **你的猜测**：分不开人可能是因为所有账都放在同一个文件里，这个原因还没有确认。\n- **先不定的事**：人的名字写进类别，还是另开一栏，暂时不选。这一轮只确认意思，不改动。",
+ "commentary": [
+  "我会按你点名的 `in-your-own-words` 技能，只复述理解，等你确认或纠正。\n"
+ ],
+ "skills_read": [
+  "in-your-own-words"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/in-your-own-words/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/in-your-own-words/SKILL.md'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a45e-aed0-7f90-a218-0be60eff60f4",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "a072b2987b4495c373ce222d3738a9fbffd678c6e9a0a5352ce7da1f1d73b5c7",
+  "digest_after": "a072b2987b4495c373ce222d3738a9fbffd678c6e9a0a5352ce7da1f1d73b5c7",
+  "head_before": "0cd3297eadc89c70a6eb6ab789711923485d7f75",
+  "head_after": "0cd3297eadc89c70a6eb6ab789711923485d7f75",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "0cd3297eadc89c70a6eb6ab789711923485d7f75",
+  "march_tracked": false,
+  "march_ignored": false,
+  "worktree_has_note": false,
+  "head_has_note": false
+ },
+ "status": "ok"
+}

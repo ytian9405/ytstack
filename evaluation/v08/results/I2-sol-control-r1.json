@@ -1,0 +1,104 @@
+{
+ "id": "I2-sol-control-r1",
+ "kind": "blind",
+ "case": "I2",
+ "arm": "control",
+ "model": "gpt-6.1-sol",
+ "rep": 1,
+ "prompt": "$in-your-own-words 我想把我自己的支出和家里人的支出分开看，你先别改。一起花的那笔，先整笔记在我名下，不要拆成两半。别人先垫的，我想标一下是谁垫的，但不要从我的合计里拿掉。导出一份给对方看的时候，不要带上我自己随手写的备注。我怀疑现在分不开人，是因为所有账都堆在同一个文件里，不过也可能是我想多了。人的名字是写进类别，还是另开一栏，你先别选。你先用你的话说说，我到底要干嘛。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 31.6,
+ "usage": {
+  "input_tokens": 33985,
+  "cached_input_tokens": 28928,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 351,
+  "reasoning_output_tokens": 120
+ },
+ "final": "我的理解：\n\n- 你想把自己的支出和家里人的支出分开看，能看清各自花了多少。\n- 一起花的钱先整笔算在你名下，不拆半；别人先垫的钱要能标明是谁垫的，但仍计入你的支出合计。\n- 导出给对方看的那份账里，不带上你自己随手写的备注。\n- 你怀疑现在分不开人，可能是因为所有账都放在同一个文件里，但这还只是猜测。\n- 人名放进类别还是另开一栏，先不决定；这一轮只确认你想要的结果，不改东西。",
+ "commentary": [
+  "我会按你点名的 in-your-own-words 技能，只复述理解，先不改，也不选做法。"
+ ],
+ "skills_read": [
+  "in-your-own-words"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/in-your-own-words/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/in-your-own-words/SKILL.md'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n2026-11-04T02:21:17.677248Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n2026-11-04T02:21:17.679463Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n",
+ "thread_id": "01a1a45c-4466-7a61-b8fa-5c9334c37caa",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "d81f5ccdb842d8d9deae877967f9e1f36c0762a245822c98a92b70d3fe30d76f",
+  "digest_after": "d81f5ccdb842d8d9deae877967f9e1f36c0762a245822c98a92b70d3fe30d76f",
+  "head_before": "0cd3297eadc89c70a6eb6ab789711923485d7f75",
+  "head_after": "0cd3297eadc89c70a6eb6ab789711923485d7f75",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "0cd3297eadc89c70a6eb6ab789711923485d7f75",
+  "march_tracked": false,
+  "march_ignored": false,
+  "worktree_has_note": false,
+  "head_has_note": false
+ },
+ "status": "ok"
+}

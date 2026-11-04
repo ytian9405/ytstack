@@ -1,0 +1,112 @@
+{
+ "id": "T1-astra-control-r1",
+ "kind": "blind",
+ "case": "T1",
+ "arm": "control",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "把我当小白讲讲 void-title 这条命令。你就着 data/ledger.json 里的账，说它碰到这些记录时会怎么走。文件保持原样。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 51.6,
+ "usage": {
+  "input_tokens": 76978,
+  "cached_input_tokens": 61056,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 946,
+  "reasoning_output_tokens": 74
+ },
+ "final": "`void-title` 用来按标题作废账目：记录还留在账里，但以后算合计时不再计入。**同名的账会全部作废**，所以你账里的两笔“电池”会一起被选中。\n\n拿这条命令举例，下面是按代码推演的结果，没有实际执行：\n\n```sh\npython3 expense_cli.py --state data/ledger.json void-title 电池\n```\n\n1. `--state data/ledger.json` 告诉程序读哪本账；`void-title 电池` 告诉程序找标题完全等于“电池”的记录。\n2. 程序按文件里的顺序检查三笔账，不会找到第一笔就停：\n\n   | 记录 | 金额 | 会怎么处理 |\n   |---|---:|---|\n   | `id: 1`，电池 | 100 分 | 标题相同，选中 |\n   | `id: 2`，牙膏 | 250 分 | 标题不同，跳过 |\n   | `id: 3`，电池 | 400 分 | 标题相同，也选中 |\n\n3. 程序把两笔“电池”的 `voided` 从 `false` 改成 `true`，意思是从“未作废”改成“已作废”。编号、标题、金额和分类都不变，“牙膏”也不变。\n4. 程序把完整的三笔账保存回 `data/ledger.json`，然后在屏幕上输出刚选中的两笔“电池”，其中都带着 `\"voided\": true`。\n5. 此后运行 `list` 仍会看到三笔账；运行 `summary` 则只算“牙膏”，笔数从 3 变成 1，总额从 750 分变成 250 分。\n\n这段处理写在 [expense_cli.py 的第 54 行起](<path>/expense_cli.py:54)。如果你只想作废 100 分的那笔“电池”，应按编号使用 `void 1`；`void-title 电池` 不会让你在两笔之间挑选。",
+ "commentary": [
+  "我会按 teach 技能的方式，先读 `void-title` 的代码和 `data/ledger.json`，再拿账里的具体记录讲它会怎么处理；文件保持原样。"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*void*' -g '*ledger*' -g '*README*' -g 'package.json' -g 'pyproject.toml'\"",
+  "/bin/zsh -lc \"cat .agents/skills/unslop/SKILL.md; rg --files -g '\"'!.git'\"' -g '\"'!.agents'\"'\"",
+  "/bin/zsh -lc \"cat AGENTS.md; rg -n 'void-title|void_title' .; cat data/ledger.json\"",
+  "/bin/zsh -lc 'nl -ba expense_cli.py; nl -ba README.md; nl -ba tests/test_smoke.py'",
+  "/bin/zsh -lc 'git log -5 --oneline -- expense_cli.py data/ledger.json'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_6\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'git log -5 --oneline -- expense_cli.py data/ledger.json'\", \"aggregated_output\": \"git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\\ngit: error: couldn't create cache file '/tmp/xcrun_db-s38JUF4S' (errno=Operation not permitted)\\ngit"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a45a-a998-7092-a0db-42a9483ae99a",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "82b5d753e38c1daa6053186e5d7b8a51f6c2b525d8df783f71eb52f75722d567",
+  "digest_after": "82b5d753e38c1daa6053186e5d7b8a51f6c2b525d8df783f71eb52f75722d567",
+  "head_before": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "head_after": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "march_tracked": false,
+  "march_ignored": false,
+  "worktree_has_note": false,
+  "head_has_note": false
+ },
+ "status": "ok"
+}

@@ -1,0 +1,118 @@
+{
+ "id": "T1-sol-control-r2",
+ "kind": "blind",
+ "case": "T1",
+ "arm": "control",
+ "model": "gpt-6.1-sol",
+ "rep": 2,
+ "prompt": "把我当小白讲讲 void-title 这条命令。你就着 data/ledger.json 里的账，说它碰到这些记录时会怎么走。文件保持原样。",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 54.7,
+ "usage": {
+  "input_tokens": 78166,
+  "cached_input_tokens": 63104,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1179,
+  "reasoning_output_tokens": 295
+ },
+ "final": "`void-title` 用来**按标题作废账目，同名的会全部作废**。作废后，记录仍然留在账里，但 `summary` 算总额时会跳过它们。\n\n拿 [data/ledger.json](<path>/data/ledger.json) 里的账，按下面这条命令推演，不实际执行：\n\n```sh\npython3 expense_cli.py --state data/ledger.json void-title 电池\n```\n\n1. `--state` 指定要读写的账本。程序先把三条记录全部读进来。\n2. 然后逐条检查 `title` 是否与“电池”完全相同。它不看金额，也不会找到第一条就停：\n\n| 记录编号 `id` | 标题 | 金额，单位为分 | 处理结果 |\n|---|---|---:|---|\n| 1 | 电池 | 100 | 找到，标记为作废 |\n| 2 | 牙膏 | 250 | 跳过，保持有效 |\n| 3 | 电池 | 400 | 找到，标记为作废 |\n\n3. 程序把两条“电池”的 `voided` 从 `false` 改为 `true`。这个字段表示“是否已作废”；编号、标题、金额和分类都保留。\n4. 程序把包含三条记录的整份账写回 `data/ledger.json`，再向屏幕输出两条已作废的“电池”完整记录。\n\n按这段代码，之后运行 `list` 仍会看到三条账；运行 `summary` 只会算“牙膏”，所以有效账目从 **3 条、750 分**变成 **1 条、250 分**。处理逻辑在 [expense_cli.py:54](<path>/expense_cli.py:54)。",
+ "commentary": [
+  "我会按 teach 技能，先读 `void-title` 的代码和 `data/ledger.json`，再拿账里的具体记录讲它会怎么处理；文件保持原样。"
+ ],
+ "skills_read": [
+  "teach",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'"
+ ],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/teach/SKILL.md'",
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '*void*' -g '*ledger*' -g 'package.json' -g 'README*'\"",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'cat AGENTS.md'",
+  "/bin/zsh -lc 'cat data/ledger.json'",
+  "/bin/zsh -lc 'rg --files'",
+  "/bin/zsh -lc 'rg -n \"void-title|void_title|voidTitle\" .'",
+  "/bin/zsh -lc 'nl -ba expense_cli.py'",
+  "/bin/zsh -lc 'nl -ba queue_cli.py'",
+  "/bin/zsh -lc 'nl -ba tests/test_smoke.py'",
+  "/bin/zsh -lc 'nl -ba README.md'",
+  "/bin/zsh -lc 'git status --short'"
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [
+  "{\"id\": \"item_12\", \"type\": \"command_execution\", \"command\": \"/bin/zsh -lc 'git status --short'\", \"aggregated_output\": \"git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\\ngit: error: couldn't create cache file '/tmp/xcrun_db-X0oWqoWM' (errno=Operation not permitted)\\ngit: warning: confstr() failed with cod"
+ ],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a459-ffa9-7572-b322-f239f758ddd6",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "82b5d753e38c1daa6053186e5d7b8a51f6c2b525d8df783f71eb52f75722d567",
+  "digest_after": "82b5d753e38c1daa6053186e5d7b8a51f6c2b525d8df783f71eb52f75722d567",
+  "head_before": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "head_after": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "d07fe8c9810c5567403b9590e34febd8977e2a17",
+  "march_tracked": false,
+  "march_ignored": false,
+  "worktree_has_note": false,
+  "head_has_note": false
+ },
+ "status": "ok"
+}

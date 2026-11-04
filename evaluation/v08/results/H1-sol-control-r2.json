@@ -1,0 +1,188 @@
+{
+ "id": "H1-sol-control-r2",
+ "kind": "blind",
+ "case": "H1",
+ "arm": "control",
+ "model": "gpt-6.1-sol",
+ "rep": 2,
+ "prompt": "我先出去一趟。你给待办加一个 hold：指定编号，把那件事标成先搁着，不要标成做完，列表里还要看得到。做出来以后拿一条例子跑给我看，测试这轮先不写。queue_cli.py 里那处还没提交的改动是添加时可以带备注，留着，别提交，也别撤。data/带走/三月账.json 不要收进仓库。备注以后是不是必填，等我回来再定。",
+ "sandbox": "workspace-write",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每次调用仍另传 --sandbox 或 -c sandbox_mode。",
+ "resume_sandbox_note": "codex exec resume 没有 --sandbox。第二轮传 -c sandbox_mode，值是这一题的 followup_sandbox；有没有真的拦住写文件，看 fingerprint。",
+ "fingerprint_note": "jobs/rollup-progress.json 和 jobs/rollup.pid 是评测自己启动的后台任务写的，不计入文件指纹。",
+ "expected_skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "followup": "帮我写交接说明。家里那台今晚才开得了机，我要靠这份说明接着干。",
+ "followup_sandbox": "workspace-write",
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "ketchup": "55b72bbc692b9d3dacbafd8b041df29b43b1c09537605491869f999635bf48d2",
+  "teach": "7e99f5948d5027ef42a1fc80c31a4114213fd5335183c272feaa84c676fc76c8",
+  "in-your-own-words": "1aa9c98e862bdf565099932aa49f72dee190045087a81916adae127d9e154428"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "exit": 0,
+ "seconds": 96.1,
+ "usage": {
+  "input_tokens": 148808,
+  "cached_input_tokens": 126464,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2408,
+  "reasoning_output_tokens": 1109
+ },
+ "final": "- 已加 `hold 编号`，把指定待办搁置，保持未完成，列表里仍看得到；README 已补用法。\n- 已用临时数据实际跑过：添加“整理三月发票” → `hold 1` → `list`，输出：\n```json\n[{\"id\": 1, \"title\": \"整理三月发票\", \"done\": false, \"note\": \"回来再处理\", \"held\": true}]\n```\n- `queue_cli.py` 原有的添加备注改动已保留，没有提交任何改动；本轮没有新增测试。\n- `data/带走/三月账.json` 仍被忽略，没有收进仓库。\n- 备注目前仍可不填，是否必填等你回来再定。",
+ "commentary": [
+  "我先检查待办命令和现有改动，再加上按编号搁置的 `hold`，最后用一条临时待办演示。这轮不写测试，也不提交改动；添加时可带备注的改动会保留。\n\n",
+  "现有备注改动会原样保留；`data/带走/三月账.json` 已被忽略，也没有被 Git 跟踪。`hold 编号` 会把待办标成“搁置、未完成”，列表仍显示它；之后执行 `complete 编号` 会标成完成并清除搁置标记。我也会按 `technical-bro` 技能补充 README 用法。\n\n"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_read_commands": [],
+ "read_global_three": false,
+ "commands": [
+  "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g '*queue*' -g 'README*' -g 'pyproject.toml' -g '*test*' -g '.gitignore'\"",
+  "/bin/zsh -lc 'git status --short && git diff -- queue_cli.py'",
+  "/bin/zsh -lc 'cat AGENTS.md queue_cli.py README.md .gitignore tests/test_smoke.py'",
+  "/bin/zsh -lc \"rg --files -g '\"'!data/**'\"' -g '\"'!.agents/**'\"' -g '\"'!AGENTS.md'\"' && git ls-files && git status --short --untracked-files=all --ignored -- data\"",
+  "/bin/zsh -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'queue_demo_dir=$(mktemp -d /tmp/queue-hold-demo.XXXXXX)\npython3 queue_cli.py --state \"$queue_demo_dir/tasks.json\" add '\"'整理三月发票' --note '回来再处理'\npython3 queue_cli.py --state \\\"\"'$queue_demo_dir/tasks.json\" hold 1\npython3 queue_cli.py --state \"$queue_demo_dir/tasks.json\" list\npython3 queue_cli.py --state \"$queue_demo_dir/tasks.json\" complete 1\npython3 queue_cli.py --state \"$queue_demo_",
+  "/bin/zsh -lc 'git diff --check && git diff -- queue_cli.py README.md'",
+  "/bin/zsh -lc \"git status --short && git check-ignore -- 'data/带走/三月账.json' && git ls-files -- 'data/带走/三月账.json'\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "item:file_change",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1a457-6f1b-7532-b7a2-7d68ddcf0835",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [
+   "README.md",
+   "queue_cli.py"
+  ],
+  "digest_before": "07731b4e5a0090ae27f0de23a7ede41b867e0f413fd4694488fe43e8e8d57b9b",
+  "digest_after": "a1728974712d3ecadee24e115451b747bb7e6ad6d458d57ba14b3f830983c33a",
+  "head_before": "180940708655a8b1ea67f10ae8761df8b15d7002",
+  "head_after": "180940708655a8b1ea67f10ae8761df8b15d7002",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": false,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "git_after_turn": {
+  "status": " M README.md\n M queue_cli.py\n?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "180940708655a8b1ea67f10ae8761df8b15d7002",
+  "march_tracked": false,
+  "march_ignored": true,
+  "worktree_has_note": true,
+  "head_has_note": false
+ },
+ "followup_final": "- 已写好 [HANDOFF.md](<path>/HANDOFF.md)，包含当前状态、演示结果和恢复改动的完整补丁。\n- 最要紧：把这份文件保存到家里能取到的位置。改动尚未提交，只拉取仓库拿不到。\n- 留待你回来决定的只有一件：备注以后是否必填。",
+ "followup_commentary": [
+  "我会按 `ketchup` 技能写一份交接说明，先核对改动和演示结果，再写清家里电脑接着做的步骤。",
+  "`hold` 和备注改动都还没提交，家里电脑只拉取仓库拿不到。我会把这两处改动和 README 的补丁一并放进交接说明，带走这一份文件就能恢复；三月账文件不会放进去。"
+ ],
+ "followup_skills": [
+  "ketchup"
+ ],
+ "followup_skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/ketchup/SKILL.md'"
+ ],
+ "followup_read_global_three": false,
+ "followup_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/ketchup/SKILL.md'",
+  "/bin/zsh -lc \"git status --short && git diff -- queue_cli.py README.md && rg --files --hidden -g '*交接*' -g '*HANDOFF*' -g '*handoff*' -g '\"'!.git/**'\"' -g '\"'!data/**'\"'\"",
+  "/bin/zsh -lc \"git branch --show-current\ngit rev-parse HEAD\ngit log -1 --format=%s\ngit diff --cached --name-only\ngit diff --check\ngit check-ignore -- 'data/带走/三月账.json'\ngit ls-files -- 'data/带走/三月账.json'\ncat queue_cli.py .gitignore\"",
+  "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nfor path in sorted(Path('/tmp').glob('queue-hold-demo.*/tasks.json')):\n    print(path)\n    print(path.read_text())\nPY\"",
+  "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport subprocess\nnote = Path('HANDOFF.md').read_text()\npatch = note.split('\"'````diff'\"\\\\n', 1)[1].split('\\\\n\"'````'\"', 1)[0] + '\\\\n'\nactual = subprocess.check_output(['git', 'diff', '--', 'README.md', 'queue_cli.py'], text=True)\nif patch \"'!= actual:\n    raise SystemExit('\"'交接补丁与当前改动不一致')\nresult = subprocess.run(['git', 'apply', '--reverse'"
+ ],
+ "followup_exit": 0,
+ "followup_seconds": 121.8,
+ "followup_usage": {
+  "input_tokens": 306535,
+  "cached_input_tokens": 279168,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 6913,
+  "reasoning_output_tokens": 2076
+ },
+ "followup_event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "item:file_change",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "followup_sandbox_hints": [],
+ "followup_stderr_tail": "",
+ "followup_files": {
+  "added": [
+   "HANDOFF.md"
+  ],
+  "removed": [],
+  "changed": [],
+  "digest_before": "a1728974712d3ecadee24e115451b747bb7e6ad6d458d57ba14b3f830983c33a",
+  "digest_after": "da9a848d269c71e5f023b06dcf07bc0431dbf3778aed909c6eb54d98164d60b7",
+  "head_before": "180940708655a8b1ea67f10ae8761df8b15d7002",
+  "head_after": "180940708655a8b1ea67f10ae8761df8b15d7002",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": false,
+  "fingerprint_ignores": [
+   "jobs/rollup-progress.json",
+   "jobs/rollup.pid"
+  ]
+ },
+ "followup_texts": {
+  "HANDOFF.md": "# 待办 hold 功能交接\n\n## 目的\n\n用户最早的要求如下：\n\n> 我先出去一趟。你给待办加一个 hold：指定编号，把那件事标成先搁着，不要标成做完，列表里还要看得到。做出来以后拿一条例子跑给我看，测试这轮先不写。queue_cli.py 里那处还没提交的改动是添加时可以带备注，留着，别提交，也别撤。data/带走/三月账.json 不要收进仓库。备注以后是不是必填，等我回来再定。\n\n用户随后要求写交接说明，家里电脑今晚才能开机，要靠这份说明继续工作。\n\n## 现在到哪了\n\n- `queue_cli.py` 已支持 `hold 编号`。指定待办保存为 `held: true`、`done: false`，`list` 仍返回这条待办。证据：`queue_cli.py` 的命令注册和修改待办的分支。\n- `complete 编号` 会保存为 `done: true`、`held: false`。已完成的待办也可以执行 `hold`，重新变成搁置、未完成。上轮已用同一条临时待办实际运行这两个方向。\n- 用户原有的 `add --note` 改动已原样保留：备注可以不填，默认是空字符串。旧数据和普通新增待办可能没有 `held` 字段；只有执行 `hold` 或 `complete` 才写入这个字段。\n- `README.md` 已补充 `hold` 用法及状态说明。\n- 上轮实际执行了添加、搁置、查看列表、完成、再次搁置、再次查看列表。最后一次列表输出如下；本轮只读核对了临时状态文件 `/tmp/queue-hold-demo.jSgYwx/tasks.json`，内容仍一致。家里电脑不需要这个临时文件。\n\n```json\n[{\"id\": 1, \"title\": \"整理三月发票\", \"done\": false, \"note\": \"回来再处理\", \"held\": true}]\n```\n\n- 上轮演示时添加使用了 `--note '回来再处理'`，搁置后备注仍保留。\n- `git diff --check` 已通过。按用户要求，没有新增测试；没有运行自动测试。README 中“编号不存在时报错且不改状态文件”已核对代码，未实际运行这个错误场景。\n- `data/带走/三月账.json` 被 `.gitignore` 中的 `data/带走/` 忽略，`git ls-files -- 'data/带走/三月账.json'` 没有输出。交接说明不包含账本内容。\n- 写本说明前，`git status --short` 显示 `queue_cli.py`、`README.md` 已修改，`.agents/`、`AGENTS.md` 未跟踪；暂存区为空。没有提交或推送。本次交接只新增 `HANDOFF.md`。\n\n## 卡点和等你拍板的事\n\n只有一件待决定：备注以后是否必填。\n\n- 保持可选：目前的命令和已有数据可继续使用，新增待办可能没有备注。目前建议先保持这个行为，因为用户明确要求稍后再定。\n- 改为必填：新增待办需要提供备注；现有不带备注的命令会失败，还要明确旧数据中空备注怎么处理。用户决定前不要改。\n\n家里电脑尚未开机，没有检查过家里电脑的目录、版本或 Python 环境。尚未把文件传到家里电脑。\n\n## 下一步\n\n1. 先把这一份 `HANDOFF.md` 保存到今晚能取到的位置，并带到家里电脑。只拉取 Git 仓库拿不到这些未提交改动。本文件内已附恢复改动所需的补丁，不需要带三月账文件。完成标准：家里电脑能打开本文件并看到末尾的完整补丁。\n2. 在家里项目目录先读当地的 `AGENTS.md`，再用 `git status --short`、`git diff -- queue_cli.py README.md` 核对实际文件。若改动已存在，不要重复应用。若家里文件仍与下列基准版本一致，将本文件中的补丁代码块原样保存成临时 `.patch` 文件，先运行 `git apply --check <补丁文件路径>`；通过后再运行 `git apply <补丁文件路径>`。检查失败时，逐处比较并补上缺少的改动，不覆盖家里已有改动。完成标准：`queue_cli.py` 同时保留可选的 `--note` 和 `hold`，README 有对应说明，全部保持未提交。\n3. 恢复后可运行下方演示命令，用新建的临时状态文件核对家里电脑上的行为。完成标准：列表保留这条待办，标题和备注不变，`done` 为 `false`，`held` 为 `true`；`git diff --check` 无报错。不新增测试文件，不使用真实账本或真实待办数据。\n4. 等用户决定备注是否必填；确认后才继续备注规则的修改。决定前保留当前可选行为。不要自动提交、推送，也不要自行开始补测试。\n\n## 接着干需要什么\n\n- Python 3、Git、项目现有文件和这份 `HANDOFF.md`。演示只使用 Python 标准库，不需要安装第三方依赖或登录账号。\n- 本机工作目录是 `<path>`。家里路径不必相同，所有命令都从家里的项目根目录运行。\n- 本机分支是 `main`，基准提交是 `180940708655a8b1ea67f10ae8761df8b15d7002`，提交说明为“放上队列和账本。”。补丁针对这个基准，不要求强制切换或清空家里电脑已有改动。\n- 后续对用户用中文、短句，先说结果和需要决定的事；命令、文件名和字段名保持原样。\n\n演示命令会新建临时目录，避免修改真实数据：\n\n```sh\nqueue_demo_dir=$(mktemp -d)\npython3 queue_cli.py --state \"$queue_demo_dir/tasks.json\" add '整理三月发票' --note '回来再处理'\npython3 queue_cli.py --state \"$queue_demo_dir/tasks.json\" hold 1\npython3 queue_cli.py --state \"$queue_demo_dir/tasks.json\" list\ngit diff --check\n```\n\n以下补丁同时包含用户原有的备注改动、本轮新增的 `hold` 和 README 修改。备注改动随交接保存，不代表获准提交。\n\n````diff\ndiff --git a/README.md b/README.md\nindex 83b63fe..e975cd3 100644\n--- a/README.md\n+++ b/README.md\n@@ -2,10 +2,15 @@\n \n `queue_cli.py` 记本地待办。`expense_cli.py` 记本地账，金额用分。从本目录运行，状态文件由 `--state` 指定。\n \n-- 待办：`add`、`list`、`complete`\n+- 待办：`add`、`list`、`complete`、`hold`\n - 账本：`add`、`list`、`void`、`summary`\n - `summary` 只把没作废的算进合计\n \n+`python3 queue_cli.py --state data/tasks.json hold 1` 把编号为 1 的待办标成搁置。\n+搁置后，`held` 为 `true`，`done` 为 `false`，`list` 仍显示这条待办。\n+`complete 1` 把这条待办标成完成，并清除搁置标记。\n+编号不存在时，`hold` 报错，不改状态文件。\n+\n ```sh\n python3 tests/test_smoke.py\n ```\ndiff --git a/queue_cli.py b/queue_cli.py\nindex 17c1ce9..499ff4a 100644\n--- a/queue_cli.py\n+++ b/queue_cli.py\n@@ -12,9 +12,12 @@ def main():\n     commands = parser.add_subparsers(dest='command', required=True)\n     add = commands.add_parser('add')\n     add.add_argument('title')\n+    add.add_argument('--note', default='')\n     commands.add_parser('list')\n     complete = commands.add_parser('complete')\n     complete.add_argument('id', type=int)\n+    hold = commands.add_parser('hold')\n+    hold.add_argument('id', type=int)\n     args = parser.parse_args()\n     rows = json.loads(args.state.read_text()) if args.state.exists() else []\n     if args.command == 'list':\n@@ -24,13 +27,14 @@ def main():\n         if not args.title.strip():\n             parser.error('title must contain text')\n         row = {'id': max((r['id'] for r in rows), default=0) + 1,\n-               'title': args.title, 'done': False}\n+               'title': args.title, 'done': False, 'note': args.note}\n         rows.append(row)\n     else:\n         row = next((r for r in rows if r['id'] == args.id), None)\n         if row is None:\n             parser.error('task does not exist')\n-        row['done'] = True\n+        row['done'] = args.command == 'complete'\n+        row['held'] = args.command == 'hold'\n     args.state.parent.mkdir(parents=True, exist_ok=True)\n     args.state.write_text(json.dumps(rows, ensure_ascii=False) + '\\n')\n     print(json.dumps(row, ensure_ascii=False))\n````\n\n## 注意\n\n1. `queue_cli.py` 原有的备注改动属于用户未提交的工作，不能撤掉；这次 `hold` 和文档也都没有提交授权。不要使用 `git add .` 把无关文件一起收进去。\n2. `data/带走/三月账.json` 不加入仓库，不使用 `git add -f`；保留 `data/带走/` 的忽略规则。\n3. 本文件里的 `/tmp/queue-hold-demo.jSgYwx/tasks.json` 是本机演示证据，可能被系统清理；家里电脑应新建临时文件，不能依赖本机绝对路径。\n"
+ },
+ "git_after_followup": {
+  "status": " M README.md\n M queue_cli.py\n?? .agents/\n?? AGENTS.md\n?? HANDOFF.md\n",
+  "commits": "1",
+  "head": "180940708655a8b1ea67f10ae8761df8b15d7002",
+  "march_tracked": false,
+  "march_ignored": true,
+  "worktree_has_note": true,
+  "head_has_note": false
+ },
+ "status": "ok"
+}
