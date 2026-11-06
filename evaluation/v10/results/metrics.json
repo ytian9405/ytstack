@@ -1,0 +1,841 @@
+{
+ "codex_calls": 36,
+ "status": [
+  {
+   "id": "W1-sol-control-r1",
+   "status": "ok",
+   "chars": 410,
+   "seconds": 52.6,
+   "unslop": true
+  },
+  {
+   "id": "W1-sol-control-r2",
+   "status": "ok",
+   "chars": 402,
+   "seconds": 63.5,
+   "unslop": true
+  },
+  {
+   "id": "W1-astra-control-r1",
+   "status": "ok",
+   "chars": 400,
+   "seconds": 57.0,
+   "unslop": true
+  },
+  {
+   "id": "W1-sol-treatment-r1",
+   "status": "ok",
+   "chars": 409,
+   "seconds": 66.8,
+   "unslop": true
+  },
+  {
+   "id": "W1-sol-treatment-r2",
+   "status": "ok",
+   "chars": 396,
+   "seconds": 62.0,
+   "unslop": true
+  },
+  {
+   "id": "W1-astra-treatment-r1",
+   "status": "ok",
+   "chars": 377,
+   "seconds": 52.3,
+   "unslop": true
+  },
+  {
+   "id": "W2-sol-control-r1",
+   "status": "ok",
+   "chars": 418,
+   "seconds": 55.1,
+   "unslop": true
+  },
+  {
+   "id": "W2-sol-control-r2",
+   "status": "ok",
+   "chars": 426,
+   "seconds": 58.5,
+   "unslop": true
+  },
+  {
+   "id": "W2-astra-control-r1",
+   "status": "ok",
+   "chars": 421,
+   "seconds": 52.9,
+   "unslop": true
+  },
+  {
+   "id": "W2-sol-treatment-r1",
+   "status": "ok",
+   "chars": 452,
+   "seconds": 60.9,
+   "unslop": true
+  },
+  {
+   "id": "W2-sol-treatment-r2",
+   "status": "ok",
+   "chars": 433,
+   "seconds": 70.4,
+   "unslop": true
+  },
+  {
+   "id": "W2-astra-treatment-r1",
+   "status": "ok",
+   "chars": 420,
+   "seconds": 54.8,
+   "unslop": true
+  },
+  {
+   "id": "R1-sol-control-r1",
+   "status": "ok",
+   "chars": 382,
+   "seconds": 52.6,
+   "unslop": true
+  },
+  {
+   "id": "R1-sol-control-r2",
+   "status": "ok",
+   "chars": 352,
+   "seconds": 53.7,
+   "unslop": true
+  },
+  {
+   "id": "R1-astra-control-r1",
+   "status": "ok",
+   "chars": 386,
+   "seconds": 51.3,
+   "unslop": true
+  },
+  {
+   "id": "R1-sol-treatment-r1",
+   "status": "ok",
+   "chars": 352,
+   "seconds": 59.9,
+   "unslop": true
+  },
+  {
+   "id": "R1-sol-treatment-r2",
+   "status": "ok",
+   "chars": 334,
+   "seconds": 60.5,
+   "unslop": true
+  },
+  {
+   "id": "R1-astra-treatment-r1",
+   "status": "ok",
+   "chars": 338,
+   "seconds": 65.7,
+   "unslop": true
+  },
+  {
+   "id": "R2-sol-control-r1",
+   "status": "ok",
+   "chars": 308,
+   "seconds": 50.1,
+   "unslop": true
+  },
+  {
+   "id": "R2-sol-control-r2",
+   "status": "ok",
+   "chars": 317,
+   "seconds": 56.1,
+   "unslop": true
+  },
+  {
+   "id": "R2-astra-control-r1",
+   "status": "ok",
+   "chars": 308,
+   "seconds": 49.3,
+   "unslop": true
+  },
+  {
+   "id": "R2-sol-treatment-r1",
+   "status": "ok",
+   "chars": 309,
+   "seconds": 54.6,
+   "unslop": true
+  },
+  {
+   "id": "R2-sol-treatment-r2",
+   "status": "ok",
+   "chars": 344,
+   "seconds": 54.6,
+   "unslop": true
+  },
+  {
+   "id": "R2-astra-treatment-r1",
+   "status": "ok",
+   "chars": 316,
+   "seconds": 49.8,
+   "unslop": true
+  },
+  {
+   "id": "C1-sol-control-r1",
+   "status": "ok",
+   "chars": 394,
+   "seconds": 70.2,
+   "unslop": true
+  },
+  {
+   "id": "C1-sol-control-r2",
+   "status": "ok",
+   "chars": 395,
+   "seconds": 63.2,
+   "unslop": true
+  },
+  {
+   "id": "C1-astra-control-r1",
+   "status": "ok",
+   "chars": 395,
+   "seconds": 59.4,
+   "unslop": true
+  },
+  {
+   "id": "C1-sol-treatment-r1",
+   "status": "ok",
+   "chars": 350,
+   "seconds": 67.5,
+   "unslop": true
+  },
+  {
+   "id": "C1-sol-treatment-r2",
+   "status": "ok",
+   "chars": 454,
+   "seconds": 56.5,
+   "unslop": true
+  },
+  {
+   "id": "C1-astra-treatment-r1",
+   "status": "ok",
+   "chars": 376,
+   "seconds": 59.2,
+   "unslop": false
+  },
+  {
+   "id": "M1-sol-control-r1",
+   "status": "ok",
+   "chars": 1478,
+   "seconds": 80.8,
+   "unslop": true
+  },
+  {
+   "id": "M1-sol-control-r2",
+   "status": "ok",
+   "chars": 1259,
+   "seconds": 68.1,
+   "unslop": true
+  },
+  {
+   "id": "M1-astra-control-r1",
+   "status": "ok",
+   "chars": 1155,
+   "seconds": 88.5,
+   "unslop": true
+  },
+  {
+   "id": "M1-sol-treatment-r1",
+   "status": "ok",
+   "chars": 1175,
+   "seconds": 71.4,
+   "unslop": true
+  },
+  {
+   "id": "M1-sol-treatment-r2",
+   "status": "ok",
+   "chars": 1044,
+   "seconds": 70.9,
+   "unslop": true
+  },
+  {
+   "id": "M1-astra-treatment-r1",
+   "status": "ok",
+   "chars": 1310,
+   "seconds": 74.8,
+   "unslop": true
+  }
+ ],
+ "roundabout": [
+  {
+   "id": "W1-sol-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W1-sol-control-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W1-astra-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W1-sol-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W1-sol-treatment-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W1-astra-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W2-sol-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W2-sol-control-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W2-astra-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W2-sol-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W2-sol-treatment-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "W2-astra-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R1-sol-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R1-sol-control-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R1-astra-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R1-sol-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R1-sol-treatment-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R1-astra-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R2-sol-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R2-sol-control-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R2-astra-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R2-sol-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R2-sol-treatment-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "R2-astra-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "C1-sol-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "C1-sol-control-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "C1-astra-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "C1-sol-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "C1-sol-treatment-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "C1-astra-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "M1-sol-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "M1-sol-control-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "M1-astra-control-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "M1-sol-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "M1-sol-treatment-r2",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  },
+  {
+   "id": "M1-astra-treatment-r1",
+   "ok": true,
+   "count": 0,
+   "hits": []
+  }
+ ],
+ "w1_words": [
+  {
+   "id": "W1-sol-control-r1",
+   "cells": {
+    "nightly": "换",
+    "warmup": "换",
+    "outlier": "换",
+    "drift": "换",
+    "缺段缝合": "换"
+   },
+   "keep": {
+    "csv_dir": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "31.2": "在",
+    "0.4": "在"
+   }
+  },
+  {
+   "id": "W1-sol-control-r2",
+   "cells": {
+    "nightly": "裸",
+    "warmup": "换",
+    "outlier": "换",
+    "drift": "换",
+    "缺段缝合": "换"
+   },
+   "keep": {
+    "csv_dir": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "31.2": "在",
+    "0.4": "在"
+   }
+  },
+  {
+   "id": "W1-astra-control-r1",
+   "cells": {
+    "nightly": "换",
+    "warmup": "换",
+    "outlier": "换",
+    "drift": "换",
+    "缺段缝合": "换"
+   },
+   "keep": {
+    "csv_dir": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "31.2": "在",
+    "0.4": "在"
+   }
+  },
+  {
+   "id": "W1-sol-treatment-r1",
+   "cells": {
+    "nightly": "换",
+    "warmup": "换",
+    "outlier": "换",
+    "drift": "换",
+    "缺段缝合": "换"
+   },
+   "keep": {
+    "csv_dir": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "31.2": "在",
+    "0.4": "在"
+   }
+  },
+  {
+   "id": "W1-sol-treatment-r2",
+   "cells": {
+    "nightly": "换",
+    "warmup": "换",
+    "outlier": "换",
+    "drift": "换",
+    "缺段缝合": "换"
+   },
+   "keep": {
+    "csv_dir": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "31.2": "在",
+    "0.4": "在"
+   }
+  },
+  {
+   "id": "W1-astra-treatment-r1",
+   "cells": {
+    "nightly": "换",
+    "warmup": "换",
+    "outlier": "换",
+    "drift": "换",
+    "缺段缝合": "换"
+   },
+   "keep": {
+    "csv_dir": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "31.2": "在",
+    "0.4": "在"
+   }
+  }
+ ],
+ "w2_words": [
+  {
+   "id": "W2-sol-control-r1",
+   "cells": {
+    "localtime": "换",
+    "utc": "换",
+    "bucket": "换",
+    "整点对齐": "换",
+    "rounding": "换",
+    "offset": "注"
+   },
+   "keep": {
+    "sensors": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "S1": "在",
+    "S2": "在"
+   }
+  },
+  {
+   "id": "W2-sol-control-r2",
+   "cells": {
+    "localtime": "注",
+    "utc": "裸",
+    "bucket": "换",
+    "整点对齐": "换",
+    "rounding": "换",
+    "offset": "注"
+   },
+   "keep": {
+    "sensors": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "S1": "在",
+    "S2": "在"
+   }
+  },
+  {
+   "id": "W2-astra-control-r1",
+   "cells": {
+    "localtime": "换",
+    "utc": "换",
+    "bucket": "换",
+    "整点对齐": "裸",
+    "rounding": "换",
+    "offset": "注"
+   },
+   "keep": {
+    "sensors": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "S1": "在",
+    "S2": "在"
+   }
+  },
+  {
+   "id": "W2-sol-treatment-r1",
+   "cells": {
+    "localtime": "换",
+    "utc": "换",
+    "bucket": "换",
+    "整点对齐": "换",
+    "rounding": "换",
+    "offset": "注"
+   },
+   "keep": {
+    "sensors": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "S1": "在",
+    "S2": "在"
+   }
+  },
+  {
+   "id": "W2-sol-treatment-r2",
+   "cells": {
+    "localtime": "换",
+    "utc": "换",
+    "bucket": "换",
+    "整点对齐": "裸",
+    "rounding": "换",
+    "offset": "换"
+   },
+   "keep": {
+    "sensors": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "S1": "在",
+    "S2": "在"
+   }
+  },
+  {
+   "id": "W2-astra-treatment-r1",
+   "cells": {
+    "localtime": "换",
+    "utc": "换",
+    "bucket": "换",
+    "整点对齐": "换",
+    "rounding": "换",
+    "offset": "注"
+   },
+   "keep": {
+    "sensors": "在",
+    "report_hour": "在",
+    "logger.json": "在"
+   },
+   "facts": {
+    "S1": "在",
+    "S2": "在"
+   }
+  }
+ ],
+ "m1_verbatim": [
+  {
+   "id": "M1-sol-control-r1",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺"
+   ],
+   "count_24_value": true
+  },
+  {
+   "id": "M1-sol-control-r2",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺"
+   ],
+   "count_24_value": true
+  },
+  {
+   "id": "M1-astra-control-r1",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "缺",
+    "缺",
+    "缺"
+   ],
+   "count_24_value": true
+  },
+  {
+   "id": "M1-sol-treatment-r1",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺"
+   ],
+   "count_24_value": true
+  },
+  {
+   "id": "M1-sol-treatment-r2",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺"
+   ],
+   "count_24_value": true
+  },
+  {
+   "id": "M1-astra-treatment-r1",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺"
+   ],
+   "count_24_value": true
+  }
+ ]
+}

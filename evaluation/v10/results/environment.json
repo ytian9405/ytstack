@@ -24,8 +24,5 @@
   "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
   "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf"
  },
- "varied_differ": true,
- "shared_match": true,
- "planned_calls": 36,
- "refuse_at": 150
+ "varied_differ": true
 }

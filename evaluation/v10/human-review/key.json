@@ -1,0 +1,38 @@
+[
+ {
+  "question": 1,
+  "source": "W1",
+  "甲": "treatment",
+  "乙": "control"
+ },
+ {
+  "question": 2,
+  "source": "W2",
+  "甲": "control",
+  "乙": "treatment"
+ },
+ {
+  "question": 3,
+  "source": "R1",
+  "甲": "control",
+  "乙": "treatment"
+ },
+ {
+  "question": 4,
+  "source": "R2",
+  "甲": "control",
+  "乙": "treatment"
+ },
+ {
+  "question": 5,
+  "source": "C1",
+  "甲": "treatment",
+  "乙": "control"
+ },
+ {
+  "question": 6,
+  "source": "M1",
+  "甲": "treatment",
+  "乙": "control"
+ }
+]
