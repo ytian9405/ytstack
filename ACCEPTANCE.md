@@ -7,7 +7,7 @@ The release contains four requested skills: `acceptance-criteria`, `create-test-
 - `create-test-skill` generates a project-local `test-<app>` skill, runnable behavior tests, and a case index. It does not merely draft a test plan.
 - `bro` keeps the upstream instruction first and adds Chinese rules.
 - `technical-bro` preserves the upstream technical-writing body, with its name and relative dependency references adapted. Two trial-supported changes preserve the requested language and restrict vocabulary-rule proposals to explicit rule-maintenance tasks.
-- `unslop` keeps every upstream rule and appends Chinese rules 34-40.
+- `unslop` keeps every upstream rule and appends Chinese rules 34-42; commands, code blocks, file paths, verbatim error text, and quoted words are copied as-is.
 - Source commits, original file hashes, changes, and MIT attribution are recorded. Copied upstream text retains Lauren Tan's license. The Claude port is a design reference, not an unacknowledged source of copied implementation.
 - New skills use normal discovery. The upstream explicit-only frontmatter is not carried into this new package.
 
