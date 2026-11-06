@@ -6,10 +6,10 @@
    "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
   },
   "treatment": {
-   "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+   "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
   }
  },
- "varied_differ": false,
+ "varied_differ": true,
  "shared_skill_md_sha256": {
   "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa",
   "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
@@ -38,7 +38,7 @@
    "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
    "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
    "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5",
-   "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+   "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
   }
  }
 }

@@ -1,0 +1,569 @@
+{
+ "codex_calls": 36,
+ "status": [
+  {
+   "id": "U1-sol-control-r1",
+   "status": "ok",
+   "chars": 478,
+   "seconds": 48.7,
+   "unslop": true
+  },
+  {
+   "id": "U1-sol-control-r2",
+   "status": "ok",
+   "chars": 450,
+   "seconds": 61.6,
+   "unslop": true
+  },
+  {
+   "id": "U1-astra-control-r1",
+   "status": "ok",
+   "chars": 479,
+   "seconds": 60.9,
+   "unslop": true
+  },
+  {
+   "id": "U1-sol-treatment-r1",
+   "status": "ok",
+   "chars": 506,
+   "seconds": 51.2,
+   "unslop": true
+  },
+  {
+   "id": "U1-sol-treatment-r2",
+   "status": "ok",
+   "chars": 494,
+   "seconds": 60.9,
+   "unslop": true
+  },
+  {
+   "id": "U1-astra-treatment-r1",
+   "status": "ok",
+   "chars": 488,
+   "seconds": 59.5,
+   "unslop": true
+  },
+  {
+   "id": "U2-sol-control-r1",
+   "status": "ok",
+   "chars": 372,
+   "seconds": 59.7,
+   "unslop": true
+  },
+  {
+   "id": "U2-sol-control-r2",
+   "status": "ok",
+   "chars": 399,
+   "seconds": 53.7,
+   "unslop": true
+  },
+  {
+   "id": "U2-astra-control-r1",
+   "status": "ok",
+   "chars": 389,
+   "seconds": 55.7,
+   "unslop": true
+  },
+  {
+   "id": "U2-sol-treatment-r1",
+   "status": "ok",
+   "chars": 427,
+   "seconds": 63.4,
+   "unslop": true
+  },
+  {
+   "id": "U2-sol-treatment-r2",
+   "status": "ok",
+   "chars": 391,
+   "seconds": 62.8,
+   "unslop": true
+  },
+  {
+   "id": "U2-astra-treatment-r1",
+   "status": "ok",
+   "chars": 376,
+   "seconds": 46.2,
+   "unslop": true
+  },
+  {
+   "id": "U3-sol-control-r1",
+   "status": "ok",
+   "chars": 505,
+   "seconds": 54.1,
+   "unslop": true
+  },
+  {
+   "id": "U3-sol-control-r2",
+   "status": "ok",
+   "chars": 502,
+   "seconds": 54.1,
+   "unslop": true
+  },
+  {
+   "id": "U3-astra-control-r1",
+   "status": "ok",
+   "chars": 563,
+   "seconds": 47.8,
+   "unslop": true
+  },
+  {
+   "id": "U3-sol-treatment-r1",
+   "status": "ok",
+   "chars": 722,
+   "seconds": 72.4,
+   "unslop": true
+  },
+  {
+   "id": "U3-sol-treatment-r2",
+   "status": "ok",
+   "chars": 711,
+   "seconds": 87.6,
+   "unslop": true
+  },
+  {
+   "id": "U3-astra-treatment-r1",
+   "status": "ok",
+   "chars": 708,
+   "seconds": 61.9,
+   "unslop": true
+  },
+  {
+   "id": "U4-sol-control-r1",
+   "status": "ok",
+   "chars": 355,
+   "seconds": 65.4,
+   "unslop": true
+  },
+  {
+   "id": "U4-sol-control-r2",
+   "status": "ok",
+   "chars": 377,
+   "seconds": 48.3,
+   "unslop": true
+  },
+  {
+   "id": "U4-astra-control-r1",
+   "status": "ok",
+   "chars": 426,
+   "seconds": 54.6,
+   "unslop": true
+  },
+  {
+   "id": "U4-sol-treatment-r1",
+   "status": "ok",
+   "chars": 431,
+   "seconds": 68.1,
+   "unslop": true
+  },
+  {
+   "id": "U4-sol-treatment-r2",
+   "status": "ok",
+   "chars": 490,
+   "seconds": 63.9,
+   "unslop": true
+  },
+  {
+   "id": "U4-astra-treatment-r1",
+   "status": "ok",
+   "chars": 422,
+   "seconds": 56.5,
+   "unslop": true
+  },
+  {
+   "id": "U5-sol-control-r1",
+   "status": "ok",
+   "chars": 392,
+   "seconds": 58.5,
+   "unslop": true
+  },
+  {
+   "id": "U5-sol-control-r2",
+   "status": "ok",
+   "chars": 368,
+   "seconds": 56.1,
+   "unslop": true
+  },
+  {
+   "id": "U5-astra-control-r1",
+   "status": "ok",
+   "chars": 384,
+   "seconds": 45.1,
+   "unslop": false
+  },
+  {
+   "id": "U5-sol-treatment-r1",
+   "status": "ok",
+   "chars": 366,
+   "seconds": 56.3,
+   "unslop": true
+  },
+  {
+   "id": "U5-sol-treatment-r2",
+   "status": "ok",
+   "chars": 367,
+   "seconds": 56.2,
+   "unslop": true
+  },
+  {
+   "id": "U5-astra-treatment-r1",
+   "status": "ok",
+   "chars": 370,
+   "seconds": 49.5,
+   "unslop": true
+  },
+  {
+   "id": "U6-sol-control-r1",
+   "status": "ok",
+   "chars": 1139,
+   "seconds": 63.6,
+   "unslop": true
+  },
+  {
+   "id": "U6-sol-control-r2",
+   "status": "ok",
+   "chars": 1237,
+   "seconds": 68.2,
+   "unslop": true
+  },
+  {
+   "id": "U6-astra-control-r1",
+   "status": "ok",
+   "chars": 1152,
+   "seconds": 61.0,
+   "unslop": true
+  },
+  {
+   "id": "U6-sol-treatment-r1",
+   "status": "ok",
+   "chars": 1013,
+   "seconds": 64.1,
+   "unslop": true
+  },
+  {
+   "id": "U6-sol-treatment-r2",
+   "status": "ok",
+   "chars": 1153,
+   "seconds": 63.4,
+   "unslop": true
+  },
+  {
+   "id": "U6-astra-treatment-r1",
+   "status": "ok",
+   "chars": 1006,
+   "seconds": 59.4,
+   "unslop": true
+  }
+ ],
+ "roundabout": [
+  {
+   "id": "U1-sol-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U1-sol-control-r2",
+   "count": 0
+  },
+  {
+   "id": "U1-astra-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U1-sol-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U1-sol-treatment-r2",
+   "count": 0
+  },
+  {
+   "id": "U1-astra-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U2-sol-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U2-sol-control-r2",
+   "count": 0
+  },
+  {
+   "id": "U2-astra-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U2-sol-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U2-sol-treatment-r2",
+   "count": 0
+  },
+  {
+   "id": "U2-astra-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U3-sol-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U3-sol-control-r2",
+   "count": 0
+  },
+  {
+   "id": "U3-astra-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U3-sol-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U3-sol-treatment-r2",
+   "count": 0
+  },
+  {
+   "id": "U3-astra-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U4-sol-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U4-sol-control-r2",
+   "count": 0
+  },
+  {
+   "id": "U4-astra-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U4-sol-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U4-sol-treatment-r2",
+   "count": 0
+  },
+  {
+   "id": "U4-astra-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U5-sol-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U5-sol-control-r2",
+   "count": 0
+  },
+  {
+   "id": "U5-astra-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U5-sol-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U5-sol-treatment-r2",
+   "count": 0
+  },
+  {
+   "id": "U5-astra-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U6-sol-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U6-sol-control-r2",
+   "count": 0
+  },
+  {
+   "id": "U6-astra-control-r1",
+   "count": 0
+  },
+  {
+   "id": "U6-sol-treatment-r1",
+   "count": 0
+  },
+  {
+   "id": "U6-sol-treatment-r2",
+   "count": 0
+  },
+  {
+   "id": "U6-astra-treatment-r1",
+   "count": 0
+  }
+ ],
+ "u6_verbatim": [
+  {
+   "id": "U6-sol-control-r1",
+   "arm": "control",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字"
+   ],
+   "total_cents_variant": true,
+   "setdefault_anywhere": false
+  },
+  {
+   "id": "U6-sol-control-r2",
+   "arm": "control",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字"
+   ],
+   "total_cents_variant": true,
+   "setdefault_anywhere": false
+  },
+  {
+   "id": "U6-astra-control-r1",
+   "arm": "control",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "缺",
+    "缺"
+   ],
+   "total_cents_variant": true,
+   "setdefault_anywhere": false
+  },
+  {
+   "id": "U6-sol-treatment-r1",
+   "arm": "treatment",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字"
+   ],
+   "total_cents_variant": true,
+   "setdefault_anywhere": false
+  },
+  {
+   "id": "U6-sol-treatment-r2",
+   "arm": "treatment",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字"
+   ],
+   "total_cents_variant": true,
+   "setdefault_anywhere": false
+  },
+  {
+   "id": "U6-astra-treatment-r1",
+   "arm": "treatment",
+   "cells": [
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字",
+    "缺",
+    "逐字",
+    "逐字"
+   ],
+   "total_cents_variant": true,
+   "setdefault_anywhere": false
+  }
+ ],
+ "u4_surface": [
+  {
+   "id": "U4-sol-control-r1",
+   "arm": "control",
+   "yi": 2,
+   "ref": 0
+  },
+  {
+   "id": "U4-sol-control-r2",
+   "arm": "control",
+   "yi": 1,
+   "ref": 0
+  },
+  {
+   "id": "U4-astra-control-r1",
+   "arm": "control",
+   "yi": 1,
+   "ref": 0
+  },
+  {
+   "id": "U4-sol-treatment-r1",
+   "arm": "treatment",
+   "yi": 0,
+   "ref": 0
+  },
+  {
+   "id": "U4-sol-treatment-r2",
+   "arm": "treatment",
+   "yi": 0,
+   "ref": 0
+  },
+  {
+   "id": "U4-astra-treatment-r1",
+   "arm": "treatment",
+   "yi": 0,
+   "ref": 0
+  }
+ ]
+}

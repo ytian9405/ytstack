@@ -159,6 +159,7 @@ bro，上一条没看懂，说人话。
 | [`v05`](evaluation/v05/REPORT.md) | 验收标准 v0.5、说人话 v0.5 | 验收标准 1 胜 1 平，保留；说人话 1 胜 3 负，没采用 |
 | [`v07`](evaluation/v07/REPORT.md) | 装与不装 `in-your-own-words`、`ketchup`、`teach` | 4 胜 3 负 |
 | [`v08`](evaluation/v08/REPORT.md) | 修好 `v07` 输掉的三处 | **6 : 0** |
+| [`v09`](evaluation/v09/REPORT.md) | `unslop` 加四条中文规则 | 1 胜 4 负 1 平，没采用 |
 
 > [!NOTE]
 > 现在的说人话规则是 v0.4 加 4 条新偏好，这一版还没单独盲看过。每轮样本小，结论供参考。

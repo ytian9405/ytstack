@@ -1,0 +1,99 @@
+{
+ "id": "U1-astra-treatment-r1",
+ "kind": "blind",
+ "case": "U1",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "$unslop 帮我改写 docs/进展说明.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。",
+ "doc": "docs/进展说明.md",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每题另传 --sandbox read-only。",
+ "read_only_note": "这一题单轮、read-only。prompt 只要求把改好的全文写在回复里。turn_files 应当显示项目文件一个没动。",
+ "expected_skill_sha256": {
+  "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa",
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5"
+ },
+ "exit": 0,
+ "seconds": 59.5,
+ "usage": {
+  "input_tokens": 67631,
+  "cached_input_tokens": 54784,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 811,
+  "reasoning_output_tokens": 230
+ },
+ "final": "两周进展\n\n本周账本工作已推进到计划中的节点 02，具体进展如下：\n\n- 用于识别重复记录的 `dedupe_key` 已存入数据库。本轮先做基础版本，只有标题 `title` 和金额 `cents` 都完全一致，才会标为疑似重复，不识别内容相近的记录。\n- 历史数据已按上述规则处理一轮，共检查 214 条记录。其中 9 条疑似重复，全部进入待人工确认的列表 `pending_pool`，没有自动合并。\n- `pending_pool` 已接入，目前只能查看。列表按 `snap` 分组展示，编号已到 S-0317，期间没有撤回改动、恢复旧状态。\n- 人工确认流程 `confirm` 将在下周补上。\n- 队列中的 `gc_pass` 任务已上线，并设为定时运行，后续不需要人工介入。\n- **目前最需要负责人决定的是月度汇总 `month_summary` 的统计时间范围。** 两种方式的数据都已算出，汇总尚未验收。确定统计方式前，暂不重新处理新增数据。\n- 选择自然月，就按每月第一天到最后一天统计。选择滚动 30 天，就按最近 30 天统计，统计范围会随日期移动。",
+ "commentary": [
+  "我会按 unslop 的规则改写，保留原文事实和判断，让项目负责人能直接看懂进展、风险和需要决定的事。",
+  "我也会按 technical-bro 的文档规则检查表达。原文里 `snap` 和 `gc_pass` 的具体含义不清楚，我会先查项目里的说明，避免改写时猜错。"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'"
+ ],
+ "read_global_varied": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'cat docs/进展说明.md'",
+  "/bin/zsh -lc \"rg -n 'snap|gc_pass|增量回放|节点 02' . --glob '\"'!**/SKILL.md'\"' --glob '\"'!**/node_modules/**'\"' --glob '\"'!**/package-lock.json'\"'\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1af61-a30b-77f2-96fc-ed3764fa032a",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "35b65b4a2be2a0dc33480f7cb77499aeb2aa542b61a51033c543dc673deb083b",
+  "digest_after": "35b65b4a2be2a0dc33480f7cb77499aeb2aa542b61a51033c543dc673deb083b",
+  "head_before": "f91778347550eb860e9b8c95a29f7d10d87e71f8",
+  "head_after": "f91778347550eb860e9b8c95a29f7d10d87e71f8",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "f91778347550eb860e9b8c95a29f7d10d87e71f8"
+ },
+ "status": "ok"
+}

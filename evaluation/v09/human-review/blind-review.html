@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盲看 · 第九轮</title>
+<style>
+:root{--bg:#f4f1ea;--panel:#fffdf8;--fg:#241f1a;--muted:#6d645b;--line:#e3d9cc;--accent:#8a4b2f;--soft:#f3e6da;--pick:#1f6b45;--pick-soft:#e5f3eb;
+--display:"Iowan Old Style","Palatino Linotype","Songti SC",serif;--body:"Avenir Next","PingFang SC","Noto Sans SC",sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#171411;--panel:#221e1a;--fg:#f3ece3;--muted:#b7aa9e;--line:#3a322b;--accent:#e0a07a;--soft:#3a2a22;--pick:#8dcfab;--pick-soft:#1c3328;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 72px;display:flex;flex-direction:column;gap:22px}
+.wrap>*{min-width:0;max-width:100%}
+h1{font-family:var(--display);font-size:1.7rem;line-height:1.25;margin:0}
+.intro{color:var(--muted);display:flex;flex-direction:column;gap:8px;max-width:min(68ch,100%)}
+.intro p{margin:0}
+.intro strong{color:var(--fg)}
+.progress{position:sticky;top:0;z-index:2;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.dot{min-width:2.4em;min-height:2.4em;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none}
+.dot.done{background:var(--pick-soft);border-color:var(--pick);color:var(--pick)}
+.progress .count{margin-left:auto;color:var(--muted);font-size:14px}
+section.q{display:flex;flex-direction:column;gap:12px;scroll-margin-top:64px}
+.eyebrow{font-size:13px;letter-spacing:.04em;color:var(--accent)}
+h2{font-family:var(--display);font-size:1.25rem;margin:0}
+.context,.ask{background:var(--soft);border-radius:12px;padding:12px 14px}
+.context p,.ask p{margin:0}
+.label{font-size:13px;color:var(--muted);margin-bottom:6px}
+.quote{white-space:pre-wrap;overflow-wrap:break-word;margin:0;font-variant-ligatures:none}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.ans{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column}
+.ans.chosen{border-color:var(--pick);box-shadow:0 0 0 1px var(--pick)}
+.ans header{display:flex;gap:10px;align-items:baseline;padding:10px 14px;border-bottom:1px solid var(--line)}
+.tag{font-weight:700}
+.len{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.md{padding:4px 14px 14px;overflow-wrap:break-word}
+.md p{margin:.55em 0}
+.md pre{white-space:pre-wrap;overflow-wrap:break-word;background:var(--soft);border-radius:8px;padding:8px 10px;margin:.55em 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em}
+.md code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;background:var(--soft);padding:0 4px;border-radius:4px}
+.vote{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-size:16px;min-height:44px;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:8px 16px}
+button[aria-pressed="true"]{background:var(--pick);border-color:var(--pick);color:#fff}
+textarea{font:inherit;font-size:16px;width:100%;min-height:72px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);padding:10px}
+label{color:var(--muted);font-size:14px}
+.finish{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+#out{font:13px ui-monospace,Menlo,Consolas,monospace;min-height:140px}
+.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.status{color:var(--pick);min-height:1.2em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>盲看</h1>
+    <p>一共 6 题，每题是一份要改写的中文稿子。每题先给你看<strong>原稿全文</strong>，再并排两份改写，左右随机标成甲、乙。</p>
+    <p>看内容，选你更愿意收到的一份，也可以选差不多；可以写一句说明。甲乙背后是哪一版，页面上看不出来，选完先别翻别的文件。</p>
+    <p>选完点底部「复制结果」，把 JSON 存成 FEEDBACK.json。里面只有甲、乙和题号，没有组别。备注可以空着。</p>
+  </div>
+  <nav class="progress" id="progress" aria-label="进度"></nav>
+  <div id="qs"></div>
+  <div class="finish">
+    <h2>复制结果</h2>
+    <p id="remain"></p>
+    <button class="primary" id="copy" type="button">复制结果</button>
+    <div class="status" id="status" role="status"></div>
+    <textarea id="out" readonly aria-label="结果 JSON"></textarea>
+  </div>
+</div>
+<script>
+const QS=[{"n": 1, "source": "U1", "title": "账本这边的两周进展说明", "ask": "（技能） 帮我改写 docs/进展说明.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。", "draft": "# 两周进展\n\n本周把账本这边的三件事推进到了节点 02：dedupe_key 已经落库，pending_pool 已经接上，month_summary 还差验收。\n\ndedupe_key 这轮走的是 mvp 口径，只认 title 加 cents 完全一致的组合，不上 fuzzy。跑了一轮 backfill，历史 214 条里命中 9 条，全部进了 pending_pool 等人工确认，没有做静默合并。\n\npending_pool 目前只有只读视图，confirm 流程下周补。视图按 snap 分组展示，编号已经推进到 S-0317，期间没有触发回滚。\n\nmonth_summary 卡在口径上：按自然月切，还是按滚动 30 天窗口切，两边的数据都跑出来了，等负责人定，定下来之前先不做增量回放。\n\n另外同步一下队列这边：gc_pass 已经上线并接入了定时任务，之后不需要人工介入。", "甲": "# 两周进展\n\n本周账本工作已推进到节点 02。重复识别规则已存入数据库，待人工确认的记录已接入列表，月度汇总仍待验收。\n\n- 重复识别字段 `dedupe_key` 本轮只按最小版本的规则判断。标题 `title` 和金额 `cents` 必须都完全一致，才会被识别为疑似重复，不做相似内容匹配。\n- 本轮已检查 214 条历史记录。其中 9 条疑似重复，全部进入待人工确认的列表 `pending_pool`，没有自动合并。\n- `pending_pool` 目前只能查看。人工确认流程 `confirm` 计划下周补上。\n- 列表把相同 `snap` 标记的记录放在一组，当前编号已到 `S-0317`。期间没有触发恢复到先前版本的操作。\n- 队列任务 `gc_pass` 已上线，并按设定时间自动运行，之后不需要人工介入。\n- 最需要负责人决定的是月度汇总 `month_summary` 按什么时间范围统计。两种方式的数据都已算出，确定前暂不使用新增数据更新汇总。\n- 选择自然月，就按每月 1 日至月末统计，适合查看每个月的结果。\n- 选择滚动 30 天，就每次统计最近 30 天，适合查看近期变化。", "乙": "# 两周进展\n\n本周推进了节点 02 的账本工作，重复检查和待确认列表已有进展，月度汇总尚未验收。\n\n- 重复检查标识 `dedupe_key` 已存入数据库。当前只检查标题 `title` 和金额 `cents` 都完全相同的记录，不检查内容相近的记录。\n- 已检查 214 条历史记录，找到 9 条疑似重复记录，全部放入待确认列表 `pending_pool`，没有自动合并。\n- 待确认列表目前只能查看，还不能确认处理。列表按 `snap` 分组，编号已到 `S-0317`，期间没有退回先前状态。\n- 下周计划补上人工确认功能 `confirm`。\n- 队列任务 `gc_pass` 已上线并设为定时运行，无需人工启动。\n\n目前最需要负责人决定的是月度汇总 `month_summary` 的统计范围。两种方式的数据都已算出，规则确定前，暂不重新处理新增数据来更新汇总。\n\n- 选自然月，就按每月 1 日到月末统计，适合查看每个日历月的账目。\n- 选滚动 30 天，就按统计日往前连续 30 天统计，适合查看近期账目，但结果不对应某个完整的日历月。"}, {"n": 2, "source": "U2", "title": "去重的设计说明", "ask": "（技能） 帮我改写 docs/设计说明.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。", "draft": "# 去重设计说明\n\n这次要解决的不是重复账本身，而是导入缺少一个统一的判定入口。现状也不是完全没有去重，而是去重散在手工录入和导入两个入口，两边口径不一致。\n\n第一版不做 fuzzy 匹配。这不是因为 fuzzy 没有价值，而是因为它的误报代价高于漏报，而 pending_pool 的人工确认量会因此翻倍。判定顺序先比 title 的精确相等，再比 cents，不是先算相似度再筛金额，因为相似度阈值目前没有校准依据。\n\n评审时有意见认为判定应该挂在导出侧。这不是权限问题，而是时机问题：等导出时才发现重复，账面已经乱了，回头清理的成本远高于在入口拦下。\n\npending_pool 的定位：它不是一张待办清单，而是\"疑似重复、等人工确认\"的暂存区，确认权在人。\n\n结论：这一版选的不是最完备的方案，而是失败代价最小的方案，后续再按确认数据迭代。", "甲": "# 去重设计说明\n\n本次要统一手工录入和导入时判断重复账目的规则。目前两个入口都有去重处理，但规则不一致，同一笔账可能得到不同的判断结果。\n\n第一版先检查标题 `title` 是否完全相同，再检查金额 `cents` 是否相同。暂不根据标题的相似程度判断重复，因为目前没有依据确定标题相似到什么程度才算重复。\n\n这一取舍优先减少把正常账目误判为重复的情况。误判的处理成本高于漏掉重复账目的成本。按标题相似程度判断，预计会使 `pending_pool` 中需要人工确认的数量翻倍。只检查完全相同的标题，则可能漏掉标题有差异的重复账目。\n\n重复检查安排在录入和导入时。等到导出时才检查，重复账目已经影响账面，回头清理的成本更高。\n\n疑似重复的账目放入 `pending_pool` 暂存，由人确认是否重复。后续根据人工确认的结果，再调整判断规则。", "乙": "# 去重设计说明\n\n这次调整要为导入提供统一的重复判断入口。目前，手工录入和导入都有去重功能，但两边的判断规则不一致。\n\n第一版不做模糊匹配，也就是不按标题的相似程度判断重复。模糊匹配有价值，但把正常账目误判为重复的代价，高于漏掉重复账目的代价。采用模糊匹配还会让待人工确认的数量翻倍。\n\n判断时，先检查账目标题 `title` 是否完全相同，再比较金额 `cents`。目前没有依据确定标题相似到什么程度才算重复，因此不采用先算相似度、再筛金额的做法。\n\n重复判断放在录入和导入时。评审中有人建议等到导出时再判断，但等到那时，重复账目已经影响了账面，回头清理的成本远高于在录入和导入时拦下。选择判断时机与权限无关。\n\n`pending_pool` 用来暂存疑似重复的账目，等待人工确认。是否重复由人决定，`pending_pool` 不作为一般待办清单使用。\n\n第一版选择判断出错时代价最小的方案，暂不追求功能完备。后续根据人工确认的数据调整判断规则。"}, {"n": 3, "source": "U3", "title": "v0.4.0 发布说明", "ask": "（技能） 帮我改写 docs/发布说明.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。", "draft": "# v0.4.0 发布说明\n\n本月发布 3 个版本，共 41 个提交，关闭 17 个 issue，其中 P1 有 5 个，回归 2 个，平均修复 2.3 天，上月是 4.1 天。\n\n去重上线第一周拦截 63 笔，误报 4 笔，准确率 93.7%，pending_pool 积压从 214 降到 51，其中确认合并 38、驳回 9、超时放行 4。\n\n性能：导入 5000 条从 8.2 秒降到 3.1 秒，内存峰值从 480MB 降到 210MB，单机 QPS 从 120 提到 310。\n\n队列侧 gc_pass 本周期清理 1247 条，释放 3.2MB，扫描间隔维持 86400 秒。\n\n下个版本做 confirm 流程和导出侧的 export_mask，当前完成度分别是 60% 和 20%，预计 11 月 28 日和 12 月 5 日两次发版带上。", "甲": "# v0.4.0 发布说明\n\n本月平均修复时间从上月的 4.1 天缩短到 2.3 天。去重功能已上线，导入耗时和内存占用均有下降。\n\n## 本月修复情况\n\n- 本月发布了 3 个版本。\n- 本月共有 41 次代码提交。\n- 团队关闭了 17 个问题，其中 5 个标为 `P1` 优先级。\n- 关闭的问题中，有 2 个涉及改动后原有功能出现异常。\n\n## 去重上线情况\n\n去重功能上线第一周，共拦截 63 笔，其中 4 笔为误报，准确率为 93.7%。\n\n`pending_pool` 中积压的待处理记录从 214 条降到 51 条。原文列出的处理情况如下：\n\n| 处理结果 | 数量 |\n| --- | ---: |\n| 确认合并 | 38 条 |\n| 驳回 | 9 条 |\n| 超时放行 | 4 条 |\n\n## 性能变化\n\n| 指标 | 改进前 | 改进后 |\n| --- | ---: | ---: |\n| 导入 5000 条记录的耗时 | 8.2 秒 | 3.1 秒 |\n| 内存占用峰值 | 480 MB | 210 MB |\n| 单机每秒处理的请求数 | 120 | 310 |\n\n## 队列清理情况\n\n- 队列清理任务 `gc_pass` 本周期清理了 1247 条记录。\n- 本次清理释放了 3.2 MB 空间。\n- 扫描间隔保持为每天一次，即 86400 秒。\n\n## 后续发布计划\n\n| 功能 | 当前完成度 | 预计发布时间 |\n| --- | ---: | --- |\n| 确认流程 `confirm` | 60% | 11 月 28 日 |\n| 导出侧的 `export_mask` | 20% | 12 月 5 日 |", "乙": "# v0.4.0 发布说明\n\n本月平均修复时间从上月的 4.1 天缩短到 2.3 天，导入耗时和内存占用也有所下降。\n\n- 本月发布 3 个版本，共 41 次代码提交，关闭 17 个问题，其中 5 个为 P1 级问题，2 个是代码改动后再次出现的问题。\n- 去重功能上线首周拦截 63 笔记录，其中 4 笔误报，拦截正确率为 93.7%。\n- 待处理记录 `pending_pool` 从 214 笔减少到 51 笔。\n- 去重处理结果包括确认合并 38 笔、驳回 9 笔、超时后放行 4 笔。\n- 导入 5000 条记录的耗时从 8.2 秒降到 3.1 秒。\n- 内存最高占用从 480 MB 降到 210 MB。\n- 单台机器每秒可处理的请求从 120 个增加到 310 个。\n- 队列清理程序 `gc_pass` 本期清理 1247 条记录，释放 3.2 MB 空间，仍每 24 小时扫描一次。\n\n后续计划如下：\n\n- 确认流程 `confirm` 已完成 60%，预计随 11 月 28 日的版本发布。\n- 导出功能中的 `export_mask` 已完成 20%，预计随 12 月 5 日的版本发布。"}, {"n": 4, "source": "U4", "title": "三月合计多算 1200 分的事故记录", "ask": "（技能） 帮我改写 docs/事故记录.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。", "draft": "# 三月合计多算 1200 分：记录\n\n上周五对账发现三月合计多了 1200 分。已排查，已定位，已在修。\n\n结论先说：问题出在 void 的写入时机，不是汇总算错。已复核三遍，每次都指向同一处。\n\n当时 add 先写入 12 笔，随后 void 作废其中 2 笔。但它没有当场生效，而是拖到下一次导入才写进去。这就让 summary 在周三夜里到周四早上之间一直读到旧状态。这也是当晚对账差一笔的直接原因。受影响的只有汇总视图，报表和导出不读这份缓存，这可以放心。\n\n已回滚当晚的汇总任务。这没有动原始账，只重建了汇总缓存，耗时 40 秒。已同步值班群。\n\n后续：给 void 补即时写入，这能从根上堵住同类问题，预计本周四上线。另外会加一条对账告警，阈值先定 1 分，它只提示不拦截，误报多了再调。", "甲": "上周五对账时，发现三月汇总金额多算了 1200 分。问题已查明，修复正在进行，预计本周四上线。\n\n影响仅限汇总页面。报表和导出不使用这份汇总数据，不受影响。\n\n当时先导入了 12 笔记录，随后作废其中 2 笔，但系统直到下一次导入才保存作废结果。因此，周三夜间至周四早上，汇总仍包含已作废的记录，导致金额偏高。当晚对账显示差一笔。\n\n已复核三次，确认原因是作废结果没有及时保存，汇总计算本身没有算错。\n\n已撤销当晚汇总任务的结果，并重新生成汇总页面使用的数据，耗时 40 秒。原始账目没有改动。处理情况已发到值班群。\n\n后续安排如下：\n\n- 修改作废操作，让系统立即保存作废结果，避免汇总继续计入已作废的记录。预计本周四上线。\n- 增加对账提醒，触发标准暂定为 1 分。提醒不会中断业务处理，误报较多时再调整。", "乙": "# 三月合计多算 1200 分事故记录\n\n上周五对账发现，三月合计多算了 1200 分。原因已查明，修复正在进行。\n\n问题出在 `void` 作废记录时没有立即保存作废状态，汇总计算本身没有出错。三次复核都指向同一处问题。\n\n当时，`add` 先写入了 12 笔记录，随后 `void` 作废了其中 2 笔。但作废状态直到下一次导入才保存。因此，从周三夜里到周四早上，`summary` 汇总时仍把已作废的记录算在内，直接导致当晚对账差了一笔。\n\n受影响的只有汇总视图。报表和导出不读取这份供汇总视图使用的临时数据，因此不受影响。\n\n当晚的汇总任务已撤销，处理时只重新生成了汇总视图使用的临时数据，没有改动原始账。处理耗时 40 秒，处理情况已发到值班群。\n\n后续安排：\n\n- 修改 `void`，让作废状态立即保存，避免汇总继续计入已作废的记录。修复预计本周四上线。\n- 增加对账告警，阈值先设为 1 分。告警只提示，不阻止后续操作。如果误报较多，再调整阈值。"}, {"n": 5, "source": "U5", "title": "导出少三笔的排查记录", "ask": "（技能） 帮我改写 docs/排查记录.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。", "draft": "# 排查记录：导出少三笔\n\n现象：导出的 csv 比列表少 3 笔，少的都是作废后又恢复的账。\n\n我先猜是导出的过滤条件写反了。核对之后：不是过滤条件写反，是恢复操作没有清掉 void_reason，这批账仍带着作废原因，被导出侧跳过。\n\n接着猜是不是 csv 有行数上限。也不是行数上限，是恢复入口只回写了 voided 这一位，void_reason 属于附注字段，不跟着回写。这不算实现缺陷，而是当时为审计留痕有意安排的：留痕要保留\"谁在何时作废\"，但恢复这条路没人补清空逻辑。之所以恢复时没顺手清掉，不是因为没想到，而是当时判断清空不该由恢复入口做，该由独立对账步骤做，而这个步骤一直没排上。\n\n处理：已写一次性回填脚本，扫全库命中 17 条，跑完复核导出行数。脚本不进主干，跑一次就删。", "甲": "# 排查记录：导出少三笔\n\n导出的 csv 文件比列表少 3 笔账，少的都是作废后又恢复的账。\n\n原因已经查明。恢复操作没有清空 `void_reason`，也就是保存作废原因的字段。导出程序因此仍然跳过这些账。排查已排除过滤条件写反和 csv 行数上限这两个原因。\n\n恢复操作只更新了 `voided`，也就是标记账目是否作废的字段。`void_reason` 属于附注字段，恢复时不会一起更新。\n\n保留作废信息是当时为记录\"谁在何时作废\"作出的安排，不算实现缺陷。当时也考虑过清空作废原因，但决定交给独立的对账步骤处理。这个步骤一直没有排上，因此恢复操作至今没有清空作废原因的逻辑。\n\n我已写好一次性回填脚本，用来修正这些记录。全库扫描命中 17 条记录。\n\n脚本运行后，再复核导出行数。脚本不加入项目主干代码，运行一次后删除。", "乙": "# 排查记录：导出少三笔\n\n导出的 CSV 比列表少 3 笔，缺少的都是作废后又恢复的账。原因已查明，修复脚本已写好，全库扫描共找到 17 条需要修复的记录。脚本执行后，还需复核导出行数。\n\n恢复账目时，程序只把 `voided` 改回未作废，没有清空作废原因 `void_reason`。导出时，程序仍会跳过带有作废原因的账，因此这些账能在列表中看到，却没有出现在 CSV 中。排查已排除过滤条件写反和 CSV 行数上限这两个原因。\n\n当时为保留谁在何时作废账目的审计记录，决定恢复时保留 `void_reason`，再由单独的对账步骤清空。但对账步骤一直没有排期，恢复后的账便一直带着作废原因。\n\n本次用一次性脚本修复扫描找到的 17 条记录。脚本运行后复核导出行数，不合入主干，使用后删除。\n\n这次脚本只处理已有记录。原计划的对账步骤仍未安排，后续恢复的账仍可能出现同样的问题。"}, {"n": 6, "source": "U6", "title": "三月合计多算 36100 分的修复指引", "ask": "（技能） 帮我改写 docs/修复指引.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。", "draft": "# 修复指引：三月合计多算 36100 分\n\n受影响的是导入过旧备份的账本，当前合计 72700，应为 36600。已确认成因是三月那批重复录入。先跑这一条判断要不要处理：\n\n    python3 tools/dedup_scan.py --state data/ledger.json\n\n输出按「标题\t金额\t编号」分组，一行出现两个以上编号就是中招，例如：\n\n    房租\t24000\t1,5\n\n确认后按编号逐笔作废，一次一条：\n\n    python3 expense_cli.py --state data/ledger.json void 5\n    python3 expense_cli.py --state data/ledger.json void 6\n    python3 expense_cli.py --state data/ledger.json void 7\n\n编号不存在时会打印 unknown expense id，这时先 list 核对，别猜编号。验收跑 summary：\n\n    python3 expense_cli.py --state data/ledger.json summary\n\ntotal_cents 应为 36600。不是这个数就停，把上面几条命令的输出原样贴给值班，不要手工改 data/ledger.json。判定逻辑在 tools/dedup_scan.py 里，是这一行：\n\n    groups.setdefault((row['title'], row['cents']), []).append(row['id'])", "甲": "# 修复三月账本多算的 36100 分\n\n导入旧备份后，三月的一批支出被重复录入。受影响账本的当前合计为 72700 分，正确合计应为 36600 分。\n\n按以下顺序安排处理：先核对重复记录，再作废多录的支出，最后检查合计。\n\n## 1. 核对需要处理的记录\n\n让执行人员在项目目录运行：\n\n```sh\npython3 tools/dedup_scan.py --state data/ledger.json\n```\n\n输出每行依次是标题、金额和记录编号。例如：\n\n```text\n房租\t24000\t1,5\n```\n\n这表示编号 `1` 和 `5` 的支出都叫“房租”，金额都是 24000 分。\n\n扫描只检查标题和金额是否相同，不能单凭扫描结果确认重复录入。核对实际账目后，再确定需要作废的编号。\n\n## 2. 作废确认多录的支出\n\n本次需要核对的记录是编号 `5`、`6`、`7`。确认三条都是重复录入后，让执行人员逐条运行：\n\n```sh\npython3 expense_cli.py --state data/ledger.json void 5\npython3 expense_cli.py --state data/ledger.json void 6\npython3 expense_cli.py --state data/ledger.json void 7\n```\n\n作废后，记录仍保留在账本中，但不再计入合计。\n\n如果出现 `unknown expense id`，表示指定编号不存在。停止作废操作，先运行以下命令核对记录，不要猜编号：\n\n```sh\npython3 expense_cli.py --state data/ledger.json list\n```\n\n## 3. 检查修复结果\n\n作废完成后，让执行人员运行：\n\n```sh\npython3 expense_cli.py --state data/ledger.json summary\n```\n\n检查输出中的 `total_cents`，这个字段表示未作废支出的合计，单位是分。\n\n- `total_cents` 为 `36600`：合计达到本次修复要求。\n- `total_cents` 不是 `36600`：停止操作，把扫描、作废和汇总命令的完整输出交给值班人员排查。\n- 排查期间，不要手工修改 `data/ledger.json`。", "乙": "# 修复三月重复记账造成的合计错误\n\n本指引用于处理导入旧备份后，三月账目重复录入的问题。受影响账本的合计为 72700 分，正确合计为 36600 分，多算了 36100 分。\n\n处理方法是保留原记录，将确认重复的记录逐笔作废。作废后，记录仍保留在 `data/ledger.json` 中，但不再计入合计。\n\n## 1. 核对需要作废的记录\n\n安排执行人员在项目目录中运行：\n\n```sh\npython3 tools/dedup_scan.py --state data/ledger.json\n```\n\n扫描结果每行依次显示标题、金额和记录编号。当前 `data/ledger.json` 的输出为：\n\n```text\n午饭\t3500\t3,7\n房租\t24000\t1,5\n电费\t8600\t2,6\n```\n\n**最要紧的是确认这些记录是否重复记了同一笔支出。** 扫描程序只查找标题和金额相同、尚未作废的记录，不检查月份。同名同金额的两笔真实支出也会出现在结果中。\n\n确认编号 5、6、7 分别是编号 1、2、3 的重复记录后，再执行下一步。其他账本的编号可能不同，不要直接照用。\n\n## 2. 逐笔作废重复记录\n\n每次执行一条命令，核对返回的记录后再继续：\n\n```sh\npython3 expense_cli.py --state data/ledger.json void 5\npython3 expense_cli.py --state data/ledger.json void 6\npython3 expense_cli.py --state data/ledger.json void 7\n```\n\n返回记录中的 `voided` 为 `true`，表示这笔记录已作废。\n\n如果出现 `unknown expense id`，表示指定编号不存在。停止作废，运行以下命令核对记录，不要猜编号：\n\n```sh\npython3 expense_cli.py --state data/ledger.json list\n```\n\n## 3. 核对修复结果\n\n作废完成后，运行：\n\n```sh\npython3 expense_cli.py --state data/ledger.json summary\n```\n\n只有同时满足以下条件，才算完成本次修复：\n\n- `total_cents` 为 `36600`，即合计 36600 分。\n- 作废的记录与事先确认的重复记录一致，原记录仍参与合计。\n\n如果 `total_cents` 不是 `36600`，停止操作。将扫描、作废和汇总命令的实际输出原样交给值班人员排查，不要手工修改 `data/ledger.json`。"}];
+const KEY='ytstack-blind-v09';
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const st=n=>S[n]||(S[n]={pick:'',why:''});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(s){
+  const safe=esc(s);
+  const blocks=[];
+  const staged=safe.replace(/```(\w*)\n?([\s\S]*?)(?:```|$)/g,(m,lang,body)=>{blocks.push(body);return '\n\n\u0000B'+(blocks.length-1)+'\u0000\n\n'});
+  let html=staged.split(/\n{2,}/).map(p=>{
+    let inner=p.replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+    inner=inner.replace(/\u0000B(\d+)\u0000/g,(m,i)=>'<pre>'+blocks[+i]+'</pre>');
+    return '<p>'+inner+'</p>';
+  }).join('');
+  html=html.replace(/<p><pre>([\s\S]*?)<\/pre><\/p>/g,'<pre>$1</pre>');
+  return html;
+}
+function build(){
+  const root=document.getElementById('qs');root.innerHTML='';
+  for(const q of QS){
+    const s=st(q.n);
+    const sec=document.createElement('section');sec.className='q';sec.id='q'+q.n;
+    const cards=['甲','乙'].map(side=>{
+      const text=q[side]||'（这一侧没有回复）';
+      return `<article class="ans${s.pick===side?' chosen':''}" data-side="${side}"><header><span class="tag">${side}</span><span class="len">${[...text].length} 字</span></header><div class="md">${render(text)}</div></article>`;
+    }).join('');
+    sec.innerHTML=`<div class="eyebrow">第 ${q.n} 题</div><h2>${esc(q.title)}</h2>
+      <div class="ask"><div class="label">题目原话</div><p class="quote">${esc(q.ask)}</p></div>
+      <div class="context"><div class="label">原稿全文（改写前的稿子）</div><p class="quote">${esc(q.draft)}</p></div>
+      <div class="pair">${cards}</div>
+      <div class="vote"><div class="choices" role="group" aria-label="第 ${q.n} 题">${[['甲','甲更好'],['乙','乙更好'],['tie','差不多']].map(([v,t])=>`<button type="button" data-v="${v}" aria-pressed="${s.pick===v}">${t}</button>`).join('')}</div>
+      <label for="why${q.n}">备注（可不填）</label><textarea id="why${q.n}">${esc(s.why)}</textarea></div>`;
+    root.append(sec);
+    sec.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{s.pick=b.dataset.v;save();
+      sec.querySelectorAll('.choices button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+      sec.querySelectorAll('.ans[data-side]').forEach(a=>a.classList.toggle('chosen',a.dataset.side===s.pick));update()});
+    sec.querySelector('textarea').oninput=e=>{s.why=e.target.value;save();update()};
+  }
+}
+function update(){
+  const p=document.getElementById('progress');p.innerHTML='';let done=0;
+  for(const q of QS){const ok=!!st(q.n).pick;done+=ok;const a=document.createElement('a');a.href='#q'+q.n;a.className='dot'+(ok?' done':'');a.textContent=q.n;p.append(a)}
+  const c=document.createElement('span');c.className='count';c.textContent=`已选 ${done} / ${QS.length}`;p.append(c);
+  const rem=QS.filter(q=>!st(q.n).pick).map(q=>q.n);
+  document.getElementById('remain').textContent=rem.length?`还有第 ${rem.join('、')} 题没选。`:`6 题都选完了，可以复制。`;
+  const records=QS.map(q=>{const s=st(q.n);return {
+    question:q.n, source:q.source,
+    preferred_alias:s.pick==='甲'?'甲':s.pick==='乙'?'乙':s.pick==='tie'?'tie':'',
+    preferred_arm:'', A:'甲', B:'乙', arm_A:'', arm_B:'',
+    chars_A:[...(q['甲']||'')].length, chars_B:[...(q['乙']||'')].length,
+    reason_verbatim:(s.why||'').trim()
+  };});
+  document.getElementById('out').value=JSON.stringify({recorded_at:new Date().toISOString(), rater:'user', records}, null, 1);
+}
+document.getElementById('copy').onclick=()=>{const o=document.getElementById('out');const st_=document.getElementById('status');
+  const fallback=()=>{o.focus();o.select();st_.textContent='已选中，请手动复制。'};
+  try{navigator.clipboard.writeText(o.value).then(()=>st_.textContent='已复制。',fallback)}catch(e){fallback()}};
+build();update();
+</script>
+</body>
+</html>

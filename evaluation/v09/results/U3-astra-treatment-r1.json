@@ -1,0 +1,97 @@
+{
+ "id": "U3-astra-treatment-r1",
+ "kind": "blind",
+ "case": "U3",
+ "arm": "treatment",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "$unslop 帮我改写 docs/发布说明.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。",
+ "doc": "docs/发布说明.md",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每题另传 --sandbox read-only。",
+ "read_only_note": "这一题单轮、read-only。prompt 只要求把改好的全文写在回复里。turn_files 应当显示项目文件一个没动。",
+ "expected_skill_sha256": {
+  "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa",
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5"
+ },
+ "exit": 0,
+ "seconds": 61.9,
+ "usage": {
+  "input_tokens": 67022,
+  "cached_input_tokens": 48128,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1058,
+  "reasoning_output_tokens": 355
+ },
+ "final": "# v0.4.0 发布说明\n\n本月的问题修复时间缩短，导入速度提高，内存占用下降。去重功能上线首周仍有误报。\n\n本月发布和问题处理情况如下：\n\n- 共发布 3 个版本。\n- 共提交 41 次代码改动。\n- 共关闭 17 个问题，其中 5 个标为 P1，需要优先处理。\n- 回归问题有 2 个，即代码改动后，原本正常的功能出现问题。\n- 平均修复时间从上月的 4.1 天缩短到 2.3 天。\n\n去重功能上线第一周的数据如下：\n\n- 共拦截 63 笔疑似重复记录。\n- 其中 4 笔属于误报。\n- 拦截准确率为 93.7%。\n- 待处理记录池 `pending_pool` 的积压从 214 条降到 51 条。\n- 处理结果包括确认合并 38 条、驳回 9 条、超时放行 4 条。原文未说明这些结果与剩余积压的关系。\n\n性能变化如下：\n\n| 项目 | 改进前 | 改进后 |\n| --- | --- | --- |\n| 导入 5000 条记录的耗时 | 8.2 秒 | 3.1 秒 |\n| 最高内存占用 | 480 MB | 210 MB |\n| 单台机器每秒处理的请求数 | 120 次 | 310 次 |\n\n队列清理程序 `gc_pass` 本周期清理了 1247 条记录，释放了 3.2 MB 空间。检查间隔保持为每天一次。\n\n后续发布计划如下：\n\n| 计划内容 | 当前完成度 | 预计发布日期 |\n| --- | --- | --- |\n| 确认流程 `confirm` | 60% | 11 月 28 日 |\n| 导出侧功能 `export_mask`，具体用途尚待补充 | 20% | 12 月 5 日 |",
+ "commentary": [
+  "我会按 unslop 和 technical-bro 的写作要求，保留原文事实，把发布说明改成项目负责人容易看懂、方便做决定的版本。\n"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat docs/发布说明.md .agents/skills/unslop/SKILL.md .agents/skills/technical-bro/SKILL.md'"
+ ],
+ "read_global_varied": false,
+ "commands": [
+  "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g '发布说明.md' -g 'SKILL.md' docs .agents/skills/technical-bro .agents/skills/unslop\"",
+  "/bin/zsh -lc 'cat docs/发布说明.md .agents/skills/unslop/SKILL.md .agents/skills/technical-bro/SKILL.md'",
+  "/bin/zsh -lc \"rg -n 'export_mask|pending_pool|gc_pass|confirm|P1|回归' . --glob '\"'!SKILL.md'\"' --glob '\"'!AGENTS.md'\"'; rg --files -g AGENTS.md -g '\"'!node_modules'\"' -g '\"'!vendor'\"'\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1af63-6517-75a2-bfa9-e55358826a2e",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "743da988346befb25f442205d9e82106d907f3eade0aa786aa5aa1a217c170cf",
+  "digest_after": "743da988346befb25f442205d9e82106d907f3eade0aa786aa5aa1a217c170cf",
+  "head_before": "86ac38c3c08191e08523a1e7f12702cc4e74f1f9",
+  "head_after": "86ac38c3c08191e08523a1e7f12702cc4e74f1f9",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "86ac38c3c08191e08523a1e7f12702cc4e74f1f9"
+ },
+ "status": "ok"
+}

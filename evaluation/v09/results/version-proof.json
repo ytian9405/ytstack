@@ -1,0 +1,19 @@
+{
+ "run_id": "U1-astra-control-r1",
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "varied_skills_read": [
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc \"cat '.agents/skills/unslop/SKILL.md'\""
+ ],
+ "read_global_varied": false,
+ "skill_sha256": {
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "matches_a5bfa83": true,
+ "sentence": "U1-astra-control-r1 的 skills_read 读了项目里的 unslop，命令路径不是全局 ~/.agents/skills，unslop 的 SKILL.md sha256 等于提交 a5bfa83。"
+}

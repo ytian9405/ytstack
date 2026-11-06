@@ -1,0 +1,295 @@
+{
+ "count": 36,
+ "refuse_at": 190,
+ "limit": 200,
+ "calls": [
+  {
+   "n": 1,
+   "job": "U1-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:41:32+0800"
+  },
+  {
+   "n": 2,
+   "job": "U1-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:41:33+0800"
+  },
+  {
+   "n": 3,
+   "job": "U1-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 4,
+   "job": "U1-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 5,
+   "job": "U2-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 6,
+   "job": "U2-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 7,
+   "job": "U1-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 8,
+   "job": "U1-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 9,
+   "job": "U2-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 10,
+   "job": "U2-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:42:53+0800"
+  },
+  {
+   "n": 11,
+   "job": "U2-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:43:53+0800"
+  },
+  {
+   "n": 12,
+   "job": "U3-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:43:53+0800"
+  },
+  {
+   "n": 13,
+   "job": "U2-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:43:54+0800"
+  },
+  {
+   "n": 14,
+   "job": "U3-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:43:55+0800"
+  },
+  {
+   "n": 15,
+   "job": "U3-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:43:55+0800"
+  },
+  {
+   "n": 16,
+   "job": "U3-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:43:55+0800"
+  },
+  {
+   "n": 17,
+   "job": "U3-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:44:41+0800"
+  },
+  {
+   "n": 18,
+   "job": "U4-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:44:41+0800"
+  },
+  {
+   "n": 19,
+   "job": "U4-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:44:48+0800"
+  },
+  {
+   "n": 20,
+   "job": "U3-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:44:49+0800"
+  },
+  {
+   "n": 21,
+   "job": "U4-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:44:49+0800"
+  },
+  {
+   "n": 22,
+   "job": "U4-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:44:49+0800"
+  },
+  {
+   "n": 23,
+   "job": "U4-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:45:28+0800"
+  },
+  {
+   "n": 24,
+   "job": "U5-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:45:29+0800"
+  },
+  {
+   "n": 25,
+   "job": "U5-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:45:37+0800"
+  },
+  {
+   "n": 26,
+   "job": "U5-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:45:47+0800"
+  },
+  {
+   "n": 27,
+   "job": "U4-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:45:51+0800"
+  },
+  {
+   "n": 28,
+   "job": "U5-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:45:51+0800"
+  },
+  {
+   "n": 29,
+   "job": "U5-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:46:23+0800"
+  },
+  {
+   "n": 30,
+   "job": "U6-sol-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:46:23+0800"
+  },
+  {
+   "n": 31,
+   "job": "U6-sol-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:46:28+0800"
+  },
+  {
+   "n": 32,
+   "job": "U6-sol-control-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:46:34+0800"
+  },
+  {
+   "n": 33,
+   "job": "U6-sol-treatment-r2",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6.1-sol",
+   "at": "2026-11-06T13:46:43+0800"
+  },
+  {
+   "n": 34,
+   "job": "U5-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:46:47+0800"
+  },
+  {
+   "n": 35,
+   "job": "U6-astra-control-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:47:08+0800"
+  },
+  {
+   "n": 36,
+   "job": "U6-astra-treatment-r1",
+   "phase": "exec",
+   "attempt": 1,
+   "model": "gpt-6-astra",
+   "at": "2026-11-06T13:47:37+0800"
+  }
+ ]
+}

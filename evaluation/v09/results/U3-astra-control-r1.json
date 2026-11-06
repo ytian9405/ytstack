@@ -1,0 +1,99 @@
+{
+ "id": "U3-astra-control-r1",
+ "kind": "blind",
+ "case": "U3",
+ "arm": "control",
+ "model": "gpt-6-astra",
+ "rep": 1,
+ "prompt": "$unslop 帮我改写 docs/发布说明.md，这份要给项目负责人看。改好的全文直接写在回复里，不用改文件。",
+ "doc": "docs/发布说明.md",
+ "sandbox": "read-only",
+ "runner_rev": 1,
+ "global_note": "每个 codex 子进程使用单独的空 HOME 和单独的 CODEX_HOME。HOME 下没有 .agents。CODEX_HOME 只有复制过来的登录文件和一份最小配置，没有 skills 目录。shell_environment_policy.exclude 含 CODEX_HOME，子进程的 shell 看不到这份目录。没有读取登录文件的内容，也没有改 ~/.agents 或 ~/.codex。",
+ "isolation": "没有加载本机 ~/.codex/config.toml。子进程配置只写了模型、high reasoning、pragmatic、approval_policy=never、sandbox_mode=read-only，以及排除 CODEX_HOME。每题另传 --sandbox read-only。",
+ "read_only_note": "这一题单轮、read-only。prompt 只要求把改好的全文写在回复里。turn_files 应当显示项目文件一个没动。",
+ "expected_skill_sha256": {
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "installed_skills": [
+  "acceptance-criteria",
+  "bro",
+  "create-test-skill",
+  "in-your-own-words",
+  "ketchup",
+  "teach",
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_sha256": {
+  "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+ },
+ "skill_sha256_match": true,
+ "shared_skill_sha256": {
+  "acceptance-criteria": "9675309356ebfa804dcac5dd7b750f32aa4061a56d0ed1c1e08496eced2f69dd",
+  "bro": "2fbfa343b08cc82a38ecd72833ab0b281b0bcdb57c01343c4bad4db582f882a9",
+  "create-test-skill": "e185b2cae914d72668760d22f99141d008276c75d6683cadf4356669420b471e",
+  "in-your-own-words": "7b507f53676cfe0f7bf32a0658d28966d8e734bae62fdc482664bba4778a82fa",
+  "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
+  "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf",
+  "technical-bro": "ed1ad79cf2a71710dbc0cb618c7598508e62c21290f8f982acbd8ed18546c8b5"
+ },
+ "exit": 0,
+ "seconds": 47.8,
+ "usage": {
+  "input_tokens": 68684,
+  "cached_input_tokens": 51584,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 886,
+  "reasoning_output_tokens": 225
+ },
+ "final": "v0.4.0 发布说明\n\n本月问题修复时间缩短，导入速度和单机处理能力提高。去重功能已上线，但仍有误拦截，待处理记录的统计也需要核对。\n\n- 本月发布 3 个版本，共提交 41 次代码改动，关闭 17 个问题。其中，5 个问题的优先级为 P1，2 个是改动引入的问题。平均修复时间从上月的 4.1 天缩短到 2.3 天。\n- 去重功能上线首周拦截 63 笔记录，其中 4 笔属于误拦截，拦截正确的比例为 93.7%。\n- 待处理记录 `pending_pool` 从 214 条降到 51 条。另记录了确认合并 38 条、驳回 9 条、超时放行 4 条。这三项合计也是 51 条，与剩余待处理记录的关系尚不清楚，需要核对。\n- 导入 5000 条记录的耗时从 8.2 秒缩短到 3.1 秒。\n- 内存最高占用从 480 MB 降到 210 MB。\n- 单台机器每秒可处理的请求数从 120 个提高到 310 个。\n- 队列清理程序 `gc_pass` 本周期清理了 1247 条记录，释放 3.2 MB 空间，仍每 24 小时扫描一次。\n- 确认流程 `confirm` 当前完成 60%，计划随 11 月 28 日的版本发布。\n- 导出功能 `export_mask` 当前完成 20%，计划随 12 月 5 日的版本发布。",
+ "commentary": [
+  "我会按 unslop 技能改写 `docs/发布说明.md`，把变化、影响和需要负责人决定的事项说清楚，全文直接放在回复里。\n",
+  "我也会按 technical-bro 的文档规则整理表述。原文里，待处理记录的剩余数量和处理结果都合计为 51，关系不清楚；我会保留数字，并明确指出需要核对的地方。\n"
+ ],
+ "skills_read": [
+  "technical-bro",
+  "unslop"
+ ],
+ "skill_read_commands": [
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'"
+ ],
+ "read_global_varied": false,
+ "commands": [
+  "/bin/zsh -lc 'cat .agents/skills/unslop/SKILL.md'",
+  "/bin/zsh -lc 'cat .agents/skills/technical-bro/SKILL.md'",
+  "/bin/zsh -lc 'cat docs/发布说明.md'",
+  "/bin/zsh -lc \"rg -n 'export_mask|pending_pool|confirm|gc_pass|P1' --glob '\"'!SKILL.md'\"' --glob '\"'!发布说明.md'\"' .\""
+ ],
+ "event_types": [
+  "item.completed",
+  "item.started",
+  "item:agent_message",
+  "item:command_execution",
+  "thread.started",
+  "turn.completed",
+  "turn.started"
+ ],
+ "sandbox_hints": [],
+ "stderr_tail": "Reading additional input from stdin...\n",
+ "thread_id": "01a1af63-45cf-7373-82d3-862092fe6a84",
+ "turn_files": {
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "digest_before": "67e60484e1d8a2c83f5992babad36a55fa25a6a2ddf0ac6609ee27988e192c33",
+  "digest_after": "67e60484e1d8a2c83f5992babad36a55fa25a6a2ddf0ac6609ee27988e192c33",
+  "head_before": "86ac38c3c08191e08523a1e7f12702cc4e74f1f9",
+  "head_after": "86ac38c3c08191e08523a1e7f12702cc4e74f1f9",
+  "commits_before": "1",
+  "commits_after": "1",
+  "unchanged": true
+ },
+ "git_after_turn": {
+  "status": "?? .agents/\n?? AGENTS.md\n",
+  "commits": "1",
+  "head": "86ac38c3c08191e08523a1e7f12702cc4e74f1f9"
+ },
+ "status": "ok"
+}

@@ -12,7 +12,7 @@
    "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
   },
   "treatment": {
-   "unslop": "34faf248e5e4d72f877c7ed3f48fedf42dfcd64a93375c7ba9752e28be4c13ff"
+   "unslop": "f2a318d4403af7cd0c28cc9d4787be8b4f23a222996cc6ce4c486e50628c7497"
   }
  },
  "shared_skill_md_sha256": {
@@ -24,8 +24,5 @@
   "ketchup": "b72c89dcc4fbe1cb5d76174cceed8adc219685a4636606ae52c276d156ef5e11",
   "teach": "9f39cd08935c1378b6e09452ef645b0bf452f9d722da28b3edb8b6b351a82bbf"
  },
- "varied_differ": false,
- "shared_match": true,
- "planned_calls": 36,
- "refuse_at": 190
+ "varied_differ": true
 }
