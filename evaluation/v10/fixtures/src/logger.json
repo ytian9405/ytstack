@@ -1,0 +1,8 @@
+{
+  "sensors": {
+    "S1": "阳台",
+    "S2": "客厅"
+  },
+  "report_hour": 7,
+  "csv_dir": "out"
+}
